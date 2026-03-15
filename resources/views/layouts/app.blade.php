@@ -32,6 +32,7 @@
 
     @livewireScripts
     @fluxScripts
+
 </body>
 
 </html>

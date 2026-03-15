@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Livewire\Page\Register;
 use App\Livewire\Page\Account;
+use App\Livewire\Page\Bets\Create;
 use App\Livewire\Page\Login;
 use App\Livewire\Page\MainPage;
 use Illuminate\Support\Facades\Route;
@@ -22,4 +23,5 @@ Route::middleware('auth')->group(function () {
         return redirect()->route('main');
     })->name('logout');
     Route::livewire('/account', Account::class)->name('account');
+    Route::livewire('/bet/create', Create::class)->name('bet.create');
 });
