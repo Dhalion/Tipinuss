@@ -1,0 +1,13 @@
+/.phpunit.cache
+/vendor
+.env
+.env.backup
+.env.production
+/.idea
+/.nova
+/.vscode
+/.zed
+/.devenv
+/.direnv
+/.dir
+devenv.lock
