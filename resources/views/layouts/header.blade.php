@@ -6,7 +6,7 @@
         <flux:navbar.item href="{{ route('main') }}">{{ __('app.navigation.home') }}</flux:navbar.item>
         @auth
             <flux:navbar.item href="#">{{ __('app.navigation.bets.list') }}</flux:navbar.item>
-            <flux:navbar.item href="#">{{ __('app.navigation.bets.create') }}</flux:navbar.item>
+            <flux:navbar.item href="{{ route('bet.create') }}">{{ __('app.navigation.bets.create') }}</flux:navbar.item>
         @endauth
     </flux:navbar>
 
@@ -14,6 +14,10 @@
 
 
     @auth
+        <span class="text-sm text-amber-300 dark:text-amber-300 mr-4">
+            {{ number_format(auth()->user()->soapnuts) }}
+            <span class="text-lg">🌰</span>
+        </span>
         <flux:dropdown>
             <flux:profile name="{{ Auth::user()->name }}" />
             <flux:menu>
