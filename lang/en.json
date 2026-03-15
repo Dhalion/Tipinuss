@@ -1,4 +1,11 @@
 {
+    "app": {
+        "title": "Tipinuss - Online Waschnusswetten",
+        "description": "Tipinuss - Online Waschnusswetten",
+        "navigation": {
+            "home": "Startseite"
+        }
+    },
     "validation": {
         "accepted": "The :attribute field must be accepted.",
         "accepted_if": "The :attribute field must be accepted when :other is :value.",
