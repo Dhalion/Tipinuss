@@ -7,6 +7,7 @@ namespace App\Livewire\Page\Bets;
 use App\Actions\Betting\CloseBetAction;
 use App\Actions\Betting\DeleteBetAction;
 use App\Models\Bet;
+use App\Services\MetaTagService;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
@@ -14,9 +15,14 @@ class BetDetail extends Component
 {
     public Bet $bet;
 
-    public function mount(Bet $bet): void
+    public function mount(Bet $bet, MetaTagService $metaTagService): void
     {
         $this->bet = $bet->load('creator', 'betOptions', 'userBets.user');
+
+        $metaTagService->setBetMetaTags(
+            title: $this->bet->title,
+            description: $this->bet->description ?? 'Tippe auf ' . $this->bet->title . ' und verdiene Waschnüsse auf Tipinuss',
+        );
     }
 
     public function selectOption(int $optionId, string $optionTitle, float $odds): void

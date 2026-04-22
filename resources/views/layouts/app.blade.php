@@ -4,10 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ __('app.title') }}</title>
-    <meta name="description" content="{{ __('app.description') }}">
-    <meta property="og:image" content="{{ asset('images/logo-full.webp') }}">
+    <title>{{ isset($pageTitle) ? $pageTitle . ' - ' : '' }}{{ __('app.title') }}</title>
+    <meta name="description" content="{{ $pageDescription ?? __('app.description') }}">
+    
+    <!-- OpenGraph Tags -->
+    <meta property="og:title" content="{{ $pageTitle ?? __('app.title') }}">
+    <meta property="og:description" content="{{ $pageDescription ?? __('app.description') }}">
+    <meta property="og:image" content="{{ $pageImage ?? asset('images/logo-full.webp') }}">
+    <meta property="og:url" content="{{ $pageUrl ?? url()->current() }}">
     <meta property="og:type" content="website">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $pageTitle ?? __('app.title') }}">
+    <meta name="twitter:description" content="{{ $pageDescription ?? __('app.description') }}">
+    <meta name="twitter:image" content="{{ $pageImage ?? asset('images/logo-full.webp') }}">
 
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
     <link rel="apple-touch-icon" href="{{ asset('images/logo-minimal.webp') }}">
