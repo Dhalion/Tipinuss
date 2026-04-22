@@ -34,7 +34,7 @@
                 </div>
             </div>
 
-            <div class="border-t border-zinc-200 dark:border-zinc-700 py-20 space-y-12">
+            <div class="border-t border-zinc-200 dark:border-zinc-700 py-20 space-y-16">
                 @if($recentBets->count() > 0)
                     <div class="space-y-8">
                         <div>
@@ -68,6 +68,10 @@
                         </p>
                     </div>
                 @endif
+
+                <div class="max-w-2xl">
+                    @livewire('bets.leaderboard')
+                </div>
             </div>
 
         </div>
