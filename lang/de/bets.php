@@ -1,0 +1,23 @@
+<?php
+return [
+    'odds' => 'Quote',
+    'pending' => 'Ausstehend',
+    'won' => 'Gewonnen',
+    'lost' => 'Verloren',
+    'open' => 'Offen',
+    'closed' => 'Geschlossen',
+    'close' => 'Wette schließen',
+    'delete' => 'Wette löschen',
+    'created_by' => 'Erstellt von',
+    'expires' => 'Läuft ab',
+    'available_odds' => 'Verfügbare Quoten',
+    'bets_placed' => 'Wetten',
+    'place_bet' => 'Wette platzieren',
+    'selected_option' => 'Option',
+    'stake_amount' => 'Einsatz in 🌰',
+    'potential_winnings' => 'Möglicher Gewinn',
+    'amount' => 'Betrag',
+    'placing' => 'Wird platziert',
+    'cancel' => 'Abbrechen',
+    'empty' => 'Noch keine Wetten vorhanden.',
+];

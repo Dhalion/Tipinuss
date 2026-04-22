@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Livewire\Page\Bets;
+declare(strict_types=1);
 
-use App\Enums\BetStatus;
-use App\Models\Bet;
+namespace App\Livewire\Page\Bets;
+use Illuminate\Contracts\View\View;
+
+use App\Actions\Betting\CreateBetAction;
 use App\Models\BetOption;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -18,7 +20,7 @@ class Create extends Component
     #[Validate('nullable|max:1000')]
     public string $description = '';
 
-    #[Validate('nullable|date_format:Y-m-d\TH:i')]
+    #[Validate('nullable|date')]
     public string $expires_at = '';
 
     /** @var array<int, array<string, mixed>> */
@@ -57,21 +59,22 @@ class Create extends Component
         }
     }
 
-    public function createBet(): void
+    public function createBet(CreateBetAction $action): void
     {
         $this->validate([
+            'title' => 'required|min:5|max:255',
+            'description' => 'nullable|max:1000',
+            'expires_at' => 'nullable|date',
             'options' => 'required|array|min:' . self::DEFAULT_OPTIONS_COUNT,
             'options.*.title' => 'required|min:1|max:255',
             'options.*.odds' => 'required|numeric|min:1',
         ]);
 
-        $bet = Bet::create([
-            'title' => $this->title,
-            'description' => $this->description,
-            'user_id' => auth()->id(),
-            'status' => BetStatus::Open,
-            'expires_at' => $this->expires_at,
-        ]);
+        $bet = $action->execute(
+            auth()->user(),
+            $this->title,
+            $this->description !== '' ? $this->description : null,
+        );
 
         foreach ($this->options as $optionData) {
             BetOption::create([
@@ -100,8 +103,9 @@ class Create extends Component
         }
     }
 
-    public function render()
+    public function render(): View
     {
         return view('pages.bets.create');
     }
 }
+

@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use App\Enums\BetStatus;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -10,8 +13,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 /**
- * @property int $id
- * @property int $user_id
+ * @property string $id
+ * @property string $user_id
  * @property string $title
  * @property string|null $description
  * @property BetStatus $status
@@ -21,18 +24,11 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
  * @property \Carbon\Carbon|null $odds_last_updated_at
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * @property-read User $creator
- * @property-read \Illuminate\Database\Eloquent\Collection<int, BetOption> $betOptions
- * @property-read \Illuminate\Database\Eloquent\Collection<int, UserBet> $userBets
  */
 final class Bet extends Model
 {
-    /** @use HasFactory<\Database\Factories\BetFactory> */
-    use HasFactory;
+    use HasFactory, HasUuids;
 
-    /**
-     * @var list<string>
-     */
     protected $fillable = [
         'title',
         'description',
@@ -44,9 +40,9 @@ final class Bet extends Model
         'odds_last_updated_at',
     ];
 
-    /**
-     * @return array<string, string>
-     */
+    protected $keyType = 'string';
+    public $incrementing = false;
+
     protected function casts(): array
     {
         return [
@@ -73,4 +69,15 @@ final class Bet extends Model
     {
         return $this->hasManyThrough(UserBet::class, BetOption::class);
     }
+
+    public function isOpen(): bool
+    {
+        return $this->status === BetStatus::Open;
+    }
+
+    public function isClosed(): bool
+    {
+        return $this->status === BetStatus::Closed;
+    }
 }
+
