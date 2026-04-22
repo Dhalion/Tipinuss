@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('user_bets', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('bet_option_id')->constrained()->onDelete('cascade');
+            $table->uuid('id')->primary();
+            $table->foreignUuid('user_id')->constrained()->onDelete('cascade');
+            $table->foreignUuid('bet_option_id')->constrained()->onDelete('cascade');
             $table->decimal('amount_wagered', 12, 2);
             $table->decimal('potential_winnings', 12, 2);
             $table->enum('status', ['pending', 'won', 'lost'])->default('pending');

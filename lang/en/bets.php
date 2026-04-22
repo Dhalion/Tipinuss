@@ -1,0 +1,23 @@
+<?php
+return [
+    'odds' => 'Odds',
+    'pending' => 'Pending',
+    'won' => 'Won',
+    'lost' => 'Lost',
+    'open' => 'Open',
+    'closed' => 'Closed',
+    'close' => 'Close Bet',
+    'delete' => 'Delete Bet',
+    'created_by' => 'Created by',
+    'expires' => 'Expires',
+    'available_odds' => 'Available Odds',
+    'bets_placed' => 'Bets',
+    'place_bet' => 'Place Bet',
+    'selected_option' => 'Option',
+    'stake_amount' => 'Stake in 🌰',
+    'potential_winnings' => 'Potential Winnings',
+    'amount' => 'Amount',
+    'placing' => 'Placing',
+    'cancel' => 'Cancel',
+    'empty' => 'No bets placed yet.',
+];

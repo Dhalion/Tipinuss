@@ -25,3 +25,5 @@ yarn-error.log
 devenv.lock
 /.direnv
 /.devenv
+/bootstrap/cache/phpstan
+

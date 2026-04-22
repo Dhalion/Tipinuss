@@ -12,11 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('bets', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->uuid('id')->primary();
+            $table->foreignUuid('user_id')->constrained()->onDelete('cascade');
             $table->string('title');
             $table->text('description')->nullable();
             $table->enum('status', ['open', 'closed'])->default('open');
+            $table->boolean('dynamic_odds_enabled')->default(false);
+            $table->timestamp('odds_last_updated_at')->nullable();
+
             $table->timestamp('expires_at')->nullable();
             $table->timestamp('closed_at')->nullable();
             $table->timestamps();

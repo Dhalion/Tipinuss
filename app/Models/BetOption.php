@@ -1,27 +1,28 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * @property int $id
- * @property int $bet_id
+ * @property string $id
+ * @property string $bet_id
  * @property string $title
  * @property float $odds
  * @property float|null $base_odds
  * @property bool|null $result
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * @property-read Bet $bet
- * @property-read \Illuminate\Database\Eloquent\Collection<int, UserBet> $userBets
  */
 final class BetOption extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUuids;
 
     protected $fillable = [
         'bet_id',
@@ -30,6 +31,9 @@ final class BetOption extends Model
         'base_odds',
         'result',
     ];
+
+    protected $keyType = 'string';
+    public $incrementing = false;
 
     protected function casts(): array
     {
@@ -52,3 +56,4 @@ final class BetOption extends Model
         return $this->hasMany(UserBet::class);
     }
 }
+

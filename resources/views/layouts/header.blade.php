@@ -1,16 +1,20 @@
 <flux:header container>
-    <flux:brand href="{{ route('main') }}" logo="{{ URL::asset('images/logo-full.webp') }}"
-        name="{{ __('app.title') }}" />
+    <flux:brand href="{{ route('main') }}"
+                logo="{{ URL::asset('images/logo-full.webp') }}"
+                name="{{ __('app.title') }}"/>
 
     <flux:navbar class="-mb-px">
-        <flux:navbar.item href="{{ route('main') }}">{{ __('app.navigation.home') }}</flux:navbar.item>
+        <flux:navbar.item href="{{ route('main') }}"
+                          wire:navigate.hover>{{ __('app.navigation.home') }}</flux:navbar.item>
         @auth
-            <flux:navbar.item href="#">{{ __('app.navigation.bets.list') }}</flux:navbar.item>
-            <flux:navbar.item href="{{ route('bet.create') }}">{{ __('app.navigation.bets.create') }}</flux:navbar.item>
+            <flux:navbar.item href="{{ route('bet.list') }}"
+                              wire:navigate.hover>{{ __('app.navigation.bets.list') }}</flux:navbar.item>
+            <flux:navbar.item href="{{ route('bet.create') }} "
+                              wire:navigate.hover>{{ __('app.navigation.bets.create') }}</flux:navbar.item>
         @endauth
     </flux:navbar>
 
-    <flux:spacer />
+    <flux:spacer/>
 
 
     @auth
@@ -19,7 +23,7 @@
             <span class="text-lg">🌰</span>
         </span>
         <flux:dropdown>
-            <flux:profile name="{{ Auth::user()->name }}" />
+            <flux:profile name="{{ Auth::user()->name }}"/>
             <flux:menu>
 
                 <flux:menu.item href="{{ route('account') }}">{{ __('app.navigation.account') }}</flux:menu.item>

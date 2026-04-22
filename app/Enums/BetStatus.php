@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Enums;
 
@@ -10,16 +10,16 @@ enum BetStatus: string
     public function label(): string
     {
         return match ($this) {
-            self::Open => 'Open',
-            self::Closed => 'Closed',
+            self::Open => __('bets.open'),
+            self::Closed => __('bets.closed'),
         };
     }
 
     public function color(): string
     {
         return match ($this) {
-            self::Open => 'tipinuss-green',
-            self::Closed => 'tipinuss-red',
+            self::Open => 'green',
+            self::Closed => 'red',
         };
     }
 }
