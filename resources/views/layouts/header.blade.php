@@ -7,9 +7,9 @@
         <flux:navbar.item href="{{ route('main') }}"
                           wire:navigate.hover>{{ __('app.navigation.home') }}</flux:navbar.item>
         @auth
-            <flux:navbar.item href="{{ route('bet.list') }}"
+            <flux:navbar.item href="{{ route('bets.list') }}"
                               wire:navigate.hover>{{ __('app.navigation.bets.list') }}</flux:navbar.item>
-            <flux:navbar.item href="{{ route('bet.create') }} "
+            <flux:navbar.item href="{{ route('bets.create') }} "
                               wire:navigate.hover>{{ __('app.navigation.bets.create') }}</flux:navbar.item>
         @endauth
     </flux:navbar>

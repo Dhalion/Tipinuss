@@ -1,4 +1,4 @@
-<a href="{{ route('bet.detail', ['bet' => $bet]) }}" wire:navigate.hover>
+<a href="{{ route('bets.detail', ['bet' => $bet]) }}" wire:navigate.hover>
     <flux:card class="space-y-3">
         <div class="flex items-start justify-between gap-3">
             <div class="flex-1">

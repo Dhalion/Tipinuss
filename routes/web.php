@@ -26,7 +26,7 @@ Route::middleware('auth')->group(function () {
     })->name('logout');
     Route::livewire('/account', Account::class)->name('account');
 
-    Route::livewire('/bet/create', Create::class)->name('bet.create');
-    Route::livewire('/bets', BetsListing::class)->name('bet.list');
-    Route::livewire('/bets/{bet}', BetDetail::class)->name('bet.detail');
+    Route::livewire('/bet/create', Create::class)->name('bets.create');
+    Route::livewire('/bets', BetsListing::class)->name('bets.list');
+    Route::livewire('/bets/{bet}', BetDetail::class)->name('bets.detail');
 });

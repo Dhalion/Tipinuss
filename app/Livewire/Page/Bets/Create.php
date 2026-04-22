@@ -86,7 +86,7 @@ class Create extends Component
         }
 
         session()->flash('success', 'Bet created successfully!');
-        $this->redirect(route('bet.detail', $bet));
+        $this->redirect(route('bets.detail', $bet));
     }
 
     private function calculateBaseOdds(int $optionCount): float
