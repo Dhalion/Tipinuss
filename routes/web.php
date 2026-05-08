@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Livewire\Page\Account;
+use App\Livewire\Page\Admin\OrganisationManagement;
 use App\Livewire\Page\Bets\BetDetail;
 use App\Livewire\Page\Bets\BetsListing;
 use App\Livewire\Page\Bets\Create;
@@ -29,4 +30,8 @@ Route::middleware('auth')->group(function () {
     Route::livewire('/bet/create', Create::class)->name('bets.create');
     Route::livewire('/bets', BetsListing::class)->name('bets.list');
     Route::livewire('/bets/{bet}', BetDetail::class)->name('bets.detail');
+
+    Route::middleware('can:admin')->group(function () {
+        Route::livewire('/admin/organisations', OrganisationManagement::class)->name('admin.organisations');
+    });
 });

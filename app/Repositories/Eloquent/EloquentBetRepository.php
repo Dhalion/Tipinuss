@@ -6,6 +6,7 @@ namespace App\Repositories\Eloquent;
 
 use App\Enums\BetStatus;
 use App\Models\Bet;
+use App\Models\User;
 use App\Repositories\Contracts\BetRepositoryInterface;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -27,6 +28,19 @@ final class EloquentBetRepository implements BetRepositoryInterface
             ->where('status', '!=', BetStatus::Closed->value)
             ->latest()
             ->paginate($perPage);
+    }
+
+    /** @return LengthAwarePaginator<int, Bet> */
+    public function paginateOpenForUser(User $user, int $perPage = 15): LengthAwarePaginator
+    {
+        $query = Bet::with(['creator', 'betOptions', 'userBets'])
+            ->where('status', '!=', BetStatus::Closed->value);
+
+        if (! $user->isAdmin()) {
+            $query->where('organisation_id', $user->organisation_id);
+        }
+
+        return $query->latest()->paginate($perPage);
     }
 
     public function save(Bet $bet): Bet

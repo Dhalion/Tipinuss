@@ -21,7 +21,11 @@ final class BetPolicy
 
     public function viewBet(User $user, Bet $bet): bool
     {
-        return true;
+        if ($user->isAdmin()) {
+            return true;
+        }
+
+        return $user->organisation_id === $bet->organisation_id;
     }
 
     private function isOpenAndAuthorizedFor(User $user, Bet $bet): bool

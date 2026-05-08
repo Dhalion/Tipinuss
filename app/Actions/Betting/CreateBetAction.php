@@ -23,6 +23,7 @@ final class CreateBetAction
         return DB::transaction(function () use ($data): Bet {
             $bet = new Bet([
                 'user_id' => $data->creator->id,
+                'organisation_id' => $data->organisationId,
                 'title' => $data->title,
                 'description' => $data->description,
                 'status' => BetStatus::Open,

@@ -18,6 +18,7 @@ final class CreateBetData
         public readonly ?string $description,
         public readonly ?CarbonImmutable $expiresAt,
         public readonly array $options,
+        public readonly ?string $organisationId,
     ) {}
 
     /**
@@ -29,6 +30,7 @@ final class CreateBetData
         ?string $description,
         ?CarbonImmutable $expiresAt,
         array $options,
+        ?string $organisationId,
     ): self {
         return new self(
             creator: $creator,
@@ -36,6 +38,7 @@ final class CreateBetData
             description: $description,
             expiresAt: $expiresAt,
             options: $options,
+            organisationId: $organisationId,
         );
     }
 }
