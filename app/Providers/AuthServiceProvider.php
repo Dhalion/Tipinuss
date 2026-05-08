@@ -10,7 +10,7 @@ use App\Policies\BetPolicy;
 use App\Policies\UserBetPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
-class AuthServiceProvider extends ServiceProvider
+final class AuthServiceProvider extends ServiceProvider
 {
     protected $policies = [
         Bet::class => BetPolicy::class,

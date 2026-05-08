@@ -47,7 +47,16 @@ final class OrganisationManagement extends Component
             return;
         }
 
-        $user->organisation_id = $organisationId !== '' ? $organisationId : null;
+        $resolvedOrganisationId = null;
+        if ($organisationId !== null && $organisationId !== '') {
+            $organisation = $organisations->findById($organisationId);
+            if ($organisation === null) {
+                return;
+            }
+            $resolvedOrganisationId = $organisation->id;
+        }
+
+        $user->organisation_id = $resolvedOrganisationId;
         $users->save($user);
 
         $this->organisations = $organisations->findAll();

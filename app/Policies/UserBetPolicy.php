@@ -7,10 +7,10 @@ namespace App\Policies;
 use App\Models\User;
 use App\Models\UserBet;
 
-class UserBetPolicy
+final class UserBetPolicy
 {
     public function viewUserBet(User $user, UserBet $userBet): bool
     {
-        return true;
+        return $user->isAdmin() || $user->id === $userBet->user_id;
     }
 }

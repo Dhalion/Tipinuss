@@ -14,6 +14,9 @@ interface UserRepositoryInterface
     /** @return Collection<int, User> */
     public function all(): Collection;
 
+    /** @return Collection<int, User> */
+    public function allWithBetCount(): Collection;
+
     public function save(User $user): User;
 
     /** @return Collection<int, User> */

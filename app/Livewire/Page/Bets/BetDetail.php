@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Livewire\Page\Bets;
 
+use App\Actions\Admin\ChangeBetOrganisationAction;
 use App\Actions\Betting\CloseBetAction;
 use App\Actions\Betting\DeleteBetAction;
 use App\Actions\Betting\PlaceBetAction;
@@ -11,6 +12,7 @@ use App\DTOs\Betting\PlaceBetData;
 use App\Exceptions\BetException;
 use App\Models\Bet;
 use App\Repositories\Contracts\BetOptionRepositoryInterface;
+use App\Repositories\Contracts\OrganisationRepositoryInterface;
 use App\Repositories\Contracts\UserBetRepositoryInterface;
 use App\Services\Betting\BetCalculationService;
 use App\Services\Betting\BettingValidationService;
@@ -35,6 +37,8 @@ final class BetDetail extends Component
     public function mount(Bet $bet, MetaTagService $metaTagService): void
     {
         $this->bet = $bet->load('creator', 'betOptions', 'userBets');
+
+        $this->authorize('viewBet', $this->bet);
 
         $metaTagService->setBetMetaTags(
             title: $this->bet->title,
@@ -149,10 +153,30 @@ final class BetDetail extends Component
         $this->redirect(route('bets.list'), navigate: true);
     }
 
-    public function render(): View
+    public function changeOrganisation(
+        ?string $organisationId,
+        ChangeBetOrganisationAction $action,
+        OrganisationRepositoryInterface $organisations,
+    ): void {
+        $this->authorize('admin');
+
+        $organisation = $organisationId !== null && $organisationId !== ''
+            ? $organisations->findById($organisationId)
+            : null;
+
+        if ($organisationId !== null && $organisationId !== '' && $organisation === null) {
+            return;
+        }
+
+        $action->execute($this->bet, $organisation);
+        $this->bet->refresh();
+    }
+
+    public function render(OrganisationRepositoryInterface $organisations): View
     {
         return view('pages.bets.detail', [
             'canCloseBet' => $this->canCloseBet(),
+            'organisations' => $organisations->findAll(),
         ]);
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Livewire\Page\Account;
 use App\Livewire\Page\Admin\OrganisationManagement;
+use App\Livewire\Page\Admin\UserManagement;
 use App\Livewire\Page\Bets\BetDetail;
 use App\Livewire\Page\Bets\BetsListing;
 use App\Livewire\Page\Bets\Create;
@@ -22,6 +23,8 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::post('/logout', function () {
         auth()->logout();
+        session()->invalidate();
+        session()->regenerateToken();
 
         return redirect()->route('main');
     })->name('logout');
@@ -33,5 +36,6 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware('can:admin')->group(function () {
         Route::livewire('/admin/organisations', OrganisationManagement::class)->name('admin.organisations');
+        Route::livewire('/admin/users', UserManagement::class)->name('admin.users');
     });
 });
