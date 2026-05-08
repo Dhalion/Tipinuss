@@ -20,6 +20,14 @@ final class EloquentUserRepository implements UserRepositoryInterface
         return User::orderBy('name')->get();
     }
 
+    public function allWithBetCount(): Collection
+    {
+        return User::withCount('userBets')
+            ->with('organisation')
+            ->orderBy('name')
+            ->get();
+    }
+
     public function save(User $user): User
     {
         $user->save();

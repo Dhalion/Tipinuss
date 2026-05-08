@@ -23,7 +23,6 @@ final class User extends Authenticatable
         'email',
         'password',
         'soapnuts',
-        'is_admin',
         'organisation_id',
     ];
 

@@ -31,6 +31,25 @@
     @include('components.flash-notification')
 
     @include('components.bets.detail-header-with-controls', ['bet' => $bet, 'canCloseBet' => $canCloseBet])
+
+    @if(auth()->user()?->isAdmin())
+        <div class="bg-amber-50 dark:bg-amber-900/20 border-b border-amber-200 dark:border-amber-700 px-4 lg:px-6 py-3">
+            <div class="max-w-6xl mx-auto flex items-center gap-4 text-sm">
+                <span class="font-medium text-amber-700 dark:text-amber-300">Admin: Organisation der Wette</span>
+                <select
+                    wire:change="changeOrganisation($event.target.value)"
+                    class="border border-amber-300 dark:border-amber-600 rounded-lg px-3 py-1 bg-white dark:bg-zinc-700 text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-400"
+                >
+                    <option value="">— Keine Gruppe —</option>
+                    @foreach($organisations as $org)
+                        <option value="{{ $org->id }}" {{ $bet->organisation_id === $org->id ? 'selected' : '' }}>
+                            {{ $org->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+    @endif
     
     <div class="flex-1 px-4 lg:px-6 py-12">
         <div class="max-w-6xl mx-auto">

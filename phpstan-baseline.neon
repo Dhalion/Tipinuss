@@ -7,6 +7,12 @@ parameters:
 			path: app/Livewire/Page/Account.php
 
 		-
+			message: '#^Dynamic call to static method Illuminate\\Contracts\\Auth\\Guard\:\:user\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 2
+			path: app/Livewire/Page/Admin/UserManagement.php
+
+		-
 			message: '#^Cannot cast mixed to int\.$#'
 			identifier: cast.int
 			count: 2
@@ -61,8 +67,8 @@ parameters:
 			path: app/Livewire/Page/Login.php
 
 		-
-			message: '#^Method App\\Livewire\\Page\\Login\:\:render\(\) has no return type specified\.$#'
-			identifier: missingType.return
+			message: '#^Dynamic call to static method Illuminate\\Session\\Store\:\:regenerate\(\)\.$#'
+			identifier: staticMethod.dynamicCall
 			count: 1
 			path: app/Livewire/Page/Login.php
 
@@ -79,8 +85,8 @@ parameters:
 			path: app/Livewire/Page/Register.php
 
 		-
-			message: '#^Method App\\Livewire\\Page\\Register\:\:render\(\) has no return type specified\.$#'
-			identifier: missingType.return
+			message: '#^Dynamic call to static method Illuminate\\Session\\Store\:\:regenerate\(\)\.$#'
+			identifier: staticMethod.dynamicCall
 			count: 1
 			path: app/Livewire/Page/Register.php
 
@@ -235,6 +241,12 @@ parameters:
 			path: app/Repositories/Eloquent/EloquentUserBetRepository.php
 
 		-
+			message: '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\User\>\:\:orderBy\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: app/Repositories/Eloquent/EloquentUserRepository.php
+
+		-
 			message: '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\User\>\:\:orderByDesc\(\)\.$#'
 			identifier: staticMethod.dynamicCall
 			count: 1
@@ -254,6 +266,18 @@ parameters:
 
 		-
 			message: '#^Dynamic call to static method Illuminate\\Auth\\SessionGuard\:\:logout\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: routes/web.php
+
+		-
+			message: '#^Dynamic call to static method Illuminate\\Session\\Store\:\:invalidate\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: routes/web.php
+
+		-
+			message: '#^Dynamic call to static method Illuminate\\Session\\Store\:\:regenerateToken\(\)\.$#'
 			identifier: staticMethod.dynamicCall
 			count: 1
 			path: routes/web.php
