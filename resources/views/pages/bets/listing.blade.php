@@ -14,8 +14,13 @@
                 @include('components.bets.bet-listing-component', ['bet' => $bet])
             @empty
                 <flux:callout icon="information-circle" class="bg-zinc-100 dark:bg-zinc-800 border-zinc-300 dark:border-zinc-700">
-                    <div class="text-sm text-zinc-700 dark:text-zinc-300">
-                        {{ __('bets.empty') }}
+                    <div class="space-y-3">
+                        <div class="text-sm text-zinc-700 dark:text-zinc-300">
+                            {{ __('bets.empty') }}
+                        </div>
+                        <a href="{{ route('bets.create') }}" wire:navigate class="inline-flex items-center px-4 py-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 rounded font-semibold text-sm hover:shadow transition">
+                            ➕ {{ __('app.navigation.bets.create') }}
+                        </a>
                     </div>
                 </flux:callout>
             @endforelse

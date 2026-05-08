@@ -1,0 +1,22 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Repositories\Contracts;
+
+use App\Models\Bet;
+use Illuminate\Pagination\LengthAwarePaginator;
+
+interface BetRepositoryInterface
+{
+    public function findById(string $id): ?Bet;
+
+    public function findByIdOrFail(string $id): Bet;
+
+    /** @return LengthAwarePaginator<Bet> */
+    public function paginateOpen(int $perPage = 15): LengthAwarePaginator;
+
+    public function save(Bet $bet): Bet;
+
+    public function delete(Bet $bet): void;
+}

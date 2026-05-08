@@ -18,25 +18,39 @@
                     {{ $bet->status->label() }}
                 </flux:badge>
                 
-                @if(auth()->check() && auth()->id() === $bet->creator_id)
-                    <div class="flex gap-2">
-                        <flux:button 
-                            variant="outline" 
-                            size="sm"
-                            wire:click="closeBet"
-                            wire:confirm="Wirklich schließen?"
-                        >
-                            {{ __('bets.close') }}
-                        </flux:button>
-                        <flux:button 
-                            variant="danger" 
-                            size="sm"
-                            wire:click="deleteBet"
-                            wire:confirm="Wirklich löschen?"
-                        >
-                            {{ __('bets.delete') }}
-                        </flux:button>
-                    </div>
+                @if(auth()->check() && (auth()->id() === $bet->user_id || auth()->user()?->isAdmin()))
+                    @if($bet->isOpen())
+                        <div class="flex gap-2 flex-wrap">
+                            <div x-data x-tooltip.raw="{{ $canCloseBet ? '' : __('bets.close_disabled_hint') }}">
+                                <button 
+                                    type="button"
+                                    @if($canCloseBet)
+                                        wire:click="openCloseBetModal"
+                                    @endif
+                                    @class([
+                                        'inline-flex items-center gap-2 px-4 py-2 rounded-lg border-2 font-medium transition',
+                                        'border-amber-400 bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300 hover:bg-amber-100 dark:hover:bg-amber-900/40 cursor-pointer' => $canCloseBet,
+                                        'border-zinc-400 bg-zinc-50 dark:bg-zinc-800 text-zinc-400 dark:text-zinc-500 cursor-not-allowed opacity-60' => !$canCloseBet,
+                                    ])
+                                >
+                                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                    </svg>
+                                    {{ __('bets.close') }}
+                                </button>
+                            </div>
+                            <button 
+                                type="button"
+                                wire:click="openDeleteBetModal"
+                                class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border-2 border-red-400 bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 font-medium hover:bg-red-100 dark:hover:bg-red-900/40 transition"
+                            >
+                                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg>
+                                {{ __('bets.delete') }}
+                            </button>
+                        </div>
+                    @endif
                 @endif
             </div>
         </div>

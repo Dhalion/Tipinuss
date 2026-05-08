@@ -6,11 +6,11 @@ namespace App\Services;
 
 class MetaTagService
 {
-    public function setBetMetaTags(string $title, string|null $description = null, string|null $image = null): void
+    public function setBetMetaTags(string $title, ?string $description = null, ?string $image = null): void
     {
         view()->share([
             'pageTitle' => $title,
-            'pageDescription' => $description ?? 'Tippe auf ' . $title . ' und verdiene Waschnüsse auf Tipinuss',
+            'pageDescription' => $description ?? 'Tippe auf '.$title.' und verdiene Waschnüsse auf Tipinuss',
             'pageImage' => $image ?? asset('images/logo-full.webp'),
         ]);
     }

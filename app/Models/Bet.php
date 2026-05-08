@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Enums\BetStatus;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -18,12 +19,12 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
  * @property string $title
  * @property string|null $description
  * @property BetStatus $status
- * @property \Carbon\Carbon|null $expires_at
- * @property \Carbon\Carbon|null $closed_at
+ * @property Carbon|null $expires_at
+ * @property Carbon|null $closed_at
  * @property bool $dynamic_odds_enabled
- * @property \Carbon\Carbon|null $odds_last_updated_at
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property Carbon|null $odds_last_updated_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
  */
 final class Bet extends Model
 {
@@ -41,6 +42,7 @@ final class Bet extends Model
     ];
 
     protected $keyType = 'string';
+
     public $incrementing = false;
 
     protected function casts(): array
@@ -80,4 +82,3 @@ final class Bet extends Model
         return $this->status === BetStatus::Closed;
     }
 }
-

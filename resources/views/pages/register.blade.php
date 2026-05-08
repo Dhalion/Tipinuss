@@ -28,7 +28,7 @@
         <div class="mt-6 pt-6 border-t border-zinc-200 dark:border-zinc-700">
             <p class="text-center text-sm text-zinc-600 dark:text-zinc-400">
                 {{ __('auth.have_account') }}
-                <a href="{{ route('login') }}"
+                <a href="{{ route('login') }}" wire:navigate
                     class="font-semibold text-tipinuss-red-600 dark:text-tipinuss-red-400 hover:underline">
                     {{ __('auth.login_here') }}
                 </a>

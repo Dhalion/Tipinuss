@@ -1,15 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Livewire\Page\Bets;
 
-use App\Enums\BetStatus;
-use App\Models\Bet;
+use App\Repositories\Contracts\BetRepositoryInterface;
 use Illuminate\View\View;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class BetsListing extends Component
+final class BetsListing extends Component
 {
     use WithPagination;
 
@@ -20,13 +21,10 @@ class BetsListing extends Component
         $this->resetPage();
     }
 
-    public function render(): View
+    public function render(BetRepositoryInterface $bets): View
     {
-        $bets = Bet::with('creator', 'betOptions', 'userBets')
-            ->where('status', '!=', BetStatus::Closed->value)
-            ->latest()
-            ->paginate(15);
-
-        return view('pages.bets.listing', ['bets' => $bets]);
+        return view('pages.bets.listing', [
+            'bets' => $bets->paginateOpen(),
+        ]);
     }
 }

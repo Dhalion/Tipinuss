@@ -1,0 +1,24 @@
+parameters:
+    level: max
+    paths:
+        - app
+        - config
+        - database
+        - routes
+
+    excludePaths:
+        - bootstrap/cache
+        - storage
+        - vendor
+        - node_modules
+        - tests
+
+    tmpDir: bootstrap/cache/phpstan
+
+    reportUnmatchedIgnoredErrors: false
+
+    ignoreErrors:
+        - '#^Baseline file phpstan-baseline\.neon does not exist\.#'
+
+includes:
+    - phpstan-baseline.neon

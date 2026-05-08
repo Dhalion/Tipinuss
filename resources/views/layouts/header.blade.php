@@ -1,7 +1,8 @@
 <flux:header container>
     <flux:brand href="{{ route('main') }}"
                 logo="{{ URL::asset('images/logo-full.webp') }}"
-                name="{{ __('app.title') }}"/>
+                name="{{ __('app.title') }}"
+                wire:navigate.hover/>
 
     <flux:navbar class="-mb-px">
         <flux:navbar.item href="{{ route('main') }}"
@@ -9,7 +10,7 @@
         @auth
             <flux:navbar.item href="{{ route('bets.list') }}"
                               wire:navigate.hover>{{ __('app.navigation.bets.list') }}</flux:navbar.item>
-            <flux:navbar.item href="{{ route('bets.create') }} "
+            <flux:navbar.item href="{{ route('bets.create') }}"
                               wire:navigate.hover>{{ __('app.navigation.bets.create') }}</flux:navbar.item>
         @endauth
     </flux:navbar>
@@ -26,7 +27,7 @@
             <flux:profile name="{{ Auth::user()->name }}"/>
             <flux:menu>
 
-                <flux:menu.item href="{{ route('account') }}">{{ __('app.navigation.account') }}</flux:menu.item>
+                <flux:menu.item href="{{ route('account') }}" wire:navigate>{{ __('app.navigation.account') }}</flux:menu.item>
                 <form method="POST" action="{{ route('logout') }}" class="contents">
                     @csrf
                     <flux:menu.item as="button" type="submit">
@@ -39,9 +40,9 @@
 
     @guest
         <div class="flex items-center gap-2">
-            <flux:navbar.item href="{{ route('login') }}" class="text-sm">{{ __('app.navigation.login') }}
+            <flux:navbar.item href="{{ route('login') }}" wire:navigate class="text-sm">{{ __('app.navigation.login') }}
             </flux:navbar.item>
-            <flux:navbar.item href="{{ route('register') }}" class="text-sm">{{ __('app.navigation.register') }}
+            <flux:navbar.item href="{{ route('register') }}" wire:navigate class="text-sm">{{ __('app.navigation.register') }}
             </flux:navbar.item>
         </div>
     @endguest

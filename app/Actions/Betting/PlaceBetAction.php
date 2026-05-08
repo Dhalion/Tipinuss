@@ -4,44 +4,44 @@ declare(strict_types=1);
 
 namespace App\Actions\Betting;
 
-use App\Models\BetOption;
-use App\Models\User;
+use App\DTOs\Betting\PlaceBetData;
+use App\Enums\UserBetStatus;
 use App\Models\UserBet;
+use App\Repositories\Contracts\UserBetRepositoryInterface;
 use App\Services\Betting\BetCalculationService;
 use App\Services\Betting\BettingValidationService;
 use App\Services\User\UserBalanceService;
+use Illuminate\Support\Facades\DB;
 
-class PlaceBetAction
+final class PlaceBetAction
 {
     public function __construct(
         private BettingValidationService $validation,
         private BetCalculationService $calculation,
         private UserBalanceService $balance,
+        private UserBetRepositoryInterface $userBets,
     ) {}
 
-    public function execute(User $user, BetOption|null $option, int $amount): UserBet
+    public function execute(PlaceBetData $data): UserBet
     {
-        $this->validation->validateOptionExists($option);
+        $this->validation->validateBetIsOpen($data->option->bet->isOpen());
+        $this->validation->validateAmountWithinBounds($data->amount);
+        $this->validation->validateBalanceSufficient($data->user, $data->amount);
 
-        if ($option === null) {
-            throw new \LogicException('Option was validated to exist but is null');
-        }
+        $potentialWinnings = $this->calculation->calculatePotentialWinnings($data->option, $data->amount);
 
-        $this->validation->validateBetIsOpen($option->bet->isOpen());
-        $this->validation->validateAmountWithinBounds($amount);
-        $this->validation->validateBalanceSufficient($user, $amount);
+        return DB::transaction(function () use ($data, $potentialWinnings): UserBet {
+            $this->balance->decrementBalance($data->user, $data->amount);
 
-        $potentialWinnings = $this->calculation->calculatePotentialWinnings($option, $amount);
+            $userBet = new UserBet([
+                'user_id' => $data->user->id,
+                'bet_option_id' => $data->option->id,
+                'amount_wagered' => $data->amount,
+                'potential_winnings' => $potentialWinnings,
+                'status' => UserBetStatus::Pending,
+            ]);
 
-        $this->balance->decrementBalance($user, $amount);
-
-        return UserBet::create([
-            'user_id' => $user->id,
-            'bet_option_id' => $option->id,
-            'amount_wagered' => $amount,
-            'potential_winnings' => $potentialWinnings,
-            'status' => 'pending',
-        ]);
+            return $this->userBets->save($userBet);
+        });
     }
 }
-

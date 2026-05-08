@@ -1,4 +1,5 @@
 <?php
+
 return [
     'odds' => 'Quote',
     'pending' => 'Ausstehend',
@@ -20,4 +21,8 @@ return [
     'placing' => 'Wird platziert',
     'cancel' => 'Abbrechen',
     'empty' => 'Noch keine Wetten vorhanden.',
+    'select_winning_option' => 'Wähle die gewinnerlose Option aus',
+    'close_disabled_hint' => 'Mindestens 2 verschiedene User müssen gewettet haben',
+    'close_not_allowed' => 'Die Wette kann erst geschlossen werden, wenn mindestens 2 verschiedene User gewettet haben.',
+    'confirm_delete' => 'Wirklich löschen? Alle Einsätze werden erstattet.',
 ];

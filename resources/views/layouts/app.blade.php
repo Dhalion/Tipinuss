@@ -31,11 +31,11 @@
     @fluxAppearance
 </head>
 
-<body class="bg-white dark:bg-zinc-900">
+<body class="bg-white dark:bg-zinc-900 flex flex-col min-h-screen">
 
     @include('layouts.header')
 
-    <main class="min-h-screen">
+    <main class="flex-1">
         {{ $slot }}
     </main>
 
