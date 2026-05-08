@@ -4,21 +4,16 @@ declare(strict_types=1);
 
 namespace App\Livewire\Bets;
 
-use App\Models\User;
+use App\Repositories\Contracts\UserRepositoryInterface;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
-class Leaderboard extends Component
+final class Leaderboard extends Component
 {
-    public function render(): View
+    public function render(UserRepositoryInterface $users): View
     {
-        $topBettors = User::withCount('userBets')
-            ->orderByDesc('soapnuts')
-            ->take(10)
-            ->get();
-
         return view('livewire.bets.leaderboard', [
-            'topBettors' => $topBettors,
+            'topBettors' => $users->topBySoapnuts(),
         ]);
     }
 }

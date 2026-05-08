@@ -1,0 +1,223 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Dynamic call to static method Illuminate\\Contracts\\Auth\\Guard\:\:user\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: app/Livewire/Page/Account.php
+
+		-
+			message: '#^Cannot cast mixed to int\.$#'
+			identifier: cast.int
+			count: 2
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Dynamic call to static method Illuminate\\Contracts\\Auth\\Guard\:\:user\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 2
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Dynamic call to static method Illuminate\\Session\\Store\:\:flash\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 3
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Cannot cast mixed to float\.$#'
+			identifier: cast.double
+			count: 1
+			path: app/Livewire/Page/Bets/Create.php
+
+		-
+			message: '#^Cannot cast mixed to string\.$#'
+			identifier: cast.string
+			count: 1
+			path: app/Livewire/Page/Bets/Create.php
+
+		-
+			message: '#^Dynamic call to static method Illuminate\\Contracts\\Auth\\Guard\:\:user\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: app/Livewire/Page/Bets/Create.php
+
+		-
+			message: '#^Dynamic call to static method Illuminate\\Session\\Store\:\:flash\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: app/Livewire/Page/Bets/Create.php
+
+		-
+			message: '#^Dynamic call to static method Illuminate\\Auth\\SessionGuard\:\:attempt\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: app/Livewire/Page/Login.php
+
+		-
+			message: '#^Method App\\Livewire\\Page\\Login\:\:render\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Livewire/Page/Login.php
+
+		-
+			message: '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\Bet\>\:\:take\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: app/Livewire/Page/MainPage.php
+
+		-
+			message: '#^Dynamic call to static method Illuminate\\Auth\\SessionGuard\:\:login\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: app/Livewire/Page/Register.php
+
+		-
+			message: '#^Method App\\Livewire\\Page\\Register\:\:render\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Livewire/Page/Register.php
+
+		-
+			message: '#^Class App\\Models\\Bet uses generic trait Illuminate\\Database\\Eloquent\\Factories\\HasFactory but does not specify its types\: TFactory$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Bet.php
+
+		-
+			message: '#^Method App\\Models\\Bet\:\:betOptions\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Bet.php
+
+		-
+			message: '#^Method App\\Models\\Bet\:\:creator\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Bet.php
+
+		-
+			message: '#^Method App\\Models\\Bet\:\:userBets\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasManyThrough does not specify its types\: TRelatedModel, TIntermediateModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Bet.php
+
+		-
+			message: '#^Class App\\Models\\BetOption uses generic trait Illuminate\\Database\\Eloquent\\Factories\\HasFactory but does not specify its types\: TFactory$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/BetOption.php
+
+		-
+			message: '#^Method App\\Models\\BetOption\:\:bet\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/BetOption.php
+
+		-
+			message: '#^Method App\\Models\\BetOption\:\:userBets\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/BetOption.php
+
+		-
+			message: '#^Method App\\Models\\User\:\:userBets\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/User.php
+
+		-
+			message: '#^Class App\\Models\\UserBet uses generic trait Illuminate\\Database\\Eloquent\\Factories\\HasFactory but does not specify its types\: TFactory$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/UserBet.php
+
+		-
+			message: '#^Method App\\Models\\UserBet\:\:betOption\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/UserBet.php
+
+		-
+			message: '#^Method App\\Models\\UserBet\:\:user\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/UserBet.php
+
+		-
+			message: '#^Method App\\Repositories\\Contracts\\BetRepositoryInterface\:\:paginateOpen\(\) return type with generic class Illuminate\\Pagination\\LengthAwarePaginator does not specify its types\: TKey, TValue$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Repositories/Contracts/BetRepositoryInterface.php
+
+		-
+			message: '#^Method App\\Repositories\\Eloquent\\EloquentBetRepository\:\:paginateOpen\(\) return type with generic class Illuminate\\Pagination\\LengthAwarePaginator does not specify its types\: TKey, TValue$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Repositories/Eloquent/EloquentBetRepository.php
+
+		-
+			message: '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Builder\<Illuminate\\Database\\Eloquent\\Model\>\:\:count\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: app/Repositories/Eloquent/EloquentUserBetRepository.php
+
+		-
+			message: '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Builder\<Illuminate\\Database\\Eloquent\\Model\>\:\:distinct\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: app/Repositories/Eloquent/EloquentUserBetRepository.php
+
+		-
+			message: '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Builder\<Illuminate\\Database\\Eloquent\\Model\>\:\:latest\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 2
+			path: app/Repositories/Eloquent/EloquentUserBetRepository.php
+
+		-
+			message: '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Builder\<Illuminate\\Database\\Eloquent\\Model\>\:\:with\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 3
+			path: app/Repositories/Eloquent/EloquentUserBetRepository.php
+
+		-
+			message: '#^Method App\\Repositories\\Eloquent\\EloquentUserBetRepository\:\:findByOption\(\) should return Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\UserBet\> but returns Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Repositories/Eloquent/EloquentUserBetRepository.php
+
+		-
+			message: '#^Method App\\Repositories\\Eloquent\\EloquentUserBetRepository\:\:recentForBet\(\) should return Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\UserBet\> but returns Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Repositories/Eloquent/EloquentUserBetRepository.php
+
+		-
+			message: '#^Method App\\Repositories\\Eloquent\\EloquentUserBetRepository\:\:recentForUser\(\) should return Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\UserBet\> but returns Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Repositories/Eloquent/EloquentUserBetRepository.php
+
+		-
+			message: '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\User\>\:\:orderByDesc\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: app/Repositories/Eloquent/EloquentUserRepository.php
+
+		-
+			message: '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\User\>\:\:take\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: app/Repositories/Eloquent/EloquentUserRepository.php
+
+		-
+			message: '#^Parameter \#1 \$string of function rtrim expects string, bool\|string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: config/filesystems.php
+
+		-
+			message: '#^Dynamic call to static method Illuminate\\Auth\\SessionGuard\:\:logout\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: routes/web.php

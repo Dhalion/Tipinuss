@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-use App\Livewire\Page\Register;
 use App\Livewire\Page\Account;
-use App\Livewire\Page\Bets\Create;
-use App\Livewire\Page\Bets\BetsListing;
 use App\Livewire\Page\Bets\BetDetail;
+use App\Livewire\Page\Bets\BetsListing;
+use App\Livewire\Page\Bets\Create;
 use App\Livewire\Page\Login;
 use App\Livewire\Page\MainPage;
+use App\Livewire\Page\Register;
 use Illuminate\Support\Facades\Route;
 
 Route::livewire('/', MainPage::class)->name('main');

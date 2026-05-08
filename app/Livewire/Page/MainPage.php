@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Livewire\Page;
 
@@ -19,4 +21,3 @@ class MainPage extends Component
         return view('pages.main-page', ['recentBets' => $recentBets]);
     }
 }
-

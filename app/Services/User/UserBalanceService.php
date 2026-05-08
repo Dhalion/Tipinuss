@@ -7,7 +7,7 @@ namespace App\Services\User;
 use App\Exceptions\BetException;
 use App\Models\User;
 
-class UserBalanceService
+final class UserBalanceService
 {
     public function decrementBalance(User $user, int $amount): void
     {
@@ -25,6 +25,8 @@ class UserBalanceService
 
     public function getAvailableBalance(User $user): int
     {
-        return $user->fresh()->soapnuts;
+        $freshUser = $user->fresh();
+
+        return $freshUser instanceof User ? (int) $freshUser->soapnuts : (int) $user->soapnuts;
     }
 }

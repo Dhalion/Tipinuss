@@ -9,7 +9,7 @@
     enable = lib.mkDefault true;
     package = lib.mkDefault pkgs.nodejs_24;
   };
-  
+
 
   languages.php = {
     enable = lib.mkDefault true;
@@ -66,6 +66,7 @@
     enable = true;
     package = pkgs.mysql84;
     initialDatabases = lib.mkDefault [{ name = "laravel"; }];
+
     ensureUsers = lib.mkDefault [
       {
         name = "laravel";
@@ -78,6 +79,7 @@
     ];
     settings = {
       mysqld = {
+        port = 3306;
         group_concat_max_len = 320000;
         log_bin_trust_function_creators = 1;
         sql_mode = "STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION";

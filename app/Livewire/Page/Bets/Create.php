@@ -3,14 +3,17 @@
 declare(strict_types=1);
 
 namespace App\Livewire\Page\Bets;
-use Illuminate\Contracts\View\View;
 
 use App\Actions\Betting\CreateBetAction;
-use App\Models\BetOption;
+use App\DTOs\Betting\BetOptionData;
+use App\DTOs\Betting\CreateBetData;
+use App\Models\User;
+use Carbon\CarbonImmutable;
+use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
-class Create extends Component
+final class Create extends Component
 {
     public const int DEFAULT_OPTIONS_COUNT = 2;
 
@@ -32,8 +35,8 @@ class Create extends Component
     {
         for ($i = 0; $i < self::DEFAULT_OPTIONS_COUNT; $i++) {
             $this->options[] = [
-                "title" => "",
-                "odds" => $this->calculateBaseOdds($i + 1),
+                'title' => '',
+                'odds' => $this->calculateBaseOdds($i + 1),
             ];
         }
     }
@@ -41,22 +44,22 @@ class Create extends Component
     public function addOption(): void
     {
         $this->options[] = [
-            "title" => "",
-            "odds" => $this->calculateBaseOdds($this->optionCount + 1),
+            'title' => '',
+            'odds' => $this->calculateBaseOdds($this->optionCount + 1),
         ];
         $this->optionCount++;
-
         $this->recalculateOdds();
     }
 
     public function removeOption(int $index): void
     {
-        if (count($this->options) > self::DEFAULT_OPTIONS_COUNT) {
-            array_splice($this->options, $index, 1);
-            $this->optionCount--;
-
-            $this->recalculateOdds();
+        if (count($this->options) <= self::DEFAULT_OPTIONS_COUNT) {
+            return;
         }
+
+        array_splice($this->options, $index, 1);
+        $this->optionCount--;
+        $this->recalculateOdds();
     }
 
     public function createBet(CreateBetAction $action): void
@@ -65,28 +68,52 @@ class Create extends Component
             'title' => 'required|min:5|max:255',
             'description' => 'nullable|max:1000',
             'expires_at' => 'nullable|date',
-            'options' => 'required|array|min:' . self::DEFAULT_OPTIONS_COUNT,
+            'options' => 'required|array|min:'.self::DEFAULT_OPTIONS_COUNT,
             'options.*.title' => 'required|min:1|max:255',
             'options.*.odds' => 'required|numeric|min:1',
         ]);
 
-        $bet = $action->execute(
-            auth()->user(),
-            $this->title,
-            $this->description !== '' ? $this->description : null,
-        );
-
-        foreach ($this->options as $optionData) {
-            BetOption::create([
-                'bet_id' => $bet->id,
-                'title' => $optionData['title'],
-                'odds' => (float) $optionData['odds'],
-                'base_odds' => (float) $optionData['odds'],
-            ]);
+        $user = auth()->user();
+        if ($user === null) {
+            return;
         }
 
-        session()->flash('success', 'Bet created successfully!');
+        $bet = $action->execute($this->buildCreateBetData($user));
+
+        session()->flash('success', '✓ Wette erfolgreich erstellt!');
         $this->redirect(route('bets.detail', $bet));
+    }
+
+    private function buildCreateBetData(User $user): CreateBetData
+    {
+        return CreateBetData::make(
+            creator: $user,
+            title: $this->title,
+            description: $this->description !== '' ? $this->description : null,
+            expiresAt: $this->parseExpiresAt(),
+            options: $this->buildOptionDTOs(),
+        );
+    }
+
+    private function parseExpiresAt(): ?CarbonImmutable
+    {
+        if ($this->expires_at === '') {
+            return null;
+        }
+
+        return CarbonImmutable::parse($this->expires_at);
+    }
+
+    /** @return array<int, BetOptionData> */
+    private function buildOptionDTOs(): array
+    {
+        return array_map(
+            fn (array $option): BetOptionData => BetOptionData::make(
+                title: (string) $option['title'],
+                odds: (float) $option['odds'],
+            ),
+            $this->options,
+        );
     }
 
     private function calculateBaseOdds(int $optionCount): float
@@ -108,4 +135,3 @@ class Create extends Component
         return view('pages.bets.create');
     }
 }
-

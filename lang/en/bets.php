@@ -1,4 +1,5 @@
 <?php
+
 return [
     'odds' => 'Odds',
     'pending' => 'Pending',
@@ -20,4 +21,8 @@ return [
     'placing' => 'Placing',
     'cancel' => 'Cancel',
     'empty' => 'No bets placed yet.',
+    'select_winning_option' => 'Select the winning option',
+    'close_disabled_hint' => 'At least 2 different users must have placed bets',
+    'close_not_allowed' => 'The bet can only be closed once at least 2 different users have placed bets.',
+    'confirm_delete' => 'Really delete? All stakes will be refunded.',
 ];
