@@ -9,6 +9,13 @@ use Illuminate\Database\Eloquent\Collection;
 
 interface UserRepositoryInterface
 {
+    public function findById(string $id): ?User;
+
+    /** @return Collection<int, User> */
+    public function all(): Collection;
+
+    public function save(User $user): User;
+
     /** @return Collection<int, User> */
     public function topBySoapnuts(int $limit = 10): Collection;
 }

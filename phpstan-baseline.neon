@@ -25,6 +25,12 @@ parameters:
 			path: app/Livewire/Page/Bets/BetDetail.php
 
 		-
+			message: '#^Dynamic call to static method Illuminate\\Contracts\\Auth\\Guard\:\:user\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: app/Livewire/Page/Bets/BetsListing.php
+
+		-
 			message: '#^Cannot cast mixed to float\.$#'
 			identifier: cast.double
 			count: 1
@@ -97,6 +103,12 @@ parameters:
 			path: app/Models/Bet.php
 
 		-
+			message: '#^Method App\\Models\\Bet\:\:organisation\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Bet.php
+
+		-
 			message: '#^Method App\\Models\\Bet\:\:userBets\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasManyThrough does not specify its types\: TRelatedModel, TIntermediateModel, TDeclaringModel$#'
 			identifier: missingType.generics
 			count: 1
@@ -119,6 +131,24 @@ parameters:
 			identifier: missingType.generics
 			count: 1
 			path: app/Models/BetOption.php
+
+		-
+			message: '#^Method App\\Models\\Organisation\:\:bets\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Organisation.php
+
+		-
+			message: '#^Method App\\Models\\Organisation\:\:users\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/Organisation.php
+
+		-
+			message: '#^Method App\\Models\\User\:\:organisation\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/User.php
 
 		-
 			message: '#^Method App\\Models\\User\:\:userBets\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
@@ -155,6 +185,12 @@ parameters:
 			identifier: missingType.generics
 			count: 1
 			path: app/Repositories/Eloquent/EloquentBetRepository.php
+
+		-
+			message: '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\Organisation\>\:\:orderBy\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: app/Repositories/Eloquent/EloquentOrganisationRepository.php
 
 		-
 			message: '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Builder\<Illuminate\\Database\\Eloquent\\Model\>\:\:count\(\)\.$#'

@@ -70,9 +70,6 @@
         </div>
     </div>
 
-    {{-- ============================================================
-         Place Bet Modal – Alpine-driven, zero server roundtrip on input
-         ============================================================ --}}
     <div
         x-show="placeBet.show"
         x-transition:enter="transition ease-out duration-200"
@@ -201,9 +198,6 @@
         </div>
     </div>
 
-    {{-- ============================================================
-         Close Bet Modal – Livewire state + Alpine transitions (@entangle)
-         ============================================================ --}}
     <div
         x-data="{ show: $wire.entangle('showCloseBetModal').defer }"
         x-show="show"
@@ -303,9 +297,6 @@
         </div>
     </div>
 
-    {{-- ============================================================
-         Delete Bet Modal – Livewire state + Alpine transitions (@entangle)
-         ============================================================ --}}
     <div
         x-data="{ show: $wire.entangle('showDeleteBetModal').defer }"
         x-show="show"

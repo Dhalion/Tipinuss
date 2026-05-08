@@ -4,17 +4,21 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Models\User;
 use App\Repositories\Contracts\BetOptionRepositoryInterface;
 use App\Repositories\Contracts\BetRepositoryInterface;
+use App\Repositories\Contracts\OrganisationRepositoryInterface;
 use App\Repositories\Contracts\UserBetRepositoryInterface;
 use App\Repositories\Contracts\UserRepositoryInterface;
 use App\Repositories\Eloquent\EloquentBetOptionRepository;
 use App\Repositories\Eloquent\EloquentBetRepository;
+use App\Repositories\Eloquent\EloquentOrganisationRepository;
 use App\Repositories\Eloquent\EloquentUserBetRepository;
 use App\Repositories\Eloquent\EloquentUserRepository;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
 
@@ -26,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(BetOptionRepositoryInterface::class, EloquentBetOptionRepository::class);
         $this->app->bind(UserBetRepositoryInterface::class, EloquentUserBetRepository::class);
         $this->app->bind(UserRepositoryInterface::class, EloquentUserRepository::class);
+        $this->app->bind(OrganisationRepositoryInterface::class, EloquentOrganisationRepository::class);
     }
 
     public function boot(): void
@@ -33,6 +38,8 @@ class AppServiceProvider extends ServiceProvider
         Date::use(CarbonImmutable::class);
 
         DB::prohibitDestructiveCommands(app()->isProduction());
+
+        Gate::define('admin', fn (User $user): bool => $user->isAdmin());
 
         Password::defaults(fn (): ?Password => app()->isProduction()
             ? Password::min(12)->mixedCase()->letters()->numbers()->symbols()->uncompromised()
