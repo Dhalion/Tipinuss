@@ -10,27 +10,27 @@
     "license": "proprietary",
     "require": {
         "php": "^8.4",
-        "laravel/fortify": "^1.30",
-        "laravel/framework": "^12.0",
-        "laravel/tinker": "^2.10.1",
-        "league/commonmark": ">=2.8.2",
-        "livewire/blaze": "^1.0",
-        "livewire/flux": "^2.13",
-        "livewire/livewire": "^4.0"
+        "laravel/fortify": "1.37.0",
+        "laravel/framework": "12.58.0",
+        "laravel/tinker": "2.11.1",
+        "league/commonmark": "2.8.2",
+        "livewire/blaze": "1.0.12",
+        "livewire/flux": "2.14.1",
+        "livewire/livewire": "4.3.0"
     },
     "require-dev": {
-        "fakerphp/faker": "^1.23",
-        "larastan/larastan": "^3.9",
-        "laravel/pail": "^1.2.2",
-        "laravel/pint": "^1.24",
-        "laravel/sail": "^1.41",
-        "mockery/mockery": "^1.6",
-        "nunomaduro/collision": "^8.6",
-        "phpstan/extension-installer": "^1.4",
-        "phpstan/phpstan": "^2.1",
-        "phpstan/phpstan-phpunit": "^2.0",
-        "phpstan/phpstan-strict-rules": "^2.0",
-        "phpunit/phpunit": "^11.5.50"
+        "fakerphp/faker": "1.24.1",
+        "larastan/larastan": "3.9.6",
+        "laravel/pail": "1.2.6",
+        "laravel/pint": "1.29.1",
+        "laravel/sail": "1.58.0",
+        "mockery/mockery": "1.6.12",
+        "nunomaduro/collision": "8.9.4",
+        "phpstan/extension-installer": "1.4.3",
+        "phpstan/phpstan": "2.1.54",
+        "phpstan/phpstan-phpunit": "2.0.16",
+        "phpstan/phpstan-strict-rules": "2.0.11",
+        "phpunit/phpunit": "11.5.55"
     },
     "autoload": {
         "psr-4": {

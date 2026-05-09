@@ -11,14 +11,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('bets', function (Blueprint $table) {
-            $table->foreignUuid('organisation_id')->nullable()->constrained('organisations')->nullOnDelete();
+            if (! Schema::hasColumn('bets', 'organisation_id')) {
+                $table->uuid('organisation_id')->nullable();
+            }
+
+            $table->foreign('organisation_id')->references('id')->on('organisations')->nullOnDelete();
         });
     }
 
     public function down(): void
     {
         Schema::table('bets', function (Blueprint $table) {
-            $table->dropForeignIdFor('organisations', 'organisation_id');
+            $table->dropForeign(['organisation_id']);
             $table->dropColumn('organisation_id');
         });
     }
