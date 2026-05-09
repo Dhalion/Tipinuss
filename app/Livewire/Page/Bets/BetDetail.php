@@ -29,11 +29,6 @@ final class BetDetail extends Component
 
     public bool $showDeleteBetModal = false;
 
-    public function __construct(
-        private BetOptionRepositoryInterface $betOptions,
-        private UserBetRepositoryInterface $userBets,
-    ) {}
-
     public function mount(Bet $bet, MetaTagService $metaTagService): void
     {
         $this->bet = $bet->load('creator', 'betOptions', 'userBets');
@@ -59,7 +54,7 @@ final class BetDetail extends Component
             return true;
         }
 
-        return $this->userBets->countDistinctBettorsForBet($this->bet) >= 2;
+        return app(UserBetRepositoryInterface::class)->countDistinctBettorsForBet($this->bet) >= 2;
     }
 
     public function openCloseBetModal(): void
@@ -89,6 +84,7 @@ final class BetDetail extends Component
         int|float $amount,
         PlaceBetAction $action,
         BetCalculationService $calculation,
+        BetOptionRepositoryInterface $betOptions,
     ): void {
         $user = auth()->user();
         if ($user === null) {
@@ -107,7 +103,7 @@ final class BetDetail extends Component
         )->validate();
 
         try {
-            $option = $this->betOptions->findById($optionId);
+            $option = $betOptions->findById($optionId);
             if ($option === null) {
                 throw new BetException('Diese Option wurde nicht gefunden.');
             }
