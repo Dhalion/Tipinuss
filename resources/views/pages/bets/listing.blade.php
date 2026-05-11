@@ -5,7 +5,7 @@
                 {{ __('app.navigation.bets.list') }}
             </h1>
             <p class="text-zinc-600 dark:text-zinc-400 mt-2">
-                Entdecke die neuesten Wetten und platziere deine Tipps
+                {{ __('bets.listing_description') }}
             </p>
         </div>
 
