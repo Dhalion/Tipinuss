@@ -9,14 +9,11 @@
             <div class="space-y-4">
                 <flux:input wire:model="title" label="{{ __('app.bet.title') }}"
                     placeholder="{{ __('app.bet.title_placeholder') }}}" wire:model.live.debounce.250ms required />
-                @error('title') <div class="text-sm text-red-600">{{ $message }}</div> @enderror
 
                 <flux:textarea wire:model="description" label="{{ __('app.bet.description') }}"
                     placeholder="{{ __('app.bet.description_placeholder') }}" rows="4" />
-                @error('description') <div class="text-sm text-red-600">{{ $message }}</div> @enderror
 
                 <flux:input type="datetime-local" wire:model="expires_at" label="{{ __('app.bet.expiration_date') }}" />
-                @error('expires_at') <div class="text-sm text-red-600">{{ $message }}</div> @enderror
 
                 <flux:separator />
 

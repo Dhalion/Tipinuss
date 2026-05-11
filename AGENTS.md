@@ -14,8 +14,9 @@
 - MUST NOT make architectural decisions (new packages, DB restructuring, new patterns). MUST present ≥2 options with trade-offs and let the human decide.
 
 ### §1.2 Git
-- NEVER commit. NEVER push. NEVER create branches. NEVER rewrite history.
+- NEVER commit unless explicitly asked. NEVER push. NEVER create branches. NEVER rewrite history.
 - Agent prepares code for review. Human handles all git operations.
+- "Explicitly asked" means the human says "commit" or "create a commit". Do NOT commit as part of a refactor, fix, or feature implementation unless the human tells you to.
 
 ### §1.3 Code Generation Standards
 - MUST follow every rule in this document without exception.
