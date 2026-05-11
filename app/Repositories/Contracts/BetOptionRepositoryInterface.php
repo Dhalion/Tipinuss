@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Repositories\Contracts;
 
+use App\DTOs\Betting\BetOptionData;
 use App\Models\Bet;
 use App\Models\BetOption;
 
@@ -13,6 +14,7 @@ interface BetOptionRepositoryInterface
 
     public function findByIdOrFail(string $id): BetOption;
 
-    /** @param array<string, mixed> $attributes */
-    public function createForBet(Bet $bet, array $attributes): BetOption;
+    public function createForBet(Bet $bet, BetOptionData $data): BetOption;
+
+    public function save(BetOption $option): BetOption;
 }

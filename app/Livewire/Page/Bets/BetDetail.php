@@ -8,76 +8,64 @@ use App\Actions\Admin\ChangeBetOrganisationAction;
 use App\Actions\Betting\CloseBetAction;
 use App\Actions\Betting\DeleteBetAction;
 use App\Actions\Betting\PlaceBetAction;
+use App\DTOs\Betting\CloseBetData;
 use App\DTOs\Betting\PlaceBetData;
 use App\Exceptions\BetException;
 use App\Models\Bet;
 use App\Repositories\Contracts\BetOptionRepositoryInterface;
+use App\Repositories\Contracts\BetRepositoryInterface;
 use App\Repositories\Contracts\OrganisationRepositoryInterface;
 use App\Repositories\Contracts\UserBetRepositoryInterface;
 use App\Services\Betting\BetCalculationService;
 use App\Services\Betting\BettingValidationService;
 use App\Services\MetaTagService;
+use Flux\Flux;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\Locked;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 final class BetDetail extends Component
 {
-    public Bet $bet;
+    #[Locked]
+    public string $betId;
 
-    public bool $showCloseBetModal = false;
-
-    public bool $showDeleteBetModal = false;
-
-    public function mount(Bet $bet, MetaTagService $metaTagService): void
+    public function mount(Bet $bet, MetaTagService $metaTagService, BetRepositoryInterface $bets): void
     {
-        $this->bet = $bet->load('creator', 'betOptions', 'userBets');
+        $this->betId = $bet->id;
 
-        $this->authorize('viewBet', $this->bet);
+        $this->authorize('viewBet', $bets->findByIdOrFail($this->betId));
 
         $metaTagService->setBetMetaTags(
-            title: $this->bet->title,
-            description: $this->bet->description ?? 'Tippe auf '.$this->bet->title.' und verdiene Waschnüsse auf Tipinuss',
+            title: $bet->title,
+            description: $bet->description,
         );
+    }
+
+    #[Computed]
+    public function bet(): Bet
+    {
+        return app(BetRepositoryInterface::class)->findByIdOrFail($this->betId);
     }
 
     #[Computed]
     public function canCloseBet(): bool
     {
-        if (! $this->bet->isOpen()) {
+        $bet = $this->bet();
+        $user = auth()->user();
+
+        if ($user === null) {
             return false;
         }
 
-        $user = auth()->user();
+        $distinctBettorCount = app(UserBetRepositoryInterface::class)->countDistinctBettorsForBet($bet);
 
-        if ($user !== null && $user->isAdmin()) {
-            return true;
-        }
-
-        return app(UserBetRepositoryInterface::class)->countDistinctBettorsForBet($this->bet) >= 2;
+        return app(BettingValidationService::class)->canCloseBet($bet, $user, $distinctBettorCount);
     }
 
-    public function openCloseBetModal(): void
-    {
-        $this->authorize('closeBet', $this->bet);
-        $this->showCloseBetModal = true;
-    }
-
-    public function closeCloseBetModal(): void
-    {
-        $this->showCloseBetModal = false;
-    }
-
-    public function openDeleteBetModal(): void
-    {
-        $this->authorize('deleteBet', $this->bet);
-        $this->showDeleteBetModal = true;
-    }
-
-    public function closeDeleteBetModal(): void
-    {
-        $this->showDeleteBetModal = false;
-    }
+    #[On('bets-count-changed')]
+    public function refreshCanClose(): void {}
 
     public function placeBet(
         string $optionId,
@@ -112,7 +100,7 @@ final class BetDetail extends Component
             $action->execute($data);
 
             $winnings = $calculation->calculatePotentialWinnings($option, (int) $validated['amount']);
-            session()->flash('success', '🎉 Wette erfolgreich platziert! Möglicher Gewinn: '.number_format($winnings, 0).' 🌰');
+            Flux::toast(variant: 'success', heading: 'Wette platziert! 🎉', text: 'Möglicher Gewinn: '.number_format($winnings, 0).' 🌰');
 
             $this->dispatch('bet-placed');
             $this->dispatch('refresh-placed-bets');
@@ -123,7 +111,9 @@ final class BetDetail extends Component
 
     public function executeCloseBet(string $winningOptionId, CloseBetAction $action): void
     {
-        $this->authorize('closeBet', $this->bet);
+        $bet = $this->bet();
+
+        $this->authorize('closeBet', $bet);
 
         if (! $this->canCloseBet()) {
             $this->addError('closeBet', __('bets.close_not_allowed'));
@@ -131,21 +121,22 @@ final class BetDetail extends Component
             return;
         }
 
-        $action->execute($this->bet, $winningOptionId);
+        $action->execute(CloseBetData::make(bet: $bet, winningOptionId: $winningOptionId));
 
-        session()->flash('success', '✓ Wette erfolgreich geschlossen und Gewinne ausgezahlt.');
-        $this->showCloseBetModal = false;
+        Flux::toast(variant: 'success', text: 'Wette geschlossen und Gewinne ausgezahlt.');
         $this->redirect(route('bets.list'), navigate: true);
     }
 
     public function deleteBet(DeleteBetAction $action): void
     {
-        $this->authorize('deleteBet', $this->bet);
+        $bet = $this->bet();
 
-        $betTitle = $this->bet->title;
-        $action->execute($this->bet);
+        $this->authorize('deleteBet', $bet);
 
-        session()->flash('success', "🗑️ Wette \"{$betTitle}\" wurde gelöscht.");
+        $betTitle = $bet->title;
+        $action->execute($bet);
+
+        Flux::toast(variant: 'success', text: "Wette \"{$betTitle}\" wurde gelöscht.");
         $this->redirect(route('bets.list'), navigate: true);
     }
 
@@ -164,13 +155,14 @@ final class BetDetail extends Component
             return;
         }
 
-        $action->execute($this->bet, $organisation);
-        $this->bet->refresh();
+        $bet = $this->bet();
+        $action->execute($bet, $organisation);
     }
 
     public function render(OrganisationRepositoryInterface $organisations): View
     {
         return view('pages.bets.detail', [
+            'bet' => $this->bet(),
             'canCloseBet' => $this->canCloseBet(),
             'organisations' => $organisations->findAll(),
         ]);
