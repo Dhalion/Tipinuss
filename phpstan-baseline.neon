@@ -1,6 +1,30 @@
 parameters:
 	ignoreErrors:
 		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Actions/Betting/CloseBetAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$result\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Actions/Betting/CloseBetAction.php
+
+		-
+			message: '#^Parameter \#1 \$option of method App\\Repositories\\Contracts\\BetOptionRepositoryInterface\:\:save\(\) expects App\\Models\\BetOption, Illuminate\\Database\\Eloquent\\Model given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Actions/Betting/CloseBetAction.php
+
+		-
+			message: '#^Parameter \#1 \$option of method App\\Repositories\\Contracts\\UserBetRepositoryInterface\:\:findByOption\(\) expects App\\Models\\BetOption, Illuminate\\Database\\Eloquent\\Model given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Actions/Betting/CloseBetAction.php
+
+		-
 			message: '#^Parameter \#1 \$callback of method Illuminate\\Database\\Eloquent\\Collection\<int,Illuminate\\Database\\Eloquent\\Model\>\:\:mapWithKeys\(\) expects callable\(Illuminate\\Database\\Eloquent\\Model, int\)\: array\<non\-falsy\-string, string\>, Closure\(App\\Models\\BetOption\)\: non\-empty\-array\<non\-falsy\-string, string\> given\.$#'
 			identifier: argument.type
 			count: 1
@@ -47,12 +71,6 @@ parameters:
 			identifier: nullsafe.neverNull
 			count: 1
 			path: app/Console/Commands/Bet/ListBetsCommand.php
-
-		-
-			message: '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\Organisation\>\:\:exists\(\)\.$#'
-			identifier: staticMethod.dynamicCall
-			count: 1
-			path: app/Console/Commands/Organisation/CreateOrganisationCommand.php
 
 		-
 			message: '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\Organisation\>\:\:orderBy\(\)\.$#'
@@ -115,12 +133,6 @@ parameters:
 			path: app/Livewire/Page/Bets/BetDetail.php
 
 		-
-			message: '#^Dynamic call to static method Illuminate\\Session\\Store\:\:flash\(\)\.$#'
-			identifier: staticMethod.dynamicCall
-			count: 3
-			path: app/Livewire/Page/Bets/BetDetail.php
-
-		-
 			message: '#^Dynamic call to static method Illuminate\\Contracts\\Auth\\Guard\:\:user\(\)\.$#'
 			identifier: staticMethod.dynamicCall
 			count: 1
@@ -145,12 +157,6 @@ parameters:
 			path: app/Livewire/Page/Bets/Create.php
 
 		-
-			message: '#^Dynamic call to static method Illuminate\\Session\\Store\:\:flash\(\)\.$#'
-			identifier: staticMethod.dynamicCall
-			count: 1
-			path: app/Livewire/Page/Bets/Create.php
-
-		-
 			message: '#^Dynamic call to static method Illuminate\\Auth\\SessionGuard\:\:attempt\(\)\.$#'
 			identifier: staticMethod.dynamicCall
 			count: 1
@@ -163,7 +169,7 @@ parameters:
 			path: app/Livewire/Page/Login.php
 
 		-
-			message: '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\Bet\>\:\:take\(\)\.$#'
+			message: '#^Dynamic call to static method Illuminate\\Contracts\\Auth\\Guard\:\:user\(\)\.$#'
 			identifier: staticMethod.dynamicCall
 			count: 1
 			path: app/Livewire/Page/MainPage.php
@@ -277,10 +283,28 @@ parameters:
 			path: app/Repositories/Contracts/BetRepositoryInterface.php
 
 		-
+			message: '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\Bet\>\:\:take\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 2
+			path: app/Repositories/Eloquent/EloquentBetRepository.php
+
+		-
+			message: '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\Bet\>\:\:whereNull\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: app/Repositories/Eloquent/EloquentBetRepository.php
+
+		-
 			message: '#^Method App\\Repositories\\Eloquent\\EloquentBetRepository\:\:paginateOpen\(\) return type with generic class Illuminate\\Pagination\\LengthAwarePaginator does not specify its types\: TKey, TValue$#'
 			identifier: missingType.generics
 			count: 1
 			path: app/Repositories/Eloquent/EloquentBetRepository.php
+
+		-
+			message: '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\Organisation\>\:\:exists\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: app/Repositories/Eloquent/EloquentOrganisationRepository.php
 
 		-
 			message: '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\Organisation\>\:\:orderBy\(\)\.$#'
