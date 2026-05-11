@@ -1,11 +1,11 @@
 @php $isClosed = $bet->status->value === 'closed'; @endphp
 
 @if($isClosed)
-    <a href="{{ route('bets.detail', ['bet' => $bet]) }}" wire:navigate.hover class="block opacity-60">
+    <a href="{{ route('bets.detail', ['bet' => $bet->slugUrl()]) }}" wire:navigate.hover class="block opacity-60">
         <flux:card class="space-y-4 cursor-pointer transition-all duration-200">
 @else
-    <a href="{{ route('bets.detail', ['bet' => $bet]) }}" wire:navigate.hover class="block">
-        <flux:card class="space-y-4 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg hover:border-primary-500/30">
+    <a href="{{ route('bets.detail', ['bet' => $bet->slugUrl()]) }}" wire:navigate.hover class="block">
+        <flux:card class="space-y-4 transition-all duration-200 hover:shadow-md hover:border-primary-500/50">
 @endif
             <div class="flex items-start justify-between gap-4">
                 <div class="flex-1 min-w-0">

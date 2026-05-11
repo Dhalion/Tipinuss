@@ -33,6 +33,7 @@ final class Bet extends Model
 
     protected $fillable = [
         'title',
+        'slug',
         'description',
         'user_id',
         'organisation_id',
@@ -87,5 +88,28 @@ final class Bet extends Model
     public function isClosed(): bool
     {
         return $this->status === BetStatus::Closed;
+    }
+
+    public function idPrefix(): string
+    {
+        return substr($this->id, 0, 8);
+    }
+
+    public function slugUrl(): string
+    {
+        return $this->idPrefix().'-'.$this->slug;
+    }
+
+    public function resolveRouteBinding($value, $field = null): ?Model
+    {
+        $identifier = is_string($value) ? $value : '';
+
+        $slug = strlen($identifier) > 9
+            ? substr($identifier, 9)
+            : $identifier;
+
+        return $this->with('betOptions.userBets', 'creator')
+            ->where('slug', $slug)
+            ->first();
     }
 }
