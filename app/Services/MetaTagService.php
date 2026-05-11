@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-class MetaTagService
+final class MetaTagService
 {
     public function setBetMetaTags(string $title, ?string $description = null, ?string $image = null): void
     {

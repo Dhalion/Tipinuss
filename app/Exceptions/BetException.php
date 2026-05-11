@@ -6,4 +6,4 @@ namespace App\Exceptions;
 
 use Exception;
 
-class BetException extends Exception {}
+final class BetException extends Exception {}
