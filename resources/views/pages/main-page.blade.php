@@ -4,23 +4,25 @@
         <div class="max-w-6xl mx-auto">
             <div class="py-12 sm:py-20">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-                    <div class="flex flex-col items-center lg:items-start text-center lg:text-left order-first">
+                    <div class="flex justify-center order-first">
                         <img
-                            class="w-48 sm:w-64 lg:w-72 object-contain drop-shadow-2xl"
+                            class="w-full max-w-xs sm:max-w-sm lg:max-w-md object-contain drop-shadow-2xl"
                             src="{{ URL::asset('images/tipinuss-thron.webp') }}"
                             alt="{{ __('app.title') }}" />
-                        <p class="text-lg sm:text-xl font-semibold text-gold-400 mt-4">
-                            {{ __('app.hero_tagline') }}
-                        </p>
                     </div>
 
                     <div class="space-y-6 text-center lg:text-left">
-                        <h1 class="text-5xl sm:text-6xl lg:text-7xl font-black text-zinc-900 dark:text-white">
-                            Tipinuss
-                        </h1>
-                        <p class="text-base sm:text-lg text-zinc-600 dark:text-zinc-300 max-w-lg leading-relaxed">
-                            {{ __('app.hero_subtitle') }}
-                        </p>
+                        <div class="space-y-2">
+                            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-zinc-900 dark:text-white">
+                                {{ __('app.title') }}
+                            </h1>
+                            <p class="text-xl sm:text-2xl font-semibold text-gold-400">
+                                {{ __('app.hero_tagline') }}
+                            </p>
+                        </div>
+<p class="text-base sm:text-lg text-zinc-600 dark:text-zinc-300 max-w-lg mx-auto lg:mx-0 leading-relaxed">
+    {{ __('app.hero_subtitle') }}
+</p>
 
                         <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start pt-2">
                             <a href="{{ route('bets.list') }}" wire:navigate

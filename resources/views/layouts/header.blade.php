@@ -2,7 +2,7 @@
     <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
 
     <flux:brand href="{{ route('main') }}"
-                logo="{{ URL::asset('images/logo-full.webp') }}"
+                logo="{{ URL::asset('images/tipinuss-waschnusskönig.webp') }}"
                 name="{{ __('app.title') }}"
                 wire:navigate.hover/>
 
