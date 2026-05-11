@@ -33,11 +33,7 @@ final class CreateBetAction
             $this->bets->save($bet);
 
             foreach ($data->options as $optionData) {
-                $this->betOptions->createForBet($bet, [
-                    'title' => $optionData->title,
-                    'odds' => $optionData->odds,
-                    'base_odds' => $optionData->odds,
-                ]);
+                $this->betOptions->createForBet($bet, $optionData);
             }
 
             return $bet;
