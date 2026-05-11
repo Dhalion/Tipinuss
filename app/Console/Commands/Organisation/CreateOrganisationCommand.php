@@ -23,7 +23,7 @@ final class CreateOrganisationCommand extends Command
     {
         $name = $this->argument('name');
 
-        if (Organisation::where('name', $name)->exists()) {
+        if ($this->organisations->existsByName($name)) {
             $this->error("An organisation named '{$name}' already exists.");
 
             return self::FAILURE;

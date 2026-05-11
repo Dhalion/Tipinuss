@@ -17,4 +17,6 @@ interface OrganisationRepositoryInterface
     public function save(Organisation $organisation): Organisation;
 
     public function delete(Organisation $organisation): void;
+
+    public function existsByName(string $name): bool;
 }

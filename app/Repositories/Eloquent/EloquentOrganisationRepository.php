@@ -31,4 +31,9 @@ final class EloquentOrganisationRepository implements OrganisationRepositoryInte
     {
         $organisation->delete();
     }
+
+    public function existsByName(string $name): bool
+    {
+        return Organisation::where('name', $name)->exists();
+    }
 }
