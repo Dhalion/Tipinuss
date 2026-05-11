@@ -20,7 +20,7 @@ final class EloquentBetRepository implements BetRepositoryInterface
 
     public function findByIdOrFail(string $id): Bet
     {
-        return Bet::findOrFail($id);
+        return Bet::with('betOptions.userBets', 'creator')->findOrFail($id);
     }
 
     public function paginateOpen(int $perPage = 15): LengthAwarePaginator

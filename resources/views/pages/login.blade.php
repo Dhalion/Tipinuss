@@ -14,7 +14,7 @@
                 <flux:input wire:model="password" label="{{ __('auth.password') }}" type="password" required />
                 @error('password') <div class="text-sm text-red-600">{{ $message }}</div> @enderror
 
-                <flux:button type="submit" variant="primary" class="w-full">
+                <flux:button type="submit" variant="outline" class="w-full">
                     {{ __('auth.login_submit') }}
                 </flux:button>
             </form>
@@ -23,7 +23,7 @@
                 <p class="text-center text-sm text-zinc-600 dark:text-zinc-400">
                     {{ __('auth.no_account') }}
                     <a href="{{ route('register') }}" wire:navigate
-                        class="font-semibold text-red-600 dark:text-red-400 hover:underline">
+                        class="font-semibold text-primary-600 dark:text-primary-400 hover:underline">
                         {{ __('auth.register_here') }}
                     </a>
                 </p>

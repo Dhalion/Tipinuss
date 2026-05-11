@@ -13,4 +13,6 @@ return [
     'register_submit' => 'Register',
     'register_here' => 'Register here',
     'login_here' => 'Login here',
+    'invalid_credentials' => 'The provided credentials are invalid.',
+    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 ];

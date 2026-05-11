@@ -42,7 +42,7 @@
                             <button 
                                 type="button"
                                 @click="placeBet.open('{{ $option->id }}', '{{ addslashes($option->title) }}', {{ $option->odds }})"
-                                class="group relative overflow-hidden rounded-xl border border-primary-700/50 bg-gradient-to-br from-primary-700/20 to-primary-600/20 px-6 py-8 text-center transition-all hover:border-primary-500 hover:shadow-2xl hover:shadow-primary-700/20 focus:outline-none focus:ring-2 focus:ring-primary-700 focus:ring-offset-2 focus:ring-offset-zinc-900"
+                                class="group relative overflow-hidden rounded-xl border border-primary-700/50 bg-gradient-to-br from-primary-700/20 to-primary-600/20 px-6 py-8 text-center transition-all duration-200 hover:scale-[1.02] hover:border-gold-500/50 hover:shadow-2xl hover:shadow-gold-500/10 focus:outline-none focus:ring-2 focus:ring-primary-700 focus:ring-offset-2 focus:ring-offset-zinc-900"
                             >
                                 <div class="absolute inset-0 bg-gradient-to-r from-primary-700/0 via-primary-700/5 to-primary-600/0 opacity-0 transition-opacity group-hover:opacity-100"></div>
                                 <div class="relative">

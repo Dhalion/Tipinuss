@@ -13,4 +13,6 @@ return [
     'register_submit' => 'Registrieren',
     'register_here' => 'Hier registrieren',
     'login_here' => 'Hier anmelden',
+    'invalid_credentials' => 'Die eingegebenen Anmeldedaten sind ungültig.',
+    'throttle' => 'Zu viele Anmeldeversuche. Bitte versuche es in :seconds Sekunden erneut.',
 ];
