@@ -8,7 +8,7 @@
             <div class="rounded-lg bg-gradient-to-r from-blue-600 to-blue-700 text-white p-4 text-center">
                 <div class="text-sm text-blue-100">{{ __('bets.selected_option') }}</div>
                 <div class="text-2xl font-bold mt-1" x-text="selectedOptionTitle"></div>
-                <div class="text-sm font-semibold text-blue-200 mt-1" x-text="`${selectedOdds.toFixed(2)}x Quote`"></div>
+                <div class="text-sm font-semibold text-blue-200 mt-1" x-text="`${selectedOdds.toFixed(2)}x {{ __('bets.odds') }}`"></div>
             </div>
             
             <!-- Amount input -->

@@ -19,10 +19,10 @@
     <flux:separator />
 
     <div class="flex flex-wrap gap-x-6 gap-y-1 text-xs text-zinc-400">
-        <span>Erstellt von <span class="font-medium text-zinc-600 dark:text-zinc-300">{{ $bet->creator->name }}</span></span>
-        <span>Am {{ $bet->created_at->format('d.m.Y') }}</span>
+        <span>{{ __('bets.created_by') }} <span class="font-medium text-zinc-600 dark:text-zinc-300">{{ $bet->creator->name }}</span></span>
+        <span>{{ $bet->created_at->format('d.m.Y') }}</span>
         @if($bet->expires_at)
-            <span>Läuft ab {{ $bet->expires_at->diffForHumans() }}</span>
+            <span>{{ __('bets.expires') }} {{ $bet->expires_at->diffForHumans() }}</span>
         @endif
     </div>
 </flux:card>
