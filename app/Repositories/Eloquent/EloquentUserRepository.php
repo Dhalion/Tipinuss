@@ -42,4 +42,9 @@ final class EloquentUserRepository implements UserRepositoryInterface
             ->take($limit)
             ->get();
     }
+
+    public function delete(User $user): void
+    {
+        $user->delete();
+    }
 }
