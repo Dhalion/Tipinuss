@@ -4,20 +4,16 @@ declare(strict_types=1);
 
 namespace App\Livewire\Page;
 
-use App\Models\Bet;
+use App\Repositories\Contracts\BetRepositoryInterface;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
-class MainPage extends Component
+final class MainPage extends Component
 {
-    public function render(): View
+    public function render(BetRepositoryInterface $bets): View
     {
-        $recentBets = Bet::with('creator', 'betOptions', 'userBets.user')
-            ->where('status', 'open')
-            ->latest()
-            ->take(5)
-            ->get();
-
-        return view('pages.main-page', ['recentBets' => $recentBets]);
+        return view('pages.main-page', [
+            'recentBets' => $bets->recentOpenForUser(auth()->user()),
+        ]);
     }
 }
