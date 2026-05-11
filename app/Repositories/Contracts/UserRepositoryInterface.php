@@ -21,4 +21,6 @@ interface UserRepositoryInterface
 
     /** @return Collection<int, User> */
     public function topBySoapnuts(int $limit = 10): Collection;
+
+    public function delete(User $user): void;
 }
