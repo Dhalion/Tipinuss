@@ -25,6 +25,12 @@ parameters:
 			path: app/Actions/Betting/CloseBetAction.php
 
 		-
+			message: '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\Bet\>\:\:exists\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: app/Actions/Betting/CreateBetAction.php
+
+		-
 			message: '#^Parameter \#1 \$callback of method Illuminate\\Database\\Eloquent\\Collection\<int,Illuminate\\Database\\Eloquent\\Model\>\:\:mapWithKeys\(\) expects callable\(Illuminate\\Database\\Eloquent\\Model, int\)\: array\<non\-falsy\-string, string\>, Closure\(App\\Models\\BetOption\)\: non\-empty\-array\<non\-falsy\-string, string\> given\.$#'
 			identifier: argument.type
 			count: 1
@@ -189,6 +195,12 @@ parameters:
 		-
 			message: '#^Class App\\Models\\Bet uses generic trait Illuminate\\Database\\Eloquent\\Factories\\HasFactory but does not specify its types\: TFactory$#'
 			identifier: missingType.generics
+			count: 1
+			path: app/Models/Bet.php
+
+		-
+			message: '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Model\:\:with\(\)\.$#'
+			identifier: staticMethod.dynamicCall
 			count: 1
 			path: app/Models/Bet.php
 
@@ -377,6 +389,12 @@ parameters:
 			identifier: argument.type
 			count: 1
 			path: config/filesystems.php
+
+		-
+			message: '#^Parameter \#1 \$title of static method Illuminate\\Support\\Str\:\:slug\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: database/migrations/2026_05_08_205346_add_slug_to_bets_table.php
 
 		-
 			message: '#^Dynamic call to static method Illuminate\\Auth\\SessionGuard\:\:logout\(\)\.$#'
