@@ -10,5 +10,7 @@ return [
     'recent_bets' => 'Letzte Wetten',
     'option' => 'Option',
     'stake' => 'Einsatz',
+    'odds' => 'Quote',
+    'potential' => 'Möglicher Gewinn',
     'no_bets' => 'Du hast noch keine Wetten platziert. Gehe zu Wetten um eine zu platzieren!',
 ];

@@ -10,5 +10,7 @@ return [
     'recent_bets' => 'Recent Bets',
     'option' => 'Option',
     'stake' => 'Stake',
+    'odds' => 'Odds',
+    'potential' => 'Potential Winnings',
     'no_bets' => 'You haven\'t placed any bets yet. Go to Bets to place one!',
 ];
