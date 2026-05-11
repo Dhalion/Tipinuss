@@ -9,21 +9,27 @@
             <div class="space-y-4">
                 <flux:input wire:model="title" label="{{ __('app.bet.title') }}"
                     placeholder="{{ __('app.bet.title_placeholder') }}}" wire:model.live.debounce.250ms required />
-                @error('title') <div class="text-sm text-tipinuss-red-600">{{ $message }}</div> @enderror
+                @error('title') <div class="text-sm text-red-600">{{ $message }}</div> @enderror
 
                 <flux:textarea wire:model="description" label="{{ __('app.bet.description') }}"
                     placeholder="{{ __('app.bet.description_placeholder') }}" rows="4" />
-                @error('description') <div class="text-sm text-tipinuss-red-600">{{ $message }}</div> @enderror
+                @error('description') <div class="text-sm text-red-600">{{ $message }}</div> @enderror
 
                 <flux:input type="datetime-local" wire:model="expires_at" label="{{ __('app.bet.expiration_date') }}" />
-                @error('expires_at') <div class="text-sm text-tipinuss-red-600">{{ $message }}</div> @enderror
+                @error('expires_at') <div class="text-sm text-red-600">{{ $message }}</div> @enderror
 
                 <flux:separator />
 
+                <div class="flex items-center justify-between">
+                    <flux:heading size="sm">{{ __('bets.options') }}</flux:heading>
+                    <flux:button type="button" wire:click="toggleManualOdds" variant="ghost" size="sm" icon="{{ $manualOdds ? 'lock-open' : 'lock-closed' }}">
+                        {{ $manualOdds ? __('app.bet.odds_auto') : __('app.bet.odds_manual') }}
+                    </flux:button>
+                </div>
 
                 <div class="space-y-4">
                     @foreach ($options as $index => $option)
-                        @include('components.bets.bet-option', ['index' => $index, 'key' => $index, 'optionCount' => $optionCount, 'manual_odds' => false])
+                        @include('components.bets.bet-option', ['index' => $index, 'key' => $index, 'optionCount' => $optionCount, 'manual_odds' => $manualOdds])
                     @endforeach
                 </div>
                 <flux:button type="button" wire:click="addOption" variant="outline" class="w-full">

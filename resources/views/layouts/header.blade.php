@@ -1,10 +1,12 @@
-<flux:header container>
+<flux:header container class="bg-zinc-50 dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-700">
+    <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
+
     <flux:brand href="{{ route('main') }}"
                 logo="{{ URL::asset('images/logo-full.webp') }}"
                 name="{{ __('app.title') }}"
                 wire:navigate.hover/>
 
-    <flux:navbar class="-mb-px">
+    <flux:navbar class="-mb-px max-lg:hidden">
         <flux:navbar.item href="{{ route('main') }}"
                           wire:navigate.hover>{{ __('app.navigation.home') }}</flux:navbar.item>
         @auth
@@ -12,21 +14,22 @@
                               wire:navigate.hover>{{ __('app.navigation.bets.list') }}</flux:navbar.item>
             <flux:navbar.item href="{{ route('bets.create') }}"
                               wire:navigate.hover>{{ __('app.navigation.bets.create') }}</flux:navbar.item>
+            @if(auth()->user()?->isAdmin())
+                <flux:navbar.item href="{{ route('admin.users') }}"
+                                  wire:navigate.hover>{{ __('app.navigation.admin') }}</flux:navbar.item>
+            @endif
         @endauth
     </flux:navbar>
 
     <flux:spacer/>
 
-
     @auth
-        <span class="text-sm text-amber-300 dark:text-amber-300 mr-4">
-            {{ number_format(auth()->user()->soapnuts) }}
-            <span class="text-lg">🌰</span>
+        <span class="text-sm text-gold-400 mr-2 whitespace-nowrap font-semibold">
+            @livewire('soapnuts-balance')
         </span>
         <flux:dropdown>
-            <flux:profile name="{{ Auth::user()->name }}"/>
+            <flux:profile name="{{ Auth::user()->name }}" class="max-lg:hidden"/>
             <flux:menu>
-
                 <flux:menu.item href="{{ route('account') }}" wire:navigate>{{ __('app.navigation.account') }}</flux:menu.item>
                 <form method="POST" action="{{ route('logout') }}" class="contents">
                     @csrf

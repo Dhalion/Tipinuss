@@ -9,10 +9,10 @@
             <form wire:submit="authenticate" class="space-y-4">
                 <flux:input wire:model="email" label="{{ __('auth.email') }}" type="email"
                     placeholder="name@example.com" required />
-                @error('email') <div class="text-sm text-tipinuss-red-600">{{ $message }}</div> @enderror
+                @error('email') <div class="text-sm text-red-600">{{ $message }}</div> @enderror
 
                 <flux:input wire:model="password" label="{{ __('auth.password') }}" type="password" required />
-                @error('password') <div class="text-sm text-tipinuss-red-600">{{ $message }}</div> @enderror
+                @error('password') <div class="text-sm text-red-600">{{ $message }}</div> @enderror
 
                 <flux:button type="submit" variant="primary" class="w-full">
                     {{ __('auth.login_submit') }}
@@ -23,7 +23,7 @@
                 <p class="text-center text-sm text-zinc-600 dark:text-zinc-400">
                     {{ __('auth.no_account') }}
                     <a href="{{ route('register') }}" wire:navigate
-                        class="font-semibold text-tipinuss-red-600 dark:text-tipinuss-red-400 hover:underline">
+                        class="font-semibold text-red-600 dark:text-red-400 hover:underline">
                         {{ __('auth.register_here') }}
                     </a>
                 </p>

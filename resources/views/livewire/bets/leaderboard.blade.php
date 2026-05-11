@@ -34,7 +34,7 @@
                             {{ $bettor->user_bets_count }}
                         </td>
                         <td class="px-3 py-2.5 text-right">
-                            <span class="font-semibold text-amber-600 dark:text-amber-400 whitespace-nowrap">
+                            <span class="font-semibold text-gold-600 dark:text-gold-400 whitespace-nowrap">
                                 {{ number_format($bettor->soapnuts) }} 🌰
                             </span>
                         </td>

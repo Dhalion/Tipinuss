@@ -1,5 +1,4 @@
 <div class="min-h-screen bg-zinc-50 dark:bg-zinc-900 py-12">
-    @include('components.flash-notification')
 
     <div class="max-w-4xl mx-auto px-4">
         <!-- Profile Header -->
@@ -31,11 +30,11 @@
                             </div>
                         </div>
 
-                        <div class="bg-amber-50 dark:bg-amber-900/20 rounded-lg p-4 border border-amber-200 dark:border-amber-800">
-                            <div class="text-sm text-amber-700 dark:text-amber-300 mb-1">
+                        <div class="bg-gold-50 dark:bg-gold-900/20 rounded-lg p-4 border border-gold-200 dark:border-gold-800">
+                            <div class="text-sm text-gold-700 dark:text-gold-300 mb-1">
                                 {{ __('account.balance') }}
                             </div>
-                            <div class="text-3xl font-bold text-amber-600 dark:text-amber-400">
+                            <div class="text-3xl font-bold text-gold-600 dark:text-gold-400">
                                 {{ number_format(auth()->user()->soapnuts) }}
                                 <span class="text-lg ml-1">🌰</span>
                             </div>
@@ -77,23 +76,44 @@
 
                 <div class="space-y-3">
                     @foreach($userBets as $userBet)
+                        @php
+                            $odds = (float) $userBet->betOption->odds;
+                            $stake = (float) $userBet->amount_wagered;
+                            $potentialWinnings = (float) $userBet->potential_winnings;
+                            $netProfit = (int) round($potentialWinnings - $stake);
+                        @endphp
                         <flux:card class="hover:shadow-md transition">
                             <div class="flex items-start justify-between gap-4">
                                 <div class="flex-1 min-w-0">
                                     <h3 class="font-semibold text-zinc-900 dark:text-white truncate">
                                         {{ $userBet->betOption->bet->title }}
                                     </h3>
-                                    <div class="text-sm text-zinc-600 dark:text-zinc-400 mt-1 flex flex-wrap gap-2">
+                                    <div class="text-sm text-zinc-600 dark:text-zinc-400 mt-1 flex flex-wrap gap-2 items-center">
                                         <span>{{ __('account.option') }}: <strong>{{ $userBet->betOption->title }}</strong></span>
                                         <span>•</span>
-                                        <span>{{ __('account.stake') }}: <strong>{{ number_format($userBet->amount) }} 🌰</strong></span>
+                                        <span>{{ __('account.stake') }}: <strong>{{ number_format($stake) }} 🌰</strong></span>
+                                        <span>•</span>
+                                        <span>{{ __('account.odds') }}: <strong>{{ number_format($odds, 2) }}x</strong></span>
                                     </div>
                                 </div>
-                                <div class="text-right shrink-0">
-                                    <flux:badge size="sm" color="indigo" class="mb-2">
-                                        Quote: {{ number_format($userBet->betOption->odds, 2) }}x
+                                <div class="text-right shrink-0 space-y-1">
+                                    <flux:badge size="sm" :color="$userBet->status->badgeColor()">
+                                        {{ $userBet->status->label() }}
                                     </flux:badge>
-                                    <div class="text-xs text-zinc-500 dark:text-zinc-400">
+                                    @if($userBet->status->value === 'won')
+                                        <div class="text-sm font-bold text-green-600 dark:text-green-400">
+                                            +{{ number_format($netProfit) }} 🌰
+                                        </div>
+                                    @elseif($userBet->status->value === 'lost')
+                                        <div class="text-sm font-bold text-red-600 dark:text-red-400">
+                                            −{{ number_format((int) $stake) }} 🌰
+                                        </div>
+                                    @else
+                                        <div class="text-sm text-zinc-400 dark:text-zinc-500">
+                                            {{ __('account.potential') }}: +{{ number_format($netProfit) }} 🌰
+                                        </div>
+                                    @endif
+                                    <div class="text-xs text-zinc-400">
                                         {{ $userBet->created_at->diffForHumans() }}
                                     </div>
                                 </div>

@@ -5,4 +5,47 @@
 
 @theme {
     --font-sans: Inter, sans-serif;
+
+    /* Primary — main brand color, easily swappable */
+    --color-primary-900: #2d0040;
+    --color-primary-800: #350052;
+    --color-primary-700: #410a61;
+    --color-primary-600: #5a0e85;
+    --color-primary-500: #7b1fa2;
+    --color-primary-400: #9c27b0;
+    --color-primary-300: #ba68c8;
+    --color-primary-200: #ce93d8;
+    --color-primary-100: #f3e5f5;
+
+    /* Gold — highlight color for valuable elements (winnings, balance) */
+    --color-gold-700: #b35900;
+    --color-gold-600: #cc6b00;
+    --color-gold-500: #ff8600;
+    --color-gold-400: #ff9e33;
+    --color-gold-300: #ffb666;
+    --color-gold-200: #ffce99;
+    --color-gold-100: #ffe7cc;
+    --color-gold-50: #fff3e6;
+}
+
+/* Flux accent — derived from primary */
+:root {
+    --color-accent: #7b1fa2;
+    --color-accent-content: #7b1fa2;
+    --color-accent-foreground: #ffffff;
+}
+
+.dark {
+    --color-accent: #9c27b0;
+    --color-accent-content: #ce93d8;
+    --color-accent-foreground: #ffffff;
+}
+
+@keyframes bet-highlight {
+    0% { background-color: rgb(255 134 0 / 0.3); }
+    100% { background-color: transparent; }
+}
+
+.bet-new-highlight {
+    animation: bet-highlight 2s ease-out forwards;
 }

@@ -19,7 +19,7 @@
                             <h1 class="text-5xl sm:text-6xl lg:text-7xl font-black text-zinc-900 dark:text-white">
                                 Tipinuss
                             </h1>
-                            <p class="text-lg sm:text-2xl font-semibold text-[#410a61]">
+                            <p class="text-lg sm:text-2xl font-semibold text-primary-600">
                                 {{ __('app.hero_tagline') }}
                             </p>
                         </div>
@@ -29,12 +29,12 @@
 
                         <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start pt-2">
                             <a href="{{ route('bets.list') }}" wire:navigate
-                               class="inline-flex items-center justify-center px-8 py-3 rounded-lg font-semibold text-white hover:opacity-90 transition shadow-lg bg-[#410a61]">
+                               class="inline-flex items-center justify-center px-8 py-3 rounded-lg font-semibold text-white hover:opacity-90 transition shadow-lg bg-primary-600">
                                 {{ __('app.hero_cta') }}
                             </a>
                             @guest
                                 <a href="{{ route('login') }}" wire:navigate
-                                   class="inline-flex items-center justify-center px-8 py-3 border-2 rounded-lg font-semibold hover:bg-zinc-100 dark:hover:bg-zinc-800 transition border-[#410a61] text-[#410a61]">
+                                   class="inline-flex items-center justify-center px-8 py-3 border-2 rounded-lg font-semibold hover:bg-zinc-100 dark:hover:bg-zinc-800 transition border-primary-600 text-primary-600">
                                     {{ __('app.navigation.login') }}
                                 </a>
                             @endguest
