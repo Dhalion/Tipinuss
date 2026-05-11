@@ -11,6 +11,7 @@ use App\Livewire\Page\Bets\Create;
 use App\Livewire\Page\Login;
 use App\Livewire\Page\MainPage;
 use App\Livewire\Page\Register;
+use App\Models\Bet;
 use Illuminate\Support\Facades\Route;
 
 Route::livewire('/', MainPage::class)->name('main');
@@ -32,6 +33,11 @@ Route::middleware('auth')->group(function () {
 
     Route::livewire('/bet/create', Create::class)->name('bets.create');
     Route::livewire('/bets', BetsListing::class)->name('bets.list');
+    Route::get('/bets/{uuid}', function (string $uuid) {
+        $bet = Bet::findOrFail($uuid);
+
+        return redirect()->route('bets.detail', ['bet' => $bet->slugUrl()], 301);
+    })->whereUuid('uuid');
     Route::livewire('/bets/{bet}', BetDetail::class)->name('bets.detail');
 
     Route::middleware('can:admin')->group(function () {

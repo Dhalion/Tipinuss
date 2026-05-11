@@ -10,6 +10,7 @@ use App\Models\Bet;
 use App\Repositories\Contracts\BetOptionRepositoryInterface;
 use App\Repositories\Contracts\BetRepositoryInterface;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 final class CreateBetAction
 {
@@ -25,6 +26,7 @@ final class CreateBetAction
                 'user_id' => $data->creator->id,
                 'organisation_id' => $data->organisationId,
                 'title' => $data->title,
+                'slug' => $this->generateSlug($data->title),
                 'description' => $data->description,
                 'status' => BetStatus::Open,
                 'expires_at' => $data->expiresAt,
@@ -38,5 +40,20 @@ final class CreateBetAction
 
             return $bet;
         });
+    }
+
+    private function generateSlug(string $title, int $maxAttempts = 100): string
+    {
+        $base = Str::slug($title);
+
+        for ($i = 0; $i < $maxAttempts; $i++) {
+            $slug = $i === 0 ? $base : $base.'-'.$i;
+
+            if (! Bet::where('slug', $slug)->exists()) {
+                return $slug;
+            }
+        }
+
+        return $base.'-'.Str::random(6);
     }
 }

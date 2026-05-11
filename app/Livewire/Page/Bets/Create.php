@@ -9,6 +9,7 @@ use App\DTOs\Betting\BetOptionData;
 use App\DTOs\Betting\CreateBetData;
 use App\Models\User;
 use Carbon\CarbonImmutable;
+use Flux\Flux;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -31,13 +32,24 @@ final class Create extends Component
 
     public int $optionCount = self::DEFAULT_OPTIONS_COUNT;
 
+    public bool $manualOdds = false;
+
     public function mount(): void
     {
+        $defaultOdds = $this->calculateBaseOdds(self::DEFAULT_OPTIONS_COUNT);
         for ($i = 0; $i < self::DEFAULT_OPTIONS_COUNT; $i++) {
             $this->options[] = [
                 'title' => '',
-                'odds' => $this->calculateBaseOdds($i + 1),
+                'odds' => $defaultOdds,
             ];
+        }
+    }
+
+    public function toggleManualOdds(): void
+    {
+        $this->manualOdds = ! $this->manualOdds;
+        if (! $this->manualOdds) {
+            $this->recalculateOdds();
         }
     }
 
@@ -45,10 +57,12 @@ final class Create extends Component
     {
         $this->options[] = [
             'title' => '',
-            'odds' => $this->calculateBaseOdds($this->optionCount + 1),
+            'odds' => $this->calculateBaseOdds(count($this->options) + 1),
         ];
         $this->optionCount++;
-        $this->recalculateOdds();
+        if (! $this->manualOdds) {
+            $this->recalculateOdds();
+        }
     }
 
     public function removeOption(int $index): void
@@ -59,7 +73,9 @@ final class Create extends Component
 
         array_splice($this->options, $index, 1);
         $this->optionCount--;
-        $this->recalculateOdds();
+        if (! $this->manualOdds) {
+            $this->recalculateOdds();
+        }
     }
 
     public function createBet(CreateBetAction $action): void
@@ -70,7 +86,7 @@ final class Create extends Component
             'expires_at' => 'nullable|date',
             'options' => 'required|array|min:'.self::DEFAULT_OPTIONS_COUNT,
             'options.*.title' => 'required|min:1|max:255',
-            'options.*.odds' => 'required|numeric|min:1',
+            'options.*.odds' => 'required|numeric|min:1.01',
         ]);
 
         $user = auth()->user();
@@ -80,8 +96,8 @@ final class Create extends Component
 
         $bet = $action->execute($this->buildCreateBetData($user));
 
-        session()->flash('success', '✓ Wette erfolgreich erstellt!');
-        $this->redirect(route('bets.detail', $bet));
+        Flux::toast(variant: 'success', text: 'Wette erfolgreich erstellt!');
+        $this->redirect(route('bets.detail', ['bet' => $bet->slugUrl()]));
     }
 
     private function buildCreateBetData(User $user): CreateBetData
