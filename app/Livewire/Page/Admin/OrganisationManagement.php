@@ -8,32 +8,31 @@ use App\Models\Organisation;
 use App\Repositories\Contracts\OrganisationRepositoryInterface;
 use App\Repositories\Contracts\UserRepositoryInterface;
 use Illuminate\Contracts\View\View;
-use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
 
 final class OrganisationManagement extends Component
 {
     public string $newOrganisationName = '';
 
-    /** @var Collection<int, Organisation> */
-    public Collection $organisations;
-
-    public function mount(
-        OrganisationRepositoryInterface $organisations,
-    ): void {
+    public function mount(): void
+    {
         $this->authorize('admin');
-        $this->organisations = $organisations->findAll();
     }
 
     public function createOrganisation(OrganisationRepositoryInterface $organisations): void
     {
-        $this->validate(['newOrganisationName' => 'required|min:2|max:100|unique:organisations,name']);
+        $this->validate(['newOrganisationName' => 'required|min:2|max:100']);
+
+        if ($organisations->existsByName($this->newOrganisationName)) {
+            $this->addError('newOrganisationName', 'Organisation existiert bereits.');
+
+            return;
+        }
 
         $organisation = new Organisation(['name' => $this->newOrganisationName]);
         $organisations->save($organisation);
 
         $this->newOrganisationName = '';
-        $this->organisations = $organisations->findAll();
     }
 
     public function assignUserToOrganisation(
@@ -58,8 +57,6 @@ final class OrganisationManagement extends Component
 
         $user->organisation_id = $resolvedOrganisationId;
         $users->save($user);
-
-        $this->organisations = $organisations->findAll();
     }
 
     public function deleteOrganisation(string $organisationId, OrganisationRepositoryInterface $organisations): void
@@ -70,12 +67,14 @@ final class OrganisationManagement extends Component
         }
 
         $organisations->delete($organisation);
-        $this->organisations = $organisations->findAll();
     }
 
-    public function render(UserRepositoryInterface $users): View
-    {
+    public function render(
+        OrganisationRepositoryInterface $organisations,
+        UserRepositoryInterface $users,
+    ): View {
         return view('pages.admin.organisations', [
+            'organisations' => $organisations->findAll(),
             'allUsers' => $users->all(),
         ]);
     }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Betting;
 
 use App\Exceptions\BetException;
+use App\Models\Bet;
 use App\Models\BetOption;
 use App\Models\User;
 
@@ -34,6 +35,19 @@ final class BettingValidationService
             $shortfall = $requiredAmount - $user->soapnuts;
             throw new BetException("Insufficient balance. You need {$shortfall} more soapnuts.");
         }
+    }
+
+    public function canCloseBet(Bet $bet, User $user, int $distinctBettorCount): bool
+    {
+        if (! $bet->isOpen()) {
+            return false;
+        }
+
+        if ($user->isAdmin()) {
+            return true;
+        }
+
+        return $distinctBettorCount >= 2;
     }
 
     public function validateAmountWithinBounds(
