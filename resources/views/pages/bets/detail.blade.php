@@ -42,7 +42,7 @@
                             <button 
                                 type="button"
                                 @click="placeBet.open('{{ $option->id }}', '{{ addslashes($option->title) }}', {{ $option->odds }})"
-                                class="group relative overflow-hidden rounded-xl border border-primary-700/50 bg-gradient-to-br from-primary-700/20 to-primary-600/20 px-6 py-8 text-center transition-all duration-200 hover:scale-[1.02] hover:border-gold-500/50 hover:shadow-2xl hover:shadow-gold-500/10 focus:outline-none focus:ring-2 focus:ring-primary-700 focus:ring-offset-2 focus:ring-offset-zinc-900"
+                                class="group relative overflow-hidden rounded-xl border border-primary-700/50 bg-gradient-to-br from-primary-700/20 to-primary-600/20 px-6 py-8 text-center transition-all duration-200 hover:border-gold-400 hover:shadow-lg hover:shadow-gold-500/25 focus:outline-none focus:ring-2 focus:ring-primary-700 focus:ring-offset-2 focus:ring-offset-zinc-900"
                             >
                                 <div class="absolute inset-0 bg-gradient-to-r from-primary-700/0 via-primary-700/5 to-primary-600/0 opacity-0 transition-opacity group-hover:opacity-100"></div>
                                 <div class="relative">
@@ -198,11 +198,11 @@
                             class="flex-1 rounded-xl bg-gradient-to-r from-primary-700 to-primary-600 px-4 py-3 font-bold text-white shadow-lg shadow-primary-700/30 transition hover:from-primary-600 hover:to-primary-500 disabled:cursor-not-allowed disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-primary-700"
                         >
                             <span wire:loading.remove wire:target="placeBet">{{ __('bets.place_bet') }}</span>
-                            <span wire:loading wire:target="placeBet" class="inline-flex items-center justify-center gap-2">
+                            <span wire:loading wire:target="placeBet" class="inline-flex items-center gap-2">
                                 <svg class="h-4 w-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                                 </svg>
-                                {{ __('bets.placing') }}…
+                                {{ __('bets.place_bet') }}
                             </span>
                         </button>
                     </div>
@@ -275,7 +275,7 @@
                     @enderror
 
                     <div class="max-h-80 space-y-2.5 overflow-y-auto pr-1">
-                        @foreach($bet->betOptions->sortByDesc('odds') as $option)
+@foreach($bet->betOptions->sortByDesc(fn ($o) => count($o->userBets)) as $option)
                             <button
                                 type="button"
                                 wire:click="executeCloseBet('{{ $option->id }}')"

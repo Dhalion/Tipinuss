@@ -27,8 +27,8 @@ final class BetsListing extends Component
         $user = auth()->user();
 
         $paginatedBets = $user instanceof User
-            ? $bets->paginateOpenForUser($user)
-            : $bets->paginateOpen();
+            ? $bets->paginateForListingForUser($user)
+            : $bets->paginateForListing();
 
         return view('pages.bets.listing', [
             'bets' => $paginatedBets,

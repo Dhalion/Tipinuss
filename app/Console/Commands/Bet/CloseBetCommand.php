@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Console\Commands\Bet;
 
 use App\Actions\Betting\CloseBetAction;
+use App\DTOs\Betting\CloseBetData;
 use App\Models\Bet;
 use App\Models\BetOption;
 use Illuminate\Console\Command;
@@ -48,7 +49,7 @@ final class CloseBetCommand extends Command
             return self::SUCCESS;
         }
 
-        $this->closeBet->execute($bet, $winningOptionId);
+        $this->closeBet->execute(CloseBetData::make(bet: $bet, winningOptionId: $winningOptionId));
 
         $this->info("✓ Bet '{$bet->title}' closed. Winnings paid out.");
 
