@@ -7,18 +7,14 @@
 
         <form wire:submit="register" class="space-y-4">
             <flux:input wire:model="name" label="{{ __('auth.name') }}" placeholder="John Doe" required />
-            @error('name') <div class="text-sm text-red-600">{{ $message }}</div> @enderror
 
             <flux:input wire:model="email" label="{{ __('auth.email') }}" type="email" placeholder="name@example.com"
                 required />
-            @error('email') <div class="text-sm text-red-600">{{ $message }}</div> @enderror
 
             <flux:input wire:model="password" label="{{ __('auth.password') }}" type="password" required />
-            @error('password') <div class="text-sm text-red-600">{{ $message }}</div> @enderror
 
             <flux:input wire:model="password_confirmation" label="{{ __('auth.password_confirmation') }}"
                 type="password" required />
-            @error('password_confirmation') <div class="text-sm text-red-600">{{ $message }}</div> @enderror
 
             <flux:button type="submit" variant="primary" class="w-full">
                 {{ __('auth.register_submit') }}
@@ -29,7 +25,7 @@
             <p class="text-center text-sm text-zinc-600 dark:text-zinc-400">
                 {{ __('auth.have_account') }}
                 <a href="{{ route('login') }}" wire:navigate
-                    class="font-semibold text-red-600 dark:text-red-400 hover:underline">
+                    class="font-semibold text-primary-600 dark:text-primary-400 hover:underline">
                     {{ __('auth.login_here') }}
                 </a>
             </p>
