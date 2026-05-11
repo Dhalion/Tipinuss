@@ -2,28 +2,23 @@
 
     <div class="px-4 lg:px-6">
         <div class="max-w-6xl mx-auto">
-            <!-- Hero: Split layout -->
             <div class="py-12 sm:py-20">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-                    <!-- Logo column -->
-                    <div class="flex justify-center lg:justify-end order-first lg:order-last">
+                    <div class="flex flex-col items-center lg:items-start text-center lg:text-left order-first">
                         <img
-                            class="w-48 sm:w-64 lg:w-80 object-contain drop-shadow-2xl"
+                            class="w-48 sm:w-64 lg:w-72 object-contain drop-shadow-2xl"
                             src="{{ URL::asset('images/tipinuss-thron.webp') }}"
                             alt="{{ __('app.title') }}" />
+                        <p class="text-lg sm:text-xl font-semibold text-gold-400 mt-4">
+                            {{ __('app.hero_tagline') }}
+                        </p>
                     </div>
 
-                    <!-- Content column -->
                     <div class="space-y-6 text-center lg:text-left">
-                        <div class="space-y-3">
-                            <h1 class="text-5xl sm:text-6xl lg:text-7xl font-black text-zinc-900 dark:text-white">
-                                Tipinuss
-                            </h1>
-                            <p class="text-lg sm:text-2xl font-semibold text-primary-600">
-                                {{ __('app.hero_tagline') }}
-                            </p>
-                        </div>
-                        <p class="text-base sm:text-lg text-zinc-600 dark:text-zinc-300 max-w-lg mx-auto lg:mx-0 leading-relaxed">
+                        <h1 class="text-5xl sm:text-6xl lg:text-7xl font-black text-zinc-900 dark:text-white">
+                            Tipinuss
+                        </h1>
+                        <p class="text-base sm:text-lg text-zinc-600 dark:text-zinc-300 max-w-lg leading-relaxed">
                             {{ __('app.hero_subtitle') }}
                         </p>
 

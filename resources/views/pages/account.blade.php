@@ -30,7 +30,7 @@
                             </div>
                         </div>
 
-                        <div class="bg-gold-50 dark:bg-gold-900/20 rounded-lg p-4 border border-gold-200 dark:border-gold-800">
+                        <div class="bg-zinc-100 dark:bg-zinc-800 rounded-lg p-4">
                             <div class="text-sm text-gold-700 dark:text-gold-300 mb-1">
                                 {{ __('account.balance') }}
                             </div>
