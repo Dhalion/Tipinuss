@@ -21,7 +21,10 @@
     <meta name="twitter:image" content="{{ $pageImage ?? asset('images/logo-full.webp') }}">
 
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
-    <link rel="apple-touch-icon" href="{{ asset('images/logo-minimal.webp') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon.ico') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('images/android-chrome-192x192.png') }}">
+    <link rel="icon" type="image/png" sizes="512x512" href="{{ asset('images/android-chrome-512x512.png') }}">
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=inter:400,500,600&display=swap" rel="stylesheet" />
 
@@ -31,15 +34,19 @@
     @fluxAppearance
 </head>
 
-<body class="bg-white dark:bg-zinc-900 flex flex-col min-h-screen">
+<body class="min-h-screen bg-white dark:bg-zinc-800 antialiased">
 
     @include('layouts.header')
 
-    <main class="flex-1">
-        {{ $slot }}
-    </main>
+    @include('layouts.sidebar')
 
-    @include('layouts.footer')
+    <flux:main class="p-0">
+        {{ $slot }}
+    </flux:main>
+
+    @persist('toast')
+        <flux:toast />
+    @endpersist
 
     @livewireScripts
     @fluxScripts
