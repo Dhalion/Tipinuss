@@ -42,16 +42,16 @@
                             <button 
                                 type="button"
                                 @click="placeBet.open('{{ $option->id }}', '{{ addslashes($option->title) }}', {{ $option->odds }})"
-                                class="group relative overflow-hidden rounded-xl border border-[#410a61]/50 bg-gradient-to-br from-[#410a61]/20 to-[#5a0e85]/20 px-6 py-8 text-center transition-all hover:border-[#7b1fa2] hover:shadow-2xl hover:shadow-[#410a61]/20 focus:outline-none focus:ring-2 focus:ring-[#410a61] focus:ring-offset-2 focus:ring-offset-zinc-900"
+                                class="group relative overflow-hidden rounded-xl border border-primary-700/50 bg-gradient-to-br from-primary-700/20 to-primary-600/20 px-6 py-8 text-center transition-all hover:border-primary-500 hover:shadow-2xl hover:shadow-primary-700/20 focus:outline-none focus:ring-2 focus:ring-primary-700 focus:ring-offset-2 focus:ring-offset-zinc-900"
                             >
-                                <div class="absolute inset-0 bg-gradient-to-r from-[#410a61]/0 via-[#410a61]/5 to-[#5a0e85]/0 opacity-0 transition-opacity group-hover:opacity-100"></div>
+                                <div class="absolute inset-0 bg-gradient-to-r from-primary-700/0 via-primary-700/5 to-primary-600/0 opacity-0 transition-opacity group-hover:opacity-100"></div>
                                 <div class="relative">
-                                    <div class="text-sm font-medium text-purple-200 mb-3">{{ $option->title }}</div>
-                                    <div class="text-4xl font-bold text-purple-300 mb-2">
-                                        {{ number_format($option->odds, 2) }}<span class="text-lg text-purple-400">x</span>
+                                    <div class="text-sm font-medium text-primary-200 mb-3">{{ $option->title }}</div>
+                                    <div class="text-4xl font-bold text-gold-300 mb-2">
+                                        {{ number_format($option->odds, 2) }}<span class="text-lg text-gold-400">x</span>
                                     </div>
                                     <div class="flex items-center justify-center gap-2 text-xs text-zinc-400 mt-4">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-[#410a61]"></span>
+                                        <span class="w-1.5 h-1.5 rounded-full bg-primary-600"></span>
                                         {{ count($option->userBets) }} {{ __('bets.bets_placed') }}
                                     </div>
                                 </div>
@@ -110,7 +110,7 @@
             x-transition:leave-end="opacity-0 translate-y-4 sm:scale-95"
             class="relative w-full sm:max-w-md max-h-[90vh] overflow-y-auto"
         >
-            <div class="rounded-t-2xl sm:rounded-2xl border border-[#410a61]/40 bg-gradient-to-b from-zinc-800 to-zinc-900 shadow-2xl shadow-black/70 overflow-hidden">
+            <div class="rounded-t-2xl sm:rounded-2xl border border-primary-700/40 bg-gradient-to-b from-zinc-800 to-zinc-900 shadow-2xl shadow-black/70 overflow-hidden">
 
                 <div class="border-b border-zinc-700/50 px-6 py-5">
                     <div class="flex items-start justify-between gap-3">
@@ -136,7 +136,7 @@
 
                     <div class="flex items-center justify-between rounded-lg bg-zinc-800/60 px-4 py-3 text-sm">
                         <span class="text-zinc-400">{{ __('bets.odds') }}</span>
-                        <span class="font-bold text-purple-300" x-text="placeBet.odds.toFixed(2) + 'x'"></span>
+                                                        <span class="font-bold text-gold-300" x-text="placeBet.odds.toFixed(2) + 'x'"></span>
                     </div>
 
                     <div class="flex items-center justify-between rounded-lg bg-zinc-800/60 px-4 py-3 text-sm">
@@ -157,7 +157,7 @@
                                 max="100000"
                                 step="1"
                                 placeholder="100"
-                                class="w-full rounded-xl border border-zinc-600 bg-zinc-800/50 px-4 py-3 pr-10 text-white placeholder-zinc-500 transition focus:border-[#7b1fa2] focus:outline-none focus:ring-2 focus:ring-[#410a61]/30"
+                                class="w-full rounded-xl border border-zinc-600 bg-zinc-800/50 px-4 py-3 pr-10 text-white placeholder-zinc-500 transition focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-700/30"
                                 autocomplete="off"
                             />
                             <span class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-xl">🌰</span>
@@ -167,15 +167,15 @@
                         @enderror
                     </div>
 
-                    <div class="rounded-xl border border-amber-500/20 bg-gradient-to-br from-amber-900/40 to-orange-900/40 px-5 py-4">
-                        <div class="text-xs font-semibold uppercase tracking-wider text-amber-300/70 mb-1.5">
+                    <div class="rounded-xl border border-gold-500/20 bg-gradient-to-br from-gold-900/40 to-orange-900/40 px-5 py-4">
+                        <div class="text-xs font-semibold uppercase tracking-wider text-gold-300/70 mb-1.5">
                             {{ __('bets.potential_winnings') }}
                         </div>
                         <div class="flex items-baseline gap-2">
-                            <span class="text-4xl font-bold text-amber-300" x-text="placeBet.potentialWinnings"></span>
-                            <span class="text-2xl text-amber-400">🌰</span>
+                            <span class="text-4xl font-bold text-gold-300" x-text="placeBet.potentialWinnings"></span>
+                            <span class="text-2xl text-gold-400">🌰</span>
                         </div>
-                        <div class="mt-2 text-xs text-amber-300/60">
+                        <div class="mt-2 text-xs text-gold-300/60">
                             <span x-text="parseFloat(placeBet.amount || 0).toLocaleString('de-DE')"></span>
                             ×
                             <span x-text="placeBet.odds.toFixed(2)"></span>x
@@ -195,7 +195,7 @@
                             :disabled="!placeBet.amount || parseFloat(placeBet.amount) < 1"
                             wire:loading.attr="disabled"
                             wire:target="placeBet"
-                            class="flex-1 rounded-xl bg-gradient-to-r from-[#410a61] to-[#5a0e85] px-4 py-3 font-bold text-white shadow-lg shadow-[#410a61]/30 transition hover:from-[#5a0e85] hover:to-[#7b1fa2] disabled:cursor-not-allowed disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-[#410a61]"
+                            class="flex-1 rounded-xl bg-gradient-to-r from-primary-700 to-primary-600 px-4 py-3 font-bold text-white shadow-lg shadow-primary-700/30 transition hover:from-primary-600 hover:to-primary-500 disabled:cursor-not-allowed disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-primary-700"
                         >
                             <span wire:loading.remove wire:target="placeBet">{{ __('bets.place_bet') }}</span>
                             <span wire:loading wire:target="placeBet" class="inline-flex items-center justify-center gap-2">

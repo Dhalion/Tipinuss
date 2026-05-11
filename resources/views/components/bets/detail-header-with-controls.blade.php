@@ -44,7 +44,7 @@
                                     @endif
                                     @class([
                                         'inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg border-2 font-medium transition text-sm',
-                                        'border-amber-400 bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300 hover:bg-amber-100 dark:hover:bg-amber-900/40 cursor-pointer' => $canCloseBet,
+                                        'border-gold-400 bg-gold-50 dark:bg-gold-900/20 text-gold-700 dark:text-gold-300 hover:bg-gold-100 dark:hover:bg-gold-900/40 cursor-pointer' => $canCloseBet,
                                         'border-zinc-400 bg-zinc-50 dark:bg-zinc-800 text-zinc-400 dark:text-zinc-500 cursor-not-allowed opacity-60' => !$canCloseBet,
                                     ])
                                 >

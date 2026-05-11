@@ -1,7 +1,7 @@
 <flux:card class="w-full max-w-md">
     <div class="space-y-4">
-        <div class="rounded-lg bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 p-4">
-            <div class="text-sm text-blue-600 dark:text-blue-400">{{ __('bets.selected_option') }}</div>
+        <div class="rounded-lg bg-primary-100 dark:bg-primary-900 border border-primary-200 dark:border-primary-800 p-4">
+            <div class="text-sm text-primary-600 dark:text-primary-400">{{ __('bets.selected_option') }}</div>
             <div class="text-xl font-bold text-zinc-900 dark:text-white mt-1">{{ $option->title }}</div>
             <div class="text-sm font-semibold text-zinc-600 dark:text-zinc-400 mt-1">{{ number_format($option->odds, 2) }}x {{ __('bets.odds') }}</div>
         </div>

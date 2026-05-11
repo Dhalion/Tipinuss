@@ -10,9 +10,9 @@
                 <flux:label>{{ __('bets.select_option') }}</flux:label>
                 <div class="space-y-2">
                     @foreach($bet->betOptions as $option)
-                        <label class="flex items-center justify-between rounded-lg border border-zinc-200 dark:border-zinc-700 px-3 py-2.5 cursor-pointer hover:bg-zinc-50 dark:hover:bg-zinc-800 has-[:checked]:border-blue-500 has-[:checked]:bg-blue-50 dark:has-[:checked]:bg-blue-950">
+                        <label class="flex items-center justify-between rounded-lg border border-zinc-200 dark:border-zinc-700 px-3 py-2.5 cursor-pointer hover:bg-zinc-50 dark:hover:bg-zinc-800 has-[:checked]:border-primary-500 has-[:checked]:bg-primary-100 dark:has-[:checked]:bg-primary-900">
                             <span class="flex items-center gap-2">
-                                <input type="radio" name="bet_option_id" value="{{ $option->id }}" class="accent-blue-500">
+                                <input type="radio" name="bet_option_id" value="{{ $option->id }}" class="accent-primary-500">
                                 <span class="text-sm text-zinc-800 dark:text-zinc-200">{{ $option->title }}</span>
                             </span>
                             <span class="text-sm font-semibold text-zinc-900 dark:text-white">{{ number_format($option->odds, 2) }}x</span>
