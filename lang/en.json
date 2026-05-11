@@ -1,9 +1,9 @@
 {
     "app": {
-        "title": "Tipinuss - Online Waschnusswetten",
-        "description": "Tipinuss - Online Waschnusswetten",
+        "title": "Tipinuss - Online Walnut Bets",
+        "description": "Tipinuss - Online Walnut Bets",
         "navigation": {
-            "home": "Startseite"
+            "home": "Home"
         }
     },
     "validation": {
