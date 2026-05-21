@@ -36,9 +36,15 @@ final class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
-            'soapnuts' => 'decimal:2',
+            'soapnuts' => 'integer',
             'is_admin' => 'boolean',
+            'is_approved' => 'boolean',
         ];
+    }
+
+    public function isApproved(): bool
+    {
+        return $this->is_approved || $this->is_admin;
     }
 
     public function isAdmin(): bool

@@ -37,12 +37,12 @@ final class AdjustBalanceCommand extends Command
             return self::FAILURE;
         }
 
-        $balanceBefore = (int) $user->soapnuts;
+        $balanceBefore = $user->soapnuts;
 
         $this->adjustBalance->execute($user, $amount);
 
         $user->refresh();
-        $balanceAfter = (int) $user->soapnuts;
+        $balanceAfter = $user->soapnuts;
 
         $sign = $amount >= 0 ? '+' : '';
         $this->info("✓ {$user->email}: {$balanceBefore} 🌰 → {$balanceAfter} 🌰 ({$sign}{$amount})");

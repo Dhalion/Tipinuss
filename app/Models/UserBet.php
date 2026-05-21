@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Enums\UserBetStatus;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -15,13 +14,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string $id
  * @property string $user_id
  * @property string $bet_option_id
- * @property float $amount_wagered
- * @property float $potential_winnings
- * @property UserBetStatus $status
- * @property Carbon $created_at
- * @property Carbon $updated_at
- * @property User|null $user
- * @property BetOption|null $betOption
+ * @property int $amount_wagered
+ * @property int $potential_winnings
+ * @property string|null $description
  */
 final class UserBet extends Model
 {
@@ -42,8 +37,8 @@ final class UserBet extends Model
     protected function casts(): array
     {
         return [
-            'amount_wagered' => 'decimal:2',
-            'potential_winnings' => 'decimal:2',
+            'amount_wagered' => 'integer',
+            'potential_winnings' => 'integer',
             'status' => UserBetStatus::class,
             'created_at' => 'datetime',
             'updated_at' => 'datetime',

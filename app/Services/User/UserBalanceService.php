@@ -14,7 +14,7 @@ final class UserBalanceService
         $decremented = $user->decrement('soapnuts', $amount);
 
         if ($decremented === 0) {
-            throw new BetException('Failed to decrement user balance.');
+            throw BetException::balanceDecrementFailed();
         }
     }
 
@@ -27,6 +27,6 @@ final class UserBalanceService
     {
         $freshUser = $user->fresh();
 
-        return $freshUser instanceof User ? (int) $freshUser->soapnuts : (int) $user->soapnuts;
+        return $freshUser instanceof User ? $freshUser->soapnuts : $user->soapnuts;
     }
 }

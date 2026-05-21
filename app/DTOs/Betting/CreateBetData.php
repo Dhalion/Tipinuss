@@ -7,7 +7,7 @@ namespace App\DTOs\Betting;
 use App\Models\User;
 use Carbon\CarbonImmutable;
 
-final class CreateBetData
+final readonly class CreateBetData
 {
     /**
      * @param  array<int, BetOptionData>  $options

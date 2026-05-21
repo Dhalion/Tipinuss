@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\DTOs\Betting;
 
-final class BetOptionData
+final readonly class BetOptionData
 {
     public function __construct(
         public readonly string $title,

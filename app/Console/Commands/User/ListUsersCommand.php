@@ -28,7 +28,7 @@ final class ListUsersCommand extends Command
             $users->map(fn (User $user) => [
                 $user->name,
                 $user->email,
-                number_format((int) $user->soapnuts).' 🌰',
+                number_format($user->soapnuts).' 🌰',
                 $user->isAdmin() ? '✓' : '—',
                 $user->organisation?->name ?? '—',
                 $user->user_bets_count,

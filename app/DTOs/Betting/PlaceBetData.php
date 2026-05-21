@@ -7,7 +7,7 @@ namespace App\DTOs\Betting;
 use App\Models\BetOption;
 use App\Models\User;
 
-final class PlaceBetData
+final readonly class PlaceBetData
 {
     public function __construct(
         public readonly User $user,
