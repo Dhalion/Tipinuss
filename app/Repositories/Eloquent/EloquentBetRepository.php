@@ -88,6 +88,11 @@ final class EloquentBetRepository implements BetRepositoryInterface
         return $query->latest()->take($limit)->get();
     }
 
+    public function existsBySlug(string $slug): bool
+    {
+        return Bet::where('slug', $slug)->exists();
+    }
+
     public function save(Bet $bet): Bet
     {
         $bet->save();

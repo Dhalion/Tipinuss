@@ -17,6 +17,11 @@ interface UserRepositoryInterface
     /** @return Collection<int, User> */
     public function allWithBetCount(): Collection;
 
+    /** @return Collection<int, User> */
+    public function allWithBetCountByApprovalStatus(?bool $isApproved): Collection;
+
+    public function pendingCount(): int;
+
     public function save(User $user): User;
 
     /** @return Collection<int, User> */

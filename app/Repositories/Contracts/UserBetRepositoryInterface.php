@@ -23,5 +23,11 @@ interface UserBetRepositoryInterface
 
     public function countDistinctBettorsForBet(Bet $bet): int;
 
+    /**
+     * @param  array<int, string>  $ids
+     * @return Collection<int, UserBet>
+     */
+    public function findByIdsWithOptionAndBet(array $ids): Collection;
+
     public function save(UserBet $userBet): UserBet;
 }

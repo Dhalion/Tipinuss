@@ -28,6 +28,24 @@ final class EloquentUserRepository implements UserRepositoryInterface
             ->get();
     }
 
+    public function allWithBetCountByApprovalStatus(?bool $isApproved): Collection
+    {
+        $query = User::withCount('userBets')
+            ->with('organisation')
+            ->orderBy('name');
+
+        if ($isApproved !== null) {
+            $query->where('is_approved', $isApproved);
+        }
+
+        return $query->get();
+    }
+
+    public function pendingCount(): int
+    {
+        return User::where('is_approved', false)->count();
+    }
+
     public function save(User $user): User
     {
         $user->save();

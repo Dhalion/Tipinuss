@@ -33,6 +33,8 @@ interface BetRepositoryInterface
     /** @return Collection<int, Bet> */
     public function recentOpenForUser(?User $user, int $limit = 5): Collection;
 
+    public function existsBySlug(string $slug): bool;
+
     public function save(Bet $bet): Bet;
 
     public function delete(Bet $bet): void;

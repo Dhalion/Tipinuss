@@ -49,7 +49,7 @@ final class CreateBetAction
         for ($i = 0; $i < $maxAttempts; $i++) {
             $slug = $i === 0 ? $base : $base.'-'.$i;
 
-            if (! Bet::where('slug', $slug)->exists()) {
+            if (! $this->bets->existsBySlug($slug)) {
                 return $slug;
             }
         }

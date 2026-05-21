@@ -36,6 +36,17 @@ final class EloquentUserBetRepository implements UserBetRepositoryInterface
             ->get();
     }
 
+    /**
+     * @param  array<int, string>  $ids
+     * @return Collection<int, UserBet>
+     */
+    public function findByIdsWithOptionAndBet(array $ids): Collection
+    {
+        return UserBet::with('betOption.bet')
+            ->whereIn('id', $ids)
+            ->get();
+    }
+
     public function countDistinctBettorsForBet(Bet $bet): int
     {
         return $bet->userBets()
