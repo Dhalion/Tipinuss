@@ -1,6 +1,12 @@
 parameters:
 	ignoreErrors:
 		-
+			message: '#^Property App\\Models\\BetaAccessKey\:\:\$used_at \(string\|null\) does not accept Illuminate\\Support\\Carbon\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Actions/Auth/RegisterUserAction.php
+
+		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
 			identifier: property.notFound
 			count: 1
@@ -10,6 +16,36 @@ parameters:
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$result\.$#'
 			identifier: property.notFound
 			count: 2
+			path: app/Actions/Betting/CloseBetAction.php
+
+		-
+			message: '#^Binary operation "\." between mixed and '' — '' results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: app/Actions/Betting/CloseBetAction.php
+
+		-
+			message: '#^Binary operation "\." between non\-falsy\-string and mixed results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: app/Actions/Betting/CloseBetAction.php
+
+		-
+			message: '#^Cannot access property \$bet on Illuminate\\Database\\Eloquent\\Model\|null\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Actions/Betting/CloseBetAction.php
+
+		-
+			message: '#^Cannot access property \$title on Illuminate\\Database\\Eloquent\\Model\|null\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Actions/Betting/CloseBetAction.php
+
+		-
+			message: '#^Cannot access property \$title on mixed\.$#'
+			identifier: property.nonObject
+			count: 1
 			path: app/Actions/Betting/CloseBetAction.php
 
 		-
@@ -25,10 +61,16 @@ parameters:
 			path: app/Actions/Betting/CloseBetAction.php
 
 		-
-			message: '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\Bet\>\:\:exists\(\)\.$#'
-			identifier: staticMethod.dynamicCall
+			message: '#^Property App\\Models\\UserBet\:\:\$status \(''lost''\|''pending''\|''won''\) does not accept App\\Enums\\UserBetStatus\:\:Lost\.$#'
+			identifier: assign.propertyType
 			count: 1
-			path: app/Actions/Betting/CreateBetAction.php
+			path: app/Actions/Betting/CloseBetAction.php
+
+		-
+			message: '#^Property App\\Models\\UserBet\:\:\$status \(''lost''\|''pending''\|''won''\) does not accept App\\Enums\\UserBetStatus\:\:Won\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Actions/Betting/CloseBetAction.php
 
 		-
 			message: '#^Parameter \#1 \$callback of method Illuminate\\Database\\Eloquent\\Collection\<int,Illuminate\\Database\\Eloquent\\Model\>\:\:mapWithKeys\(\) expects callable\(Illuminate\\Database\\Eloquent\\Model, int\)\: array\<non\-falsy\-string, string\>, Closure\(App\\Models\\BetOption\)\: non\-empty\-array\<non\-falsy\-string, string\> given\.$#'
@@ -115,10 +157,40 @@ parameters:
 			path: app/Console/Commands/User/ListUsersCommand.php
 
 		-
-			message: '#^Dynamic call to static method Illuminate\\Contracts\\Auth\\Guard\:\:user\(\)\.$#'
-			identifier: staticMethod.dynamicCall
+			message: '#^Method App\\Http\\Middleware\\BetaGuardMiddleware\:\:handle\(\) should return Symfony\\Component\\HttpFoundation\\Response but returns mixed\.$#'
+			identifier: return.type
+			count: 4
+			path: app/Http/Middleware/BetaGuardMiddleware.php
+
+		-
+			message: '#^Cannot call method format\(\) on Carbon\\CarbonImmutable\|null\.$#'
+			identifier: method.nonObject
 			count: 1
 			path: app/Livewire/Page/Account.php
+
+		-
+			message: '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Builder\<Illuminate\\Database\\Eloquent\\Model\>\:\:count\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 3
+			path: app/Livewire/Page/Account.php
+
+		-
+			message: '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Builder\<Illuminate\\Database\\Eloquent\\Model\>\:\:where\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 2
+			path: app/Livewire/Page/Account.php
+
+		-
+			message: '#^Parameter \$admin of method App\\Actions\\Auth\\CreateBetaAccessKeyAction\:\:execute\(\) expects App\\Models\\User, App\\Models\\User\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
+			message: '#^Casting to int something that''s already int\<min, \-1\>\|int\<1, max\>\.$#'
+			identifier: cast.useless
+			count: 1
+			path: app/Livewire/Page/Admin/UserManagement.php
 
 		-
 			message: '#^Dynamic call to static method Illuminate\\Contracts\\Auth\\Guard\:\:user\(\)\.$#'
@@ -136,6 +208,24 @@ parameters:
 			message: '#^Dynamic call to static method Illuminate\\Contracts\\Auth\\Guard\:\:user\(\)\.$#'
 			identifier: staticMethod.dynamicCall
 			count: 2
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Method App\\Livewire\\Page\\Bets\\BetDetail\:\:optionsByBets\(\) should return Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\BetOption\> but returns Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Method App\\Livewire\\Page\\Bets\\BetDetail\:\:optionsByOdds\(\) should return Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\BetOption\> but returns Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Support\\Collection\<int,Illuminate\\Database\\Eloquent\\Model\>\:\:sortByDesc\(\) expects array\<array\{string, string\}\|\(callable\(Illuminate\\Database\\Eloquent\\Model, Illuminate\\Database\\Eloquent\\Model\)\: mixed\)\|\(callable\(Illuminate\\Database\\Eloquent\\Model, int\)\: mixed\)\|string\>\|\(callable\(Illuminate\\Database\\Eloquent\\Model, int\)\: mixed\)\|string, Closure\(App\\Models\\BetOption\)\: int\<0, max\> given\.$#'
+			identifier: argument.type
+			count: 1
 			path: app/Livewire/Page/Bets/BetDetail.php
 
 		-
@@ -161,6 +251,12 @@ parameters:
 			identifier: staticMethod.dynamicCall
 			count: 1
 			path: app/Livewire/Page/Bets/Create.php
+
+		-
+			message: '#^Cannot call method isApproved\(\) on App\\Models\\User\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Livewire/Page/Login.php
 
 		-
 			message: '#^Dynamic call to static method Illuminate\\Auth\\SessionGuard\:\:attempt\(\)\.$#'
@@ -191,6 +287,18 @@ parameters:
 			identifier: staticMethod.dynamicCall
 			count: 1
 			path: app/Livewire/Page/Register.php
+
+		-
+			message: '#^Method App\\Models\\BalanceTransaction\:\:user\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/BalanceTransaction.php
+
+		-
+			message: '#^Method App\\Models\\BalanceTransaction\:\:userBet\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/BalanceTransaction.php
 
 		-
 			message: '#^Class App\\Models\\Bet uses generic trait Illuminate\\Database\\Eloquent\\Factories\\HasFactory but does not specify its types\: TFactory$#'
@@ -247,6 +355,24 @@ parameters:
 			path: app/Models/BetOption.php
 
 		-
+			message: '#^Method App\\Models\\BetaAccessKey\:\:createdByUser\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/BetaAccessKey.php
+
+		-
+			message: '#^Method App\\Models\\BetaAccessKey\:\:organisation\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/BetaAccessKey.php
+
+		-
+			message: '#^Method App\\Models\\BetaAccessKey\:\:usedByUser\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/BetaAccessKey.php
+
+		-
 			message: '#^Method App\\Models\\Organisation\:\:bets\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
 			identifier: missingType.generics
 			count: 1
@@ -295,6 +421,30 @@ parameters:
 			path: app/Repositories/Contracts/BetRepositoryInterface.php
 
 		-
+			message: '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\BalanceTransaction\>\:\:orderBy\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: app/Repositories/Eloquent/EloquentBalanceTransactionRepository.php
+
+		-
+			message: '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\BalanceTransaction\>\:\:orderByDesc\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: app/Repositories/Eloquent/EloquentBalanceTransactionRepository.php
+
+		-
+			message: '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\BalanceTransaction\>\:\:take\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 2
+			path: app/Repositories/Eloquent/EloquentBalanceTransactionRepository.php
+
+		-
+			message: '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\Bet\>\:\:exists\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: app/Repositories/Eloquent/EloquentBetRepository.php
+
+		-
 			message: '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\Bet\>\:\:take\(\)\.$#'
 			identifier: staticMethod.dynamicCall
 			count: 2
@@ -313,6 +463,18 @@ parameters:
 			path: app/Repositories/Eloquent/EloquentBetRepository.php
 
 		-
+			message: '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\BetaAccessKey\>\:\:exists\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: app/Repositories/Eloquent/EloquentBetaAccessKeyRepository.php
+
+		-
+			message: '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\BetaAccessKey\>\:\:orderByDesc\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: app/Repositories/Eloquent/EloquentBetaAccessKeyRepository.php
+
+		-
 			message: '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\Organisation\>\:\:exists\(\)\.$#'
 			identifier: staticMethod.dynamicCall
 			count: 1
@@ -323,6 +485,12 @@ parameters:
 			identifier: staticMethod.dynamicCall
 			count: 1
 			path: app/Repositories/Eloquent/EloquentOrganisationRepository.php
+
+		-
+			message: '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\UserBet\>\:\:whereIn\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: app/Repositories/Eloquent/EloquentUserBetRepository.php
 
 		-
 			message: '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Builder\<Illuminate\\Database\\Eloquent\\Model\>\:\:count\(\)\.$#'
@@ -367,9 +535,15 @@ parameters:
 			path: app/Repositories/Eloquent/EloquentUserBetRepository.php
 
 		-
-			message: '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\User\>\:\:orderBy\(\)\.$#'
+			message: '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\User\>\:\:count\(\)\.$#'
 			identifier: staticMethod.dynamicCall
 			count: 1
+			path: app/Repositories/Eloquent/EloquentUserRepository.php
+
+		-
+			message: '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\User\>\:\:orderBy\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 2
 			path: app/Repositories/Eloquent/EloquentUserRepository.php
 
 		-
@@ -383,6 +557,24 @@ parameters:
 			identifier: staticMethod.dynamicCall
 			count: 1
 			path: app/Repositories/Eloquent/EloquentUserRepository.php
+
+		-
+			message: '#^Parameter \#1 \$shortfall of static method App\\Exceptions\\BetException\:\:insufficientBalance\(\) expects int, float given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Services/Betting/BettingValidationService.php
+
+		-
+			message: '#^Cannot access property \$value on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Services/User/TransactionHistoryService.php
+
+		-
+			message: '#^Method App\\Services\\User\\UserBalanceService\:\:getAvailableBalance\(\) should return int but returns float\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Services/User/UserBalanceService.php
 
 		-
 			message: '#^Parameter \#1 \$string of function rtrim expects string, bool\|string given\.$#'

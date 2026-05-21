@@ -3,8 +3,10 @@
 declare(strict_types=1);
 
 use App\Livewire\Page\Account;
+use App\Livewire\Page\Admin\BetaKeyManagement;
 use App\Livewire\Page\Admin\OrganisationManagement;
 use App\Livewire\Page\Admin\UserManagement;
+use App\Livewire\Page\Auth\PendingApproval;
 use App\Livewire\Page\Bets\BetDetail;
 use App\Livewire\Page\Bets\BetsListing;
 use App\Livewire\Page\Bets\Create;
@@ -20,6 +22,8 @@ Route::middleware('guest')->group(function () {
     Route::livewire('/login', Login::class)->name('login');
     Route::livewire('/register', Register::class)->name('register');
 });
+
+Route::livewire('/pending', PendingApproval::class)->name('pending.approval');
 
 Route::middleware('auth')->group(function () {
     Route::post('/logout', function () {
@@ -43,5 +47,6 @@ Route::middleware('auth')->group(function () {
     Route::middleware('can:admin')->group(function () {
         Route::livewire('/admin/organisations', OrganisationManagement::class)->name('admin.organisations');
         Route::livewire('/admin/users', UserManagement::class)->name('admin.users');
+        Route::livewire('/admin/beta-keys', BetaKeyManagement::class)->name('admin.beta-keys');
     });
 });

@@ -18,6 +18,8 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->decimal('soapnuts', 12, 2)->default(1000);
+            $table->boolean('is_admin')->default(false);
+            $table->boolean('is_approved')->default(true);
             $table->rememberToken();
             $table->timestamps();
         });
