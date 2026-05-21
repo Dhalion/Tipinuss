@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Livewire\Page\Admin;
 
 use App\Actions\Admin\AdjustUserBalanceAction;
+use App\Actions\Admin\ApproveUserAction;
 use App\Actions\Admin\DeleteUserAction;
 use App\Actions\Admin\ToggleUserAdminAction;
 use App\Exceptions\BetException;
@@ -16,12 +17,19 @@ use Livewire\Component;
 
 final class UserManagement extends Component
 {
+    public string $approvalFilter = '';
+
     /** @var array<string, int> */
     public array $balanceAdjustments = [];
 
     public function mount(): void
     {
         $this->authorize('admin');
+    }
+
+    public function setFilter(string $filter): void
+    {
+        $this->approvalFilter = $filter;
     }
 
     public function adjustBalance(
@@ -39,7 +47,7 @@ final class UserManagement extends Component
             return;
         }
 
-        $action->execute($target, $adjustment);
+        $action->execute($target, (int) $adjustment);
         $this->balanceAdjustments[$userId] = 0;
     }
 
@@ -60,6 +68,20 @@ final class UserManagement extends Component
         } catch (BetException $e) {
             $this->addError('admin', $e->getMessage());
         }
+    }
+
+    public function approveUser(
+        string $userId,
+        ?string $organisationId,
+        ApproveUserAction $action,
+        UserRepositoryInterface $users,
+    ): void {
+        $target = $users->findById($userId);
+        if ($target === null) {
+            return;
+        }
+
+        $action->execute($target, $organisationId);
     }
 
     public function assignOrganisation(
@@ -109,9 +131,16 @@ final class UserManagement extends Component
         UserRepositoryInterface $users,
         OrganisationRepositoryInterface $organisations,
     ): View {
+        $isApproved = match ($this->approvalFilter) {
+            'approved' => true,
+            'pending' => false,
+            default => null,
+        };
+
         return view('pages.admin.users', [
-            'users' => $users->allWithBetCount(),
+            'users' => $users->allWithBetCountByApprovalStatus($isApproved),
             'organisations' => $organisations->findAll(),
+            'pendingCount' => $users->pendingCount(),
         ]);
     }
 }

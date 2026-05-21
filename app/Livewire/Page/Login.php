@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Livewire\Page;
 
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Validate;
@@ -34,6 +35,13 @@ final class Login extends Component
         if (auth()->attempt(['email' => $this->email, 'password' => $this->password])) {
             RateLimiter::clear($throttleKey);
             session()->regenerate();
+
+            if ((bool) config('app.beta_mode', false) && ! Auth::user()->isApproved()) {
+                $this->redirect(route('pending.approval'));
+
+                return;
+            }
+
             $this->redirect(route('main'));
         } else {
             RateLimiter::hit($throttleKey, decaySeconds: 60);
