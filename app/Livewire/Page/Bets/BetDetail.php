@@ -12,6 +12,7 @@ use App\DTOs\Betting\CloseBetData;
 use App\DTOs\Betting\PlaceBetData;
 use App\Exceptions\BetException;
 use App\Models\Bet;
+use App\Models\BetOption;
 use App\Repositories\Contracts\BetOptionRepositoryInterface;
 use App\Repositories\Contracts\BetRepositoryInterface;
 use App\Repositories\Contracts\OrganisationRepositoryInterface;
@@ -21,6 +22,7 @@ use App\Services\Betting\BettingValidationService;
 use App\Services\MetaTagService;
 use Flux\Flux;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Collection;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
@@ -93,14 +95,14 @@ final class BetDetail extends Component
         try {
             $option = $betOptions->findById($optionId);
             if ($option === null) {
-                throw new BetException('Diese Option wurde nicht gefunden.');
+                throw BetException::optionNotFound();
             }
 
             $data = PlaceBetData::make(user: $user, option: $option, amount: (int) $validated['amount']);
             $action->execute($data);
 
             $winnings = $calculation->calculatePotentialWinnings($option, (int) $validated['amount']);
-            Flux::toast(variant: 'success', heading: 'Wette platziert! 🎉', text: 'Möglicher Gewinn: '.number_format($winnings, 0).' 🌰');
+            Flux::toast(variant: 'success', heading: __('bets.placed_heading'), text: __('bets.potential_winnings_text', ['amount' => number_format($winnings, 0)]));
 
             $this->dispatch('bet-placed');
             $this->dispatch('refresh-placed-bets');
@@ -123,7 +125,7 @@ final class BetDetail extends Component
 
         $action->execute(CloseBetData::make(bet: $bet, winningOptionId: $winningOptionId));
 
-        Flux::toast(variant: 'success', text: 'Wette geschlossen und Gewinne ausgezahlt.');
+        Flux::toast(variant: 'success', text: __('bets.closed_success'));
         $this->redirect(route('bets.list'), navigate: true);
     }
 
@@ -136,7 +138,7 @@ final class BetDetail extends Component
         $betTitle = $bet->title;
         $action->execute($bet);
 
-        Flux::toast(variant: 'success', text: "Wette \"{$betTitle}\" wurde gelöscht.");
+        Flux::toast(variant: 'success', text: __('bets.deleted_success', ['title' => $betTitle]));
         $this->redirect(route('bets.list'), navigate: true);
     }
 
@@ -159,12 +161,28 @@ final class BetDetail extends Component
         $action->execute($bet, $organisation);
     }
 
+    /** @return Collection<int, BetOption> */
+    #[Computed]
+    public function optionsByOdds(): Collection
+    {
+        return $this->bet()->betOptions->sortByDesc('odds');
+    }
+
+    /** @return Collection<int, BetOption> */
+    #[Computed]
+    public function optionsByBets(): Collection
+    {
+        return $this->bet()->betOptions->sortByDesc(fn (BetOption $option): int => $option->userBets->count());
+    }
+
     public function render(OrganisationRepositoryInterface $organisations): View
     {
         return view('pages.bets.detail', [
             'bet' => $this->bet(),
             'canCloseBet' => $this->canCloseBet(),
             'organisations' => $organisations->findAll(),
+            'optionsByOdds' => $this->optionsByOdds(),
+            'optionsByBets' => $this->optionsByBets(),
         ]);
     }
 }

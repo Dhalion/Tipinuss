@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'title' => 'Tipinuss',
     'description' => 'Online Waschnusswetten - Tippe deine Wetten, verdiene Waschnüsse. Die moderne Wettplatform für Enthusiasten.',
@@ -38,4 +40,7 @@ return [
     'hero_cta' => 'Wetten entdecken →',
     'recent_bets_title' => 'Letzte Wetten',
     'recent_bets_description' => 'Die 5 neuesten offenen Wetten – jetzt kannst du mittippen!',
+
+    'beta_badge' => 'Beta',
+    'bet_meta_fallback' => 'Tippe auf :title und verdiene Waschnüsse auf Tipinuss',
 ];

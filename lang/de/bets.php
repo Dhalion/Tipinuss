@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'odds' => 'Quote',
     'pending' => 'Ausstehend',
@@ -38,4 +40,15 @@ return [
     'closed_bets' => 'Abgeschlossene Wetten',
     'empty_suggestion' => 'Schau bald wieder vorbei oder erstelle selbst eine neue Wette!',
     'listing_description' => 'Entdecke die neuesten Wetten und platziere deine Tipps',
+
+    'option_not_found' => 'Diese Option wurde nicht gefunden.',
+    'bet_closed_error' => 'Diese Wette ist bereits geschlossen und kann keine neuen Einsätze mehr annehmen.',
+    'insufficient_balance' => 'Nicht genügend Guthaben. Dir fehlen :shortfall 🌰.',
+    'amount_out_of_bounds' => 'Der Einsatz muss zwischen :min und :max 🌰 liegen.',
+    'wrong_bet_option' => 'Die ausgewählte Option gehört nicht zu dieser Wette.',
+    'created_success' => 'Wette erfolgreich erstellt!',
+    'placed_heading' => 'Wette platziert!',
+    'potential_winnings_text' => 'Möglicher Gewinn: :amount 🌰',
+    'closed_success' => 'Wette geschlossen und Gewinne ausgezahlt.',
+    'deleted_success' => 'Wette ":title" wurde gelöscht.',
 ];

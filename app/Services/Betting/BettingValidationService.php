@@ -18,14 +18,14 @@ final class BettingValidationService
     public function validateOptionExists(?BetOption $option): void
     {
         if ($option === null) {
-            throw new BetException('Betting option not found.');
+            throw BetException::optionNotFound();
         }
     }
 
     public function validateBetIsOpen(bool $betIsOpen): void
     {
         if (! $betIsOpen) {
-            throw new BetException('Bet is already closed and cannot accept new bets.');
+            throw BetException::betAlreadyClosed();
         }
     }
 
@@ -33,7 +33,7 @@ final class BettingValidationService
     {
         if ($user->soapnuts < $requiredAmount) {
             $shortfall = $requiredAmount - $user->soapnuts;
-            throw new BetException("Insufficient balance. You need {$shortfall} more soapnuts.");
+            throw BetException::insufficientBalance($shortfall);
         }
     }
 
@@ -56,7 +56,7 @@ final class BettingValidationService
         int $maxAmount = self::MAX_BET_AMOUNT,
     ): void {
         if ($amount < $minAmount || $amount > $maxAmount) {
-            throw new BetException("Bet amount must be between {$minAmount} and {$maxAmount}.");
+            throw BetException::amountOutOfBounds($minAmount, $maxAmount);
         }
     }
 }

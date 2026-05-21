@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'odds' => 'Odds',
     'pending' => 'Pending',
@@ -38,4 +40,15 @@ return [
     'closed_bets' => 'Closed Bets',
     'empty_suggestion' => 'Check back later or create a new bet!',
     'listing_description' => 'Discover the latest bets and place your tips',
+
+    'option_not_found' => 'This option was not found.',
+    'bet_closed_error' => 'This bet is already closed and cannot accept new stakes.',
+    'insufficient_balance' => 'Insufficient balance. You need :shortfall 🌰 more.',
+    'amount_out_of_bounds' => 'The stake must be between :min and :max 🌰.',
+    'wrong_bet_option' => 'The selected option does not belong to this bet.',
+    'created_success' => 'Bet created successfully!',
+    'placed_heading' => 'Bet placed!',
+    'potential_winnings_text' => 'Potential winnings: :amount 🌰',
+    'closed_success' => 'Bet closed and winnings paid out.',
+    'deleted_success' => 'Bet ":title" has been deleted.',
 ];

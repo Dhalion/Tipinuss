@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'title' => 'Tipinuss',
     'description' => 'Online Walnut Bets - Place your bets, earn walnuts. The modern betting platform for enthusiasts.',
@@ -38,4 +40,7 @@ return [
     'hero_cta' => 'Discover bets →',
     'recent_bets_title' => 'Recent Bets',
     'recent_bets_description' => 'The 5 newest open bets – start betting now!',
+
+    'beta_badge' => 'Beta',
+    'bet_meta_fallback' => 'Bet on :title and earn walnuts on Tipinuss',
 ];

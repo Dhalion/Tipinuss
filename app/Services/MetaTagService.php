@@ -10,7 +10,7 @@ final class MetaTagService
     {
         view()->share([
             'pageTitle' => $title,
-            'pageDescription' => $description ?? 'Tippe auf '.$title.' und verdiene Waschnüsse auf Tipinuss',
+            'pageDescription' => $description ?? __('app.bet_meta_fallback', ['title' => $title]),
             'pageImage' => $image ?? asset('images/logo-full.webp'),
         ]);
     }

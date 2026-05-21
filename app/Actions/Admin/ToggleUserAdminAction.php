@@ -15,7 +15,7 @@ final class ToggleUserAdminAction
     public function execute(User $admin, User $target): void
     {
         if ($admin->id === $target->id) {
-            throw new BetException('Admins cannot change their own admin status.');
+            throw BetException::cannotToggleSelf();
         }
 
         $target->is_admin = ! $target->is_admin;

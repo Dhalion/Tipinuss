@@ -3,13 +3,13 @@
 declare(strict_types=1);
 
 return [
-    'title' => 'Top Bettors',
+    'title' => 'Top Tipper',
     'description' => 'Die erfolgreichsten Wettenden',
     'table' => [
         'rank' => '#',
-        'bettor' => 'Bettor',
+        'bettor' => 'Tipper',
         'bets' => 'Wetten',
         'winnings' => 'Gewinne',
     ],
-    'empty' => 'Noch keine Bettors vorhanden',
+    'empty' => 'Noch keine Tipper vorhanden',
 ];

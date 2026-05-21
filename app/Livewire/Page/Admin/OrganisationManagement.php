@@ -24,7 +24,7 @@ final class OrganisationManagement extends Component
         $this->validate(['newOrganisationName' => 'required|min:2|max:100']);
 
         if ($organisations->existsByName($this->newOrganisationName)) {
-            $this->addError('newOrganisationName', 'Organisation existiert bereits.');
+            $this->addError('newOrganisationName', __('admin.organisations.exists_error'));
 
             return;
         }

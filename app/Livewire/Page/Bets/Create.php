@@ -81,9 +81,6 @@ final class Create extends Component
     public function createBet(CreateBetAction $action): void
     {
         $this->validate([
-            'title' => 'required|min:5|max:255',
-            'description' => 'nullable|max:1000',
-            'expires_at' => 'nullable|date',
             'options' => 'required|array|min:'.self::DEFAULT_OPTIONS_COUNT,
             'options.*.title' => 'required|min:1|max:255',
             'options.*.odds' => 'required|numeric|min:1.01',
@@ -96,7 +93,7 @@ final class Create extends Component
 
         $bet = $action->execute($this->buildCreateBetData($user));
 
-        Flux::toast(variant: 'success', text: 'Wette erfolgreich erstellt!');
+        Flux::toast(variant: 'success', text: __('bets.created_success'));
         $this->redirect(route('bets.detail', ['bet' => $bet->slugUrl()]));
     }
 
