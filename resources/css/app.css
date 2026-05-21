@@ -6,7 +6,8 @@
 @theme {
     --font-sans: Inter, sans-serif;
 
-    /* Primary — main brand color, easily swappable */
+    /* Primary — main brand color, easily swappable (purple family) */
+    --color-primary-950: #1a0024;
     --color-primary-900: #2d0040;
     --color-primary-800: #350052;
     --color-primary-700: #410a61;
@@ -15,9 +16,12 @@
     --color-primary-400: #9c27b0;
     --color-primary-300: #ba68c8;
     --color-primary-200: #ce93d8;
-    --color-primary-100: #f3e5f5;
+    --color-primary-100: #e1bee7;
+    --color-primary-50: #f3e5f5;
 
-    /* Gold — highlight color for valuable elements (winnings, balance) */
+    /* Gold — highlight color for valuable elements (orange family) */
+    --color-gold-900: #7a3d00;
+    --color-gold-800: #994d00;
     --color-gold-700: #b35900;
     --color-gold-600: #cc6b00;
     --color-gold-500: #ff8600;
@@ -30,19 +34,19 @@
 
 /* Flux accent — derived from primary */
 :root {
-    --color-accent: #7b1fa2;
-    --color-accent-content: #7b1fa2;
+    --color-accent: var(--color-primary-500);
+    --color-accent-content: var(--color-primary-600);
     --color-accent-foreground: #ffffff;
 }
 
 .dark {
-    --color-accent: #9c27b0;
-    --color-accent-content: #ce93d8;
+    --color-accent: var(--color-primary-400);
+    --color-accent-content: var(--color-primary-300);
     --color-accent-foreground: #ffffff;
 }
 
 @keyframes bet-highlight {
-    0% { background-color: rgb(255 134 0 / 0.3); }
+    0% { background-color: color-mix(in srgb, var(--color-gold-500) 30%, transparent); }
     100% { background-color: transparent; }
 }
 

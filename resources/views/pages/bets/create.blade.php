@@ -8,7 +8,7 @@
         <form wire:submit="createBet" class="space-y-6">
             <div class="space-y-4">
                 <flux:input wire:model="title" label="{{ __('app.bet.title') }}"
-                    placeholder="{{ __('app.bet.title_placeholder') }}}" wire:model.live.debounce.250ms required />
+                    placeholder="{{ __('app.bet.title_placeholder') }}" wire:model.live.debounce.250ms required />
 
                 <flux:textarea wire:model="description" label="{{ __('app.bet.description') }}"
                     placeholder="{{ __('app.bet.description_placeholder') }}" rows="4" />

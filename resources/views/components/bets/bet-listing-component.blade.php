@@ -1,6 +1,4 @@
-@php $isClosed = $bet->status->value === 'closed'; @endphp
-
-@if($isClosed)
+@if($bet->isClosed())
     <a href="{{ route('bets.detail', ['bet' => $bet->slugUrl()]) }}" wire:navigate.hover class="block opacity-60">
         <flux:card class="space-y-4 cursor-pointer transition-all duration-200">
 @else
@@ -40,11 +38,6 @@
                     <span class="text-right">{{ $bet->expires_at->diffForHumans() }}</span>
                 @endif
             </div>
-@if($isClosed)
-        </flux:card>
-    </a>
-@else
-        </flux:card>
-    </a>
-@endif
+    </flux:card>
+</a>
 

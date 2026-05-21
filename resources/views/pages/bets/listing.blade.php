@@ -1,4 +1,4 @@
-<div class="min-h-screen bg-zinc-50 dark:bg-zinc-900 py-12">
+<div class="py-8">
     <div class="max-w-4xl mx-auto px-4">
         <div class="mb-8">
             <h1 class="text-3xl font-bold text-zinc-900 dark:text-white">
@@ -18,9 +18,9 @@
                         <div class="text-sm text-zinc-700 dark:text-zinc-300">
                             {{ __('bets.empty') }}
                         </div>
-                        <a href="{{ route('bets.create') }}" wire:navigate class="inline-flex items-center px-4 py-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 rounded font-semibold text-sm hover:shadow transition">
-                            ➕ {{ __('app.navigation.bets.create') }}
-                        </a>
+                        <flux:button href="{{ route('bets.create') }}" wire:navigate variant="primary" size="sm" icon="plus">
+                            {{ __('app.navigation.bets.create') }}
+                        </flux:button>
                     </div>
                 </flux:callout>
             @endforelse

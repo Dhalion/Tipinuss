@@ -1,5 +1,5 @@
 <div 
-    class="min-h-screen bg-gradient-to-b from-zinc-900 to-zinc-950 text-white"
+    class="flex-1 flex flex-col bg-zinc-900 text-white"
     x-data="{
         placeBet: {
             show: false,
@@ -37,14 +37,14 @@
                 <h2 class="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">{{ __('bets.available_odds') }}</h2>
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-                    @foreach($bet->betOptions->sortByDesc('odds') as $option)
+                    @foreach($optionsByOdds as $option)
                         @if($bet->isOpen())
                             <button 
                                 type="button"
                                 @click="placeBet.open('{{ $option->id }}', '{{ addslashes($option->title) }}', {{ $option->odds }})"
-                                class="group relative overflow-hidden rounded-xl border border-primary-700/50 bg-gradient-to-br from-primary-700/20 to-primary-600/20 px-6 py-8 text-center transition-all duration-200 hover:border-gold-400 hover:shadow-lg hover:shadow-gold-500/25 focus:outline-none focus:ring-2 focus:ring-primary-700 focus:ring-offset-2 focus:ring-offset-zinc-900"
+                                class="group relative overflow-hidden rounded-xl border border-primary-700/50 bg-primary-700/20 px-6 py-8 text-center transition-all duration-200 hover:border-gold-400 hover:shadow-lg hover:shadow-gold-500/25 focus:outline-none focus:ring-2 focus:ring-primary-700 focus:ring-offset-2 focus:ring-offset-zinc-900"
                             >
-                                <div class="absolute inset-0 bg-gradient-to-r from-primary-700/0 via-primary-700/5 to-primary-600/0 opacity-0 transition-opacity group-hover:opacity-100"></div>
+                                <div class="absolute inset-0 bg-primary-700/5 opacity-0 transition-opacity group-hover:opacity-100"></div>
                                 <div class="relative">
                                     <div class="text-sm font-medium text-primary-200 mb-3">{{ $option->title }}</div>
                                     <div class="text-4xl font-bold text-gold-300 mb-2">
@@ -73,7 +73,7 @@
             </div>
 
             <div class="border-t border-zinc-700 pt-8">
-                @livewire('bets.placed-bets-feed', ['bet' => $bet], key('placed-bets-feed-' . $bet->id))
+                @livewire('bets.placed-bets-feed', ['betId' => $bet->id], key('placed-bets-feed-' . $bet->id))
             </div>
             
         </div>
@@ -110,13 +110,13 @@
             x-transition:leave-end="opacity-0 translate-y-4 sm:scale-95"
             class="relative w-full sm:max-w-md max-h-[90vh] overflow-y-auto"
         >
-            <div class="rounded-t-2xl sm:rounded-2xl border border-primary-700/40 bg-gradient-to-b from-zinc-800 to-zinc-900 shadow-2xl shadow-black/70 overflow-hidden">
+            <div class="rounded-t-2xl sm:rounded-2xl border border-primary-700/40 bg-zinc-800 shadow-2xl shadow-black/70 overflow-hidden">
 
                 <div class="border-b border-zinc-700/50 px-6 py-5">
                     <div class="flex items-start justify-between gap-3">
                         <div class="min-w-0">
                             <h2 class="text-xl font-bold text-white">{{ __('bets.place_bet') }}</h2>
-                            <p class="mt-1 text-sm font-medium text-purple-300 truncate" x-text="placeBet.optionTitle"></p>
+                            <p class="mt-1 text-sm font-medium text-primary-300 truncate" x-text="placeBet.optionTitle"></p>
                         </div>
                         <button
                             type="button"
@@ -124,9 +124,7 @@
                             class="shrink-0 rounded-lg p-1.5 text-zinc-400 transition hover:bg-zinc-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-zinc-500"
                             aria-label="{{ __('bets.close') }}"
                         >
-                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                            </svg>
+                            <flux:icon name="x-mark" class="h-5 w-5" />
                         </button>
                     </div>
                 </div>
@@ -141,7 +139,7 @@
 
                     <div class="flex items-center justify-between rounded-lg bg-zinc-800/60 px-4 py-3 text-sm">
                         <span class="text-zinc-400">{{ __('bets.your_balance') }}</span>
-                        <span class="font-bold text-emerald-400">{{ number_format(auth()->user()->soapnuts) }} 🌰</span>
+                        <span class="font-bold text-gold-300">{{ number_format(auth()->user()->soapnuts) }} 🌰</span>
                     </div>
 
                     <div>
@@ -167,7 +165,7 @@
                         @enderror
                     </div>
 
-                    <div class="rounded-xl border border-gold-500/20 bg-gradient-to-br from-gold-900/40 to-orange-900/40 px-5 py-4">
+                    <div class="rounded-xl border border-gold-500/20 bg-gold-900/20 px-5 py-4">
                         <div class="text-xs font-semibold uppercase tracking-wider text-gold-300/70 mb-1.5">
                             {{ __('bets.potential_winnings') }}
                         </div>
@@ -195,7 +193,7 @@
                             :disabled="!placeBet.amount || parseFloat(placeBet.amount) < 1"
                             wire:loading.attr="disabled"
                             wire:target="placeBet"
-                            class="flex-1 rounded-xl bg-gradient-to-r from-primary-700 to-primary-600 px-4 py-3 font-bold text-white shadow-lg shadow-primary-700/30 transition hover:from-primary-600 hover:to-primary-500 disabled:cursor-not-allowed disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-primary-700"
+                            class="flex-1 rounded-xl bg-primary-700 px-4 py-3 font-bold text-white shadow-lg shadow-primary-700/30 transition hover:bg-primary-600 disabled:cursor-not-allowed disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-primary-700"
                         >
                             <span wire:loading.remove wire:target="placeBet">{{ __('bets.place_bet') }}</span>
                             <span wire:loading wire:target="placeBet" class="inline-flex items-center gap-2">
@@ -246,7 +244,7 @@
             x-transition:leave-end="opacity-0 translate-y-4 sm:scale-95"
             class="relative w-full sm:max-w-md max-h-[90vh] overflow-y-auto"
         >
-            <div class="overflow-hidden rounded-t-2xl sm:rounded-2xl border border-red-500/30 bg-gradient-to-b from-zinc-800 to-zinc-900 shadow-2xl shadow-black/70">
+            <div class="overflow-hidden rounded-t-2xl sm:rounded-2xl border border-red-500/30 bg-zinc-800 shadow-2xl shadow-black/70">
 
                 <div class="border-b border-zinc-700/50 px-6 py-5">
                     <div class="flex items-center justify-between gap-3">
@@ -260,9 +258,7 @@
                             class="rounded-lg p-1.5 text-zinc-400 transition hover:bg-zinc-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-zinc-500"
                             aria-label="{{ __('bets.close') }}"
                         >
-                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                            </svg>
+                            <flux:icon name="x-mark" class="h-5 w-5" />
                         </button>
                     </div>
                 </div>
@@ -275,7 +271,7 @@
                     @enderror
 
                     <div class="max-h-80 space-y-2.5 overflow-y-auto pr-1">
-@foreach($bet->betOptions->sortByDesc(fn ($o) => count($o->userBets)) as $option)
+@foreach($optionsByBets as $option)
                             <button
                                 type="button"
                                 wire:click="executeCloseBet('{{ $option->id }}')"
@@ -285,7 +281,7 @@
                             >
                                 <div class="flex items-center justify-between gap-3">
                                     <span class="font-semibold text-white transition group-hover:text-red-200">{{ $option->title }}</span>
-                                    <span class="shrink-0 text-sm font-bold text-amber-300">{{ number_format($option->odds, 2) }}x</span>
+                                    <span class="shrink-0 text-sm font-bold text-gold-300">{{ number_format($option->odds, 2) }}x</span>
                                 </div>
                                 <div class="mt-1 text-xs text-zinc-400">
                                     {{ $option->userBets->count() }} {{ __('bets.bets_placed') }}
@@ -346,13 +342,11 @@
             x-transition:leave-end="opacity-0 translate-y-4 sm:scale-95"
             class="relative w-full sm:max-w-sm max-h-[90vh] overflow-y-auto"
         >
-            <div class="overflow-hidden rounded-t-2xl sm:rounded-2xl border border-red-500/40 bg-gradient-to-b from-zinc-800 to-zinc-900 shadow-2xl shadow-black/70">
+            <div class="overflow-hidden rounded-t-2xl sm:rounded-2xl border border-red-500/40 bg-zinc-800 shadow-2xl shadow-black/70">
 
                 <div class="px-6 pt-6 pb-2 text-center">
                     <div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-red-500/10 ring-1 ring-red-500/30">
-                        <svg class="h-7 w-7 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                        </svg>
+                        <flux:icon name="trash" class="h-7 w-7 text-red-400" />
                     </div>
                     <h2 class="text-lg font-bold text-white">{{ __('bets.delete') }}</h2>
                     <p class="mt-2 text-sm text-zinc-400">{{ __('bets.confirm_delete') }}</p>

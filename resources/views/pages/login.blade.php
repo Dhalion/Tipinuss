@@ -1,4 +1,4 @@
-<div class="min-h-screen flex items-center justify-center bg-zinc-50 dark:bg-zinc-900 px-4">
+<div class="flex-1 flex items-center justify-center px-4 py-8">
     <div class="w-full max-w-md">
         <flux:card>
             <div class="mb-6">

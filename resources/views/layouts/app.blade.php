@@ -34,15 +34,17 @@
     @fluxAppearance
 </head>
 
-<body class="min-h-screen bg-white dark:bg-zinc-800 antialiased">
+<body class="min-h-screen flex flex-col bg-zinc-50 dark:bg-zinc-900 antialiased">
 
     @include('layouts.header')
 
     @include('layouts.sidebar')
 
-    <flux:main class="p-0">
+    <flux:main class="flex-1">
         {{ $slot }}
     </flux:main>
+
+    @include('layouts.footer')
 
     @persist('toast')
         <flux:toast />
@@ -50,6 +52,27 @@
 
     @livewireScripts
     @fluxScripts
+
+    <script>
+        (function() {
+            'use strict';
+
+            function initChart() {
+                var el = document.querySelector('[data-balance-chart]');
+                if (el && typeof window.initBalanceChart === 'function') {
+                    window.initBalanceChart(el);
+                }
+            }
+
+            document.addEventListener('livewire:navigated', initChart);
+
+            if (document.readyState === 'complete' || document.readyState === 'interactive') {
+                initChart();
+            } else {
+                document.addEventListener('DOMContentLoaded', initChart);
+            }
+        })();
+    </script>
 
 </body>
 

@@ -1,4 +1,4 @@
-<div class="min-h-screen bg-gradient-to-b from-zinc-50 to-white dark:from-zinc-900 dark:to-zinc-800">
+<div class="bg-zinc-50 dark:bg-zinc-900">
 
     <div class="px-4 lg:px-6">
         <div class="max-w-6xl mx-auto">

@@ -5,11 +5,15 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Models\User;
+use App\Repositories\Contracts\BalanceTransactionRepositoryInterface;
+use App\Repositories\Contracts\BetaAccessKeyRepositoryInterface;
 use App\Repositories\Contracts\BetOptionRepositoryInterface;
 use App\Repositories\Contracts\BetRepositoryInterface;
 use App\Repositories\Contracts\OrganisationRepositoryInterface;
 use App\Repositories\Contracts\UserBetRepositoryInterface;
 use App\Repositories\Contracts\UserRepositoryInterface;
+use App\Repositories\Eloquent\EloquentBalanceTransactionRepository;
+use App\Repositories\Eloquent\EloquentBetaAccessKeyRepository;
 use App\Repositories\Eloquent\EloquentBetOptionRepository;
 use App\Repositories\Eloquent\EloquentBetRepository;
 use App\Repositories\Eloquent\EloquentOrganisationRepository;
@@ -20,6 +24,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
 
@@ -27,6 +32,8 @@ final class AppServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
+        $this->app->bind(BalanceTransactionRepositoryInterface::class, EloquentBalanceTransactionRepository::class);
+        $this->app->bind(BetaAccessKeyRepositoryInterface::class, EloquentBetaAccessKeyRepository::class);
         $this->app->bind(BetRepositoryInterface::class, EloquentBetRepository::class);
         $this->app->bind(BetOptionRepositoryInterface::class, EloquentBetOptionRepository::class);
         $this->app->bind(UserBetRepositoryInterface::class, EloquentUserBetRepository::class);
@@ -42,6 +49,8 @@ final class AppServiceProvider extends ServiceProvider
         Model::shouldBeStrict(! app()->isProduction());
 
         DB::prohibitDestructiveCommands(app()->isProduction());
+
+        View::share('showBetaBadge', (bool) config('app.beta_mode', false));
 
         Gate::define('admin', fn (User $user): bool => $user->isAdmin());
 
