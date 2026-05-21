@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace App\Actions\Betting;
 
 use App\DTOs\Betting\PlaceBetData;
+use App\Enums\TransactionType;
 use App\Enums\UserBetStatus;
 use App\Models\UserBet;
 use App\Repositories\Contracts\UserBetRepositoryInterface;
 use App\Services\Betting\BetCalculationService;
 use App\Services\Betting\BettingValidationService;
+use App\Services\User\BalanceTransactionService;
 use App\Services\User\UserBalanceService;
 use Illuminate\Support\Facades\DB;
 
@@ -20,6 +22,7 @@ final class PlaceBetAction
         private BetCalculationService $calculation,
         private UserBalanceService $balance,
         private UserBetRepositoryInterface $userBets,
+        private BalanceTransactionService $balanceTransactions,
     ) {}
 
     public function execute(PlaceBetData $data): UserBet
@@ -41,7 +44,17 @@ final class PlaceBetAction
                 'status' => UserBetStatus::Pending,
             ]);
 
-            return $this->userBets->save($userBet);
+            $savedUserBet = $this->userBets->save($userBet);
+
+            $this->balanceTransactions->log(
+                user: $data->user,
+                type: TransactionType::BetPlaced,
+                amount: -$data->amount,
+                userBetId: $savedUserBet->id,
+                description: $data->option->bet->title.' — '.$data->option->title,
+            );
+
+            return $savedUserBet;
         });
     }
 }
