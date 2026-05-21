@@ -21,6 +21,8 @@ return [
         'pending_notification' => '{1} Ein Nutzer wartet auf Freischaltung.|[2,*] :count Nutzer warten auf Freischaltung.',
         'pending_view' => 'Ausstehende anzeigen',
         'approve_title' => 'Freischalten',
+        'cannot_delete_self' => 'Admins können ihren eigenen Account nicht löschen.',
+        'cannot_toggle_self' => 'Admins können ihren eigenen Admin-Status nicht ändern.',
         'table' => [
             'user' => 'Nutzer',
             'balance' => 'Soapnuts 🌰',
@@ -79,9 +81,5 @@ return [
         'none' => '— Keine —',
         'no_group' => '— Keine Gruppe —',
         'exists_error' => 'Organisation existiert bereits.',
-    ],
-    'users' => [
-        'cannot_delete_self' => 'Admins können ihren eigenen Account nicht löschen.',
-        'cannot_toggle_self' => 'Admins können ihren eigenen Admin-Status nicht ändern.',
     ],
 ];

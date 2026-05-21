@@ -21,6 +21,8 @@ return [
         'pending_notification' => '{1} One user is pending approval.|[2,*] :count users are pending approval.',
         'pending_view' => 'Show pending',
         'approve_title' => 'Approve',
+        'cannot_delete_self' => 'Admins cannot delete their own account.',
+        'cannot_toggle_self' => 'Admins cannot change their own admin status.',
         'table' => [
             'user' => 'User',
             'balance' => 'Balance 🌰',
@@ -79,9 +81,5 @@ return [
         'none' => '— None —',
         'no_group' => '— No Group —',
         'exists_error' => 'An organisation with this name already exists.',
-    ],
-    'users' => [
-        'cannot_delete_self' => 'Admins cannot delete their own account.',
-        'cannot_toggle_self' => 'Admins cannot change their own admin status.',
     ],
 ];
