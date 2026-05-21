@@ -53,27 +53,6 @@
     @livewireScripts
     @fluxScripts
 
-    <script>
-        (function() {
-            'use strict';
-
-            function initChart() {
-                var el = document.querySelector('[data-balance-chart]');
-                if (el && typeof window.initBalanceChart === 'function') {
-                    window.initBalanceChart(el);
-                }
-            }
-
-            document.addEventListener('livewire:navigated', initChart);
-
-            if (document.readyState === 'complete' || document.readyState === 'interactive') {
-                initChart();
-            } else {
-                document.addEventListener('DOMContentLoaded', initChart);
-            }
-        })();
-    </script>
-
 </body>
 
 </html>
