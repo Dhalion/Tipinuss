@@ -31,7 +31,8 @@
         "phpstan/phpstan": "2.1.54",
         "phpstan/phpstan-phpunit": "2.0.16",
         "phpstan/phpstan-strict-rules": "2.0.11",
-        "phpunit/phpunit": "11.5.55"
+        "phpunit/phpunit": "11.5.55",
+        "tomasvotruba/bladestan": "^0.11"
     },
     "autoload": {
         "psr-4": {
@@ -64,14 +65,22 @@
         "lint:check": [
             "pint --parallel --test"
         ],
+        "lint:blade": [
+            "@php vendor/bin/phpstan analyse --error-format=blade --ansi"
+        ],
         "analyse": [
             "@php vendor/bin/phpstan analyse --ansi"
+        ],
+        "analyse:blade": [
+            "@php vendor/bin/phpstan analyse --error-format=blade --ansi"
         ],
         "analyse:baseline": [
             "@php vendor/bin/phpstan analyse --generate-baseline --ansi"
         ],
         "ci:check": [
             "Composer\\Config::disableProcessTimeout",
+            "@lint:check",
+            "@lint:blade",
             "@test"
         ],
         "test": [
