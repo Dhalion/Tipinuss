@@ -10,7 +10,6 @@
 
         <div class="mb-6">
             <h2 class="text-2xl font-bold text-zinc-900 dark:text-white">{{ __('auth.register_title') }}</h2>
-            <p class="text-zinc-600 dark:text-zinc-400 text-sm mt-1">{{ __('auth.have_account') }}</p>
         </div>
 
         <form wire:submit="register" class="space-y-5">
@@ -31,7 +30,7 @@
                     </label>
 
                     @if ($hasBetaKey)
-                        <div class="ml-7 pl-1 border-l-2 border-primary-300 dark:border-primary-700">
+                        <div class="ml-1 p-3 border-l-2 border-primary-300 dark:border-primary-700">
                             <flux:input wire:model="betaKey" label="{{ __('auth.beta_key_label') }}"
                                 placeholder="{{ __('auth.beta_key_placeholder') }}" class="mb-2" />
 
