@@ -8,7 +8,7 @@
                     {{ __('app.title') }} – {{ __('app.hero_tagline') }}
                 </div>
                 <h1 class="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white mb-2 break-words">{{ $bet->title }}</h1>
-                @if($bet->description)
+                @if($bet->description !== null && $bet->description !== '')
                     <p class="text-zinc-600 dark:text-zinc-400 text-sm">{{ $bet->description }}</p>
                 @endif
             </div>
@@ -67,9 +67,9 @@
         </div>
         
         <div class="flex gap-4 sm:gap-6 text-sm text-zinc-500 dark:text-zinc-400 flex-wrap">
-            <span>{{ __('bets.created_by') }} <span class="font-medium text-zinc-700 dark:text-zinc-300">{{ $bet->creator->name }}</span></span>
+            <span>{{ __('bets.created_by') }} <span class="font-medium text-zinc-700 dark:text-zinc-300">{{ $bet->creator?->name ?? '-' }}</span></span>
             <span>{{ $bet->created_at->format('d.m.Y H:i') }}</span>
-            @if($bet->expires_at)
+            @if($bet->expires_at !== null)
                 <span>{{ __('bets.expires') }} {{ $bet->expires_at->diffForHumans() }}</span>
             @endif
         </div>

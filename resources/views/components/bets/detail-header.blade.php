@@ -10,7 +10,7 @@
         </flux:badge>
     </div>
 
-    @if($bet->description)
+    @if($bet->description !== null && $bet->description !== '')
         <p class="text-sm text-zinc-500 dark:text-zinc-400">
             {{ $bet->description }}
         </p>
@@ -19,9 +19,9 @@
     <flux:separator />
 
     <div class="flex flex-wrap gap-x-6 gap-y-1 text-xs text-zinc-400">
-        <span>{{ __('bets.created_by') }} <span class="font-medium text-zinc-600 dark:text-zinc-300">{{ $bet->creator->name }}</span></span>
+        <span>{{ __('bets.created_by') }} <span class="font-medium text-zinc-600 dark:text-zinc-300">{{ $bet->creator?->name ?? '-' }}</span></span>
         <span>{{ $bet->created_at->format('d.m.Y') }}</span>
-        @if($bet->expires_at)
+        @if($bet->expires_at !== null)
             <span>{{ __('bets.expires') }} {{ $bet->expires_at->diffForHumans() }}</span>
         @endif
     </div>

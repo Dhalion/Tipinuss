@@ -1,3 +1,4 @@
+@php /** @var \App\Models\Bet $bet */ @endphp
 @if($bet->isClosed())
     <a href="{{ route('bets.detail', ['bet' => $bet->slugUrl()]) }}" wire:navigate.hover class="block opacity-60">
         <flux:card class="space-y-4 cursor-pointer transition-all duration-200">
@@ -10,7 +11,7 @@
                     <h3 class="font-semibold text-lg text-zinc-900 dark:text-white truncate">
                         {{ $bet->title }}
                     </h3>
-                    @if($bet->description)
+                    @if($bet->description !== null && $bet->description !== '')
                         <p class="text-sm text-zinc-500 dark:text-zinc-400 mt-2 line-clamp-2">
                             {{ $bet->description }}
                         </p>
@@ -22,6 +23,7 @@
             </div>
 
             <div class="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
+                @php /** @var \App\Models\BetOption $option */ @endphp
                 @foreach($bet->betOptions as $option)
                     <div class="rounded-lg bg-zinc-100 dark:bg-zinc-700 px-3 py-2.5 text-center">
                         <div class="text-xs font-medium text-zinc-600 dark:text-zinc-300 truncate">{{ $option->title }}</div>
@@ -33,8 +35,8 @@
             <flux:separator />
 
             <div class="flex items-center justify-between gap-2 text-xs text-zinc-500 dark:text-zinc-400">
-                <span class="font-medium">{{ $bet->creator->name }}</span>
-                @if($bet->expires_at)
+                <span class="font-medium">{{ $bet->creator?->name ?? '-' }}</span>
+                @if($bet->expires_at !== null)
                     <span class="text-right">{{ $bet->expires_at->diffForHumans() }}</span>
                 @endif
             </div>

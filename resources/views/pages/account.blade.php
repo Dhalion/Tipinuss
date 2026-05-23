@@ -1,3 +1,5 @@
+ @php /** @var \App\Models\User|null $authUser */ $authUser = auth()->user(); @endphp
+
 <div class="py-8">
     <div class="max-w-4xl mx-auto px-4">
 
@@ -11,19 +13,19 @@
                 <div class="flex items-start gap-4">
                     <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-primary-100 dark:bg-primary-900/40 ring-2 ring-primary-300/50 dark:ring-primary-700/50">
                         <span class="text-xl font-bold text-primary-600 dark:text-primary-300">
-                            {{ auth()->user()->initials() }}
+                            {{ $authUser?->initials() ?? '?' }}
                         </span>
                     </div>
                     <div class="min-w-0">
                         <h2 class="text-xl font-bold text-zinc-900 dark:text-white">
-                            {{ auth()->user()->name }}
+                            {{ $authUser?->name ?? '' }}
                         </h2>
                         <p class="text-sm text-zinc-500 dark:text-zinc-400 mt-0.5">
-                            {{ auth()->user()->email }}
+                            {{ $authUser?->email ?? '' }}
                         </p>
                         <p class="text-xs text-zinc-400 dark:text-zinc-500 mt-1 flex items-center gap-1.5">
                             <flux:icon name="calendar" class="h-3 w-3" />
-                            {{ __('account.member_since') }} {{ auth()->user()->created_at->format('d. F Y') }}
+                            {{ __('account.member_since') }} {{ $authUser?->created_at?->format('d. F Y') ?? '' }}
                         </p>
                     </div>
                 </div>
@@ -36,7 +38,7 @@
                         {{ __('account.balance') }}
                     </div>
                     <div class="text-4xl font-black text-gold-600 dark:text-gold-400">
-                        {{ number_format(auth()->user()->soapnuts) }}
+                        {{ number_format($authUser?->soapnuts ?? 0) }}
                     </div>
                     <div class="text-xl mt-1">🌰</div>
                 </div>
@@ -123,6 +125,7 @@
                 </div>
 
                 <div class="space-y-2">
+                    @php /** @var \App\DTOs\TransactionHistoryEntry $entry */ @endphp
                     @foreach ($historyEntries as $entry)
                         wire:key="entry-{{ $entry->id }}"
                         <flux:card>

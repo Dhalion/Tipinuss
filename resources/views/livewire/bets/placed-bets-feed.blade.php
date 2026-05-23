@@ -16,6 +16,7 @@
     </div>
 
     <flux:card class="p-0 overflow-hidden">
+        @php /** @var \App\Models\UserBet $userBet */ @endphp
         @forelse($placedBets as $userBet)
             <div
                 wire:key="{{ $userBet->id }}"
@@ -32,14 +33,14 @@
                 <div class="flex-1 min-w-0">
                     <div class="flex items-center gap-2">
                         <span class="text-sm font-medium text-zinc-800 dark:text-zinc-200 truncate">
-                            {{ $userBet->user->name }}
+                            {{ $userBet->user?->name ?? '-' }}
                         </span>
                         <flux:badge :color="$userBet->status->badgeColor()" size="sm">
                             {{ $userBet->status->label() }}
                         </flux:badge>
                     </div>
                     <div class="text-xs text-zinc-500 dark:text-zinc-400 truncate mt-0.5">
-                        {{ $userBet->betOption->title }}
+                        {{ $userBet->betOption?->title ?? '-' }}
                     </div>
                 </div>
 

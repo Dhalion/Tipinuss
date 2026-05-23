@@ -76,7 +76,7 @@
                 @endif
 
                 <div class="max-w-2xl">
-                    @livewire('bets.leaderboard')
+                    @livewire('bets.leaderboard', [])
                 </div>
             </div>
 

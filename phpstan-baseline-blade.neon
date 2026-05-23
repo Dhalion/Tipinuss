@@ -1,0 +1,1711 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Livewire\\Blaze\\BlazeServiceProvider\:\:\{closure\:Livewire\\Blaze\\BlazeServiceProvider\:\:registerViewComposer\(\)\:77\}\(\)\: Argument \#1 \(\$view\) must be of type Illuminate\\View\\View, Bladestan\\ValueObject\\ViewDataCollector given, called in /home/chris/Dokumente/Projekte/Tipinuss/vendor/laravel/framework/src/Illuminate/View/Concerns/ManagesEvents\.php on line 162$#'
+			identifier: bladestan.data
+			count: 1
+			path: app/Livewire/Bets/Leaderboard.php
+
+		-
+			message: '#^Parameter \#1 \$string of function ltrim expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 17
+			path: app/Livewire/Bets/Leaderboard.php
+
+		-
+			message: '#^Parameter \#1 \$string of function trim expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 17
+			path: app/Livewire/Bets/Leaderboard.php
+
+		-
+			message: '#^Binary operation "\*" between mixed and 1000 results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: app/Livewire/Bets/PlacedBetsFeed.php
+
+		-
+			message: '#^Binary operation "\." between mixed and ''/ca29657caefef1bb99…'' results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: app/Livewire/Bets/PlacedBetsFeed.php
+
+		-
+			message: '#^Cannot access an offset on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: app/Livewire/Bets/PlacedBetsFeed.php
+
+		-
+			message: '#^Cannot access offset ''key'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: app/Livewire/Bets/PlacedBetsFeed.php
+
+		-
+			message: '#^Cannot access property \$amount_wagered on mixed\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Livewire/Bets/PlacedBetsFeed.php
+
+		-
+			message: '#^Cannot access property \$betOption on mixed\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Livewire/Bets/PlacedBetsFeed.php
+
+		-
+			message: '#^Cannot access property \$compiledPath on mixed\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Livewire/Bets/PlacedBetsFeed.php
+
+		-
+			message: '#^Cannot access property \$created_at on mixed\.$#'
+			identifier: property.nonObject
+			count: 2
+			path: app/Livewire/Bets/PlacedBetsFeed.php
+
+		-
+			message: '#^Cannot access property \$id on mixed\.$#'
+			identifier: property.nonObject
+			count: 2
+			path: app/Livewire/Bets/PlacedBetsFeed.php
+
+		-
+			message: '#^Cannot access property \$name on mixed\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Livewire/Bets/PlacedBetsFeed.php
+
+		-
+			message: '#^Cannot access property \$status on mixed\.$#'
+			identifier: property.nonObject
+			count: 2
+			path: app/Livewire/Bets/PlacedBetsFeed.php
+
+		-
+			message: '#^Cannot access property \$timestamp on mixed\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Livewire/Bets/PlacedBetsFeed.php
+
+		-
+			message: '#^Cannot access property \$title on mixed\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Livewire/Bets/PlacedBetsFeed.php
+
+		-
+			message: '#^Cannot access property \$user on mixed\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Livewire/Bets/PlacedBetsFeed.php
+
+		-
+			message: '#^Cannot call method badgeColor\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Livewire/Bets/PlacedBetsFeed.php
+
+		-
+			message: '#^Cannot call method diffForHumans\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Livewire/Bets/PlacedBetsFeed.php
+
+		-
+			message: '#^Cannot call method ensureRequired\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Livewire/Bets/PlacedBetsFeed.php
+
+		-
+			message: '#^Cannot call method label\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Livewire/Bets/PlacedBetsFeed.php
+
+		-
+			message: '#^Cannot call method popData\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Livewire/Bets/PlacedBetsFeed.php
+
+		-
+			message: '#^Cannot call method pushData\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Livewire/Bets/PlacedBetsFeed.php
+
+		-
+			message: '#^Cannot call method pushSlots\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Livewire/Bets/PlacedBetsFeed.php
+
+		-
+			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
+			identifier: empty.notAllowed
+			count: 2
+			path: app/Livewire/Bets/PlacedBetsFeed.php
+
+		-
+			message: '#^Foreach overwrites \$userBet with its value variable\.$#'
+			identifier: foreach.valueOverwrite
+			count: 1
+			path: app/Livewire/Bets/PlacedBetsFeed.php
+
+		-
+			message: '#^Function _ca29657caefef1bb99c280bb3a7ea9fb not found\.$#'
+			identifier: function.notFound
+			count: 1
+			path: app/Livewire/Bets/PlacedBetsFeed.php
+
+		-
+			message: '#^Implicit array creation is not allowed \- variable \$__attrsStackca29657caefef1bb99c280bb3a7ea9fb might not exist\.$#'
+			identifier: variable.implicitArray
+			count: 1
+			path: app/Livewire/Bets/PlacedBetsFeed.php
+
+		-
+			message: '#^Implicit array creation is not allowed \- variable \$__slotsStackca29657caefef1bb99c280bb3a7ea9fb might not exist\.$#'
+			identifier: variable.implicitArray
+			count: 1
+			path: app/Livewire/Bets/PlacedBetsFeed.php
+
+		-
+			message: '#^Livewire\\Blaze\\BlazeServiceProvider\:\:\{closure\:Livewire\\Blaze\\BlazeServiceProvider\:\:registerViewComposer\(\)\:77\}\(\)\: Argument \#1 \(\$view\) must be of type Illuminate\\View\\View, Bladestan\\ValueObject\\ViewDataCollector given, called in /home/chris/Dokumente/Projekte/Tipinuss/vendor/laravel/framework/src/Illuminate/View/Concerns/ManagesEvents\.php on line 162$#'
+			identifier: bladestan.data
+			count: 1
+			path: app/Livewire/Bets/PlacedBetsFeed.php
+
+		-
+			message: '#^Parameter \#1 \$array of function array_pop expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Livewire/Bets/PlacedBetsFeed.php
+
+		-
+			message: '#^Parameter \#1 \$num of function number_format expects float, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Livewire/Bets/PlacedBetsFeed.php
+
+		-
+			message: '#^Parameter \#1 \$string of function ltrim expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Livewire/Bets/PlacedBetsFeed.php
+
+		-
+			message: '#^Parameter \#1 \$string of function trim expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Livewire/Bets/PlacedBetsFeed.php
+
+		-
+			message: '#^Parameter \#1 \$value of function e expects BackedEnum\|float\|Illuminate\\Contracts\\Support\\DeferringDisplayableValue\|Illuminate\\Contracts\\Support\\Htmlable\|int\|string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 6
+			path: app/Livewire/Bets/PlacedBetsFeed.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Livewire/Bets/PlacedBetsFeed.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>title" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Livewire/Bets/PlacedBetsFeed.php
+
+		-
+			message: '#^Variable \$__blaze might not be defined\.$#'
+			identifier: variable.undefined
+			count: 6
+			path: app/Livewire/Bets/PlacedBetsFeed.php
+
+		-
+			message: '#^Variable \$this in isset\(\) always exists and is not nullable\.$#'
+			identifier: isset.variable
+			count: 1
+			path: app/Livewire/Bets/PlacedBetsFeed.php
+
+		-
+			message: '#^Binary operation "\." between mixed and ''/b95e17b693fb03d8fe…'' results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: app/Livewire/Bets/QuickBetForm.php
+
+		-
+			message: '#^Cannot access property \$compiledPath on mixed\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Livewire/Bets/QuickBetForm.php
+
+		-
+			message: '#^Cannot call method ensureRequired\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Livewire/Bets/QuickBetForm.php
+
+		-
+			message: '#^Cannot call method popData\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Livewire/Bets/QuickBetForm.php
+
+		-
+			message: '#^Cannot call method pushData\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Livewire/Bets/QuickBetForm.php
+
+		-
+			message: '#^Function _b95e17b693fb03d8fe9d5f88b0c28f93 not found\.$#'
+			identifier: function.notFound
+			count: 1
+			path: app/Livewire/Bets/QuickBetForm.php
+
+		-
+			message: '#^Livewire\\Blaze\\BlazeServiceProvider\:\:\{closure\:Livewire\\Blaze\\BlazeServiceProvider\:\:registerViewComposer\(\)\:77\}\(\)\: Argument \#1 \(\$view\) must be of type Illuminate\\View\\View, Bladestan\\ValueObject\\ViewDataCollector given, called in /home/chris/Dokumente/Projekte/Tipinuss/vendor/laravel/framework/src/Illuminate/View/Concerns/ManagesEvents\.php on line 162$#'
+			identifier: bladestan.data
+			count: 1
+			path: app/Livewire/Bets/QuickBetForm.php
+
+		-
+			message: '#^Parameter \#1 \$string of function ltrim expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 3
+			path: app/Livewire/Bets/QuickBetForm.php
+
+		-
+			message: '#^Parameter \#1 \$string of function trim expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 3
+			path: app/Livewire/Bets/QuickBetForm.php
+
+		-
+			message: '#^Variable \$__blaze might not be defined\.$#'
+			identifier: variable.undefined
+			count: 5
+			path: app/Livewire/Bets/QuickBetForm.php
+
+		-
+			message: '#^Variable \$this in isset\(\) always exists and is not nullable\.$#'
+			identifier: isset.variable
+			count: 1
+			path: app/Livewire/Bets/QuickBetForm.php
+
+		-
+			message: '#^Binary operation "\." between mixed and ''/ca29657caefef1bb99…'' results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 2
+			path: app/Livewire/Page/Account.php
+
+		-
+			message: '#^Cannot access an offset on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 4
+			path: app/Livewire/Page/Account.php
+
+		-
+			message: '#^Cannot access offset ''key'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: app/Livewire/Page/Account.php
+
+		-
+			message: '#^Cannot access property \$amount on mixed\.$#'
+			identifier: property.nonObject
+			count: 3
+			path: app/Livewire/Page/Account.php
+
+		-
+			message: '#^Cannot access property \$badgeColor on mixed\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Livewire/Page/Account.php
+
+		-
+			message: '#^Cannot access property \$badgeLabel on mixed\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Livewire/Page/Account.php
+
+		-
+			message: '#^Cannot access property \$compiledPath on mixed\.$#'
+			identifier: property.nonObject
+			count: 2
+			path: app/Livewire/Page/Account.php
+
+		-
+			message: '#^Cannot access property \$createdAt on mixed\.$#'
+			identifier: property.nonObject
+			count: 2
+			path: app/Livewire/Page/Account.php
+
+		-
+			message: '#^Cannot access property \$description on mixed\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Livewire/Page/Account.php
+
+		-
+			message: '#^Cannot access property \$id on mixed\.$#'
+			identifier: property.nonObject
+			count: 2
+			path: app/Livewire/Page/Account.php
+
+		-
+			message: '#^Cannot call method ensureRequired\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: app/Livewire/Page/Account.php
+
+		-
+			message: '#^Cannot call method popData\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: app/Livewire/Page/Account.php
+
+		-
+			message: '#^Cannot call method pushData\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: app/Livewire/Page/Account.php
+
+		-
+			message: '#^Cannot call method pushSlots\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: app/Livewire/Page/Account.php
+
+		-
+			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
+			identifier: empty.notAllowed
+			count: 4
+			path: app/Livewire/Page/Account.php
+
+		-
+			message: '#^Dynamic call to static method Illuminate\\Contracts\\Auth\\Guard\:\:user\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 2
+			path: app/Livewire/Page/Account.php
+
+		-
+			message: '#^Foreach overwrites \$entry with its value variable\.$#'
+			identifier: foreach.valueOverwrite
+			count: 2
+			path: app/Livewire/Page/Account.php
+
+		-
+			message: '#^Function _ca29657caefef1bb99c280bb3a7ea9fb not found\.$#'
+			identifier: function.notFound
+			count: 2
+			path: app/Livewire/Page/Account.php
+
+		-
+			message: '#^Implicit array creation is not allowed \- variable \$__attrsStackca29657caefef1bb99c280bb3a7ea9fb might not exist\.$#'
+			identifier: variable.implicitArray
+			count: 2
+			path: app/Livewire/Page/Account.php
+
+		-
+			message: '#^Implicit array creation is not allowed \- variable \$__slotsStackca29657caefef1bb99c280bb3a7ea9fb might not exist\.$#'
+			identifier: variable.implicitArray
+			count: 2
+			path: app/Livewire/Page/Account.php
+
+		-
+			message: '#^Livewire\\Blaze\\BlazeServiceProvider\:\:\{closure\:Livewire\\Blaze\\BlazeServiceProvider\:\:registerViewComposer\(\)\:77\}\(\)\: Argument \#1 \(\$view\) must be of type Illuminate\\View\\View, Bladestan\\ValueObject\\ViewDataCollector given, called in /home/chris/Dokumente/Projekte/Tipinuss/vendor/laravel/framework/src/Illuminate/View/Concerns/ManagesEvents\.php on line 162$#'
+			identifier: bladestan.data
+			count: 2
+			path: app/Livewire/Page/Account.php
+
+		-
+			message: '#^Only booleans are allowed in a ternary operator condition, string\|null given\.$#'
+			identifier: ternary.condNotBoolean
+			count: 1
+			path: app/Livewire/Page/Account.php
+
+		-
+			message: '#^Parameter \#1 \$array of function array_pop expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 4
+			path: app/Livewire/Page/Account.php
+
+		-
+			message: '#^Parameter \#1 \$num of function number_format expects float, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Livewire/Page/Account.php
+
+		-
+			message: '#^Parameter \#1 \$string of function ltrim expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 38
+			path: app/Livewire/Page/Account.php
+
+		-
+			message: '#^Parameter \#1 \$string of function trim expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 24
+			path: app/Livewire/Page/Account.php
+
+		-
+			message: '#^Parameter \#1 \$time of static method Carbon\\Carbon\:\:parse\(\) expects Carbon\\Month\|Carbon\\WeekDay\|DateTimeInterface\|float\|int\|string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Livewire/Page/Account.php
+
+		-
+			message: '#^Parameter \#1 \$value of function e expects BackedEnum\|float\|Illuminate\\Contracts\\Support\\DeferringDisplayableValue\|Illuminate\\Contracts\\Support\\Htmlable\|int\|string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 7
+			path: app/Livewire/Page/Account.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>email" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Livewire/Page/Account.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Livewire/Page/Account.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>soapnuts" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Livewire/Page/Account.php
+
+		-
+			message: '#^Variable \$__blaze might not be defined\.$#'
+			identifier: variable.undefined
+			count: 12
+			path: app/Livewire/Page/Account.php
+
+		-
+			message: '#^Variable \$lostBetsCount might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: app/Livewire/Page/Account.php
+
+		-
+			message: '#^Variable \$this in isset\(\) always exists and is not nullable\.$#'
+			identifier: isset.variable
+			count: 2
+			path: app/Livewire/Page/Account.php
+
+		-
+			message: '#^Variable \$totalBetsCount might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: app/Livewire/Page/Account.php
+
+		-
+			message: '#^Variable \$wonBetsCount might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: app/Livewire/Page/Account.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
+			message: '#^Binary operation "\." between mixed and ''/b95e17b693fb03d8fe…'' results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 2
+			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
+			message: '#^Binary operation "\." between mixed and ''/f671db50746a927922…'' results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
+			message: '#^Cannot access an offset on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
+			message: '#^Cannot access property \$compiledPath on mixed\.$#'
+			identifier: property.nonObject
+			count: 3
+			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
+			message: '#^Cannot call method ensureRequired\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 3
+			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
+			message: '#^Cannot call method popData\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 3
+			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
+			message: '#^Cannot call method pushData\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 3
+			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
+			message: '#^Cannot call method pushSlots\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
+			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
+			identifier: empty.notAllowed
+			count: 2
+			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
+			message: '#^Function _b95e17b693fb03d8fe9d5f88b0c28f93 not found\.$#'
+			identifier: function.notFound
+			count: 2
+			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
+			message: '#^Function _f671db50746a927922ac89406f5aa095 not found\.$#'
+			identifier: function.notFound
+			count: 1
+			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
+			message: '#^Implicit array creation is not allowed \- variable \$__attrsStackf671db50746a927922ac89406f5aa095 might not exist\.$#'
+			identifier: variable.implicitArray
+			count: 1
+			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
+			message: '#^Implicit array creation is not allowed \- variable \$__slotsStackf671db50746a927922ac89406f5aa095 might not exist\.$#'
+			identifier: variable.implicitArray
+			count: 1
+			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
+			message: '#^Livewire\\Blaze\\BlazeServiceProvider\:\:\{closure\:Livewire\\Blaze\\BlazeServiceProvider\:\:registerViewComposer\(\)\:77\}\(\)\: Argument \#1 \(\$view\) must be of type Illuminate\\View\\View, Bladestan\\ValueObject\\ViewDataCollector given, called in /home/chris/Dokumente/Projekte/Tipinuss/vendor/laravel/framework/src/Illuminate/View/Concerns/ManagesEvents\.php on line 162$#'
+			identifier: bladestan.data
+			count: 1
+			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
+			message: '#^Parameter \#1 \$array of function array_pop expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
+			message: '#^Parameter \#1 \$string of function ltrim expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 33
+			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
+			message: '#^Parameter \#1 \$string of function trim expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 33
+			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
+			message: '#^Parameter \#1 \$value of function e expects BackedEnum\|float\|Illuminate\\Contracts\\Support\\DeferringDisplayableValue\|Illuminate\\Contracts\\Support\\Htmlable\|int\|string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
+			message: '#^Variable \$__blaze might not be defined\.$#'
+			identifier: variable.undefined
+			count: 16
+			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
+			message: '#^Variable \$this in isset\(\) always exists and is not nullable\.$#'
+			identifier: isset.variable
+			count: 3
+			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Livewire/Page/Admin/OrganisationManagement.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Livewire/Page/Admin/OrganisationManagement.php
+
+		-
+			message: '#^Binary operation "\." between mixed and ''/b95e17b693fb03d8fe…'' results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: app/Livewire/Page/Admin/OrganisationManagement.php
+
+		-
+			message: '#^Cannot access property \$compiledPath on mixed\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Livewire/Page/Admin/OrganisationManagement.php
+
+		-
+			message: '#^Cannot call method ensureRequired\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Livewire/Page/Admin/OrganisationManagement.php
+
+		-
+			message: '#^Cannot call method popData\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Livewire/Page/Admin/OrganisationManagement.php
+
+		-
+			message: '#^Cannot call method pushData\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Livewire/Page/Admin/OrganisationManagement.php
+
+		-
+			message: '#^Function _b95e17b693fb03d8fe9d5f88b0c28f93 not found\.$#'
+			identifier: function.notFound
+			count: 1
+			path: app/Livewire/Page/Admin/OrganisationManagement.php
+
+		-
+			message: '#^Livewire\\Blaze\\BlazeServiceProvider\:\:\{closure\:Livewire\\Blaze\\BlazeServiceProvider\:\:registerViewComposer\(\)\:77\}\(\)\: Argument \#1 \(\$view\) must be of type Illuminate\\View\\View, Bladestan\\ValueObject\\ViewDataCollector given, called in /home/chris/Dokumente/Projekte/Tipinuss/vendor/laravel/framework/src/Illuminate/View/Concerns/ManagesEvents\.php on line 162$#'
+			identifier: bladestan.data
+			count: 1
+			path: app/Livewire/Page/Admin/OrganisationManagement.php
+
+		-
+			message: '#^Only booleans are allowed in an if condition, mixed given\.$#'
+			identifier: if.condNotBoolean
+			count: 1
+			path: app/Livewire/Page/Admin/OrganisationManagement.php
+
+		-
+			message: '#^Parameter \#1 \$string of function ltrim expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 17
+			path: app/Livewire/Page/Admin/OrganisationManagement.php
+
+		-
+			message: '#^Parameter \#1 \$string of function trim expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 17
+			path: app/Livewire/Page/Admin/OrganisationManagement.php
+
+		-
+			message: '#^Parameter \#1 \$value of function e expects BackedEnum\|float\|Illuminate\\Contracts\\Support\\DeferringDisplayableValue\|Illuminate\\Contracts\\Support\\Htmlable\|int\|string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 4
+			path: app/Livewire/Page/Admin/OrganisationManagement.php
+
+		-
+			message: '#^Variable \$__blaze might not be defined\.$#'
+			identifier: variable.undefined
+			count: 5
+			path: app/Livewire/Page/Admin/OrganisationManagement.php
+
+		-
+			message: '#^Variable \$this in isset\(\) always exists and is not nullable\.$#'
+			identifier: isset.variable
+			count: 1
+			path: app/Livewire/Page/Admin/OrganisationManagement.php
+
+		-
+			message: '#^Binary operation "\." between mixed and ''/b95e17b693fb03d8fe…'' results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: app/Livewire/Page/Admin/UserManagement.php
+
+		-
+			message: '#^Binary operation "\." between mixed and ''/ca29657caefef1bb99…'' results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: app/Livewire/Page/Admin/UserManagement.php
+
+		-
+			message: '#^Cannot access an offset on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: app/Livewire/Page/Admin/UserManagement.php
+
+		-
+			message: '#^Cannot access property \$compiledPath on mixed\.$#'
+			identifier: property.nonObject
+			count: 2
+			path: app/Livewire/Page/Admin/UserManagement.php
+
+		-
+			message: '#^Cannot call method ensureRequired\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: app/Livewire/Page/Admin/UserManagement.php
+
+		-
+			message: '#^Cannot call method popData\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: app/Livewire/Page/Admin/UserManagement.php
+
+		-
+			message: '#^Cannot call method pushData\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: app/Livewire/Page/Admin/UserManagement.php
+
+		-
+			message: '#^Cannot call method pushSlots\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Livewire/Page/Admin/UserManagement.php
+
+		-
+			message: '#^Casting to float something that''s already float\.$#'
+			identifier: cast.useless
+			count: 1
+			path: app/Livewire/Page/Admin/UserManagement.php
+
+		-
+			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
+			identifier: empty.notAllowed
+			count: 2
+			path: app/Livewire/Page/Admin/UserManagement.php
+
+		-
+			message: '#^Function _b95e17b693fb03d8fe9d5f88b0c28f93 not found\.$#'
+			identifier: function.notFound
+			count: 1
+			path: app/Livewire/Page/Admin/UserManagement.php
+
+		-
+			message: '#^Function _ca29657caefef1bb99c280bb3a7ea9fb not found\.$#'
+			identifier: function.notFound
+			count: 1
+			path: app/Livewire/Page/Admin/UserManagement.php
+
+		-
+			message: '#^Implicit array creation is not allowed \- variable \$__attrsStackca29657caefef1bb99c280bb3a7ea9fb might not exist\.$#'
+			identifier: variable.implicitArray
+			count: 1
+			path: app/Livewire/Page/Admin/UserManagement.php
+
+		-
+			message: '#^Implicit array creation is not allowed \- variable \$__slotsStackca29657caefef1bb99c280bb3a7ea9fb might not exist\.$#'
+			identifier: variable.implicitArray
+			count: 1
+			path: app/Livewire/Page/Admin/UserManagement.php
+
+		-
+			message: '#^Livewire\\Blaze\\BlazeServiceProvider\:\:\{closure\:Livewire\\Blaze\\BlazeServiceProvider\:\:registerViewComposer\(\)\:77\}\(\)\: Argument \#1 \(\$view\) must be of type Illuminate\\View\\View, Bladestan\\ValueObject\\ViewDataCollector given, called in /home/chris/Dokumente/Projekte/Tipinuss/vendor/laravel/framework/src/Illuminate/View/Concerns/ManagesEvents\.php on line 162$#'
+			identifier: bladestan.data
+			count: 1
+			path: app/Livewire/Page/Admin/UserManagement.php
+
+		-
+			message: '#^Parameter \#1 \$array of function array_pop expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Livewire/Page/Admin/UserManagement.php
+
+		-
+			message: '#^Parameter \#1 \$string of function ltrim expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 38
+			path: app/Livewire/Page/Admin/UserManagement.php
+
+		-
+			message: '#^Parameter \#1 \$string of function trim expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 36
+			path: app/Livewire/Page/Admin/UserManagement.php
+
+		-
+			message: '#^Parameter \#1 \$value of function e expects BackedEnum\|float\|Illuminate\\Contracts\\Support\\DeferringDisplayableValue\|Illuminate\\Contracts\\Support\\Htmlable\|int\|string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Livewire/Page/Admin/UserManagement.php
+
+		-
+			message: '#^Variable \$__blaze might not be defined\.$#'
+			identifier: variable.undefined
+			count: 11
+			path: app/Livewire/Page/Admin/UserManagement.php
+
+		-
+			message: '#^Variable \$this in isset\(\) always exists and is not nullable\.$#'
+			identifier: isset.variable
+			count: 2
+			path: app/Livewire/Page/Admin/UserManagement.php
+
+		-
+			message: '#^Livewire\\Blaze\\BlazeServiceProvider\:\:\{closure\:Livewire\\Blaze\\BlazeServiceProvider\:\:registerViewComposer\(\)\:77\}\(\)\: Argument \#1 \(\$view\) must be of type Illuminate\\View\\View, Bladestan\\ValueObject\\ViewDataCollector given, called in /home/chris/Dokumente/Projekte/Tipinuss/vendor/laravel/framework/src/Illuminate/View/Concerns/ManagesEvents\.php on line 162$#'
+			identifier: bladestan.data
+			count: 1
+			path: app/Livewire/Page/Auth/PendingApproval.php
+
+		-
+			message: '#^Parameter \#1 \$string of function ltrim expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 3
+			path: app/Livewire/Page/Auth/PendingApproval.php
+
+		-
+			message: '#^Parameter \#1 \$string of function trim expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Livewire/Page/Auth/PendingApproval.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Binary operation "\." between mixed and ''/ca29657caefef1bb99…'' results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Cannot access an offset on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Cannot access property \$compiledPath on mixed\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Cannot call method ensureRequired\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Cannot call method popData\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Cannot call method pushData\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Cannot call method pushSlots\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
+			identifier: empty.notAllowed
+			count: 2
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Dynamic call to static method Illuminate\\Contracts\\Auth\\Guard\:\:check\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Dynamic call to static method Illuminate\\Contracts\\Auth\\Guard\:\:id\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Dynamic call to static method Illuminate\\Contracts\\Auth\\Guard\:\:user\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 3
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Foreach overwrites \$option with its value variable\.$#'
+			identifier: foreach.valueOverwrite
+			count: 2
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Function _ca29657caefef1bb99c280bb3a7ea9fb not found\.$#'
+			identifier: function.notFound
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Implicit array creation is not allowed \- variable \$__attrsStackca29657caefef1bb99c280bb3a7ea9fb might not exist\.$#'
+			identifier: variable.implicitArray
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Implicit array creation is not allowed \- variable \$__slotsStackca29657caefef1bb99c280bb3a7ea9fb might not exist\.$#'
+			identifier: variable.implicitArray
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Livewire\\Blaze\\BlazeServiceProvider\:\:\{closure\:Livewire\\Blaze\\BlazeServiceProvider\:\:registerViewComposer\(\)\:77\}\(\)\: Argument \#1 \(\$view\) must be of type Illuminate\\View\\View, Bladestan\\ValueObject\\ViewDataCollector given, called in /home/chris/Dokumente/Projekte/Tipinuss/vendor/laravel/framework/src/Illuminate/View/Concerns/ManagesEvents\.php on line 162$#'
+			identifier: bladestan.data
+			count: 3
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Only booleans are allowed in an if condition, bool\|null given\.$#'
+			identifier: if.condNotBoolean
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Only booleans are allowed in \|\|, bool\|null given on the right side\.$#'
+			identifier: booleanOr.rightNotBoolean
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Parameter \#1 \$array of function array_pop expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Parameter \#1 \$string of function ltrim expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 6
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Parameter \#1 \$string of function trim expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Parameter \#1 \$value of function e expects BackedEnum\|float\|Illuminate\\Contracts\\Support\\DeferringDisplayableValue\|Illuminate\\Contracts\\Support\\Htmlable\|int\|string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>soapnuts" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Variable \$__blaze might not be defined\.$#'
+			identifier: variable.undefined
+			count: 6
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Livewire/Page/Bets/BetsListing.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$odds\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Livewire/Page/Bets/BetsListing.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$title\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Livewire/Page/Bets/BetsListing.php
+
+		-
+			message: '#^Binary operation "\." between mixed and ''/ca29657caefef1bb99…'' results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: app/Livewire/Page/Bets/BetsListing.php
+
+		-
+			message: '#^Cannot access property \$compiledPath on mixed\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Livewire/Page/Bets/BetsListing.php
+
+		-
+			message: '#^Cannot call method ensureRequired\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Livewire/Page/Bets/BetsListing.php
+
+		-
+			message: '#^Cannot call method popData\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Livewire/Page/Bets/BetsListing.php
+
+		-
+			message: '#^Cannot call method pushData\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Livewire/Page/Bets/BetsListing.php
+
+		-
+			message: '#^Cannot call method pushSlots\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Livewire/Page/Bets/BetsListing.php
+
+		-
+			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
+			identifier: empty.notAllowed
+			count: 2
+			path: app/Livewire/Page/Bets/BetsListing.php
+
+		-
+			message: '#^Function _ca29657caefef1bb99c280bb3a7ea9fb not found\.$#'
+			identifier: function.notFound
+			count: 1
+			path: app/Livewire/Page/Bets/BetsListing.php
+
+		-
+			message: '#^Implicit array creation is not allowed \- variable \$__attrsStackca29657caefef1bb99c280bb3a7ea9fb does not exist\.$#'
+			identifier: variable.implicitArray
+			count: 1
+			path: app/Livewire/Page/Bets/BetsListing.php
+
+		-
+			message: '#^Implicit array creation is not allowed \- variable \$__slotsStackca29657caefef1bb99c280bb3a7ea9fb does not exist\.$#'
+			identifier: variable.implicitArray
+			count: 1
+			path: app/Livewire/Page/Bets/BetsListing.php
+
+		-
+			message: '#^Livewire\\Blaze\\BlazeServiceProvider\:\:\{closure\:Livewire\\Blaze\\BlazeServiceProvider\:\:registerViewComposer\(\)\:77\}\(\)\: Argument \#1 \(\$view\) must be of type Illuminate\\View\\View, Bladestan\\ValueObject\\ViewDataCollector given, called in /home/chris/Dokumente/Projekte/Tipinuss/vendor/laravel/framework/src/Illuminate/View/Concerns/ManagesEvents\.php on line 162$#'
+			identifier: bladestan.data
+			count: 2
+			path: app/Livewire/Page/Bets/BetsListing.php
+
+		-
+			message: '#^Parameter \#1 \$array of function array_pop expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Livewire/Page/Bets/BetsListing.php
+
+		-
+			message: '#^Parameter \#1 \$num of function number_format expects float, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Livewire/Page/Bets/BetsListing.php
+
+		-
+			message: '#^Parameter \#1 \$string of function ltrim expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 5
+			path: app/Livewire/Page/Bets/BetsListing.php
+
+		-
+			message: '#^Parameter \#1 \$string of function trim expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 5
+			path: app/Livewire/Page/Bets/BetsListing.php
+
+		-
+			message: '#^Parameter \#1 \$value of function e expects BackedEnum\|float\|Illuminate\\Contracts\\Support\\DeferringDisplayableValue\|Illuminate\\Contracts\\Support\\Htmlable\|int\|string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Livewire/Page/Bets/BetsListing.php
+
+		-
+			message: '#^Undefined variable\: \$__attrsStackca29657caefef1bb99c280bb3a7ea9fb$#'
+			identifier: variable.undefined
+			count: 1
+			path: app/Livewire/Page/Bets/BetsListing.php
+
+		-
+			message: '#^Undefined variable\: \$__attrsca29657caefef1bb99c280bb3a7ea9fb$#'
+			identifier: variable.undefined
+			count: 1
+			path: app/Livewire/Page/Bets/BetsListing.php
+
+		-
+			message: '#^Undefined variable\: \$__blaze$#'
+			identifier: variable.undefined
+			count: 6
+			path: app/Livewire/Page/Bets/BetsListing.php
+
+		-
+			message: '#^Undefined variable\: \$__slotsStackca29657caefef1bb99c280bb3a7ea9fb$#'
+			identifier: variable.undefined
+			count: 1
+			path: app/Livewire/Page/Bets/BetsListing.php
+
+		-
+			message: '#^Undefined variable\: \$__slotsca29657caefef1bb99c280bb3a7ea9fb$#'
+			identifier: variable.undefined
+			count: 1
+			path: app/Livewire/Page/Bets/BetsListing.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Livewire/Page/Bets/BetsListing.php
+
+		-
+			message: '#^Variable \$__attrsStackca29657caefef1bb99c280bb3a7ea9fb in empty\(\) is never defined\.$#'
+			identifier: empty.variable
+			count: 1
+			path: app/Livewire/Page/Bets/BetsListing.php
+
+		-
+			message: '#^Variable \$__attrsca29657caefef1bb99c280bb3a7ea9fb in isset\(\) is never defined\.$#'
+			identifier: isset.variable
+			count: 1
+			path: app/Livewire/Page/Bets/BetsListing.php
+
+		-
+			message: '#^Variable \$__slotsStackca29657caefef1bb99c280bb3a7ea9fb in empty\(\) is never defined\.$#'
+			identifier: empty.variable
+			count: 1
+			path: app/Livewire/Page/Bets/BetsListing.php
+
+		-
+			message: '#^Variable \$__slotsca29657caefef1bb99c280bb3a7ea9fb in isset\(\) is never defined\.$#'
+			identifier: isset.variable
+			count: 1
+			path: app/Livewire/Page/Bets/BetsListing.php
+
+		-
+			message: '#^Variable \$__this on left side of \?\? is never defined\.$#'
+			identifier: nullCoalesce.variable
+			count: 1
+			path: app/Livewire/Page/Bets/BetsListing.php
+
+		-
+			message: '#^Variable \$option in PHPDoc tag @var does not exist\.$#'
+			identifier: varTag.variableNotFound
+			count: 1
+			path: app/Livewire/Page/Bets/BetsListing.php
+
+		-
+			message: '#^Variable \$this in isset\(\) always exists and is not nullable\.$#'
+			identifier: isset.variable
+			count: 1
+			path: app/Livewire/Page/Bets/BetsListing.php
+
+		-
+			message: '#^Binary operation "\." between mixed and ''/437fa112dc117cd5bd…'' results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: app/Livewire/Page/Bets/Create.php
+
+		-
+			message: '#^Binary operation "\." between mixed and ''/a7020cc7759d41582a…'' results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: app/Livewire/Page/Bets/Create.php
+
+		-
+			message: '#^Binary operation "\." between mixed and ''/b95e17b693fb03d8fe…'' results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 4
+			path: app/Livewire/Page/Bets/Create.php
+
+		-
+			message: '#^Cannot access an offset on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: app/Livewire/Page/Bets/Create.php
+
+		-
+			message: '#^Cannot access property \$compiledPath on mixed\.$#'
+			identifier: property.nonObject
+			count: 6
+			path: app/Livewire/Page/Bets/Create.php
+
+		-
+			message: '#^Cannot call method ensureRequired\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 6
+			path: app/Livewire/Page/Bets/Create.php
+
+		-
+			message: '#^Cannot call method popData\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 6
+			path: app/Livewire/Page/Bets/Create.php
+
+		-
+			message: '#^Cannot call method pushData\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 6
+			path: app/Livewire/Page/Bets/Create.php
+
+		-
+			message: '#^Cannot call method pushSlots\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Livewire/Page/Bets/Create.php
+
+		-
+			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
+			identifier: empty.notAllowed
+			count: 2
+			path: app/Livewire/Page/Bets/Create.php
+
+		-
+			message: '#^Function _437fa112dc117cd5bda0be2fc8266dcc not found\.$#'
+			identifier: function.notFound
+			count: 1
+			path: app/Livewire/Page/Bets/Create.php
+
+		-
+			message: '#^Function _a7020cc7759d41582a358f1a88087e2a not found\.$#'
+			identifier: function.notFound
+			count: 1
+			path: app/Livewire/Page/Bets/Create.php
+
+		-
+			message: '#^Function _b95e17b693fb03d8fe9d5f88b0c28f93 not found\.$#'
+			identifier: function.notFound
+			count: 4
+			path: app/Livewire/Page/Bets/Create.php
+
+		-
+			message: '#^Implicit array creation is not allowed \- variable \$__attrsStacka7020cc7759d41582a358f1a88087e2a might not exist\.$#'
+			identifier: variable.implicitArray
+			count: 1
+			path: app/Livewire/Page/Bets/Create.php
+
+		-
+			message: '#^Implicit array creation is not allowed \- variable \$__slotsStacka7020cc7759d41582a358f1a88087e2a might not exist\.$#'
+			identifier: variable.implicitArray
+			count: 1
+			path: app/Livewire/Page/Bets/Create.php
+
+		-
+			message: '#^Livewire\\Blaze\\BlazeServiceProvider\:\:\{closure\:Livewire\\Blaze\\BlazeServiceProvider\:\:registerViewComposer\(\)\:77\}\(\)\: Argument \#1 \(\$view\) must be of type Illuminate\\View\\View, Bladestan\\ValueObject\\ViewDataCollector given, called in /home/chris/Dokumente/Projekte/Tipinuss/vendor/laravel/framework/src/Illuminate/View/Concerns/ManagesEvents\.php on line 162$#'
+			identifier: bladestan.data
+			count: 2
+			path: app/Livewire/Page/Bets/Create.php
+
+		-
+			message: '#^Parameter \#1 \$array of function array_pop expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Livewire/Page/Bets/Create.php
+
+		-
+			message: '#^Parameter \#1 \$string of function ltrim expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 7
+			path: app/Livewire/Page/Bets/Create.php
+
+		-
+			message: '#^Parameter \#1 \$string of function trim expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 6
+			path: app/Livewire/Page/Bets/Create.php
+
+		-
+			message: '#^Undefined variable\: \$__blaze$#'
+			identifier: variable.undefined
+			count: 10
+			path: app/Livewire/Page/Bets/Create.php
+
+		-
+			message: '#^Variable \$__blaze might not be defined\.$#'
+			identifier: variable.undefined
+			count: 21
+			path: app/Livewire/Page/Bets/Create.php
+
+		-
+			message: '#^Variable \$__this on left side of \?\? is never defined\.$#'
+			identifier: nullCoalesce.variable
+			count: 2
+			path: app/Livewire/Page/Bets/Create.php
+
+		-
+			message: '#^Variable \$this in isset\(\) always exists and is not nullable\.$#'
+			identifier: isset.variable
+			count: 6
+			path: app/Livewire/Page/Bets/Create.php
+
+		-
+			message: '#^Binary operation "\." between mixed and ''/b95e17b693fb03d8fe…'' results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 2
+			path: app/Livewire/Page/Login.php
+
+		-
+			message: '#^Cannot access property \$compiledPath on mixed\.$#'
+			identifier: property.nonObject
+			count: 2
+			path: app/Livewire/Page/Login.php
+
+		-
+			message: '#^Cannot call method ensureRequired\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: app/Livewire/Page/Login.php
+
+		-
+			message: '#^Cannot call method popData\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: app/Livewire/Page/Login.php
+
+		-
+			message: '#^Cannot call method pushData\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: app/Livewire/Page/Login.php
+
+		-
+			message: '#^Function _b95e17b693fb03d8fe9d5f88b0c28f93 not found\.$#'
+			identifier: function.notFound
+			count: 2
+			path: app/Livewire/Page/Login.php
+
+		-
+			message: '#^Livewire\\Blaze\\BlazeServiceProvider\:\:\{closure\:Livewire\\Blaze\\BlazeServiceProvider\:\:registerViewComposer\(\)\:77\}\(\)\: Argument \#1 \(\$view\) must be of type Illuminate\\View\\View, Bladestan\\ValueObject\\ViewDataCollector given, called in /home/chris/Dokumente/Projekte/Tipinuss/vendor/laravel/framework/src/Illuminate/View/Concerns/ManagesEvents\.php on line 162$#'
+			identifier: bladestan.data
+			count: 1
+			path: app/Livewire/Page/Login.php
+
+		-
+			message: '#^Parameter \#1 \$string of function ltrim expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Livewire/Page/Login.php
+
+		-
+			message: '#^Parameter \#1 \$string of function trim expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Livewire/Page/Login.php
+
+		-
+			message: '#^Variable \$__blaze might not be defined\.$#'
+			identifier: variable.undefined
+			count: 10
+			path: app/Livewire/Page/Login.php
+
+		-
+			message: '#^Variable \$this in isset\(\) always exists and is not nullable\.$#'
+			identifier: isset.variable
+			count: 2
+			path: app/Livewire/Page/Login.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Livewire/Page/MainPage.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$odds\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Livewire/Page/MainPage.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$title\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Livewire/Page/MainPage.php
+
+		-
+			message: '#^Binary operation "\." between mixed and ''/ca29657caefef1bb99…'' results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: app/Livewire/Page/MainPage.php
+
+		-
+			message: '#^Cannot access property \$compiledPath on mixed\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Livewire/Page/MainPage.php
+
+		-
+			message: '#^Cannot call method ensureRequired\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Livewire/Page/MainPage.php
+
+		-
+			message: '#^Cannot call method popData\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Livewire/Page/MainPage.php
+
+		-
+			message: '#^Cannot call method pushData\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Livewire/Page/MainPage.php
+
+		-
+			message: '#^Cannot call method pushSlots\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Livewire/Page/MainPage.php
+
+		-
+			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
+			identifier: empty.notAllowed
+			count: 2
+			path: app/Livewire/Page/MainPage.php
+
+		-
+			message: '#^Function _ca29657caefef1bb99c280bb3a7ea9fb not found\.$#'
+			identifier: function.notFound
+			count: 1
+			path: app/Livewire/Page/MainPage.php
+
+		-
+			message: '#^Implicit array creation is not allowed \- variable \$__attrsStackca29657caefef1bb99c280bb3a7ea9fb does not exist\.$#'
+			identifier: variable.implicitArray
+			count: 1
+			path: app/Livewire/Page/MainPage.php
+
+		-
+			message: '#^Implicit array creation is not allowed \- variable \$__slotsStackca29657caefef1bb99c280bb3a7ea9fb does not exist\.$#'
+			identifier: variable.implicitArray
+			count: 1
+			path: app/Livewire/Page/MainPage.php
+
+		-
+			message: '#^Livewire\\Blaze\\BlazeServiceProvider\:\:\{closure\:Livewire\\Blaze\\BlazeServiceProvider\:\:registerViewComposer\(\)\:77\}\(\)\: Argument \#1 \(\$view\) must be of type Illuminate\\View\\View, Bladestan\\ValueObject\\ViewDataCollector given, called in /home/chris/Dokumente/Projekte/Tipinuss/vendor/laravel/framework/src/Illuminate/View/Concerns/ManagesEvents\.php on line 162$#'
+			identifier: bladestan.data
+			count: 2
+			path: app/Livewire/Page/MainPage.php
+
+		-
+			message: '#^Parameter \#1 \$array of function array_pop expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Livewire/Page/MainPage.php
+
+		-
+			message: '#^Parameter \#1 \$num of function number_format expects float, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Livewire/Page/MainPage.php
+
+		-
+			message: '#^Parameter \#1 \$string of function ltrim expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 3
+			path: app/Livewire/Page/MainPage.php
+
+		-
+			message: '#^Parameter \#1 \$string of function trim expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 3
+			path: app/Livewire/Page/MainPage.php
+
+		-
+			message: '#^Parameter \#1 \$value of function e expects BackedEnum\|float\|Illuminate\\Contracts\\Support\\DeferringDisplayableValue\|Illuminate\\Contracts\\Support\\Htmlable\|int\|string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Livewire/Page/MainPage.php
+
+		-
+			message: '#^Undefined variable\: \$__attrsStackca29657caefef1bb99c280bb3a7ea9fb$#'
+			identifier: variable.undefined
+			count: 1
+			path: app/Livewire/Page/MainPage.php
+
+		-
+			message: '#^Undefined variable\: \$__attrsca29657caefef1bb99c280bb3a7ea9fb$#'
+			identifier: variable.undefined
+			count: 1
+			path: app/Livewire/Page/MainPage.php
+
+		-
+			message: '#^Undefined variable\: \$__blaze$#'
+			identifier: variable.undefined
+			count: 6
+			path: app/Livewire/Page/MainPage.php
+
+		-
+			message: '#^Undefined variable\: \$__slotsStackca29657caefef1bb99c280bb3a7ea9fb$#'
+			identifier: variable.undefined
+			count: 1
+			path: app/Livewire/Page/MainPage.php
+
+		-
+			message: '#^Undefined variable\: \$__slotsca29657caefef1bb99c280bb3a7ea9fb$#'
+			identifier: variable.undefined
+			count: 1
+			path: app/Livewire/Page/MainPage.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Livewire/Page/MainPage.php
+
+		-
+			message: '#^Variable \$__attrsStackca29657caefef1bb99c280bb3a7ea9fb in empty\(\) is never defined\.$#'
+			identifier: empty.variable
+			count: 1
+			path: app/Livewire/Page/MainPage.php
+
+		-
+			message: '#^Variable \$__attrsca29657caefef1bb99c280bb3a7ea9fb in isset\(\) is never defined\.$#'
+			identifier: isset.variable
+			count: 1
+			path: app/Livewire/Page/MainPage.php
+
+		-
+			message: '#^Variable \$__slotsStackca29657caefef1bb99c280bb3a7ea9fb in empty\(\) is never defined\.$#'
+			identifier: empty.variable
+			count: 1
+			path: app/Livewire/Page/MainPage.php
+
+		-
+			message: '#^Variable \$__slotsca29657caefef1bb99c280bb3a7ea9fb in isset\(\) is never defined\.$#'
+			identifier: isset.variable
+			count: 1
+			path: app/Livewire/Page/MainPage.php
+
+		-
+			message: '#^Variable \$__this on left side of \?\? is never defined\.$#'
+			identifier: nullCoalesce.variable
+			count: 1
+			path: app/Livewire/Page/MainPage.php
+
+		-
+			message: '#^Variable \$option in PHPDoc tag @var does not exist\.$#'
+			identifier: varTag.variableNotFound
+			count: 1
+			path: app/Livewire/Page/MainPage.php
+
+		-
+			message: '#^Variable \$this in isset\(\) always exists and is not nullable\.$#'
+			identifier: isset.variable
+			count: 1
+			path: app/Livewire/Page/MainPage.php
+
+		-
+			message: '#^Binary operation "\." between mixed and ''/b95e17b693fb03d8fe…'' results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 5
+			path: app/Livewire/Page/Register.php
+
+		-
+			message: '#^Cannot access property \$compiledPath on mixed\.$#'
+			identifier: property.nonObject
+			count: 5
+			path: app/Livewire/Page/Register.php
+
+		-
+			message: '#^Cannot call method ensureRequired\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 5
+			path: app/Livewire/Page/Register.php
+
+		-
+			message: '#^Cannot call method popData\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 5
+			path: app/Livewire/Page/Register.php
+
+		-
+			message: '#^Cannot call method pushData\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 5
+			path: app/Livewire/Page/Register.php
+
+		-
+			message: '#^Function _b95e17b693fb03d8fe9d5f88b0c28f93 not found\.$#'
+			identifier: function.notFound
+			count: 5
+			path: app/Livewire/Page/Register.php
+
+		-
+			message: '#^Livewire\\Blaze\\BlazeServiceProvider\:\:\{closure\:Livewire\\Blaze\\BlazeServiceProvider\:\:registerViewComposer\(\)\:77\}\(\)\: Argument \#1 \(\$view\) must be of type Illuminate\\View\\View, Bladestan\\ValueObject\\ViewDataCollector given, called in /home/chris/Dokumente/Projekte/Tipinuss/vendor/laravel/framework/src/Illuminate/View/Concerns/ManagesEvents\.php on line 162$#'
+			identifier: bladestan.data
+			count: 1
+			path: app/Livewire/Page/Register.php
+
+		-
+			message: '#^Parameter \#1 \$string of function ltrim expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 4
+			path: app/Livewire/Page/Register.php
+
+		-
+			message: '#^Parameter \#1 \$string of function trim expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Livewire/Page/Register.php
+
+		-
+			message: '#^Variable \$__blaze might not be defined\.$#'
+			identifier: variable.undefined
+			count: 25
+			path: app/Livewire/Page/Register.php
+
+		-
+			message: '#^Variable \$this in isset\(\) always exists and is not nullable\.$#'
+			identifier: isset.variable
+			count: 5
+			path: app/Livewire/Page/Register.php
+
+		-
+			message: '#^Cannot access property \$soapnuts on App\\Models\\User\|null\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Livewire/SoapnutsBalance.php
+
+		-
+			message: '#^Dynamic call to static method Illuminate\\Contracts\\Auth\\Guard\:\:user\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: app/Livewire/SoapnutsBalance.php
+
+		-
+			message: '#^Livewire\\Blaze\\BlazeServiceProvider\:\:\{closure\:Livewire\\Blaze\\BlazeServiceProvider\:\:registerViewComposer\(\)\:77\}\(\)\: Argument \#1 \(\$view\) must be of type Illuminate\\View\\View, Bladestan\\ValueObject\\ViewDataCollector given, called in /home/chris/Dokumente/Projekte/Tipinuss/vendor/laravel/framework/src/Illuminate/View/Concerns/ManagesEvents\.php on line 162$#'
+			identifier: bladestan.data
+			count: 1
+			path: app/Livewire/SoapnutsBalance.php

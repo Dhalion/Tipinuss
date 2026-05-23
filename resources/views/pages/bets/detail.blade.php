@@ -37,6 +37,7 @@
                 <h2 class="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">{{ __('bets.available_odds') }}</h2>
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+                    @php /** @var \App\Models\BetOption $option */ @endphp
                     @foreach($optionsByOdds as $option)
                         @if($bet->isOpen())
                             <button 
@@ -139,7 +140,7 @@
 
                     <div class="flex items-center justify-between rounded-lg bg-zinc-800/60 px-4 py-3 text-sm">
                         <span class="text-zinc-400">{{ __('bets.your_balance') }}</span>
-                        <span class="font-bold text-gold-300">{{ number_format(auth()->user()->soapnuts) }} 🌰</span>
+                        <span class="font-bold text-gold-300">{{ number_format(auth()->user()?->soapnuts ?? 0) }} 🌰</span>
                     </div>
 
                     <div>
@@ -271,6 +272,7 @@
                     @enderror
 
                     <div class="max-h-80 space-y-2.5 overflow-y-auto pr-1">
+@php /** @var \App\Models\BetOption $option */ @endphp
 @foreach($optionsByBets as $option)
                             <button
                                 type="button"
