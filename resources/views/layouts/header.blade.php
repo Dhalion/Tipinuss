@@ -7,38 +7,50 @@
                 wire:navigate.hover/>
 
     <flux:navbar class="-mb-px max-lg:hidden">
-        <flux:navbar.item href="{{ route('main') }}"
-                          wire:navigate.hover>{{ __('app.navigation.home') }}</flux:navbar.item>
         @auth
-            <flux:navbar.item href="{{ route('bets.list') }}"
-                              wire:navigate.hover>{{ __('app.navigation.bets.list') }}</flux:navbar.item>
-            <flux:navbar.item href="{{ route('bets.create') }}"
-                              wire:navigate.hover>{{ __('app.navigation.bets.create') }}</flux:navbar.item>
-            @if(auth()->user()?->isAdmin())
-                <flux:navbar.item href="{{ route('admin.users') }}"
-                                  wire:navigate.hover>{{ __('app.navigation.admin') }}</flux:navbar.item>
+            @if(auth()->user()->isApproved())
+                <flux:navbar.item href="{{ route('bets.list') }}"
+                                  wire:navigate.hover>{{ __('app.navigation.bets.list') }}</flux:navbar.item>
+                <flux:navbar.item href="{{ route('bets.create') }}"
+                                  wire:navigate.hover>{{ __('app.navigation.bets.create') }}</flux:navbar.item>
+                @if(auth()->user()->isAdmin())
+                    <flux:navbar.item href="{{ route('admin.users') }}"
+                                      wire:navigate.hover>{{ __('app.navigation.admin') }}</flux:navbar.item>
+                @endif
             @endif
         @endauth
+
+        <flux:navbar.item href="{{ route('main') }}"
+                          wire:navigate.hover>{{ __('app.navigation.home') }}</flux:navbar.item>
     </flux:navbar>
 
     <flux:spacer/>
 
     @auth
-        <span class="text-sm text-gold-400 mr-2 whitespace-nowrap font-semibold">
-            @livewire('soapnuts-balance')
-        </span>
-        <flux:dropdown>
-            <flux:profile name="{{ Auth::user()->name }}" class="max-lg:hidden"/>
-            <flux:menu>
-                <flux:menu.item href="{{ route('account') }}" wire:navigate>{{ __('app.navigation.account') }}</flux:menu.item>
-                <form method="POST" action="{{ route('logout') }}" class="contents">
-                    @csrf
-                    <flux:menu.item as="button" type="submit">
-                        {{ __('app.navigation.logout') }}
-                    </flux:menu.item>
-                </form>
-            </flux:menu>
-        </flux:dropdown>
+        @if(auth()->user()->isApproved())
+            <span class="text-sm text-gold-400 mr-2 whitespace-nowrap font-semibold">
+                @livewire('soapnuts-balance')
+            </span>
+            <flux:dropdown>
+                <flux:profile name="{{ Auth::user()->name }}" class="max-lg:hidden"/>
+                <flux:menu>
+                    <flux:menu.item href="{{ route('account') }}" wire:navigate>{{ __('app.navigation.account') }}</flux:menu.item>
+                    <form method="POST" action="{{ route('logout') }}" class="contents">
+                        @csrf
+                        <flux:menu.item as="button" type="submit">
+                            {{ __('app.navigation.logout') }}
+                        </flux:menu.item>
+                    </form>
+                </flux:menu>
+            </flux:dropdown>
+        @else
+            <form method="POST" action="{{ route('logout') }}" class="contents">
+                @csrf
+                <flux:button type="submit" variant="ghost" size="sm" icon="arrow-right-start-on-rectangle">
+                    {{ __('app.navigation.logout') }}
+                </flux:button>
+            </form>
+        @endif
     @endauth
 
     @guest

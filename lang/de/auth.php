@@ -39,5 +39,6 @@ return [
     'pending_title' => 'Account wartet auf Freischaltung',
     'pending_description' => 'Dein Account wurde erfolgreich erstellt, muss aber noch von einem Administrator freigeschaltet werden, bevor du die Plattform nutzen kannst.',
     'pending_hint' => 'Du erhältst eine Benachrichtigung, sobald dein Account freigeschaltet wurde. Bitte habe etwas Geduld.',
+    'pending_checking' => 'Prüfe auf Freischaltung…',
     'pending_footer' => 'Beta-Phase — Zugang nur für freigeschaltete Nutzer.',
 ];

@@ -39,5 +39,6 @@ return [
     'pending_title' => 'Account Pending Approval',
     'pending_description' => 'Your account has been created successfully, but needs to be approved by an administrator before you can use the platform.',
     'pending_hint' => 'You will be notified once your account has been approved. Please be patient.',
+    'pending_checking' => 'Checking for approval…',
     'pending_footer' => 'Beta phase — access for approved users only.',
 ];

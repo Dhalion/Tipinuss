@@ -739,12 +739,6 @@ parameters:
 			path: app/Livewire/Page/Admin/OrganisationManagement.php
 
 		-
-			message: '#^Binary operation "\." between mixed and ''/b95e17b693fb03d8fe…'' results in an error\.$#'
-			identifier: binaryOp.invalid
-			count: 1
-			path: app/Livewire/Page/Admin/UserManagement.php
-
-		-
 			message: '#^Binary operation "\." between mixed and ''/ca29657caefef1bb99…'' results in an error\.$#'
 			identifier: binaryOp.invalid
 			count: 1
@@ -759,25 +753,25 @@ parameters:
 		-
 			message: '#^Cannot access property \$compiledPath on mixed\.$#'
 			identifier: property.nonObject
-			count: 2
+			count: 1
 			path: app/Livewire/Page/Admin/UserManagement.php
 
 		-
 			message: '#^Cannot call method ensureRequired\(\) on mixed\.$#'
 			identifier: method.nonObject
-			count: 2
+			count: 1
 			path: app/Livewire/Page/Admin/UserManagement.php
 
 		-
 			message: '#^Cannot call method popData\(\) on mixed\.$#'
 			identifier: method.nonObject
-			count: 2
+			count: 1
 			path: app/Livewire/Page/Admin/UserManagement.php
 
 		-
 			message: '#^Cannot call method pushData\(\) on mixed\.$#'
 			identifier: method.nonObject
-			count: 2
+			count: 1
 			path: app/Livewire/Page/Admin/UserManagement.php
 
 		-
@@ -799,12 +793,6 @@ parameters:
 			path: app/Livewire/Page/Admin/UserManagement.php
 
 		-
-			message: '#^Function _b95e17b693fb03d8fe9d5f88b0c28f93 not found\.$#'
-			identifier: function.notFound
-			count: 1
-			path: app/Livewire/Page/Admin/UserManagement.php
-
-		-
 			message: '#^Function _ca29657caefef1bb99c280bb3a7ea9fb not found\.$#'
 			identifier: function.notFound
 			count: 1
@@ -823,8 +811,26 @@ parameters:
 			path: app/Livewire/Page/Admin/UserManagement.php
 
 		-
+			message: '#^Left side of && is always true\.$#'
+			identifier: booleanAnd.leftAlwaysTrue
+			count: 1
+			path: app/Livewire/Page/Admin/UserManagement.php
+
+		-
+			message: '#^Left side of \|\| is always false\.$#'
+			identifier: booleanOr.leftAlwaysFalse
+			count: 1
+			path: app/Livewire/Page/Admin/UserManagement.php
+
+		-
 			message: '#^Livewire\\Blaze\\BlazeServiceProvider\:\:\{closure\:Livewire\\Blaze\\BlazeServiceProvider\:\:registerViewComposer\(\)\:77\}\(\)\: Argument \#1 \(\$view\) must be of type Illuminate\\View\\View, Bladestan\\ValueObject\\ViewDataCollector given, called in /home/chris/Dokumente/Projekte/Tipinuss/vendor/laravel/framework/src/Illuminate/View/Concerns/ManagesEvents\.php on line 162$#'
 			identifier: bladestan.data
+			count: 1
+			path: app/Livewire/Page/Admin/UserManagement.php
+
+		-
+			message: '#^Only booleans are allowed in &&, string given on the left side\.$#'
+			identifier: booleanAnd.leftNotBoolean
 			count: 1
 			path: app/Livewire/Page/Admin/UserManagement.php
 
@@ -837,7 +843,7 @@ parameters:
 		-
 			message: '#^Parameter \#1 \$string of function ltrim expects string, string\|false given\.$#'
 			identifier: argument.type
-			count: 38
+			count: 39
 			path: app/Livewire/Page/Admin/UserManagement.php
 
 		-
@@ -855,14 +861,26 @@ parameters:
 		-
 			message: '#^Variable \$__blaze might not be defined\.$#'
 			identifier: variable.undefined
-			count: 11
+			count: 6
 			path: app/Livewire/Page/Admin/UserManagement.php
 
 		-
 			message: '#^Variable \$this in isset\(\) always exists and is not nullable\.$#'
 			identifier: isset.variable
-			count: 2
+			count: 1
 			path: app/Livewire/Page/Admin/UserManagement.php
+
+		-
+			message: '#^Cannot call method isApproved\(\) on App\\Models\\User\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Livewire/Page/Auth/PendingApproval.php
+
+		-
+			message: '#^Dynamic call to static method Illuminate\\Contracts\\Auth\\Guard\:\:user\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: app/Livewire/Page/Auth/PendingApproval.php
 
 		-
 			message: '#^Livewire\\Blaze\\BlazeServiceProvider\:\:\{closure\:Livewire\\Blaze\\BlazeServiceProvider\:\:registerViewComposer\(\)\:77\}\(\)\: Argument \#1 \(\$view\) must be of type Illuminate\\View\\View, Bladestan\\ValueObject\\ViewDataCollector given, called in /home/chris/Dokumente/Projekte/Tipinuss/vendor/laravel/framework/src/Illuminate/View/Concerns/ManagesEvents\.php on line 162$#'
@@ -873,13 +891,13 @@ parameters:
 		-
 			message: '#^Parameter \#1 \$string of function ltrim expects string, string\|false given\.$#'
 			identifier: argument.type
-			count: 3
+			count: 5
 			path: app/Livewire/Page/Auth/PendingApproval.php
 
 		-
 			message: '#^Parameter \#1 \$string of function trim expects string, string\|false given\.$#'
 			identifier: argument.type
-			count: 2
+			count: 3
 			path: app/Livewire/Page/Auth/PendingApproval.php
 
 		-

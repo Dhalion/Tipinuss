@@ -45,6 +45,10 @@
     --color-accent-foreground: #ffffff;
 }
 
+[x-cloak] {
+    display: none !important;
+}
+
 @keyframes bet-highlight {
     0% { background-color: color-mix(in srgb, var(--color-gold-500) 30%, transparent); }
     100% { background-color: transparent; }
