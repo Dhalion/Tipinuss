@@ -18,6 +18,9 @@ final class BetaGuardMiddleware
         'register',
         'logout',
         'pending.approval',
+        'dusk.login',
+        'dusk.logout',
+        'dusk.user',
     ];
 
     public function handle(Request $request, Closure $next): Response
