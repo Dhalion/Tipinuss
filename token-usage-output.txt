@@ -1,0 +1,193 @@
+═══════════════════════════════════════════════════════════════════════════
+Token Analysis: Session ses_1e79ec090ffex5XiKq2s1PMhqA
+Model: deepseek-v4-flash-free
+═══════════════════════════════════════════════════════════════════════════
+
+WARNINGS
+───────────────────────────────────────────────────
+- Pricing for 'opencode/deepseek-v4-flash-free' was not found in models.json. Cost estimates use the default fallback rates ($1/M input, $3/M output, no cache pricing).
+- OpenCode export failed for session ses_1e79ec090ffex5XiKq2s1PMhqA. Context sections were skipped: JSON Parse error: Unterminated string
+
+TOKEN BREAKDOWN BY CATEGORY
+─────────────────────────────────────────────────────────────────────────
+Estimated using tokenizer analysis of message content:
+
+Input Categories:
+  USER      ███░░░░░░░░░░░░░░░░░░░░░░░░░░░    10.8% (82,788)
+  TOOLS     ███████████████████████████░░░   89.2% (685,157)
+
+  Subtotal: 767,945 estimated input tokens
+
+Output Categories:
+  ASSISTANT ████████░░░░░░░░░░░░░░░░░░░░░░    27.3% (96,592)
+  REASONING ██████████████████████░░░░░░░░   72.7% (256,993)
+
+  Subtotal: 353,585 estimated output tokens
+
+Local Total: 1,121,530 tokens (estimated)
+
+TOOL USAGE BREAKDOWN
+─────────────────────────────────────────────────────────────────────────
+read                 ███████████████████░░░░░░░░░░░   62.5% (427,908)  627x
+bash                 █████░░░░░░░░░░░░░░░░░░░░░░░░░   16.2% (110,836)  502x
+task                 ███░░░░░░░░░░░░░░░░░░░░░░░░░░░     9.9% (67,832)   19x
+todowrite            █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░     3.1% (21,067)   75x
+grep                 █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░     1.9% (13,202)   82x
+webfetch             █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░     1.9% (13,112)    4x
+websearch            █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░     1.7% (11,474)    4x
+write                ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░      1.2% (8,453)   66x
+glob                 ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░      1.0% (6,656)   58x
+edit                 ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░      0.4% (2,610)  531x
+question             ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░      0.2% (1,261)   13x
+skill                ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░        0.1% (577)    1x
+invalid              ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░        0.0% (121)    1x
+compress             ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░         0.0% (48)    5x
+
+TOP CONTRIBUTORS
+─────────────────────────────────────────────────────────────────────────
+• read                         427,908 tokens (38.2%)
+• bash                         110,836 tokens (9.9%)
+• task                         67,832 tokens (6.0%)
+• User#20                      28,941 tokens (2.6%)
+• User#1                       28,928 tokens (2.6%)
+
+═══════════════════════════════════════════════════════════════════════════
+MOST RECENT API CALL
+─────────────────────────────────────────────────────────────────────────
+
+Raw telemetry from last API response:
+  Input (fresh):            128 tokens
+  Cache read:            62,720 tokens
+  Output:                    72 tokens
+  Reasoning:                 22 tokens
+  Provider total:        62,942 tokens
+  ─────────────────────────────────────
+  Total:                 62,942 tokens
+
+═══════════════════════════════════════════════════════════════════════════
+SESSION TOTALS (All 1368 API calls)
+─────────────────────────────────────────────────────────────────────────
+
+Assistant messages observed: 1374 (structural count)
+
+Total tokens processed across the entire session (for cost calculation):
+
+  Input tokens:       5,139,694 (fresh tokens across all calls)
+  Cache read:        183,563,136 (cached tokens across all calls)
+  Cache write:                0 (tokens written to cache)
+  Output tokens:        426,720 (all model responses)
+  Reasoning tokens:     263,347 (thinking/reasoning)
+  ─────────────────────────────────────
+  Session Total:     189,392,897 tokens (for billing)
+  Cache read calls:        1356 / 1368
+  Cache write calls:          0 / 1368
+
+═══════════════════════════════════════════════════════════════════════════
+ESTIMATED SESSION COST (API Key Pricing)
+─────────────────────────────────────────────────────────────────────────
+
+You appear to be on a subscription plan (API cost is $0).
+Here's what this session would cost with direct API access:
+
+  Input tokens:       5,139,694 × $1.00/M  = $5.1397
+  Output tokens:        690,067 × $3.00/M  = $2.0702
+─────────────────────────────────────────────────────────────────────────
+ESTIMATED TOTAL: $7.2099
+
+Note: This estimate uses standard API pricing from models.json.
+Actual API costs may vary based on provider and context size.
+
+══════════════════════════════════════════════════════════════════════════
+AVAILABLE SKILLS (always-available context)
+─────────────────────────────────────────────────────────────────────────
+
+These skills were recovered from the skill tool metadata available to this session.
+
+  Skill                  Description                                   Tokens
+  ───────────────────────────────────────────────────────────────────────
+  fortify-development    ACTIVATE when the user works on authenticati…    ~199
+  tailwindcss-developme… Always invoke when the user's message includ…    ~154
+  livewire-development   Use for any task or question involving Livew…    ~128
+  fluxui-development     Use this skill for Flux UI development in Li…    ~122
+  laravel-best-practices Apply this skill whenever writing, reviewing…    ~115
+  customize-opencode     Use ONLY when the user is editing or creatin…     ~91
+  graphify               any input (code, docs, papers, images) → kno…     ~75
+  events-listeners       Events & Listeners Standards für dieses Lara…     ~68
+  error-handling         Error-Handling-Standards für dieses Laravel-…     ~66
+  php-coding             PHP-Kodierstandards für dieses Laravel-Proje…     ~64
+  quality-gates          Quality Gates und Pre-Merge-Checklist für di…     ~61
+  database               Datenbank-Richtlinien für dieses Laravel-Pro…     ~53
+  file-templates         Datei-Templates für dieses Laravel-Projekt. …     ~51
+  testing                Testing-Standards für dieses Laravel-Projekt…     ~51
+  blaze-optimize         Set up and optimize Blade component renderin…     ~34
+  ───────────────────────────────────────────────────────────────────────
+  Total: ~1,332 tokens (15 skills available)
+
+  Note: Full skill tool description is ~1,523 tokens (includes boilerplate).
+
+═══════════════════════════════════════════════════════════════════════════
+AVAILABLE SUBAGENTS (in task tool definition)
+─────────────────────────────────────────────────────────────────────────
+
+These subagents are embedded in the task tool description and consume tokens on every API call.
+
+  Subagent               Description                                        Tokens
+  ───────────────────────────────────────────────────────────────────────
+  explore                Fast agent specialized for exploring codebases. U…    ~101
+  general                General-purpose agent for researching complex que…     ~28
+  ───────────────────────────────────────────────────────────────────────
+  Total: ~129 tokens (2 subagents available)
+
+  Note: Full task tool description is ~585 tokens (includes instructions/examples).
+
+═══════════════════════════════════════════════════════════════════════════
+LOADED SKILLS (on-demand content)
+─────────────────────────────────────────────────────────────────────────
+
+Skills loaded during this session via the skill tool.
+
+  Skill                  Message #     Tokens     Calls
+  ─────────────────────────────────────────────────────
+  fluxui-development          #1439        577        1x
+  ─────────────────────────────────────────────────────
+  Total: 577 tokens (1 skill loaded)
+
+  Note: Loaded skill content stays in context (protected from pruning).
+
+═══════════════════════════════════════════════════════════════════════════
+SUBAGENT COSTS (19 child sessions, 194 API calls)
+─────────────────────────────────────────────────────────────────────────
+
+  general                      $0.0298  (35,706 tokens, 2 calls)
+  explore                      $0.0806  (188,080 tokens, 5 calls)
+  explore                      $0.0997  (422,366 tokens, 10 calls)
+  explore                      $0.0462  (95,081 tokens, 4 calls)
+  explore                      $0.0465  (170,840 tokens, 7 calls)
+  explore                      $0.0569  (229,779 tokens, 9 calls)
+  explore                      $0.0980  (721,012 tokens, 15 calls)
+  explore                      $0.1363  (928,863 tokens, 17 calls)
+  explore                      $0.1269  (946,670 tokens, 15 calls)
+  explore                      $0.0217  (28,725 tokens, 2 calls)
+  explore                      $0.0588  (227,202 tokens, 10 calls)
+  explore                      $0.0861  (806,784 tokens, 19 calls)
+  explore                      $0.0534  (297,158 tokens, 10 calls)
+  explore                      $0.0569  (609,458 tokens, 24 calls)
+  explore                      $0.0476  (182,316 tokens, 8 calls)
+  explore                      $0.0719  (378,430 tokens, 11 calls)
+  explore                      $0.0119  (22,982 tokens, 3 calls)
+  explore                      $0.0726  (295,075 tokens, 9 calls)
+  explore                      $0.0809  (357,748 tokens, 14 calls)
+─────────────────────────────────────────────────────────────────────────
+Subagent Total:            $1.2825  (6,944,275 tokens, 194 calls)
+
+═══════════════════════════════════════════════════════════════════════════
+SUMMARY
+─────────────────────────────────────────────────────────────────────────
+
+                          Cost        Tokens          API Calls
+  Main session:      $    7.2099    189,392,897          1368
+  Subagents:         $    1.2825     6,944,275           194
+─────────────────────────────────────────────────────────────────────────
+  TOTAL:             $    8.4924    196,337,172          1562
+
+═══════════════════════════════════════════════════════════════════════════

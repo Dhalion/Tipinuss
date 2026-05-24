@@ -27,3 +27,10 @@ devenv.lock
 /.devenv
 /bootstrap/cache/phpstan
 
+/tests/Browser/screenshots/
+/tests/Browser/console/
+.env.dusk.local
+
+/graphify-out/
+/.agents/
+/.opencode/

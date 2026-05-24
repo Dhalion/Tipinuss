@@ -10,7 +10,6 @@
     "license": "proprietary",
     "require": {
         "php": "^8.4",
-        "laravel/fortify": "1.37.0",
         "laravel/framework": "12.58.0",
         "laravel/tinker": "2.11.1",
         "league/commonmark": "2.8.2",
@@ -22,6 +21,7 @@
         "fakerphp/faker": "1.24.1",
         "larastan/larastan": "3.9.6",
         "laravel/boost": "^2.4",
+        "laravel/dusk": "^8.6",
         "laravel/pail": "1.2.6",
         "laravel/pint": "1.29.1",
         "laravel/sail": "1.58.0",
@@ -74,6 +74,11 @@
         "analyse:blade": [
             "@php vendor/bin/phpstan analyse --error-format=blade --ansi"
         ],
+        "dusk": [
+            "Composer\\Config::disableProcessTimeout",
+            "@php artisan dusk:chrome-driver --detect --ansi",
+            "bash -c 'php artisan serve --env=dusk --port=8081 --no-reload &>/dev/null & SERVER_PID=$!; sleep 3; php artisan dusk; E=$?; kill $SERVER_PID 2>/dev/null; exit $E'"
+        ],
         "analyse:baseline": [
             "@php vendor/bin/phpstan analyse --generate-baseline --ansi"
         ],
@@ -109,7 +114,9 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "dont-discover": [
+                "laravel/dusk"
+            ]
         }
     },
     "config": {
