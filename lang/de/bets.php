@@ -43,6 +43,7 @@ return [
 
     'option_not_found' => 'Diese Option wurde nicht gefunden.',
     'bet_closed_error' => 'Diese Wette ist bereits geschlossen und kann keine neuen Einsätze mehr annehmen.',
+    'bet_expired_error' => 'Diese Wette ist abgelaufen und kann keine neuen Einsätze mehr annehmen.',
     'insufficient_balance' => 'Nicht genügend Guthaben. Dir fehlen :shortfall 🌰.',
     'amount_out_of_bounds' => 'Der Einsatz muss zwischen :min und :max 🌰 liegen.',
     'wrong_bet_option' => 'Die ausgewählte Option gehört nicht zu dieser Wette.',
@@ -51,4 +52,12 @@ return [
     'potential_winnings_text' => 'Möglicher Gewinn: :amount 🌰',
     'closed_success' => 'Wette geschlossen und Gewinne ausgezahlt.',
     'deleted_success' => 'Wette ":title" wurde gelöscht.',
+
+    'bet_won' => 'Wette gewonnen!',
+    'bet_lost' => 'Wette verloren',
+    'result_won_title' => 'Glückwunsch! Du hast gewonnen!',
+    'result_lost_title' => 'Leider verloren.',
+    'your_bet' => 'Dein Einsatz',
+    'winnings' => 'Gewinn',
+    'loss' => 'Verlust',
 ];

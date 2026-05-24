@@ -43,4 +43,7 @@ return [
 
     'beta_badge' => 'Beta',
     'bet_meta_fallback' => 'Tippe auf :title und verdiene Waschnüsse auf Tipinuss',
+
+    'notifications' => 'Benachrichtigungen',
+    'no_notifications' => 'Keine Benachrichtigungen',
 ];

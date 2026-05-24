@@ -22,10 +22,14 @@ final class BettingValidationService
         }
     }
 
-    public function validateBetIsOpen(bool $betIsOpen): void
+    public function validateBetIsOpen(Bet $bet): void
     {
-        if (! $betIsOpen) {
+        if (! $bet->isOpen()) {
             throw BetException::betAlreadyClosed();
+        }
+
+        if ($bet->isExpired()) {
+            throw BetException::betExpired();
         }
     }
 

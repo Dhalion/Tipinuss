@@ -90,6 +90,11 @@ final class Bet extends Model
         return $this->status === BetStatus::Closed;
     }
 
+    public function isExpired(): bool
+    {
+        return $this->expires_at !== null && $this->expires_at->isPast();
+    }
+
     public function idPrefix(): string
     {
         return substr($this->id, 0, 8);
@@ -108,7 +113,7 @@ final class Bet extends Model
             ? substr($identifier, 9)
             : $identifier;
 
-        return $this->with('betOptions.userBets', 'creator')
+        return $this->with('betOptions', 'creator')
             ->where('slug', $slug)
             ->first();
     }

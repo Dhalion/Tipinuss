@@ -10,6 +10,6 @@ final class BetCalculationService
 {
     public function calculatePotentialWinnings(BetOption $option, int $amountWagered): int
     {
-        return (int) ($option->odds * $amountWagered);
+        return (int) round($option->odds * $amountWagered);
     }
 }

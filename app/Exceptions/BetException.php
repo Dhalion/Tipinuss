@@ -23,6 +23,11 @@ class BetException extends Exception
         return new self(__('bets.bet_closed_error'));
     }
 
+    public static function betExpired(): self
+    {
+        return new self(__('bets.bet_expired_error'));
+    }
+
     public static function insufficientBalance(int $shortfall): self
     {
         return new self(__('bets.insufficient_balance', ['shortfall' => $shortfall]));

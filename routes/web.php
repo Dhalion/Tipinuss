@@ -40,7 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/bets/{uuid}', function (string $uuid) {
         $bet = Bet::findOrFail($uuid);
 
-        return redirect()->route('bets.detail', ['bet' => $bet->slugUrl()], 301);
+        return redirect()->route('bets.detail', ['bet' => $bet->slugUrl()], 302);
     })->whereUuid('uuid');
     Route::livewire('/bets/{bet}', BetDetail::class)->name('bets.detail');
 

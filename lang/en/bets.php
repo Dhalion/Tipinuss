@@ -43,6 +43,7 @@ return [
 
     'option_not_found' => 'This option was not found.',
     'bet_closed_error' => 'This bet is already closed and cannot accept new stakes.',
+    'bet_expired_error' => 'This bet has expired and can no longer accept new stakes.',
     'insufficient_balance' => 'Insufficient balance. You need :shortfall 🌰 more.',
     'amount_out_of_bounds' => 'The stake must be between :min and :max 🌰.',
     'wrong_bet_option' => 'The selected option does not belong to this bet.',
@@ -51,4 +52,12 @@ return [
     'potential_winnings_text' => 'Potential winnings: :amount 🌰',
     'closed_success' => 'Bet closed and winnings paid out.',
     'deleted_success' => 'Bet ":title" has been deleted.',
+
+    'bet_won' => 'Bet won!',
+    'bet_lost' => 'Bet lost',
+    'result_won_title' => 'Congratulations! You won!',
+    'result_lost_title' => 'Unfortunately lost.',
+    'your_bet' => 'Your bet',
+    'winnings' => 'Winnings',
+    'loss' => 'Loss',
 ];

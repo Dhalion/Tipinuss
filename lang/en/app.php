@@ -43,4 +43,7 @@ return [
 
     'beta_badge' => 'Beta',
     'bet_meta_fallback' => 'Bet on :title and earn walnuts on Tipinuss',
+
+    'notifications' => 'Notifications',
+    'no_notifications' => 'No notifications',
 ];

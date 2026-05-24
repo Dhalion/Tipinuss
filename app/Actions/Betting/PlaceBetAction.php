@@ -27,7 +27,7 @@ final class PlaceBetAction
 
     public function execute(PlaceBetData $data): UserBet
     {
-        $this->validation->validateBetIsOpen($data->option->bet->isOpen());
+        $this->validation->validateBetIsOpen($data->option->bet);
         $this->validation->validateAmountWithinBounds($data->amount);
         $this->validation->validateBalanceSufficient($data->user, $data->amount);
 

@@ -12,6 +12,7 @@ use App\Exceptions\BetException;
 use App\Models\Bet;
 use App\Models\User;
 use App\Models\UserBet;
+use App\Notifications\BetClosed;
 use App\Repositories\Contracts\BetOptionRepositoryInterface;
 use App\Repositories\Contracts\BetRepositoryInterface;
 use App\Repositories\Contracts\UserBetRepositoryInterface;
@@ -19,6 +20,7 @@ use App\Services\User\BalanceTransactionService;
 use App\Services\User\UserBalanceService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Log;
 
 final class CloseBetAction
 {
@@ -40,10 +42,12 @@ final class CloseBetAction
             throw BetException::wrongBetOption();
         }
 
-        return DB::transaction(function () use ($data, $winningOption): Bet {
+        $participants = [];
+
+        $bet = DB::transaction(function () use ($data, $winningOption, &$participants): Bet {
             $winningUserBets = $this->userBets->findByOption($winningOption);
 
-            $winningUserBets->each(function (UserBet $userBet) use ($winningOption): void {
+            $winningUserBets->each(function (UserBet $userBet) use ($winningOption, &$participants): void {
                 $winner = $userBet->user;
                 if ($winner instanceof User) {
                     $winnings = (int) round($userBet->amount_wagered * $winningOption->odds);
@@ -59,24 +63,82 @@ final class CloseBetAction
                 }
                 $userBet->status = UserBetStatus::Won;
                 $this->userBets->save($userBet);
+
+                $participants[] = [
+                    'user' => $userBet->user,
+                    'status' => UserBetStatus::Won->value,
+                    'wagered' => $userBet->amount_wagered,
+                    'winnings' => $userBet->potential_winnings,
+                ];
             });
 
-            foreach ($data->bet->betOptions as $option) {
-                if ($option->id === $winningOption->id) {
-                    $option->result = true;
-                } else {
-                    $option->result = false;
-                    $this->userBets->findByOption($option)->each(function (UserBet $userBet): void {
-                        $userBet->status = UserBetStatus::Lost;
-                        $this->userBets->save($userBet);
-                    });
-                }
+            $losingOptions = $data->bet->betOptions->reject(fn ($o) => $o->id === $winningOption->id);
+
+            $losingUserBetIds = $losingOptions->flatMap(fn ($option) => $option->userBets->pluck('id'));
+
+            if ($losingUserBetIds->isNotEmpty()) {
+                $losingUserBets = $this->userBets->findByIdsWithOptionAndBet($losingUserBetIds->all());
+
+                $losingUserBets->each(function (UserBet $userBet) use (&$participants): void {
+                    $userBet->status = UserBetStatus::Lost;
+                    $this->userBets->save($userBet);
+
+                    $participants[] = [
+                        'user' => $userBet->user,
+                        'status' => UserBetStatus::Lost->value,
+                        'wagered' => $userBet->amount_wagered,
+                        'winnings' => $userBet->potential_winnings,
+                    ];
+                });
+            }
+
+            foreach ($losingOptions as $option) {
+                $option->result = false;
                 $this->betOptions->save($option);
             }
+
+            $winningOption->result = true;
+            $this->betOptions->save($winningOption);
 
             $data->bet->status = BetStatus::Closed;
 
             return $this->bets->save($data->bet);
         });
+
+        try {
+            $this->notifyParticipants($bet, $participants);
+        } catch (\Throwable $e) {
+            Log::warning('Failed to notify participants of closed bet', [
+                'bet_id' => $bet->id,
+                'error' => $e->getMessage(),
+            ]);
+        }
+
+        return $bet;
+    }
+
+    /**
+     * @param  list<array{user: User, status: string, wagered: int, winnings: int}>  $participants
+     */
+    private function notifyParticipants(Bet $bet, array $participants): void
+    {
+        $notifiedUserIds = [];
+
+        foreach ($participants as $participant) {
+            $userId = $participant['user']->id;
+
+            if (isset($notifiedUserIds[$userId])) {
+                continue;
+            }
+
+            $notifiedUserIds[$userId] = true;
+
+            $participant['user']->notify(new BetClosed(
+                bet: $bet,
+                userBetStatus: $participant['status'],
+                amountWagered: $participant['wagered'],
+                potentialWinnings: $participant['winnings'],
+            ));
+        }
     }
 }
