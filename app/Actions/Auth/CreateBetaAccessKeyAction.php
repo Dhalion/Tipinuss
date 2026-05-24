@@ -20,6 +20,7 @@ final class CreateBetaAccessKeyAction
         string $organisationId,
         ?string $customKey = null,
         ?string $expiresAt = null,
+        ?int $startBalance = null,
     ): BetaAccessKey {
         $key = $customKey ?? $this->generateKey();
 
@@ -28,6 +29,7 @@ final class CreateBetaAccessKeyAction
             'organisation_id' => $organisationId,
             'created_by_user_id' => $admin->id,
             'expires_at' => $expiresAt,
+            'start_balance' => $startBalance,
         ]);
 
         return $this->betaKeys->save($betaKey);

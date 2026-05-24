@@ -62,6 +62,10 @@ final class RegisterUserAction
         $user->password = Hash::make($data->password);
 
         return DB::transaction(function () use ($user, $betaKeyModel): User {
+            if ($betaKeyModel !== null && $betaKeyModel->start_balance !== null) {
+                $user->soapnuts = $betaKeyModel->start_balance;
+            }
+
             $user = $this->users->save($user);
 
             if ($betaKeyModel !== null) {

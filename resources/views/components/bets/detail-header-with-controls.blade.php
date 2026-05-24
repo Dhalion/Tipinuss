@@ -26,7 +26,7 @@
                     >
                         <option value="">{{ __('admin.organisations.no_group') }}</option>
                         @foreach($organisations as $org)
-                            <option value="{{ $org->id }}" {{ $bet->organisation_id === $org->id ? 'selected' : '' }}>
+                            <option wire:key="org-{{ $org->id }}" value="{{ $org->id }}" {{ $bet->organisation_id === $org->id ? 'selected' : '' }}>
                                 {{ $org->name }}
                             </option>
                         @endforeach

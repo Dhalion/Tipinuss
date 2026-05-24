@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Console\Commands\User;
 
 use App\Actions\Admin\AdjustUserBalanceAction;
-use App\Models\User;
+use App\Repositories\Contracts\UserRepositoryInterface;
 use Illuminate\Console\Command;
 
 final class AdjustBalanceCommand extends Command
@@ -14,14 +14,16 @@ final class AdjustBalanceCommand extends Command
 
     protected $description = 'Adjust a user\'s Soapnut balance by a signed amount';
 
-    public function __construct(private AdjustUserBalanceAction $adjustBalance)
-    {
+    public function __construct(
+        private AdjustUserBalanceAction $adjustBalance,
+        private UserRepositoryInterface $users,
+    ) {
         parent::__construct();
     }
 
     public function handle(): int
     {
-        $user = User::where('email', $this->argument('email'))->first();
+        $user = $this->users->findByEmail($this->argument('email'));
 
         if ($user === null) {
             $this->error("No user found with email '{$this->argument('email')}'.");
@@ -45,7 +47,7 @@ final class AdjustBalanceCommand extends Command
         $balanceAfter = $user->soapnuts;
 
         $sign = $amount >= 0 ? '+' : '';
-        $this->info("✓ {$user->email}: {$balanceBefore} 🌰 → {$balanceAfter} 🌰 ({$sign}{$amount})");
+        $this->info("{$user->email}: {$balanceBefore} -> {$balanceAfter} ({$sign}{$amount})");
 
         return self::SUCCESS;
     }

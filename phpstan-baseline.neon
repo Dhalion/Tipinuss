@@ -15,7 +15,13 @@ parameters:
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$result\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
+			path: app/Actions/Betting/CloseBetAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$userBets\.$#'
+			identifier: property.notFound
+			count: 1
 			path: app/Actions/Betting/CloseBetAction.php
 
 		-
@@ -49,13 +55,31 @@ parameters:
 			path: app/Actions/Betting/CloseBetAction.php
 
 		-
+			message: '#^Cannot call method pluck\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Actions/Betting/CloseBetAction.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Support\\Collection\<int,Illuminate\\Database\\Eloquent\\Model\>\:\:flatMap\(\) expects callable\(Illuminate\\Database\\Eloquent\\Model, int\)\: \(array\<mixed\>\|Illuminate\\Support\\Collection\<int\|string, mixed\>\), Closure\(mixed\)\: mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Actions/Betting/CloseBetAction.php
+
+		-
+			message: '#^Parameter \#1 \$ids of method App\\Repositories\\Contracts\\UserBetRepositoryInterface\:\:findByIdsWithOptionAndBet\(\) expects array\<int, string\>, array\<mixed\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Actions/Betting/CloseBetAction.php
+
+		-
 			message: '#^Parameter \#1 \$option of method App\\Repositories\\Contracts\\BetOptionRepositoryInterface\:\:save\(\) expects App\\Models\\BetOption, Illuminate\\Database\\Eloquent\\Model given\.$#'
 			identifier: argument.type
 			count: 1
 			path: app/Actions/Betting/CloseBetAction.php
 
 		-
-			message: '#^Parameter \#1 \$option of method App\\Repositories\\Contracts\\UserBetRepositoryInterface\:\:findByOption\(\) expects App\\Models\\BetOption, Illuminate\\Database\\Eloquent\\Model given\.$#'
+			message: '#^Parameter \#2 \$participants of method App\\Actions\\Betting\\CloseBetAction\:\:notifyParticipants\(\) expects list\<array\{user\: App\\Models\\User, status\: string, wagered\: int, winnings\: int\}\>, list\<array\{user\: Illuminate\\Database\\Eloquent\\Model\|null, status\: literal\-string&non\-falsy\-string, wagered\: int, winnings\: int\}\> given\.$#'
 			identifier: argument.type
 			count: 1
 			path: app/Actions/Betting/CloseBetAction.php
@@ -73,6 +97,18 @@ parameters:
 			path: app/Actions/Betting/CloseBetAction.php
 
 		-
+			message: '#^Unable to resolve the template type TFlatMapKey in call to method Illuminate\\Support\\Collection\<int,Illuminate\\Database\\Eloquent\\Model\>\:\:flatMap\(\)$#'
+			identifier: argument.templateType
+			count: 1
+			path: app/Actions/Betting/CloseBetAction.php
+
+		-
+			message: '#^Unable to resolve the template type TFlatMapValue in call to method Illuminate\\Support\\Collection\<int,Illuminate\\Database\\Eloquent\\Model\>\:\:flatMap\(\)$#'
+			identifier: argument.templateType
+			count: 1
+			path: app/Actions/Betting/CloseBetAction.php
+
+		-
 			message: '#^Parameter \#1 \$callback of method Illuminate\\Database\\Eloquent\\Collection\<int,Illuminate\\Database\\Eloquent\\Model\>\:\:mapWithKeys\(\) expects callable\(Illuminate\\Database\\Eloquent\\Model, int\)\: array\<non\-falsy\-string, string\>, Closure\(App\\Models\\BetOption\)\: non\-empty\-array\<non\-falsy\-string, string\> given\.$#'
 			identifier: argument.type
 			count: 1
@@ -81,6 +117,12 @@ parameters:
 		-
 			message: '#^Possibly invalid array key type array\|string\.$#'
 			identifier: offsetAccess.invalidOffset
+			count: 1
+			path: app/Console/Commands/Bet/CloseBetCommand.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between App\\Models\\Bet and null will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
 			count: 1
 			path: app/Console/Commands/Bet/CloseBetCommand.php
 
@@ -121,20 +163,38 @@ parameters:
 			path: app/Console/Commands/Bet/ListBetsCommand.php
 
 		-
-			message: '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\Organisation\>\:\:orderBy\(\)\.$#'
-			identifier: staticMethod.dynamicCall
-			count: 1
-			path: app/Console/Commands/Organisation/ListOrganisationsCommand.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
 			identifier: property.notFound
 			count: 1
-			path: app/Console/Commands/User/ListUsersCommand.php
+			path: app/Console/Commands/GenerateBetaKeyCommand.php
+
+		-
+			message: '#^Call to function is_string\(\) with string will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: app/Console/Commands/GenerateBetaKeyCommand.php
 
 		-
 			message: '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\User\>\:\:orderBy\(\)\.$#'
 			identifier: staticMethod.dynamicCall
+			count: 1
+			path: app/Console/Commands/GenerateBetaKeyCommand.php
+
+		-
+			message: '#^Short ternary operator is not allowed\. Use null coalesce operator if applicable or consider using long ternary\.$#'
+			identifier: ternary.shortNotAllowed
+			count: 1
+			path: app/Console/Commands/GenerateBetaKeyCommand.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Console/Commands/GenerateBetaKeyCommand.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
 			count: 1
 			path: app/Console/Commands/User/ListUsersCommand.php
 
@@ -163,6 +223,126 @@ parameters:
 			path: app/Http/Middleware/BetaGuardMiddleware.php
 
 		-
+			message: '#^Cannot access offset ''key'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: app/Livewire/Bets/Leaderboard.php
+
+		-
+			message: '#^Cannot access offset ''amount_wagered'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: app/Livewire/NotificationBell.php
+
+		-
+			message: '#^Cannot access offset ''bet_slug_url'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: app/Livewire/NotificationBell.php
+
+		-
+			message: '#^Cannot access offset ''bet_title'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: app/Livewire/NotificationBell.php
+
+		-
+			message: '#^Cannot access offset ''key'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: app/Livewire/NotificationBell.php
+
+		-
+			message: '#^Cannot access offset ''potential_winnings'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: app/Livewire/NotificationBell.php
+
+		-
+			message: '#^Cannot access offset ''user_bet_status'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: app/Livewire/NotificationBell.php
+
+		-
+			message: '#^Cannot access property \$data on mixed\.$#'
+			identifier: property.nonObject
+			count: 6
+			path: app/Livewire/NotificationBell.php
+
+		-
+			message: '#^Cannot access property \$id on mixed\.$#'
+			identifier: property.nonObject
+			count: 3
+			path: app/Livewire/NotificationBell.php
+
+		-
+			message: '#^Cannot access property \$unreadNotifications on App\\Models\\User\|null\.$#'
+			identifier: property.nonObject
+			count: 2
+			path: app/Livewire/NotificationBell.php
+
+		-
+			message: '#^Cannot call method notifications\(\) on App\\Models\\User\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Livewire/NotificationBell.php
+
+		-
+			message: '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Builder\<Illuminate\\Notifications\\DatabaseNotification\>\:\:first\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: app/Livewire/NotificationBell.php
+
+		-
+			message: '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Builder\<Illuminate\\Notifications\\DatabaseNotification\>\:\:where\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: app/Livewire/NotificationBell.php
+
+		-
+			message: '#^Livewire\\Blaze\\BlazeServiceProvider\:\:\{closure\:Livewire\\Blaze\\BlazeServiceProvider\:\:registerViewComposer\(\)\:77\}\(\)\: Argument \#1 \(\$view\) must be of type Illuminate\\View\\View, Bladestan\\ValueObject\\ViewDataCollector given, called in /home/chris/Dokumente/Projekte/Tipinuss/vendor/laravel/framework/src/Illuminate/View/Concerns/ManagesEvents\.php on line 162$#'
+			identifier: bladestan.data
+			count: 1
+			path: app/Livewire/NotificationBell.php
+
+		-
+			message: '#^PHPDoc tag @var with type Illuminate\\Support\\Collection is not subtype of type Illuminate\\Notifications\\DatabaseNotificationCollection\<int, Illuminate\\Notifications\\DatabaseNotification\>\.$#'
+			identifier: varTag.type
+			count: 1
+			path: app/Livewire/NotificationBell.php
+
+		-
+			message: '#^Parameter \#1 \$num of function number_format expects float, mixed given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Livewire/NotificationBell.php
+
+		-
+			message: '#^Parameter \#1 \$string of function ltrim expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 7
+			path: app/Livewire/NotificationBell.php
+
+		-
+			message: '#^Parameter \#1 \$string of function trim expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 6
+			path: app/Livewire/NotificationBell.php
+
+		-
+			message: '#^Parameter \#1 \$value of function e expects BackedEnum\|float\|Illuminate\\Contracts\\Support\\DeferringDisplayableValue\|Illuminate\\Contracts\\Support\\Htmlable\|int\|string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 4
+			path: app/Livewire/NotificationBell.php
+
+		-
+			message: '#^Cannot access property \$betRoute on mixed\.$#'
+			identifier: property.nonObject
+			count: 4
+			path: app/Livewire/Page/Account.php
+
+		-
 			message: '#^Cannot call method format\(\) on Carbon\\CarbonImmutable\|null\.$#'
 			identifier: method.nonObject
 			count: 1
@@ -181,10 +361,154 @@ parameters:
 			path: app/Livewire/Page/Account.php
 
 		-
+			message: '#^Only booleans are allowed in an if condition, string\|null given\.$#'
+			identifier: if.condNotBoolean
+			count: 2
+			path: app/Livewire/Page/Account.php
+
+		-
+			message: '#^Parameter \#1 \$array of static method Illuminate\\Support\\Arr\:\:toCssClasses\(\) expects array\<int\|string, bool\|int\|string\>\|string, array\<string, mixed\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Livewire/Page/Account.php
+
+		-
+			message: '#^Parameter \#1 \$array of static method Illuminate\\Support\\Arr\:\:toCssClasses\(\) expects array\<int\|string, bool\|int\|string\>\|string, array\<string, string\|null\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Livewire/Page/Account.php
+
+		-
+			message: '#^Parameter \#1 \$value of function e expects BackedEnum\|float\|Illuminate\\Contracts\\Support\\DeferringDisplayableValue\|Illuminate\\Contracts\\Support\\Htmlable\|int\|string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Livewire/Page/Account.php
+
+		-
+			message: '#^Binary operation "\." between mixed and ''/b95e17b693fb03d8fe…'' results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
+			message: '#^Cannot access offset ''key'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
+			message: '#^Cannot access property \$compiledPath on mixed\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
+			message: '#^Cannot call method ensureRequired\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
+			message: '#^Cannot call method popData\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
+			message: '#^Cannot call method pushData\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
+			message: '#^Function _b95e17b693fb03d8fe9d5f88b0c28f93 not found\.$#'
+			identifier: function.notFound
+			count: 1
+			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
+			message: '#^Parameter \#1 \$string of function ltrim expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
+			message: '#^Parameter \#1 \$string of function trim expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
 			message: '#^Parameter \$admin of method App\\Actions\\Auth\\CreateBetaAccessKeyAction\:\:execute\(\) expects App\\Models\\User, App\\Models\\User\|null given\.$#'
 			identifier: argument.type
 			count: 1
 			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
+			message: '#^Variable \$__blaze might not be defined\.$#'
+			identifier: variable.undefined
+			count: 5
+			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
+			message: '#^Variable \$this in isset\(\) always exists and is not nullable\.$#'
+			identifier: isset.variable
+			count: 1
+			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Livewire/Page/Admin/OrganisationManagement.php
+
+		-
+			message: '#^Cannot access offset ''key'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: app/Livewire/Page/Admin/OrganisationManagement.php
+
+		-
+			message: '#^Parameter \#1 \$value of function e expects BackedEnum\|float\|Illuminate\\Contracts\\Support\\DeferringDisplayableValue\|Illuminate\\Contracts\\Support\\Htmlable\|int\|string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Livewire/Page/Admin/OrganisationManagement.php
+
+		-
+			message: '#^Binary operation "\." between mixed and ''/b95e17b693fb03d8fe…'' results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: app/Livewire/Page/Admin/UserManagement.php
+
+		-
+			message: '#^Cannot access offset ''key'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: app/Livewire/Page/Admin/UserManagement.php
+
+		-
+			message: '#^Cannot access property \$compiledPath on mixed\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Livewire/Page/Admin/UserManagement.php
+
+		-
+			message: '#^Cannot call method ensureRequired\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Livewire/Page/Admin/UserManagement.php
+
+		-
+			message: '#^Cannot call method popData\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Livewire/Page/Admin/UserManagement.php
+
+		-
+			message: '#^Cannot call method pushData\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Livewire/Page/Admin/UserManagement.php
 
 		-
 			message: '#^Casting to int something that''s already int\<min, \-1\>\|int\<1, max\>\.$#'
@@ -199,15 +523,129 @@ parameters:
 			path: app/Livewire/Page/Admin/UserManagement.php
 
 		-
+			message: '#^Function _b95e17b693fb03d8fe9d5f88b0c28f93 not found\.$#'
+			identifier: function.notFound
+			count: 1
+			path: app/Livewire/Page/Admin/UserManagement.php
+
+		-
+			message: '#^Variable \$__blaze might not be defined\.$#'
+			identifier: variable.undefined
+			count: 5
+			path: app/Livewire/Page/Admin/UserManagement.php
+
+		-
+			message: '#^Variable \$this in isset\(\) always exists and is not nullable\.$#'
+			identifier: isset.variable
+			count: 1
+			path: app/Livewire/Page/Admin/UserManagement.php
+
+		-
+			message: '#^Binary operation "\." between mixed and ''/ca29657caefef1bb99…'' results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Cannot access offset ''key'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 3
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Cannot access property \$compiledPath on mixed\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Cannot access property \$odds on Illuminate\\Database\\Eloquent\\Model\|null\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Cannot call method badgeColor\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Cannot call method ensureRequired\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Cannot call method label\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Cannot call method popData\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Cannot call method pushData\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Cannot call method pushSlots\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
 			message: '#^Cannot cast mixed to int\.$#'
 			identifier: cast.int
 			count: 2
 			path: app/Livewire/Page/Bets/BetDetail.php
 
 		-
+			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
+			identifier: empty.notAllowed
+			count: 2
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
 			message: '#^Dynamic call to static method Illuminate\\Contracts\\Auth\\Guard\:\:user\(\)\.$#'
 			identifier: staticMethod.dynamicCall
+			count: 3
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Function _ca29657caefef1bb99c280bb3a7ea9fb not found\.$#'
+			identifier: function.notFound
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^If condition is always false\.$#'
+			identifier: if.alwaysFalse
 			count: 2
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Implicit array creation is not allowed \- variable \$__attrsStackca29657caefef1bb99c280bb3a7ea9fb does not exist\.$#'
+			identifier: variable.implicitArray
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Implicit array creation is not allowed \- variable \$__slotsStackca29657caefef1bb99c280bb3a7ea9fb does not exist\.$#'
+			identifier: variable.implicitArray
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Livewire\\Blaze\\BlazeServiceProvider\:\:\{closure\:Livewire\\Blaze\\BlazeServiceProvider\:\:registerViewComposer\(\)\:77\}\(\)\: Argument \#1 \(\$view\) must be of type Illuminate\\View\\View, Bladestan\\ValueObject\\ViewDataCollector given, called in /home/chris/Dokumente/Projekte/Tipinuss/vendor/laravel/framework/src/Illuminate/View/Concerns/ManagesEvents\.php on line 162$#'
+			identifier: bladestan.data
+			count: 1
 			path: app/Livewire/Page/Bets/BetDetail.php
 
 		-
@@ -223,16 +661,148 @@ parameters:
 			path: app/Livewire/Page/Bets/BetDetail.php
 
 		-
+			message: '#^Parameter \#1 \$array of function array_pop expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
 			message: '#^Parameter \#1 \$callback of method Illuminate\\Support\\Collection\<int,Illuminate\\Database\\Eloquent\\Model\>\:\:sortByDesc\(\) expects array\<array\{string, string\}\|\(callable\(Illuminate\\Database\\Eloquent\\Model, Illuminate\\Database\\Eloquent\\Model\)\: mixed\)\|\(callable\(Illuminate\\Database\\Eloquent\\Model, int\)\: mixed\)\|string\>\|\(callable\(Illuminate\\Database\\Eloquent\\Model, int\)\: mixed\)\|string, Closure\(App\\Models\\BetOption\)\: int\<0, max\> given\.$#'
 			identifier: argument.type
 			count: 1
 			path: app/Livewire/Page/Bets/BetDetail.php
 
 		-
+			message: '#^Parameter \#1 \$num of function number_format expects float, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Parameter \#1 \$string of function trim expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Parameter \#1 \$value of function e expects BackedEnum\|float\|Illuminate\\Contracts\\Support\\DeferringDisplayableValue\|Illuminate\\Contracts\\Support\\Htmlable\|int\|string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Parameter \#1 \$value of function e expects BackedEnum\|float\|Illuminate\\Contracts\\Support\\DeferringDisplayableValue\|Illuminate\\Contracts\\Support\\Htmlable\|int\|string\|null, string\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between ''lost''\|''pending''\|''won'' and App\\Enums\\UserBetStatus\:\:Won will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Ternary operator condition is always false\.$#'
+			identifier: ternary.alwaysFalse
+			count: 7
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Undefined variable\: \$__attrsStackca29657caefef1bb99c280bb3a7ea9fb$#'
+			identifier: variable.undefined
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Undefined variable\: \$__attrsca29657caefef1bb99c280bb3a7ea9fb$#'
+			identifier: variable.undefined
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Undefined variable\: \$__blaze$#'
+			identifier: variable.undefined
+			count: 6
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Undefined variable\: \$__slotsStackca29657caefef1bb99c280bb3a7ea9fb$#'
+			identifier: variable.undefined
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Undefined variable\: \$__slotsca29657caefef1bb99c280bb3a7ea9fb$#'
+			identifier: variable.undefined
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Variable \$__attrsStackca29657caefef1bb99c280bb3a7ea9fb in empty\(\) is never defined\.$#'
+			identifier: empty.variable
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Variable \$__attrsca29657caefef1bb99c280bb3a7ea9fb in isset\(\) is never defined\.$#'
+			identifier: isset.variable
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Variable \$__slotsStackca29657caefef1bb99c280bb3a7ea9fb in empty\(\) is never defined\.$#'
+			identifier: empty.variable
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Variable \$__slotsca29657caefef1bb99c280bb3a7ea9fb in isset\(\) is never defined\.$#'
+			identifier: isset.variable
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Variable \$__this on left side of \?\? is never defined\.$#'
+			identifier: nullCoalesce.variable
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Variable \$this in isset\(\) always exists and is not nullable\.$#'
+			identifier: isset.variable
+			count: 1
+			path: app/Livewire/Page/Bets/BetDetail.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Livewire/Page/Bets/BetsListing.php
+
+		-
+			message: '#^Cannot access offset ''key'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 3
+			path: app/Livewire/Page/Bets/BetsListing.php
+
+		-
 			message: '#^Dynamic call to static method Illuminate\\Contracts\\Auth\\Guard\:\:user\(\)\.$#'
 			identifier: staticMethod.dynamicCall
 			count: 1
 			path: app/Livewire/Page/Bets/BetsListing.php
+
+		-
+			message: '#^Parameter \#1 \$value of function e expects BackedEnum\|float\|Illuminate\\Contracts\\Support\\DeferringDisplayableValue\|Illuminate\\Contracts\\Support\\Htmlable\|int\|string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Livewire/Page/Bets/BetsListing.php
+
+		-
+			message: '#^Cannot access offset ''key'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: app/Livewire/Page/Bets/Create.php
 
 		-
 			message: '#^Cannot cast mixed to float\.$#'
@@ -271,9 +841,27 @@ parameters:
 			path: app/Livewire/Page/Login.php
 
 		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Livewire/Page/MainPage.php
+
+		-
+			message: '#^Cannot access offset ''key'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 3
+			path: app/Livewire/Page/MainPage.php
+
+		-
 			message: '#^Dynamic call to static method Illuminate\\Contracts\\Auth\\Guard\:\:user\(\)\.$#'
 			identifier: staticMethod.dynamicCall
 			count: 1
+			path: app/Livewire/Page/MainPage.php
+
+		-
+			message: '#^Parameter \#1 \$value of function e expects BackedEnum\|float\|Illuminate\\Contracts\\Support\\DeferringDisplayableValue\|Illuminate\\Contracts\\Support\\Htmlable\|int\|string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 2
 			path: app/Livewire/Page/MainPage.php
 
 		-
@@ -415,6 +1003,18 @@ parameters:
 			path: app/Models/UserBet.php
 
 		-
+			message: '#^Method App\\Notifications\\BetClosed\:\:toDatabase\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Notifications/BetClosed.php
+
+		-
+			message: '#^Method App\\Notifications\\BetClosed\:\:via\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Notifications/BetClosed.php
+
+		-
 			message: '#^Method App\\Repositories\\Contracts\\BetRepositoryInterface\:\:paginateOpen\(\) return type with generic class Illuminate\\Pagination\\LengthAwarePaginator does not specify its types\: TKey, TValue$#'
 			identifier: missingType.generics
 			count: 1
@@ -505,19 +1105,37 @@ parameters:
 			path: app/Repositories/Eloquent/EloquentUserBetRepository.php
 
 		-
+			message: '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Builder\<Illuminate\\Database\\Eloquent\\Model\>\:\:first\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: app/Repositories/Eloquent/EloquentUserBetRepository.php
+
+		-
 			message: '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Builder\<Illuminate\\Database\\Eloquent\\Model\>\:\:latest\(\)\.$#'
 			identifier: staticMethod.dynamicCall
 			count: 2
 			path: app/Repositories/Eloquent/EloquentUserBetRepository.php
 
 		-
+			message: '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Builder\<Illuminate\\Database\\Eloquent\\Model\>\:\:whereHas\(\)\.$#'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: app/Repositories/Eloquent/EloquentUserBetRepository.php
+
+		-
 			message: '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Builder\<Illuminate\\Database\\Eloquent\\Model\>\:\:with\(\)\.$#'
 			identifier: staticMethod.dynamicCall
-			count: 3
+			count: 4
 			path: app/Repositories/Eloquent/EloquentUserBetRepository.php
 
 		-
 			message: '#^Method App\\Repositories\\Eloquent\\EloquentUserBetRepository\:\:findByOption\(\) should return Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\UserBet\> but returns Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Repositories/Eloquent/EloquentUserBetRepository.php
+
+		-
+			message: '#^Method App\\Repositories\\Eloquent\\EloquentUserBetRepository\:\:findForUserAndBet\(\) should return App\\Models\\UserBet\|null but returns Illuminate\\Database\\Eloquent\\Model\|null\.$#'
 			identifier: return.type
 			count: 1
 			path: app/Repositories/Eloquent/EloquentUserBetRepository.php
@@ -559,10 +1177,10 @@ parameters:
 			path: app/Repositories/Eloquent/EloquentUserRepository.php
 
 		-
-			message: '#^Parameter \#1 \$shortfall of static method App\\Exceptions\\BetException\:\:insufficientBalance\(\) expects int, float given\.$#'
-			identifier: argument.type
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$bet\.$#'
+			identifier: property.notFound
 			count: 1
-			path: app/Services/Betting/BettingValidationService.php
+			path: app/Services/User/TransactionHistoryService.php
 
 		-
 			message: '#^Cannot access property \$value on string\.$#'
@@ -571,10 +1189,16 @@ parameters:
 			path: app/Services/User/TransactionHistoryService.php
 
 		-
-			message: '#^Method App\\Services\\User\\UserBalanceService\:\:getAvailableBalance\(\) should return int but returns float\.$#'
-			identifier: return.type
+			message: '#^Cannot call method slugUrl\(\) on mixed\.$#'
+			identifier: method.nonObject
 			count: 1
-			path: app/Services/User/UserBalanceService.php
+			path: app/Services/User/TransactionHistoryService.php
+
+		-
+			message: '#^Class Pdo\\Mysql referenced with incorrect case\: PDO\\Mysql\.$#'
+			identifier: class.nameCase
+			count: 3
+			path: config/database.php
 
 		-
 			message: '#^Parameter \#1 \$string of function rtrim expects string, bool\|string given\.$#'

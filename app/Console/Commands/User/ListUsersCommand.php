@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Console\Commands\User;
 
 use App\Models\User;
+use App\Repositories\Contracts\UserRepositoryInterface;
 use Illuminate\Console\Command;
 
 final class ListUsersCommand extends Command
@@ -13,9 +14,14 @@ final class ListUsersCommand extends Command
 
     protected $description = 'List all users with their balance, admin status and organisation';
 
+    public function __construct(private UserRepositoryInterface $users)
+    {
+        parent::__construct();
+    }
+
     public function handle(): int
     {
-        $users = User::with('organisation')->withCount('userBets')->orderBy('created_at')->get();
+        $users = $this->users->allWithBetCount();
 
         if ($users->isEmpty()) {
             $this->info('No users found.');
@@ -28,8 +34,8 @@ final class ListUsersCommand extends Command
             $users->map(fn (User $user) => [
                 $user->name,
                 $user->email,
-                number_format($user->soapnuts).' 🌰',
-                $user->isAdmin() ? '✓' : '—',
+                number_format($user->soapnuts),
+                $user->isAdmin() ? 'yes' : 'no',
                 $user->organisation?->name ?? '—',
                 $user->user_bets_count,
                 $user->created_at?->format('Y-m-d'),

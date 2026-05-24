@@ -12,9 +12,4 @@ final readonly class CloseBetData
         public Bet $bet,
         public string $winningOptionId,
     ) {}
-
-    public static function make(Bet $bet, string $winningOptionId): self
-    {
-        return new self(bet: $bet, winningOptionId: $winningOptionId);
-    }
 }

@@ -21,6 +21,8 @@ interface UserBetRepositoryInterface
     /** @return Collection<int, UserBet> */
     public function recentForUser(User $user, int $limit = 10): Collection;
 
+    public function findForUserAndBet(User $user, Bet $bet): ?UserBet;
+
     public function countDistinctBettorsForBet(Bet $bet): int;
 
     /**

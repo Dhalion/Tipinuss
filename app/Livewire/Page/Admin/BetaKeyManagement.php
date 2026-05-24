@@ -23,6 +23,9 @@ final class BetaKeyManagement extends Component
     #[Validate('nullable|date|after:today')]
     public ?string $expiresAt = null;
 
+    #[Validate('nullable|integer|min:0')]
+    public ?string $startBalance = null;
+
     public bool $showCreateForm = false;
 
     public function mount(): void
@@ -40,6 +43,7 @@ final class BetaKeyManagement extends Component
             organisationId: $this->organisationId,
             customKey: $this->customKey !== '' ? $this->customKey : null,
             expiresAt: $this->expiresAt,
+            startBalance: $this->startBalance !== null && $this->startBalance !== '' ? (int) $this->startBalance : null,
         );
 
         $this->resetForm();
@@ -64,6 +68,7 @@ final class BetaKeyManagement extends Component
         $this->organisationId = '';
         $this->customKey = '';
         $this->expiresAt = null;
+        $this->startBalance = null;
         $this->showCreateForm = false;
     }
 

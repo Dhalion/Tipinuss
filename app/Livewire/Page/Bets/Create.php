@@ -99,7 +99,7 @@ final class Create extends Component
 
     private function buildCreateBetData(User $user): CreateBetData
     {
-        return CreateBetData::make(
+        return new CreateBetData(
             creator: $user,
             title: $this->title,
             description: $this->description !== '' ? $this->description : null,

@@ -32,7 +32,7 @@
 
             <div class="lg:col-span-2 space-y-4">
                 @forelse ($organisations as $organisation)
-                    <flux:card>
+                    <flux:card wire:key="org-{{ $organisation->id }}">
                         <div class="flex items-center justify-between mb-4">
                             <flux:heading size="lg">{{ $organisation->name }}</flux:heading>
                             <flux:button
@@ -52,7 +52,7 @@
                         @if ($organisation->users->isNotEmpty())
                             <div class="space-y-2 mb-4">
                                 @foreach ($organisation->users as $member)
-                                    <div class="flex items-center justify-between py-1">
+                                    <div wire:key="member-{{ $member->id }}" class="flex items-center justify-between py-1">
                                         <span class="text-sm text-zinc-700 dark:text-zinc-300">{{ $member->name }}</span>
                                         <flux:button
                                             wire:click="assignUserToOrganisation('{{ $member->id }}', '')"
@@ -80,7 +80,7 @@
                 <flux:heading size="lg" class="mb-4">{{ __('admin.organisations.assign_users') }}</flux:heading>
                 <div class="space-y-3">
                     @foreach ($allUsers as $user)
-                        <div class="flex items-center justify-between py-2 border-b border-zinc-100 dark:border-zinc-700 last:border-0">
+                        <div wire:key="all-user-{{ $user->id }}" class="flex items-center justify-between py-2 border-b border-zinc-100 dark:border-zinc-700 last:border-0">
                             <div>
                                 <span class="font-medium text-zinc-900 dark:text-white text-sm">{{ $user->name }}</span>
                                 <span class="ml-2 text-xs text-zinc-400 dark:text-zinc-500">{{ $user->email }}</span>
@@ -92,7 +92,7 @@
                             >
                                 <option value="">{{ __('admin.organisations.no_group') }}</option>
                                 @foreach ($organisations as $organisation)
-                                    <option
+                                    <option wire:key="org-{{ $organisation->id }}-assign"
                                         value="{{ $organisation->id }}"
                                         {{ $user->organisation_id === $organisation->id ? 'selected' : '' }}
                                     >

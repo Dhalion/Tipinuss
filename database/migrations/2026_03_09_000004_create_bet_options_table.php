@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('bet_options', function (Blueprint $table) {
@@ -20,14 +17,9 @@ return new class extends Migration
 
             $table->boolean('result')->nullable();
             $table->timestamps();
-
-            $table->index('bet_id');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('bet_options');

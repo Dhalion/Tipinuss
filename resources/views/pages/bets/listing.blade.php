@@ -11,7 +11,9 @@
 
         <div class="space-y-4">
             @forelse ($bets as $bet)
-                @include('components.bets.bet-listing-component', ['bet' => $bet])
+                <div wire:key="bet-{{ $bet->id }}">
+                    @include('components.bets.bet-listing-component', ['bet' => $bet])
+                </div>
             @empty
                 <flux:callout icon="information-circle" class="bg-zinc-100 dark:bg-zinc-800 border-zinc-300 dark:border-zinc-700">
                     <div class="space-y-3">

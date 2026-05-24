@@ -21,6 +21,7 @@ final class BetaAccessKey extends Model
         'organisation_id',
         'created_by_user_id',
         'expires_at',
+        'start_balance',
         'is_active',
     ];
 
@@ -29,6 +30,7 @@ final class BetaAccessKey extends Model
         return [
             'used_at' => 'datetime',
             'expires_at' => 'datetime',
+            'start_balance' => 'integer',
             'is_active' => 'boolean',
         ];
     }

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignUuid('used_by_user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignUuid('created_by_user_id')->constrained('users')->cascadeOnDelete();
             $table->timestamp('expires_at')->nullable();
+            $table->integer('start_balance')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

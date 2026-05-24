@@ -35,7 +35,7 @@ final class Register extends Component
         $this->validate();
 
         try {
-            $user = $action->execute(RegisterData::make(
+            $user = $action->execute(new RegisterData(
                 name: $this->name,
                 email: $this->email,
                 password: $this->password,

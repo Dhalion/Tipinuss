@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('bets', function (Blueprint $table) {
@@ -16,7 +13,7 @@ return new class extends Migration
             $table->foreignUuid('user_id')->constrained()->onDelete('cascade');
             $table->string('title');
             $table->text('description')->nullable();
-            $table->enum('status', ['open', 'closed'])->default('open');
+            $table->string('status', 20)->default('open');
             $table->boolean('dynamic_odds_enabled')->default(false);
             $table->timestamp('odds_last_updated_at')->nullable();
 
@@ -24,14 +21,10 @@ return new class extends Migration
             $table->timestamp('closed_at')->nullable();
             $table->timestamps();
 
-            $table->index('user_id');
             $table->index('status');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('bets');

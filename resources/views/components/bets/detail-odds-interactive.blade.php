@@ -9,10 +9,11 @@
     
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
         @foreach($sorted as $option)
-            <button 
+            <button
+                wire:key="option-{{ $option->id }}"
                 type="button"
-                wire:click="selectOption('{{ $option->id }}', '{{ addslashes($option->title) }}', {{ $option->odds }})"
-                class="group relative rounded-lg border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 px-6 py-6 text-center transition-all hover:border-zinc-400 dark:hover:border-zinc-500 hover:bg-zinc-50 dark:hover:bg-zinc-750 focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:ring-offset-2 dark:focus:ring-offset-zinc-900"
+                wire:click="selectOption('{{ $option->id }}', {{ json_encode($option->title) }}, {{ $option->odds }})"
+                class="group relative rounded-lg border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 px-6 py-6 text-center transition-all hover:border-zinc-400 dark:hover:border-zinc-500 hover:bg-zinc-50 dark:hover:bg-zinc-700 focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:ring-offset-2 dark:focus:ring-offset-zinc-900"
             >
                 <div class="text-sm font-medium text-zinc-600 dark:text-zinc-400 mb-2">{{ $option->title }}</div>
                 <div class="text-3xl font-bold text-zinc-900 dark:text-white">

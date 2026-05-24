@@ -15,5 +15,6 @@ final readonly class TransactionHistoryEntry
         public ?string $badgeLabel = null,
         public ?string $badgeColor = null,
         public ?string $createdAt = null,
+        public ?string $betRoute = null,
     ) {}
 }

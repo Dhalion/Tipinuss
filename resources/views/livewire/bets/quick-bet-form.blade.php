@@ -26,7 +26,7 @@
             </div>
 
             <div class="flex gap-2">
-                <flux:button variant="outline" class="flex-1">
+                <flux:button variant="outline" class="flex-1" @click="$dispatch('close-quick-bet')">
                     {{ __('bets.cancel') }}
                 </flux:button>
                 <flux:button variant="primary" class="flex-1" wire:click="placeBet" wire:loading.attr="disabled">

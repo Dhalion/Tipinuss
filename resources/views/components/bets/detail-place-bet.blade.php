@@ -5,14 +5,14 @@
 
     @if($bet->status === \App\Enums\BetStatus::Open)
 
-        <form class="space-y-4">
+        <form wire:submit="placeBet" class="space-y-4">
             <div class="space-y-2">
                 <flux:label>{{ __('bets.select_option') }}</flux:label>
                 <div class="space-y-2">
                     @foreach($bet->betOptions as $option)
-                        <label class="flex items-center justify-between rounded-lg border border-zinc-200 dark:border-zinc-700 px-3 py-2.5 cursor-pointer hover:bg-zinc-50 dark:hover:bg-zinc-800 has-[:checked]:border-primary-500 has-[:checked]:bg-primary-100 dark:has-[:checked]:bg-primary-900">
+                        <label wire:key="placebet-option-{{ $option->id }}" class="flex items-center justify-between rounded-lg border border-zinc-200 dark:border-zinc-700 px-3 py-2.5 cursor-pointer hover:bg-zinc-50 dark:hover:bg-zinc-800 has-[:checked]:border-primary-500 has-[:checked]:bg-primary-100 dark:has-[:checked]:bg-primary-900">
                             <span class="flex items-center gap-2">
-                                <input type="radio" name="bet_option_id" value="{{ $option->id }}" class="accent-primary-500">
+                                <input type="radio" name="bet_option_id" wire:model="optionId" value="{{ $option->id }}" class="accent-primary-500">
                                 <span class="text-sm text-zinc-800 dark:text-zinc-200">{{ $option->title }}</span>
                             </span>
                             <span class="text-sm font-semibold text-zinc-900 dark:text-white">{{ number_format($option->odds, 2) }}x</span>
@@ -23,7 +23,7 @@
 
             <flux:input
                 type="number"
-                name="amount"
+                wire:model="amount"
                 min="1"
                 label="{{ __('bets.stake_amount') }}"
                 placeholder="{{ __('bets.stake_placeholder') }}"
@@ -34,7 +34,7 @@
                 <span class="font-semibold text-zinc-900 dark:text-white">— 🌰</span>
             </div>
 
-            <flux:button variant="primary" class="w-full">{{ __('bets.place_bet') }}</flux:button>
+            <flux:button type="submit" variant="primary" class="w-full">{{ __('bets.place_bet') }}</flux:button>
         </form>
 
     @else

@@ -15,7 +15,7 @@ final class EloquentUserBetRepository implements UserBetRepositoryInterface
 {
     public function findByOption(BetOption $option): Collection
     {
-        return $option->userBets()->with('user')->get();
+        return $option->userBets()->with(['user', 'betOption.bet'])->get();
     }
 
     public function recentForBet(Bet $bet, int $limit = 20): Collection
@@ -45,6 +45,14 @@ final class EloquentUserBetRepository implements UserBetRepositoryInterface
         return UserBet::with('betOption.bet')
             ->whereIn('id', $ids)
             ->get();
+    }
+
+    public function findForUserAndBet(User $user, Bet $bet): ?UserBet
+    {
+        return $user->userBets()
+            ->whereHas('betOption', fn ($q) => $q->where('bet_id', $bet->id))
+            ->with(['betOption', 'betOption.bet'])
+            ->first();
     }
 
     public function countDistinctBettorsForBet(Bet $bet): int

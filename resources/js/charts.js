@@ -1,6 +1,11 @@
 import ApexCharts from 'apexcharts';
 
 export function initBalanceChart(el) {
+    if (el._chartInstance) {
+        el._chartInstance.destroy();
+        el._chartInstance = null;
+    }
+
     const data = JSON.parse(el.dataset.chartData || '[]');
 
     if (data.length < 2) {
@@ -8,9 +13,7 @@ export function initBalanceChart(el) {
         return;
     }
 
-    if (el._chartInstance) {
-        el._chartInstance.destroy();
-    }
+    el.innerHTML = '';
 
     const style = getComputedStyle(document.documentElement);
     const primaryColor = style.getPropertyValue('--color-primary-500').trim() || '#7b1fa2';
@@ -61,7 +64,9 @@ export function initBalanceChart(el) {
             axisTicks: { show: false },
         },
         yaxis: {
+            show: false,
             labels: {
+                show: false,
                 formatter: (val) => val.toLocaleString(locale),
                 style: { colors: '#a1a1aa', fontSize: '12px' },
             },

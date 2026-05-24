@@ -1,5 +1,5 @@
 <div 
-    class="flex-1 flex flex-col bg-zinc-900 text-white"
+    class="flex-1 flex flex-col bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-white"
     x-data="{
         placeBet: {
             show: false,
@@ -30,6 +30,14 @@
 
     @include('components.bets.detail-header-with-controls', ['bet' => $bet, 'canCloseBet' => $canCloseBet, 'organisations' => $organisations])
 
+    @if($bet->isClosed() && $userBet !== null)
+        <div class="px-4 lg:px-6 pt-6 sm:pt-8">
+            <div class="max-w-6xl mx-auto">
+                @include('components.bets.result-card', ['userBet' => $userBet, 'bet' => $bet])
+            </div>
+        </div>
+    @endif
+
     <div class="flex-1 px-4 lg:px-6 py-8 sm:py-12">
         <div class="max-w-6xl mx-auto">
             
@@ -40,31 +48,32 @@
                     @php /** @var \App\Models\BetOption $option */ @endphp
                     @foreach($optionsByOdds as $option)
                         @if($bet->isOpen())
-                            <button 
+                            <button
+                                wire:key="option-odds-{{ $option->id }}"
                                 type="button"
-                                @click="placeBet.open('{{ $option->id }}', '{{ addslashes($option->title) }}', {{ $option->odds }})"
-                                class="group relative overflow-hidden rounded-xl border border-primary-700/50 bg-primary-700/20 px-6 py-8 text-center transition-all duration-200 hover:border-gold-400 hover:shadow-lg hover:shadow-gold-500/25 focus:outline-none focus:ring-2 focus:ring-primary-700 focus:ring-offset-2 focus:ring-offset-zinc-900"
+                                @click="placeBet.open('{{ $option->id }}', {{ json_encode($option->title) }}, {{ $option->odds }})"
+                                class="group relative overflow-hidden rounded-xl border border-primary-200 dark:border-primary-700/50 bg-primary-50 dark:bg-primary-700/20 px-4 py-5 sm:px-6 sm:py-8 text-center transition-all duration-200 hover:border-gold-400 hover:shadow-lg hover:shadow-gold-500/25 focus:outline-none focus:ring-2 focus:ring-primary-700 focus:ring-offset-2 focus:ring-offset-zinc-50 dark:focus:ring-offset-zinc-900"
                             >
-                                <div class="absolute inset-0 bg-primary-700/5 opacity-0 transition-opacity group-hover:opacity-100"></div>
+                                <div class="absolute inset-0 bg-primary-950/5 dark:bg-primary-700/5 opacity-0 transition-opacity group-hover:opacity-100"></div>
                                 <div class="relative">
-                                    <div class="text-sm font-medium text-primary-200 mb-3">{{ $option->title }}</div>
-                                    <div class="text-4xl font-bold text-gold-300 mb-2">
-                                        {{ number_format($option->odds, 2) }}<span class="text-lg text-gold-400">x</span>
+                                    <div class="text-sm font-medium text-primary-700 dark:text-primary-200 mb-3">{{ $option->title }}</div>
+                                    <div class="text-4xl font-bold text-gold-600 dark:text-gold-300 mb-2">
+                                        {{ number_format($option->odds, 2) }}<span class="text-lg text-gold-500 dark:text-gold-400">x</span>
                                     </div>
-                                    <div class="flex items-center justify-center gap-2 text-xs text-zinc-400 mt-4">
+                                    <div class="flex items-center justify-center gap-2 text-xs text-zinc-500 dark:text-zinc-400 mt-4">
                                         <span class="w-1.5 h-1.5 rounded-full bg-primary-600"></span>
                                         {{ count($option->userBets) }} {{ __('bets.bets_placed') }}
                                     </div>
                                 </div>
                             </button>
                         @else
-                            <div class="relative overflow-hidden rounded-xl border border-zinc-700/50 bg-zinc-800/40 px-6 py-8 text-center opacity-70">
-                                <div class="text-sm font-medium text-zinc-300 mb-3">{{ $option->title }}</div>
-                                <div class="text-4xl font-bold text-zinc-400 mb-2">
+                            <div class="relative overflow-hidden rounded-xl border border-zinc-300 dark:border-zinc-700/50 bg-zinc-100 dark:bg-zinc-800/40 px-4 py-5 sm:px-6 sm:py-8 text-center opacity-70">
+                                <div class="text-sm font-medium text-zinc-600 dark:text-zinc-300 mb-3">{{ $option->title }}</div>
+                                <div class="text-4xl font-bold text-zinc-400 dark:text-zinc-400 mb-2">
                                     {{ number_format($option->odds, 2) }}<span class="text-lg text-zinc-500">x</span>
                                 </div>
-                                <div class="flex items-center justify-center gap-2 text-xs text-zinc-500 mt-4">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-zinc-500"></span>
+                                <div class="flex items-center justify-center gap-2 text-xs text-zinc-400 dark:text-zinc-500 mt-4">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-zinc-400 dark:bg-zinc-500"></span>
                                     {{ count($option->userBets) }} {{ __('bets.bets_placed') }}
                                 </div>
                             </div>
@@ -73,7 +82,7 @@
                 </div>
             </div>
 
-            <div class="border-t border-zinc-700 pt-8">
+            <div class="border-t border-zinc-300 dark:border-zinc-700 pt-8">
                 @livewire('bets.placed-bets-feed', ['betId' => $bet->id], key('placed-bets-feed-' . $bet->id))
             </div>
             
@@ -275,10 +284,10 @@
 @php /** @var \App\Models\BetOption $option */ @endphp
 @foreach($optionsByBets as $option)
                             <button
+                                wire:key="option-bets-{{ $option->id }}"
                                 type="button"
                                 wire:click="executeCloseBet('{{ $option->id }}')"
                                 wire:loading.attr="disabled"
-                                wire:target="executeCloseBet('{{ $option->id }}')"
                                 class="group w-full rounded-xl border border-zinc-600 bg-zinc-800/50 px-4 py-4 text-left transition hover:border-red-400/60 hover:bg-red-900/20 disabled:cursor-not-allowed disabled:opacity-60 focus:outline-none focus:ring-2 focus:ring-red-500/50"
                             >
                                 <div class="flex items-center justify-between gap-3">
@@ -287,7 +296,7 @@
                                 </div>
                                 <div class="mt-1 text-xs text-zinc-400">
                                     {{ $option->userBets->count() }} {{ __('bets.bets_placed') }}
-                                    <span wire:loading wire:target="executeCloseBet('{{ $option->id }}')" class="ml-2 inline-flex items-center gap-1 text-red-400">
+                                    <span wire:loading class="ml-2 inline-flex items-center gap-1 text-red-400">
                                         <svg class="h-3 w-3 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                                         </svg>

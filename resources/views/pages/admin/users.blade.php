@@ -36,8 +36,8 @@
 
         @if ($errors->any())
             <flux:callout icon="exclamation-triangle" variant="danger" class="mb-6">
-                @foreach ($errors->all() as $error)
-                    <flux:text>{{ $error }}</flux:text>
+                @foreach ($errors->all() as $index => $error)
+                    <flux:text wire:key="error-{{ $index }}">{{ $error }}</flux:text>
                 @endforeach
             </flux:callout>
         @endif
@@ -57,7 +57,7 @@
             </flux:table.columns>
             <flux:table.rows>
                 @foreach ($users as $user)
-                    <flux:table.row>
+                    <flux:table.row wire:key="user-{{ $user->id }}">
                         <flux:table.cell class="align-middle">
                             <div class="font-medium text-zinc-900 dark:text-white">{{ $user->name }}</div>
                             <div class="text-xs text-zinc-500 dark:text-zinc-400 truncate max-w-[180px]">{{ $user->email }}</div>
@@ -111,7 +111,7 @@
                                 >
                                     <option value="">{{ __('admin.organisations.none') }}</option>
                                     @foreach ($organisations as $org)
-                                        <option value="{{ $org->id }}" {{ $user->organisation_id === $org->id ? 'selected' : '' }}>
+                                        <option wire:key="org-{{ $org->id }}-user-{{ $user->id }}" value="{{ $org->id }}" {{ $user->organisation_id === $org->id ? 'selected' : '' }}>
                                             {{ $org->name }}
                                         </option>
                                     @endforeach

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands\User;
 
-use App\Models\User;
+use App\Repositories\Contracts\UserRepositoryInterface;
 use Illuminate\Console\Command;
 
 final class RevokeAdminCommand extends Command
@@ -13,9 +13,14 @@ final class RevokeAdminCommand extends Command
 
     protected $description = 'Revoke admin privileges from a user';
 
+    public function __construct(private UserRepositoryInterface $users)
+    {
+        parent::__construct();
+    }
+
     public function handle(): int
     {
-        $user = User::where('email', $this->argument('email'))->first();
+        $user = $this->users->findByEmail($this->argument('email'));
 
         if ($user === null) {
             $this->error("No user found with email '{$this->argument('email')}'.");
@@ -30,9 +35,9 @@ final class RevokeAdminCommand extends Command
         }
 
         $user->is_admin = false;
-        $user->save();
+        $this->users->save($user);
 
-        $this->info("✓ Admin privileges revoked from {$user->email}.");
+        $this->info("Admin privileges revoked from {$user->email}.");
 
         return self::SUCCESS;
     }

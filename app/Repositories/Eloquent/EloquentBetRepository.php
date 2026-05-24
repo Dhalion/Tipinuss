@@ -20,12 +20,13 @@ final class EloquentBetRepository implements BetRepositoryInterface
 
     public function findByIdOrFail(string $id): Bet
     {
-        return Bet::with('betOptions.userBets', 'creator')->findOrFail($id);
+        return Bet::with(['betOptions.userBets', 'creator'])->findOrFail($id);
     }
 
     public function paginateOpen(int $perPage = 15): LengthAwarePaginator
     {
-        return Bet::with(['creator', 'betOptions', 'userBets'])
+        return Bet::with(['creator', 'betOptions'])
+            ->withCount('userBets')
             ->where('status', '!=', BetStatus::Closed)
             ->latest()
             ->paginate($perPage);
@@ -34,7 +35,8 @@ final class EloquentBetRepository implements BetRepositoryInterface
     /** @return LengthAwarePaginator<int, Bet> */
     public function paginateOpenForUser(User $user, int $perPage = 15): LengthAwarePaginator
     {
-        $query = Bet::with(['creator', 'betOptions', 'userBets'])
+        $query = Bet::with(['creator', 'betOptions'])
+            ->withCount('userBets')
             ->where('status', '!=', BetStatus::Closed);
 
         if (! $user->isAdmin()) {
@@ -47,7 +49,8 @@ final class EloquentBetRepository implements BetRepositoryInterface
     /** @return LengthAwarePaginator<int, Bet> */
     public function paginateForListing(int $perPage = 15): LengthAwarePaginator
     {
-        return Bet::with(['creator', 'betOptions', 'userBets'])
+        return Bet::with(['creator', 'betOptions'])
+            ->withCount('userBets')
             ->latest()
             ->paginate($perPage);
     }
@@ -55,7 +58,8 @@ final class EloquentBetRepository implements BetRepositoryInterface
     /** @return LengthAwarePaginator<int, Bet> */
     public function paginateForListingForUser(User $user, int $perPage = 15): LengthAwarePaginator
     {
-        $query = Bet::with(['creator', 'betOptions', 'userBets']);
+        $query = Bet::with(['creator', 'betOptions'])
+            ->withCount('userBets');
 
         if (! $user->isAdmin()) {
             $query->where('organisation_id', $user->organisation_id);

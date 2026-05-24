@@ -11,11 +11,11 @@ final class UserBalanceService
 {
     public function decrementBalance(User $user, int $amount): void
     {
-        $decremented = $user->decrement('soapnuts', $amount);
-
-        if ($decremented === 0) {
-            throw BetException::balanceDecrementFailed();
+        if ($user->soapnuts < $amount) {
+            throw BetException::insufficientBalance($amount - $user->soapnuts);
         }
+
+        $user->decrement('soapnuts', $amount);
     }
 
     public function incrementBalance(User $user, int $amount): void

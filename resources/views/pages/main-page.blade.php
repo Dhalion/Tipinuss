@@ -7,7 +7,7 @@
                     <div class="flex justify-center order-first">
                         <img
                             class="w-full max-w-xs sm:max-w-sm lg:max-w-md object-contain drop-shadow-2xl"
-                            src="{{ URL::asset('images/tipinuss-thron.webp') }}"
+                            src="{{ URL::asset('images/tipinuss-waschnusskönig-winning.webp') }}"
                             alt="{{ __('app.title') }}" />
                     </div>
 
@@ -40,7 +40,7 @@
                 </div>
             </div>
 
-            <div class="border-t border-zinc-200 dark:border-zinc-700 py-20 space-y-16">
+            <div class="border-t border-zinc-200 dark:border-zinc-700 py-12 sm:py-20 space-y-16">
                 @if($recentBets->count() > 0)
                     <div class="space-y-8">
                         <div>
@@ -52,9 +52,11 @@
                             </p>
                         </div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                             @foreach($recentBets as $bet)
-                                @include('components.bets.bet-listing-component', ['bet' => $bet])
+                                <div wire:key="bet-{{ $bet->id }}">
+                                    @include('components.bets.bet-listing-component', ['bet' => $bet])
+                                </div>
                             @endforeach
                         </div>
 

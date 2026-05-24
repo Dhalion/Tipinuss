@@ -1,4 +1,4 @@
-<flux:header container class="bg-zinc-50 dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-700">
+<flux:header container class="bg-zinc-50 dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-700 sticky top-0 z-30">
     <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
 
     <flux:brand href="{{ route('main') }}"
@@ -7,6 +7,8 @@
                 wire:navigate.hover/>
 
     <flux:navbar class="-mb-px max-lg:hidden">
+        <flux:navbar.item href="{{ route('main') }}"
+                          wire:navigate.hover>{{ __('app.navigation.home') }}</flux:navbar.item>
         @auth
             @if(auth()->user()->isApproved())
                 <flux:navbar.item href="{{ route('bets.list') }}"
@@ -19,9 +21,6 @@
                 @endif
             @endif
         @endauth
-
-        <flux:navbar.item href="{{ route('main') }}"
-                          wire:navigate.hover>{{ __('app.navigation.home') }}</flux:navbar.item>
     </flux:navbar>
 
     <flux:spacer/>
@@ -31,6 +30,7 @@
             <span class="text-sm text-gold-400 mr-2 whitespace-nowrap font-semibold">
                 @livewire('soapnuts-balance')
             </span>
+            @livewire('notification-bell', key('notification-bell'))
             <flux:dropdown>
                 <flux:profile name="{{ Auth::user()->name }}" class="max-lg:hidden"/>
                 <flux:menu>

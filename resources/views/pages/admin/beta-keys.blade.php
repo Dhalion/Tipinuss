@@ -19,7 +19,7 @@
                     <flux:select wire:model="organisationId" label="{{ __('admin.beta_keys.organisation_label') }}" required>
                         <option value="">{{ __('admin.beta_keys.organisation_placeholder') }}</option>
                         @foreach ($organisations as $org)
-                            <option value="{{ $org->id }}">{{ $org->name }}</option>
+                            <option wire:key="org-{{ $org->id }}" value="{{ $org->id }}">{{ $org->name }}</option>
                         @endforeach
                     </flux:select>
 
@@ -28,6 +28,9 @@
 
                     <flux:input wire:model="expiresAt" label="{{ __('admin.beta_keys.expires_label') }}" type="date"
                         hint="{{ __('admin.beta_keys.expires_hint') }}" />
+
+                    <flux:input wire:model="startBalance" label="{{ __('admin.beta_keys.start_balance_label') }}" type="number" min="0"
+                        hint="{{ __('admin.beta_keys.start_balance_hint') }}" />
 
                     <div class="flex gap-2 justify-end pt-2">
                         <flux:button wire:click="$set('showCreateForm', false)" variant="ghost">
@@ -56,6 +59,7 @@
                             <flux:table.column class="w-[100px]">{{ __('admin.beta_keys.table.status') }}</flux:table.column>
                             <flux:table.column class="w-[150px]">{{ __('admin.beta_keys.table.used_by') }}</flux:table.column>
                             <flux:table.column class="w-[100px]">{{ __('admin.beta_keys.table.expires') }}</flux:table.column>
+                            <flux:table.column class="w-[100px]">{{ __('admin.beta_keys.table.start_balance') }}</flux:table.column>
                             <flux:table.column class="w-[120px]">{{ __('admin.beta_keys.table.created') }}</flux:table.column>
                             <flux:table.column class="text-right w-[60px]">{{ __('admin.beta_keys.table.actions') }}</flux:table.column>
                         </flux:table.columns>
@@ -65,7 +69,7 @@
                                 @php
                                     $status = $key->isValid() ? 'available' : (\is_null($key->used_at) ? 'inactive' : 'used');
                                 @endphp
-                                <flux:table.row>
+                                <flux:table.row wire:key="key-{{ $key->id }}">
                                     <flux:table.cell class="align-middle">
                                         <code class="font-mono text-sm font-semibold text-zinc-900 dark:text-white">
                                             {{ $key->key }}
@@ -92,6 +96,10 @@
 
                                     <flux:table.cell class="align-middle text-sm text-zinc-500 dark:text-zinc-400">
                                         {{ $key->expires_at?->format('d.m.Y') ?? '—' }}
+                                    </flux:table.cell>
+
+                                    <flux:table.cell class="align-middle text-sm text-zinc-900 dark:text-white font-semibold">
+                                        {{ $key->start_balance !== null ? number_format($key->start_balance, 0) . ' 🌰' : '—' }}
                                     </flux:table.cell>
 
                                     <flux:table.cell class="align-middle text-sm text-zinc-500 dark:text-zinc-400 whitespace-nowrap">

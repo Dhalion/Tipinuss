@@ -94,20 +94,18 @@
         </div>
 
         <flux:card class="mb-8">
-            <div class="px-5 pt-5 pb-1">
-                <div class="flex items-center gap-2 mb-1">
-                    <flux:icon name="presentation-chart-bar" class="h-5 w-5 text-primary-600 dark:text-primary-400" />
-                    <h3 class="text-base font-semibold text-zinc-900 dark:text-white">
-                        {{ __('account.balance_chart_title') }}
-                    </h3>
-                </div>
+            <div class="flex items-center gap-2 mb-3">
+                <flux:icon name="presentation-chart-bar" class="h-5 w-5 text-primary-600 dark:text-primary-400" />
+                <h3 class="text-base font-semibold text-zinc-900 dark:text-white">
+                    {{ __('account.balance_chart_title') }}
+                </h3>
             </div>
             <div
                 data-balance-chart
                 data-chart-data="{{ $chartDataJson }}"
                 data-series-name="{{ __('account.balance') }}"
                 data-empty-text="{{ __('account.balance_chart_empty') }}"
-                class="w-full px-1 pb-2"
+                class="w-full"
             >
                 <div class="flex items-center justify-center h-80">
                     <svg class="h-6 w-6 animate-spin text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -125,30 +123,36 @@
                 </div>
 
                 <div class="space-y-2">
-                    @php /** @var \App\DTOs\TransactionHistoryEntry $entry */ @endphp
+                    @php /** @var \App\DTOs\Account\TransactionHistoryEntry $entry */ @endphp
                     @foreach ($historyEntries as $entry)
-                        wire:key="entry-{{ $entry->id }}"
-                        <flux:card>
-                            <div class="flex items-center justify-between gap-4">
-                                <div class="flex-1 min-w-0">
-                                    <p class="font-medium text-zinc-900 dark:text-white truncate">
-                                        {{ $entry->description }}
-                                    </p>
-                                    <p class="text-xs text-zinc-400 mt-0.5 flex items-center gap-1">
-                                        <flux:icon name="clock" class="h-3 w-3" />
-                                        {{ $entry->createdAt ? \Carbon\Carbon::parse($entry->createdAt)->diffForHumans() : '' }}
-                                    </p>
-                                </div>
-                                <div class="text-right shrink-0 space-y-1">
-                                    <div class="font-bold {{ $entry->amount >= 0 ? 'text-gold-600 dark:text-gold-400' : 'text-red-600 dark:text-red-400' }}">
-                                        {{ $entry->amount >= 0 ? '+' : '' }}{{ number_format($entry->amount) }} 🌰
+                        @if($entry->betRoute)
+                            <a href="{{ $entry->betRoute }}" wire:navigate.hover class="block transition hover:opacity-80">
+                        @endif
+                            <flux:card wire:key="entry-{{ $entry->id }}"
+                                @class(['hover:shadow-md hover:border-primary-500/50' => $entry->betRoute])>
+                                <div class="flex items-center justify-between gap-4">
+                                    <div class="flex-1 min-w-0">
+                                        <p class="font-medium text-zinc-900 dark:text-white truncate">
+                                            {{ $entry->description }}
+                                        </p>
+                                        <p class="text-xs text-zinc-400 mt-0.5 flex items-center gap-1">
+                                            <flux:icon name="clock" class="h-3 w-3" />
+                                            {{ $entry->createdAt ? \Carbon\Carbon::parse($entry->createdAt)->diffForHumans() : '' }}
+                                        </p>
                                     </div>
-                                    <flux:badge size="sm" :color="$entry->badgeColor">
-                                        {{ $entry->badgeLabel }}
-                                    </flux:badge>
+                                    <div class="text-right shrink-0 space-y-1">
+                                        <div class="font-bold {{ $entry->amount >= 0 ? 'text-gold-600 dark:text-gold-400' : 'text-red-600 dark:text-red-400' }}">
+                                            {{ $entry->amount >= 0 ? '+' : '' }}{{ number_format($entry->amount) }} 🌰
+                                        </div>
+                                        <flux:badge size="sm" :color="$entry->badgeColor">
+                                            {{ $entry->badgeLabel }}
+                                        </flux:badge>
+                                    </div>
                                 </div>
-                            </div>
-                        </flux:card>
+                            </flux:card>
+                        @if($entry->betRoute)
+                            </a>
+                        @endif
                     @endforeach
                 </div>
             </div>

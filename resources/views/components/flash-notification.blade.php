@@ -13,7 +13,7 @@
                         {{ session('success') }}
                     </p>
                 </div>
-                <button @click="document.currentScript.parentElement.parentElement.remove()"
+                <button @click="$el.closest('[x-data]').remove()"
                         class="text-green-400 hover:text-green-600">
                     <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd"
@@ -39,7 +39,7 @@
                         {{ session('error') }}
                     </p>
                 </div>
-                <button @click="document.currentScript.parentElement.parentElement.remove()"
+                <button @click="$el.closest('[x-data]').remove()"
                         class="text-red-400 hover:text-red-600">
                     <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd"

@@ -7,8 +7,8 @@
     <flux:card>
         <form wire:submit="createBet" class="space-y-6">
             <div class="space-y-4">
-                <flux:input wire:model="title" label="{{ __('app.bet.title') }}"
-                    placeholder="{{ __('app.bet.title_placeholder') }}" wire:model.live.debounce.250ms required />
+                <flux:input wire:model.live.debounce.250ms="title" label="{{ __('app.bet.title') }}"
+                    placeholder="{{ __('app.bet.title_placeholder') }}" required />
 
                 <flux:textarea wire:model="description" label="{{ __('app.bet.description') }}"
                     placeholder="{{ __('app.bet.description_placeholder') }}" rows="4" />
@@ -26,7 +26,9 @@
 
                 <div class="space-y-4">
                     @foreach ($options as $index => $option)
-                        @include('components.bets.bet-option', ['index' => $index, 'key' => $index, 'optionCount' => $optionCount, 'manual_odds' => $manualOdds])
+                        <div wire:key="option-{{ $index }}">
+                            @include('components.bets.bet-option', ['index' => $index, 'key' => $index, 'optionCount' => $optionCount, 'manual_odds' => $manualOdds])
+                        </div>
                     @endforeach
                 </div>
                 <flux:button type="button" wire:click="addOption" variant="outline" class="w-full">

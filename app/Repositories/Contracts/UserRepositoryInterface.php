@@ -11,6 +11,8 @@ interface UserRepositoryInterface
 {
     public function findById(string $id): ?User;
 
+    public function findByEmail(string $email): ?User;
+
     /** @return Collection<int, User> */
     public function all(): Collection;
 

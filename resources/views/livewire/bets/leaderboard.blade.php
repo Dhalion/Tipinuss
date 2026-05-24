@@ -16,7 +16,7 @@
 
                 <flux:table.rows>
                     @forelse($topBettors as $index => $bettor)
-                        <flux:table.row>
+                        <flux:table.row wire:key="bettor-{{ $bettor->id }}">
                             <flux:table.cell class="align-middle">
                                 <span class="font-bold text-zinc-900 dark:text-white">
                                     @if($index === 0) 🥇

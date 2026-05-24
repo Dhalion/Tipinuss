@@ -88,6 +88,10 @@ final class TransactionHistoryService
         if ($placedTransaction !== null) {
             $betDescription = $placedTransaction->description ?? __('account.bet_unknown');
 
+            $betRoute = $userBet?->betOption?->bet !== null
+                ? route('bets.detail', ['bet' => $userBet->betOption->bet->slugUrl()])
+                : null;
+
             if ($wonTransaction !== null) {
                 $placedAmount = $placedTransaction->amount;
                 $wonAmount = $wonTransaction->amount;
@@ -102,6 +106,7 @@ final class TransactionHistoryService
                     badgeLabel: __('bets.won'),
                     badgeColor: 'green',
                     createdAt: $placedTransaction->created_at?->toIso8601String(),
+                    betRoute: $betRoute,
                 );
             }
 
@@ -115,6 +120,7 @@ final class TransactionHistoryService
                     badgeLabel: __('bets.lost'),
                     badgeColor: 'red',
                     createdAt: $placedTransaction->created_at?->toIso8601String(),
+                    betRoute: $betRoute,
                 );
             }
 
@@ -127,6 +133,7 @@ final class TransactionHistoryService
                 badgeLabel: __('bets.pending'),
                 badgeColor: 'amber',
                 createdAt: $placedTransaction->created_at?->toIso8601String(),
+                betRoute: $betRoute,
             );
         }
 

@@ -13,6 +13,7 @@ use App\DTOs\Betting\PlaceBetData;
 use App\Exceptions\BetException;
 use App\Models\Bet;
 use App\Models\BetOption;
+use App\Models\UserBet;
 use App\Repositories\Contracts\BetOptionRepositoryInterface;
 use App\Repositories\Contracts\BetRepositoryInterface;
 use App\Repositories\Contracts\OrganisationRepositoryInterface;
@@ -98,7 +99,7 @@ final class BetDetail extends Component
                 throw BetException::optionNotFound();
             }
 
-            $data = PlaceBetData::make(user: $user, option: $option, amount: (int) $validated['amount']);
+            $data = new PlaceBetData(user: $user, option: $option, amount: (int) $validated['amount']);
             $action->execute($data);
 
             $winnings = $calculation->calculatePotentialWinnings($option, (int) $validated['amount']);
@@ -123,7 +124,7 @@ final class BetDetail extends Component
             return;
         }
 
-        $action->execute(CloseBetData::make(bet: $bet, winningOptionId: $winningOptionId));
+        $action->execute(new CloseBetData(bet: $bet, winningOptionId: $winningOptionId));
 
         Flux::toast(variant: 'success', text: __('bets.closed_success'));
         $this->redirect(route('bets.list'), navigate: true);
@@ -161,6 +162,19 @@ final class BetDetail extends Component
         $action->execute($bet, $organisation);
     }
 
+    #[Computed]
+    public function userBet(): ?UserBet
+    {
+        $user = auth()->user();
+
+        if ($user === null) {
+            return null;
+        }
+
+        return app(UserBetRepositoryInterface::class)
+            ->findForUserAndBet($user, $this->bet());
+    }
+
     /** @return Collection<int, BetOption> */
     #[Computed]
     public function optionsByOdds(): Collection
@@ -183,6 +197,7 @@ final class BetDetail extends Component
             'organisations' => $organisations->findAll(),
             'optionsByOdds' => $this->optionsByOdds(),
             'optionsByBets' => $this->optionsByBets(),
+            'userBet' => $this->userBet(),
         ]);
     }
 }

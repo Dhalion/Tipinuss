@@ -7,6 +7,10 @@
     </flux:sidebar.header>
 
     <flux:sidebar.nav>
+        <flux:sidebar.item href="{{ route('main') }}" icon="home" wire:navigate.hover>
+            {{ __('app.navigation.home') }}
+        </flux:sidebar.item>
+
         @auth
             @if(auth()->user()->isApproved())
                 <flux:sidebar.item href="{{ route('bets.list') }}" icon="list-bullet" wire:navigate.hover>
@@ -34,10 +38,6 @@
                 {{ __('app.navigation.register') }}
             </flux:sidebar.item>
         @endguest
-
-        <flux:sidebar.item href="{{ route('main') }}" icon="home" wire:navigate.hover>
-            {{ __('app.navigation.home') }}
-        </flux:sidebar.item>
     </flux:sidebar.nav>
 
     <flux:sidebar.spacer />

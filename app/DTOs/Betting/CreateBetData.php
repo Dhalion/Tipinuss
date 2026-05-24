@@ -13,32 +13,11 @@ final readonly class CreateBetData
      * @param  array<int, BetOptionData>  $options
      */
     public function __construct(
-        public readonly User $creator,
-        public readonly string $title,
-        public readonly ?string $description,
-        public readonly ?CarbonImmutable $expiresAt,
-        public readonly array $options,
-        public readonly ?string $organisationId,
+        public User $creator,
+        public string $title,
+        public ?string $description,
+        public ?CarbonImmutable $expiresAt,
+        public array $options,
+        public ?string $organisationId,
     ) {}
-
-    /**
-     * @param  array<int, BetOptionData>  $options
-     */
-    public static function make(
-        User $creator,
-        string $title,
-        ?string $description,
-        ?CarbonImmutable $expiresAt,
-        array $options,
-        ?string $organisationId,
-    ): self {
-        return new self(
-            creator: $creator,
-            title: $title,
-            description: $description,
-            expiresAt: $expiresAt,
-            options: $options,
-            organisationId: $organisationId,
-        );
-    }
 }
