@@ -23,6 +23,7 @@
 - MUST match existing project patterns (search repo first).
 - MUST deliver complete solutions — no stubs, placeholders, `// TODO`.
 - MUST verify: syntax check (`php -l`), route list, `composer lint:blade`, tests.
+- MUST use `composer test:ai` to run tests (token-optimized output).
 - MUST NOT add speculative code (YAGNI) or refactor unrelated code.
 
 ---
@@ -77,6 +78,8 @@ app/
 
 ```bash
 composer test              # phpunit
+composer test:ai           # phpunit (token-optimized for AI agents: compact, no ANSI, no TTY)
+composer coverage          # phpunit with code coverage
 composer lint              # pint + phpstan + bladestan
 ./vendor/bin/phpstan analyse
 ./vendor/bin/pint --test
