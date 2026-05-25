@@ -32,6 +32,7 @@ final class AdjustUserBalanceAction
                 user: $target,
                 type: TransactionType::AdminAdjustment,
                 amount: $adjustment,
+                balanceAfter: $target->soapnuts,
                 description: $description,
             );
         });

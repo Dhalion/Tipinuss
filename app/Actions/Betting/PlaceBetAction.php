@@ -50,6 +50,7 @@ final class PlaceBetAction
                 user: $data->user,
                 type: TransactionType::BetPlaced,
                 amount: -$data->amount,
+                balanceAfter: $data->user->soapnuts,
                 userBetId: $savedUserBet->id,
                 description: $data->option->bet->title.' — '.$data->option->title,
             );

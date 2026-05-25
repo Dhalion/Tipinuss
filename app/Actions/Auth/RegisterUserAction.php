@@ -32,6 +32,8 @@ final class RegisterUserAction
             'email' => $data->email,
         ]);
 
+        $user->is_approved = true;
+
         if ($betaMode && $data->betaKey === null) {
             $user->is_approved = false;
         }
@@ -48,7 +50,7 @@ final class RegisterUserAction
                     throw InvalidBetaKeyException::alreadyUsed();
                 }
 
-                if ($betaKeyModel->expires_at !== null && $betaKeyModel->expires_at instanceof Carbon && $betaKeyModel->expires_at->isPast()) {
+                if ($betaKeyModel->expires_at !== null && $betaKeyModel->expires_at->isPast()) {
                     throw InvalidBetaKeyException::expired();
                 }
 

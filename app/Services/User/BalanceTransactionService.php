@@ -19,16 +19,15 @@ final class BalanceTransactionService
         User $user,
         TransactionType $type,
         int $amount,
+        int $balanceAfter,
         ?string $userBetId = null,
         ?string $description = null,
     ): BalanceTransaction {
-        $user->refresh();
-
         return $this->transactions->create([
             'user_id' => $user->id,
             'type' => $type,
             'amount' => $amount,
-            'balance_after' => $user->soapnuts,
+            'balance_after' => $balanceAfter,
             'user_bet_id' => $userBetId,
             'description' => $description,
         ]);

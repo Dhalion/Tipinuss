@@ -12,7 +12,7 @@ use App\Exceptions\BetException;
 use App\Models\Bet;
 use App\Models\User;
 use App\Models\UserBet;
-use App\Notifications\BetClosed;
+use App\Events\Betting\BetClosed;
 use App\Repositories\Contracts\BetOptionRepositoryInterface;
 use App\Repositories\Contracts\BetRepositoryInterface;
 use App\Repositories\Contracts\UserBetRepositoryInterface;
@@ -20,7 +20,6 @@ use App\Services\User\BalanceTransactionService;
 use App\Services\User\UserBalanceService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Log;
 
 final class CloseBetAction
 {
@@ -57,6 +56,7 @@ final class CloseBetAction
                         user: $winner,
                         type: TransactionType::BetWon,
                         amount: $winnings,
+                        balanceAfter: $winner->soapnuts,
                         userBetId: $userBet->id,
                         description: $userBet->betOption->bet->title.' — '.$userBet->betOption->title,
                     );
@@ -105,40 +105,8 @@ final class CloseBetAction
             return $this->bets->save($data->bet);
         });
 
-        try {
-            $this->notifyParticipants($bet, $participants);
-        } catch (\Throwable $e) {
-            Log::warning('Failed to notify participants of closed bet', [
-                'bet_id' => $bet->id,
-                'error' => $e->getMessage(),
-            ]);
-        }
+        event(new BetClosed(bet: $bet, participants: $participants));
 
         return $bet;
-    }
-
-    /**
-     * @param  list<array{user: User, status: string, wagered: int, winnings: int}>  $participants
-     */
-    private function notifyParticipants(Bet $bet, array $participants): void
-    {
-        $notifiedUserIds = [];
-
-        foreach ($participants as $participant) {
-            $userId = $participant['user']->id;
-
-            if (isset($notifiedUserIds[$userId])) {
-                continue;
-            }
-
-            $notifiedUserIds[$userId] = true;
-
-            $participant['user']->notify(new BetClosed(
-                bet: $bet,
-                userBetStatus: $participant['status'],
-                amountWagered: $participant['wagered'],
-                potentialWinnings: $participant['winnings'],
-            ));
-        }
     }
 }

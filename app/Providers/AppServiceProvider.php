@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Events\Betting\BetClosed;
+use App\Listeners\Betting\NotifyBetParticipants;
 use App\Models\User;
 use App\Repositories\Contracts\BalanceTransactionRepositoryInterface;
 use App\Repositories\Contracts\BetaAccessKeyRepositoryInterface;
@@ -23,6 +25,7 @@ use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -63,5 +66,7 @@ final class AppServiceProvider extends ServiceProvider
             ? Password::min(12)->mixedCase()->letters()->numbers()->symbols()->uncompromised()
             : null,
         );
+
+        Event::listen(BetClosed::class, NotifyBetParticipants::class);
     }
 }
