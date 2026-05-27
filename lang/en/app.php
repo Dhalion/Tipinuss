@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 return [
-    'title' => 'Tipinuss',
-    'description' => 'Online Walnut Bets - Place your bets, earn walnuts. The modern betting platform for enthusiasts.',
+    'title' => 'Tipinuss - Online Soapnut Bets',
+    'description' => 'Online Soapnut Bets - Place your bets, earn Soapnuts. The modern betting platform for enthusiasts.',
     'navigation' => [
         'home' => 'Home',
         'bets' => [
@@ -20,7 +20,7 @@ return [
     'bet' => [
         'create' => [
             'title' => 'Create New Bet',
-            'description' => 'Create your own bet and let others participate. Earn walnuts if your bet is correct!',
+            'description' => 'Create your own bet and let others participate. Earn Soapnuts if your bet is correct!',
             'add_option' => '+ Add Option',
             'remove_option' => 'Remove',
             'submit' => 'Create Bet',
@@ -35,14 +35,14 @@ return [
         'odds_manual' => 'Manual odds',
         'odds_auto' => 'Auto odds',
     ],
-    'hero_tagline' => 'Online Walnut Bets',
-    'hero_subtitle' => 'Place your bets, earn walnuts. The modern betting platform for enthusiasts.',
+    'hero_tagline' => 'Online Soapnut Bets',
+    'hero_subtitle' => 'Place your bets, earn Soapnuts. The modern betting platform for enthusiasts.',
     'hero_cta' => 'Discover bets →',
     'recent_bets_title' => 'Recent Bets',
     'recent_bets_description' => 'The 5 newest open bets – start betting now!',
 
     'beta_badge' => 'Beta',
-    'bet_meta_fallback' => 'Bet on :title and earn walnuts on Tipinuss',
+    'bet_meta_fallback' => 'Bet on :title and earn Soapnuts on Tipinuss',
 
     'notifications' => 'Notifications',
     'no_notifications' => 'No notifications',

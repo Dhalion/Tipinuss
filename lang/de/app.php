@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 return [
-    'title' => 'Tipinuss',
+    'title' => 'Tipinuss - Online Waschnusswetten',
     'description' => 'Online Waschnusswetten - Tippe deine Wetten, verdiene Waschnüsse. Die moderne Wettplatform für Enthusiasten.',
     'navigation' => [
         'home' => 'Startseite',
