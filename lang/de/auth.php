@@ -21,7 +21,7 @@ return [
     'register_path_label' => 'Wie möchtest du dich registrieren?',
     'register_path_key_title' => 'Mit Einladungscode',
     'register_path_key_desc' => 'Du hast einen gültigen Beta-Zugangscode erhalten.',
-    'register_path_key_benefit' => 'Du wirst direkt freigeschaltet und einer Organisation zugeordnet.',
+    'register_path_key_benefit' => 'Du wirst direkt freigeschaltet und kannst die Platform nutzen.',
     'register_path_no_key_title' => 'Ohne Code',
     'register_path_no_key_desc' => 'Du möchtest dich erstmal umsehen.',
     'register_path_no_key_benefit' => 'Dein Account muss von einem Admin freigeschaltet werden.',

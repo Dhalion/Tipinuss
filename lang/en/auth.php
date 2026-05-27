@@ -21,7 +21,7 @@ return [
     'register_path_label' => 'How would you like to register?',
     'register_path_key_title' => 'With Invitation Code',
     'register_path_key_desc' => 'You have received a valid beta access code.',
-    'register_path_key_benefit' => 'You will be approved immediately and assigned to an organisation.',
+    'register_path_key_benefit' => 'You will be approved immediately and are able to use the platform.',
     'register_path_no_key_title' => 'Without Code',
     'register_path_no_key_desc' => 'You just want to have a look around.',
     'register_path_no_key_benefit' => 'Your account will need admin approval before you can participate.',
