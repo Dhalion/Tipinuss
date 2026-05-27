@@ -1,0 +1,81 @@
+name: 🐛 Bug Report
+description: Report something that isn't working as expected
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug! Before you start, please:
+        - 🔍 Search [existing issues](https://github.com/Dhalion/Tipinuss/issues)
+        - 📖 Check the [README](https://github.com/Dhalion/Tipinuss)
+
+  - type: checkboxes
+    attributes:
+      label: 🔍 Duplicate Check
+      description: Did you search for similar issues?
+      options:
+        - label: I have searched existing issues (open and closed)
+          required: true
+
+  - type: textarea
+    attributes:
+      label: 📝 Description
+      description: What happened? What did you expect instead?
+      placeholder: "When I …, I expected … but instead …"
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: 👣 Steps to Reproduce
+      description: Minimal steps to trigger the bug
+      placeholder: |
+        1. Go to '…'
+        2. Click '…'
+        3. See error
+    validations:
+      required: true
+
+  - type: dropdown
+    attributes:
+      label: 🎯 Area
+      description: Which part of the app is affected?
+      options:
+        - Auth (Login / Registration / 2FA)
+        - Account (Profile / Balance)
+        - Betting (Bets / Results)
+        - Admin
+        - UI / Design
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: 🔧 Laravel Version
+      placeholder: "12.x"
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: 🐘 PHP Version
+      placeholder: "8.4"
+    validations:
+      required: true
+
+  - type: dropdown
+    attributes:
+      label: 💻 OS
+      multiple: true
+      options:
+        - macOS
+        - Windows
+        - Linux
+
+  - type: textarea
+    attributes:
+      label: 📋 Log Output
+      description: Laravel log (`storage/logs/laravel.log`) or browser console
+      render: shell
