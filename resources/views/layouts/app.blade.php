@@ -10,7 +10,7 @@
     <!-- OpenGraph Tags -->
     <meta property="og:title" content="{{ $pageTitle ?? __('app.title') }}">
     <meta property="og:description" content="{{ $pageDescription ?? __('app.description') }}">
-    <meta property="og:image" content="{{ $pageImage ?? asset('images/logo-full.webp') }}">
+    <meta property="og:image" content="{{ $pageImage ?? asset('images/tipinuss-waschnusskönig.webp') }}">
     <meta property="og:url" content="{{ $pageUrl ?? url()->current() }}">
     <meta property="og:type" content="website">
 
@@ -18,7 +18,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ $pageTitle ?? __('app.title') }}">
     <meta name="twitter:description" content="{{ $pageDescription ?? __('app.description') }}">
-    <meta name="twitter:image" content="{{ $pageImage ?? asset('images/logo-full.webp') }}">
+    <meta name="twitter:image" content="{{ $pageImage ?? asset('images/tipinuss-waschnusskönig.webp') }}">
 
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon.ico') }}">

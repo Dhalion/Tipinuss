@@ -1,7 +1,7 @@
 <flux:sidebar sticky collapsible="mobile" class="lg:hidden bg-zinc-50 dark:bg-zinc-900 border-r border-zinc-200 dark:border-zinc-700">
     <flux:sidebar.header>
         <flux:brand href="{{ route('main') }}"
-                    logo="{{ URL::asset('images/logo-full.webp') }}"
+                    logo="{{ URL::asset('images/tipinuss-waschnusskönig.webp') }}"
                     name="{{ __('app.title') }}"
                     wire:navigate.hover/>
     </flux:sidebar.header>
