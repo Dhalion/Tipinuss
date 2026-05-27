@@ -34,3 +34,5 @@ devenv.lock
 /graphify-out/
 /.agents/
 /.opencode/
+
+/config/version.php

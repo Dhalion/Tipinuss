@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Carbon\Carbon;
+use Database\Factories\BetaAccessKeyFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -18,7 +19,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 final class BetaAccessKey extends Model
 {
-    /** @use HasFactory<\Database\Factories\BetaAccessKeyFactory> */
+    /** @use HasFactory<BetaAccessKeyFactory> */
     use HasFactory, HasUuids;
 
     protected $fillable = [

@@ -54,7 +54,7 @@ final class BalanceTransactionServiceTest extends TestCase
     public function test_log_with_user_bet_id(): void
     {
         $user = User::factory()->withBalance(1000)->create();
-        $userBet = \App\Models\UserBet::factory()->create(['user_id' => $user->id]);
+        $userBet = UserBet::factory()->create(['user_id' => $user->id]);
         $service = app(BalanceTransactionService::class);
 
         $transaction = $service->log(

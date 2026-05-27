@@ -4,16 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ isset($pageTitle) ? $pageTitle . ' - ' : '' }}{{ __('app.title') }}</title>
+    <title>{{ isset($pageTitle) ? $pageTitle . ' - ' : '' }}{{ __('app.title_long') }}</title>
     <meta name="description" content="{{ $pageDescription ?? __('app.description') }}">
-    
+
     <!-- OpenGraph Tags -->
     <meta property="og:title" content="{{ $pageTitle ?? __('app.title') }}">
     <meta property="og:description" content="{{ $pageDescription ?? __('app.description') }}">
     <meta property="og:image" content="{{ $pageImage ?? asset('images/logo-full.webp') }}">
     <meta property="og:url" content="{{ $pageUrl ?? url()->current() }}">
     <meta property="og:type" content="website">
-    
+
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ $pageTitle ?? __('app.title') }}">

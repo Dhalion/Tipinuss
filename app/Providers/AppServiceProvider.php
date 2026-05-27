@@ -23,6 +23,7 @@ use App\Repositories\Eloquent\EloquentUserBetRepository;
 use App\Repositories\Eloquent\EloquentUserRepository;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
@@ -59,6 +60,8 @@ final class AppServiceProvider extends ServiceProvider
         DB::prohibitDestructiveCommands(app()->isProduction());
 
         View::share('showBetaBadge', (bool) config('app.beta_mode', false));
+
+        Blade::directive('appVersion', fn (): string => "<?php echo \App\Services\VersionService::label(); ?>");
 
         Gate::define('admin', fn (User $user): bool => $user->isAdmin());
 
