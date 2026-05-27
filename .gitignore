@@ -10,6 +10,7 @@
 .env.backup
 .env.production
 .env.local
+.env.testing
 .phpactor.json
 .phpunit.result.cache
 Homestead.json
@@ -36,3 +37,5 @@ devenv.lock
 /.opencode/
 
 /config/version.php
+
+/package-lock.json
