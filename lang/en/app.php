@@ -3,7 +3,8 @@
 declare(strict_types=1);
 
 return [
-    'title' => 'Tipinuss - Online Soapnut Bets',
+    'title' => 'Tipinuss',
+    'title_long' => 'Tipinuss - Online Soapnut Bets',
     'description' => 'Online Soapnut Bets - Place your bets, earn Soapnuts. The modern betting platform for enthusiasts.',
     'navigation' => [
         'home' => 'Home',
