@@ -1,0 +1,67 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          tools: composer
+
+      - name: Cache bun dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.bun/install/cache
+          key: bun-${{ hashFiles('bun.lock') }}
+          restore-keys: bun-
+
+      - name: Install dependencies & build Vite assets
+        run: |
+          bun install --frozen-lockfile
+          bun run build
+
+      - name: Generate version file (includes build number)
+        run: |
+          COMMIT="${{ github.sha }}"
+          DATE="${{ github.event.head_commit.timestamp }}"
+          DATE="${DATE:-$(date +%Y-%m-%d)}"
+          mkdir -p config
+          echo "<?php return ['commit' => '${COMMIT:0:7}', 'date' => '${DATE:0:10}'];" > config/version.php
+
+      - name: Install Deployer
+        run: |
+          curl -LO https://deployer.org/deployer.phar
+          chmod +x deployer.phar
+          sudo mv deployer.phar /usr/local/bin/dep
+
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H "${{ secrets.DEPLOY_HOST }}" >> ~/.ssh/known_hosts
+
+      - name: Deploy
+        run: dep deploy production -vv
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT || '22' }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+          GITHUB_SHA: ${{ github.sha }}
+          GITHUB_DATE: ${{ github.event.head_commit.timestamp || '' }}
