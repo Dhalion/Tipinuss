@@ -6,13 +6,9 @@ namespace Deployer;
 
 require 'recipe/laravel.php';
 
-// ─── Project ───────────────────────────────────────────────────────────────
-
 set('application', 'Tipinuss');
 set('repository', 'git@github.com:Dhalion/Tipinuss.git');
 set('keep_releases', 5);
-
-// ─── Code transfer strategy: rsync from CI → server ────────────────────────
 
 set('update_code_strategy', 'rsync');
 set('rsync_src', __DIR__);
@@ -45,8 +41,6 @@ add('rsync', [
     ],
 ]);
 
-// ─── Shared across releases (symlinked) ─────────────────────────────────────
-
 set('shared_files', ['.env']);
 set('shared_dirs', ['storage', 'logs']);
 set('writable_dirs', ['bootstrap/cache', 'storage', 'logs']);
@@ -55,8 +49,6 @@ set('http_user', null);
 
 set('bin/php', '/usr/bin/php8.4');
 set('bin/composer', '/usr/local/bin/composer');
-
-// ─── Host definitions ──────────────────────────────────────────────────────
 
 host('production')
     ->set('hostname', getenv('DEPLOY_HOST'))
@@ -73,8 +65,6 @@ host('staging')
     ->set('ssh_multiplexing', false)
     ->set('labels', ['env' => 'staging']);
 
-// ─── Version stamp (from CI env, since .git is not on server) ─────────────
-
 set('version_commit', getenv('GITHUB_SHA') ?: 'dev');
 set('version_date', getenv('GITHUB_DATE') ?: date('Y-m-d'));
 
@@ -82,9 +72,6 @@ task('artisan:app:generate-version', function () {
     run("{{bin/php}} {{bin/artisan}} app:generate-version --commit={{version_commit}} --date={{version_date}}");
 });
 
-// ─── Hooks ─────────────────────────────────────────────────────────────────
-
-before('deploy:symlink', 'artisan:migrate');
-after('deploy:success', 'artisan:app:generate-version');
-after('deploy:success', 'artisan:queue:restart');
+after('deploy:symlink', 'artisan:app:generate-version');
+after('deploy:symlink', 'artisan:queue:restart');
 after('deploy:failed', 'deploy:unlock');
