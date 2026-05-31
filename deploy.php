@@ -78,7 +78,9 @@ host('staging')
 set('version_commit', getenv('GITHUB_SHA') ?: 'dev');
 set('version_date', getenv('GITHUB_DATE') ?: date('Y-m-d'));
 
-task('artisan:app:generate-version', artisan('app:generate-version --commit={{version_commit}} --date={{version_date}}'));
+task('artisan:app:generate-version', function () {
+    run("{{bin/php}} {{bin/artisan}} app:generate-version --commit={{version_commit}} --date={{version_date}}");
+});
 
 // ─── Hooks ─────────────────────────────────────────────────────────────────
 
