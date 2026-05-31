@@ -51,19 +51,19 @@ set('bin/php', '/usr/bin/php8.4');
 set('bin/composer', '/usr/local/bin/composer');
 
 host('production')
-    ->set('hostname', getenv('DEPLOY_HOST'))
-    ->set('remote_user', getenv('DEPLOY_USER'))
-    ->set('port', (int) getenv('DEPLOY_PORT'))
-    ->set('deploy_path', getenv('DEPLOY_PATH'))
-    ->set('labels', ['env' => 'production']);
+    ->setHostname(getenv('DEPLOY_HOST'))
+    ->setRemoteUser(getenv('DEPLOY_USER'))
+    ->setPort((int) getenv('DEPLOY_PORT'))
+    ->setDeployPath(getenv('DEPLOY_PATH'))
+    ->setLabels(['env' => 'production']);
 
 host('staging')
-    ->set('hostname', getenv('STAGING_HOST'))
-    ->set('remote_user', getenv('STAGING_USER'))
-    ->set('port', (int) getenv('STAGING_PORT'))
-    ->set('deploy_path', getenv('STAGING_PATH'))
-    ->set('ssh_multiplexing', false)
-    ->set('labels', ['env' => 'staging']);
+    ->setHostname(getenv('STAGING_HOST'))
+    ->setRemoteUser(getenv('STAGING_USER'))
+    ->setPort((int) getenv('STAGING_PORT'))
+    ->setDeployPath(getenv('STAGING_PATH'))
+    ->setSshMultiplexing(false)
+    ->setLabels(['env' => 'staging']);
 
 set('version_commit', getenv('GITHUB_SHA') ?: 'dev');
 set('version_date', getenv('GITHUB_DATE') ?: date('Y-m-d'));
