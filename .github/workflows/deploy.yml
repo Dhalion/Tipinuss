@@ -30,9 +30,17 @@ jobs:
           key: bun-${{ hashFiles('bun.lock') }}
           restore-keys: bun-
 
+      - name: Cache composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: vendor
+          key: composer-${{ hashFiles('composer.lock') }}
+
       - name: Install dependencies & build Vite assets
         run: |
           bun install --frozen-lockfile
+          composer install --no-dev --no-interaction
+          composer dump-autoload --no-dev --classmap-authoritative
           bun run build
 
       - name: Generate version file (includes build number)
