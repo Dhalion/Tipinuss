@@ -42,6 +42,9 @@ return [
     'recent_bets_title' => 'Recent Bets',
     'recent_bets_description' => 'The 5 newest open bets – start betting now!',
 
+    'coming_soon' => 'Coming soon!',
+    'coming_soon_tagline' => "We're still gathering the soapnuts for your bets.",
+
     'beta_badge' => 'Beta',
     'bet_meta_fallback' => 'Bet on :title and earn Soapnuts on Tipinuss',
 

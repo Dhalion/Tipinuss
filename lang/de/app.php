@@ -42,6 +42,9 @@ return [
     'recent_bets_title' => 'Letzte Wetten',
     'recent_bets_description' => 'Die 5 neuesten offenen Wetten – jetzt kannst du mittippen!',
 
+    'coming_soon' => "Bald geht's los!",
+    'coming_soon_tagline' => 'Wir sammeln noch die Waschnüsse für deine Wetten.',
+
     'beta_badge' => 'Beta',
     'bet_meta_fallback' => 'Tippe auf :title und verdiene Waschnüsse auf Tipinuss',
 
