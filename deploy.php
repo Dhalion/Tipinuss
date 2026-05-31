@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Deployer;
 
-import('recipe/laravel.php');
+require 'recipe/laravel.php';
 
 // ─── Project ───────────────────────────────────────────────────────────────
 
