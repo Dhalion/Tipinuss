@@ -37,7 +37,7 @@ final class AppServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        if (! $this->app->environment('production')) {
+        if (! $this->app->environment('production') && class_exists(DuskServiceProvider::class)) {
             $this->app->register(DuskServiceProvider::class);
         }
 
