@@ -5,12 +5,11 @@ declare(strict_types=1);
 namespace Deployer;
 
 require 'recipe/laravel.php';
+require 'contrib/rsync.php';
 
 set('application', 'Tipinuss');
-set('repository', 'git@github.com:Dhalion/Tipinuss.git');
 set('keep_releases', 5);
 
-set('update_code_strategy', 'rsync');
 set('rsync_src', __DIR__);
 set('rsync_dest', '{{release_path}}');
 add('rsync', [
@@ -21,7 +20,6 @@ add('rsync', [
         '.gitattributes',
         '.github',
         'node_modules',
-        'vendor',
         'bootstrap/cache',
         'storage',
         'tests',
@@ -68,9 +66,29 @@ set('version_commit', getenv('GITHUB_SHA') ?: 'dev');
 set('version_date', getenv('GITHUB_DATE') ?: date('Y-m-d'));
 
 task('artisan:app:generate-version', function () {
-    run("{{bin/php}} {{bin/artisan}} app:generate-version --commit={{version_commit}} --date={{version_date}}");
+    run('{{bin/php}} {{bin/artisan}} app:generate-version --commit={{version_commit}} --date={{version_date}}');
 });
 
 after('deploy:symlink', 'artisan:app:generate-version');
 after('deploy:symlink', 'artisan:queue:restart');
 after('deploy:failed', 'deploy:unlock');
+
+task('deploy:prepare', [
+    'deploy:info',
+    'deploy:setup',
+    'deploy:lock',
+    'deploy:release',
+    'rsync',
+    'deploy:env',
+    'deploy:shared',
+    'deploy:writable',
+]);
+
+task('deploy', [
+    'deploy:prepare',
+    'artisan:storage:link',
+    'artisan:optimize',
+    'artisan:migrate',
+    'deploy:publish',
+    'artisan:reload',
+]);
