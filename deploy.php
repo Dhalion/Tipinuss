@@ -73,6 +73,19 @@ after('deploy:symlink', 'artisan:app:generate-version');
 after('deploy:symlink', 'artisan:queue:restart');
 after('deploy:failed', 'deploy:unlock');
 
+task('deploy:storage:init', function () {
+    $shared = get('deploy_path').'/shared/storage';
+    if (! test("[ -d $shared ]")) {
+        return;
+    }
+    within('{{deploy_path}}/shared', function () {
+        run('mkdir -p storage/framework/{views,cache,sessions,testing}');
+        run('mkdir -p storage/logs');
+        run('mkdir -p storage/app/public');
+    });
+});
+after('deploy:shared', 'deploy:storage:init');
+
 task('deploy:prepare', [
     'deploy:info',
     'deploy:setup',
