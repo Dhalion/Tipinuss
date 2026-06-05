@@ -7,8 +7,6 @@ on:
         description: 'Deployer stage (production or staging)'
         type: string
         required: true
-    secrets:
-      inherit: true
 
 concurrency:
   group: deploy-${{ inputs.stage }}
