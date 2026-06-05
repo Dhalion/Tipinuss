@@ -1,17 +1,23 @@
 name: Deploy
 
 on:
-  push:
-    branches: [main]
-  workflow_dispatch:
+  workflow_call:
+    inputs:
+      stage:
+        description: 'Deployer stage (production or staging)'
+        type: string
+        required: true
+    secrets:
+      inherit: true
 
 concurrency:
-  group: deploy-${{ github.ref }}
+  group: deploy-${{ inputs.stage }}
   cancel-in-progress: false
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: ${{ inputs.stage }}
 
     steps:
       - uses: actions/checkout@v4
@@ -65,7 +71,7 @@ jobs:
           ssh-keyscan -H -p ${{ secrets.DEPLOY_PORT }} "${{ secrets.DEPLOY_HOST }}" >> ~/.ssh/known_hosts
 
       - name: Deploy
-        run: dep deploy production -vv
+        run: dep deploy ${{ inputs.stage }} -vv
         env:
           DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}

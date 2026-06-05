@@ -33,34 +33,35 @@ add('rsync', [
         'phpunit.xml*',
         'phpstan.neon',
         'pint.json',
-        'composer.lock',
         'bun.lock',
         'package-lock.json',
+        'inventory.local.php',
     ],
 ]);
 
 set('shared_files', ['.env']);
-set('shared_dirs', ['storage', 'logs']);
-set('writable_dirs', ['bootstrap/cache', 'storage', 'logs']);
+set('shared_dirs', ['storage']);
+set('writable_dirs', ['bootstrap/cache']);
 set('writable_mode', 'chmod');
+set('writable_chmod_mode', '2775');
 set('http_user', null);
 
 set('bin/php', '/usr/bin/php8.4');
 set('bin/composer', '/usr/local/bin/composer');
 
 host('production')
-    ->set('hostname', getenv('DEPLOY_HOST'))
-    ->set('remote_user', getenv('DEPLOY_USER'))
-    ->set('port', (int) getenv('DEPLOY_PORT'))
-    ->set('deploy_path', getenv('DEPLOY_PATH'))
-    ->setLabels(['env' => 'production']);
+    ->setHostname(getenv('DEPLOY_HOST'))
+    ->setRemoteUser(getenv('DEPLOY_USER'))
+    ->setPort((int) getenv('DEPLOY_PORT'))
+    ->setDeployPath(getenv('DEPLOY_PATH'))
+    ->setLabels(['env' => 'production', 'stage' => 'production']);
 
 host('staging')
-    ->set('hostname', getenv('STAGING_HOST'))
-    ->set('remote_user', getenv('STAGING_USER'))
-    ->set('port', (int) getenv('STAGING_PORT'))
-    ->set('deploy_path', getenv('STAGING_PATH'))
-    ->setLabels(['env' => 'staging']);
+    ->setHostname(getenv('DEPLOY_HOST'))
+    ->setRemoteUser(getenv('DEPLOY_USER'))
+    ->setPort((int) getenv('DEPLOY_PORT'))
+    ->setDeployPath(getenv('DEPLOY_PATH'))
+    ->setLabels(['env' => 'staging', 'stage' => 'staging']);
 
 set('version_commit', getenv('GITHUB_SHA') ?: 'dev');
 set('version_date', getenv('GITHUB_DATE') ?: date('Y-m-d'));
@@ -72,19 +73,6 @@ task('artisan:app:generate-version', function () {
 after('deploy:symlink', 'artisan:app:generate-version');
 after('deploy:symlink', 'artisan:queue:restart');
 after('deploy:failed', 'deploy:unlock');
-
-task('deploy:storage:init', function () {
-    $shared = get('deploy_path').'/shared/storage';
-    if (! test("[ -d $shared ]")) {
-        return;
-    }
-    within('{{deploy_path}}/shared', function () {
-        run('mkdir -p storage/framework/{views,cache,sessions,testing}');
-        run('mkdir -p storage/logs');
-        run('mkdir -p storage/app/public');
-    });
-});
-after('deploy:shared', 'deploy:storage:init');
 
 task('deploy:prepare', [
     'deploy:info',
