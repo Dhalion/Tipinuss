@@ -24,7 +24,7 @@ final class RegisterUserActionTest extends TestCase
     {
         parent::setUp();
 
-        config(['app.beta_mode' => false]);
+        config(['app.restricted_mode' => false]);
     }
 
     public function test_registers_user_without_beta_key(): void
@@ -181,9 +181,9 @@ final class RegisterUserActionTest extends TestCase
         ));
     }
 
-    public function test_sets_not_approved_when_no_key_and_beta_mode(): void
+    public function test_sets_not_approved_when_no_key_and_restricted_mode(): void
     {
-        config(['app.beta_mode' => true]);
+        config(['app.restricted_mode' => true]);
         $action = app(RegisterUserAction::class);
 
         $result = $action->execute(new RegisterData(

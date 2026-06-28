@@ -54,7 +54,7 @@ final class AppServiceProvider extends ServiceProvider
 
         DB::prohibitDestructiveCommands(app()->isProduction());
 
-        View::share('showBetaBadge', (bool) config('app.beta_mode', false));
+        View::share('showBetaBadge', (bool) config('app.restricted_mode', false));
 
         Blade::directive('appVersion', fn (): string => "<?php echo \App\Services\VersionService::label(); ?>");
 

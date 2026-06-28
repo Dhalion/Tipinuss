@@ -37,7 +37,7 @@ final class Login extends Component
             RateLimiter::clear($throttleKey);
             session()->regenerate();
 
-            if ((bool) config('app.beta_mode', false) && ! Auth::user()->isApproved()) {
+            if ((bool) config('app.restricted_mode', false) && ! Auth::user()->isApproved()) {
                 $this->redirect(route('pending.approval'));
 
                 return;

@@ -22,7 +22,7 @@ final class BetaGuardMiddleware
 
     public function handle(Request $request, Closure $next): Response
     {
-        if (! (bool) config('app.beta_mode', false)) {
+        if (! (bool) config('app.restricted_mode', false)) {
             return $next($request);
         }
 

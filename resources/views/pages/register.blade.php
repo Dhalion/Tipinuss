@@ -14,7 +14,7 @@
 
         <form wire:submit="register" class="space-y-5">
 
-            @if ((bool) config('app.beta_mode', false))
+            @if ((bool) config('app.restricted_mode', false))
                 <div x-data="{ hasBetaKey: $wire.entangle('hasBetaKey'), keyFromUrl: @js(request()->has('key')) }" class="space-y-3">
                     <p class="text-sm font-medium text-zinc-700 dark:text-zinc-300">{{ __('auth.register_path_label') }}</p>
 
@@ -76,9 +76,9 @@
                 type="password" required />
 
             <flux:button type="submit" variant="primary" class="w-full">
-                @if ((bool) config('app.beta_mode', false) && $hasBetaKey)
+                @if ((bool) config('app.restricted_mode', false) && $hasBetaKey)
                     {{ __('auth.register_submit_key') }}
-                @elseif ((bool) config('app.beta_mode', false))
+                @elseif ((bool) config('app.restricted_mode', false))
                     {{ __('auth.register_submit_pending') }}
                 @else
                     {{ __('auth.register_submit') }}

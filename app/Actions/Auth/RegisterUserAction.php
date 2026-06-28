@@ -27,7 +27,7 @@ final class RegisterUserAction
 
     public function execute(RegisterData $data): RegisterResult
     {
-        $betaMode = (bool) config('app.beta_mode', false);
+        $betaMode = (bool) config('app.restricted_mode', false);
         /** @var BetaAccessKey|null $betaKeyModel */
         $betaKeyModel = null;
 
