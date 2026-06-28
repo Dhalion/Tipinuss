@@ -31,4 +31,5 @@ return [
     'potential' => 'Potential Winnings',
     'no_bets' => 'You haven\'t placed any bets yet. Go to Bets to place one!',
     'balance_decrement_failed' => 'Failed to decrement balance.',
+    'initial_balance_description' => 'Initial balance from registration',
 ];
