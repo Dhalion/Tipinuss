@@ -71,10 +71,18 @@ final class EloquentUserRepository implements UserRepositoryInterface
         return $user;
     }
 
-    public function topBySoapnuts(int $limit = AppDefaults::TOP_USERS_LIMIT): Collection
+    public function topBySoapnuts(int $limit = AppDefaults::TOP_USERS_LIMIT, ?string $organisationId = null): Collection
     {
-        return User::withCount('userBets')
-            ->orderByDesc('soapnuts')
+        $query = User::withCount('userBets');
+
+        if ($organisationId !== null) {
+            $query->where(function ($q) use ($organisationId): void {
+                $q->where('organisation_id', $organisationId)
+                    ->orWhereNull('organisation_id');
+            });
+        }
+
+        return $query->orderByDesc('soapnuts')
             ->take($limit)
             ->get();
     }

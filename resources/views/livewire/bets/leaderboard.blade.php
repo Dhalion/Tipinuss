@@ -4,7 +4,7 @@
         <flux:text class="mt-1">{{ __('leaderboard.description') }}</flux:text>
     </div>
 
-    <flux:card class="p-0 overflow-hidden">
+    <flux:card class="p-3 overflow-hidden">
         <div class="overflow-x-auto">
             <flux:table class="w-full">
                 <flux:table.columns>
