@@ -78,7 +78,7 @@ final class RegisterUserAction
                 type: TransactionType::Initial,
                 amount: $startBalance,
                 balanceAfter: $startBalance,
-                description: 'Initial balance from registration',
+                description: __('account.initial_balance_description'),
             );
 
             if ($betaKeyModel !== null) {
