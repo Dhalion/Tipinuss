@@ -1,6 +1,8 @@
 <div class="py-8">
     <div class="max-w-7xl mx-auto px-4">
 
+        <x:admin-nav />
+
         <div class="mb-6">
             <flux:breadcrumbs>
                 <flux:breadcrumbs.item href="{{ route('admin.organisations') }}" wire:navigate>

@@ -11,6 +11,8 @@
             </flux:button>
         </div>
 
+        <x:admin-nav />
+
         @if ($showCreateForm)
             <flux:card class="mb-6 p-6">
                 <flux:heading size="lg" class="mb-4">{{ __('admin.beta_keys.create_title') }}</flux:heading>

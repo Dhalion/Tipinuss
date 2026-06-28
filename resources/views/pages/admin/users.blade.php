@@ -12,12 +12,6 @@
                     <option value="approved">{{ __('admin.users.filter_approved') }}</option>
                     <option value="pending">{{ __('admin.users.filter_pending') }}</option>
                 </flux:select>
-                <flux:button href="{{ route('admin.organisations') }}" wire:navigate variant="ghost" size="sm" icon="building-office">
-                    {{ __('admin.organisations.title') }}
-                </flux:button>
-                <flux:button href="{{ route('admin.beta-keys') }}" wire:navigate variant="ghost" size="sm" icon="key">
-                    {{ __('admin.beta_keys.nav_title') }}
-                </flux:button>
             </div>
         </div>
 
@@ -33,6 +27,8 @@
                 </div>
             </flux:callout>
         @endif
+
+        <x:admin-nav />
 
         @if ($errors->any())
             <flux:callout icon="exclamation-triangle" variant="danger" class="mb-6">

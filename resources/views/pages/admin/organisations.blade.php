@@ -6,12 +6,14 @@
                 <flux:heading size="xl">{{ __('admin.organisations.title') }}</flux:heading>
                 <flux:text class="mt-2">{{ __('admin.organisations.description') }}</flux:text>
             </div>
-            @if ($organisations->isNotEmpty())
+                @if ($organisations->isNotEmpty())
                 <flux:button wire:click="$toggle('showCreateForm')" variant="primary" size="sm" icon="plus">
                     {{ __('admin.organisations.create_button') }}
                 </flux:button>
             @endif
         </div>
+
+        <x:admin-nav />
 
         @if ($showCreateForm)
             <flux:card class="mb-6 p-6">
