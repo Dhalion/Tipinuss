@@ -6,13 +6,14 @@ namespace App\Livewire\Page\Admin;
 
 use App\Models\Organisation;
 use App\Repositories\Contracts\OrganisationRepositoryInterface;
-use App\Repositories\Contracts\UserRepositoryInterface;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
 final class OrganisationManagement extends Component
 {
     public string $newOrganisationName = '';
+
+    public bool $showCreateForm = false;
 
     public function mount(): void
     {
@@ -33,30 +34,7 @@ final class OrganisationManagement extends Component
         $organisations->save($organisation);
 
         $this->newOrganisationName = '';
-    }
-
-    public function assignUserToOrganisation(
-        string $userId,
-        ?string $organisationId,
-        OrganisationRepositoryInterface $organisations,
-        UserRepositoryInterface $users,
-    ): void {
-        $user = $users->findById($userId);
-        if ($user === null) {
-            return;
-        }
-
-        $resolvedOrganisationId = null;
-        if ($organisationId !== null && $organisationId !== '') {
-            $organisation = $organisations->findById($organisationId);
-            if ($organisation === null) {
-                return;
-            }
-            $resolvedOrganisationId = $organisation->id;
-        }
-
-        $user->organisation_id = $resolvedOrganisationId;
-        $users->save($user);
+        $this->showCreateForm = false;
     }
 
     public function deleteOrganisation(string $organisationId, OrganisationRepositoryInterface $organisations): void
@@ -69,13 +47,10 @@ final class OrganisationManagement extends Component
         $organisations->delete($organisation);
     }
 
-    public function render(
-        OrganisationRepositoryInterface $organisations,
-        UserRepositoryInterface $users,
-    ): View {
+    public function render(OrganisationRepositoryInterface $organisations): View
+    {
         return view('pages.admin.organisations', [
             'organisations' => $organisations->findAll(),
-            'allUsers' => $users->all(),
         ]);
     }
 }

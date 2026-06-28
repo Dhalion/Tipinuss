@@ -33,7 +33,7 @@ interface UserRepositoryInterface
     public function save(User $user): User;
 
     /** @return Collection<int, User> */
-    public function topBySoapnuts(int $limit = AppDefaults::TOP_USERS_LIMIT): Collection;
+    public function topBySoapnuts(int $limit = AppDefaults::TOP_USERS_LIMIT, ?string $organisationId = null): Collection;
 
     public function delete(User $user): void;
 }

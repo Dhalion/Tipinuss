@@ -12,6 +12,7 @@ use App\Exceptions\BetException;
 use App\Models\User;
 use App\Repositories\Contracts\OrganisationRepositoryInterface;
 use App\Repositories\Contracts\UserRepositoryInterface;
+use Flux\Flux;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -26,8 +27,11 @@ final class UserManagement extends Component
 
     public string $sortDirection = 'asc';
 
-    /** @var array<string, int> */
-    public array $balanceAdjustments = [];
+    public bool $showBalanceModal = false;
+
+    public string $modalUserId = '';
+
+    public int $modalAdjustment = 0;
 
     protected function queryString(): array
     {
@@ -60,23 +64,42 @@ final class UserManagement extends Component
         $this->resetPage();
     }
 
-    public function adjustBalance(
-        string $userId,
-        AdjustUserBalanceAction $action,
-        UserRepositoryInterface $users,
-    ): void {
-        $adjustment = $this->balanceAdjustments[$userId] ?? 0;
-        if ($adjustment === 0) {
+    public function openBalanceModal(string $userId, UserRepositoryInterface $users): void
+    {
+        $user = $users->findById($userId);
+        if ($user === null) {
             return;
         }
 
-        $target = $users->findById($userId);
+        $this->modalUserId = $userId;
+        $this->modalAdjustment = 0;
+        $this->showBalanceModal = true;
+    }
+
+    public function adjustBalance(AdjustUserBalanceAction $action, UserRepositoryInterface $users): void
+    {
+        if ($this->modalAdjustment === 0) {
+            return;
+        }
+
+        $target = $users->findById($this->modalUserId);
         if ($target === null) {
             return;
         }
 
-        $action->execute($target, (int) $adjustment);
-        $this->balanceAdjustments[$userId] = 0;
+        $action->execute($target, $this->modalAdjustment);
+
+        $name = $target->name;
+        $this->closeBalanceModal();
+
+        Flux::toast(variant: 'success', text: __('admin.balance_modal.success', ['name' => $name]));
+    }
+
+    public function closeBalanceModal(): void
+    {
+        $this->showBalanceModal = false;
+        $this->modalUserId = '';
+        $this->modalAdjustment = 0;
     }
 
     public function toggleAdmin(

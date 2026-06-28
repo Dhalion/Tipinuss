@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Livewire\Page\Account;
 use App\Livewire\Page\Admin\BetaKeyManagement;
+use App\Livewire\Page\Admin\OrganisationDetail;
 use App\Livewire\Page\Admin\OrganisationManagement;
 use App\Livewire\Page\Admin\UserManagement;
 use App\Livewire\Page\Auth\PendingApproval;
@@ -49,6 +50,7 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware('can:admin')->group(function () {
         Route::livewire('/admin/organisations', OrganisationManagement::class)->name('admin.organisations');
+        Route::livewire('/admin/organisations/{organisation}', OrganisationDetail::class)->name('admin.organisations.detail');
         Route::livewire('/admin/users', UserManagement::class)->name('admin.users');
         Route::livewire('/admin/beta-keys', BetaKeyManagement::class)->name('admin.beta-keys');
     });

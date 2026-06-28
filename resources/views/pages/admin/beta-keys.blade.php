@@ -54,17 +54,17 @@
             </flux:card>
         @else
             <flux:card class="overflow-hidden">
-                <flux:table :paginate="$keys" class="min-w-[600px]">
+                <flux:table :paginate="$keys">
                     <flux:table.columns>
-                        <flux:table.column sortable :sorted="$sortBy === 'key'" :direction="$sortDirection" wire:click="sort('key')" class="w-[200px]">{{ __('admin.beta_keys.table.key') }}</flux:table.column>
-                        <flux:table.column class="w-[150px]">{{ __('admin.beta_keys.table.organisation') }}</flux:table.column>
-                        <flux:table.column sortable :sorted="$sortBy === 'is_active'" :direction="$sortDirection" wire:click="sort('is_active')" class="w-[100px]">{{ __('admin.beta_keys.table.status') }}</flux:table.column>
-                        <flux:table.column class="w-[150px]">{{ __('admin.beta_keys.table.used_by') }}</flux:table.column>
-                        <flux:table.column sortable :sorted="$sortBy === 'expires_at'" :direction="$sortDirection" wire:click="sort('expires_at')" class="w-[100px]">{{ __('admin.beta_keys.table.expires') }}</flux:table.column>
-                        <flux:table.column sortable :sorted="$sortBy === 'start_balance'" :direction="$sortDirection" wire:click="sort('start_balance')" class="w-[100px]">{{ __('admin.beta_keys.table.start_balance') }}</flux:table.column>
-                        <flux:table.column class="w-[160px]">{{ __('admin.beta_keys.table.message') }}</flux:table.column>
-                        <flux:table.column sortable :sorted="$sortBy === 'created_at'" :direction="$sortDirection" wire:click="sort('created_at')" class="w-[120px]">{{ __('admin.beta_keys.table.created') }}</flux:table.column>
-                        <flux:table.column class="text-right w-[60px]">{{ __('admin.beta_keys.table.actions') }}</flux:table.column>
+                        <flux:table.column sortable :sorted="$sortBy === 'key'" :direction="$sortDirection" wire:click="sort('key')">{{ __('admin.beta_keys.table.key') }}</flux:table.column>
+                        <flux:table.column>{{ __('admin.beta_keys.table.organisation') }}</flux:table.column>
+                        <flux:table.column sortable :sorted="$sortBy === 'is_active'" :direction="$sortDirection" wire:click="sort('is_active')" align="center">{{ __('admin.beta_keys.table.status') }}</flux:table.column>
+                        <flux:table.column>{{ __('admin.beta_keys.table.used_by') }}</flux:table.column>
+                        <flux:table.column sortable :sorted="$sortBy === 'expires_at'" :direction="$sortDirection" wire:click="sort('expires_at')">{{ __('admin.beta_keys.table.expires') }}</flux:table.column>
+                        <flux:table.column sortable :sorted="$sortBy === 'start_balance'" :direction="$sortDirection" wire:click="sort('start_balance')" align="end">{{ __('admin.beta_keys.table.start_balance') }}</flux:table.column>
+                        <flux:table.column>{{ __('admin.beta_keys.table.message') }}</flux:table.column>
+                        <flux:table.column sortable :sorted="$sortBy === 'created_at'" :direction="$sortDirection" wire:click="sort('created_at')">{{ __('admin.beta_keys.table.created') }}</flux:table.column>
+                        <flux:table.column align="end">{{ __('admin.beta_keys.table.actions') }}</flux:table.column>
                     </flux:table.columns>
 
                     <flux:table.rows>
@@ -80,7 +80,7 @@
                                     {{ $key->organisation?->name ?? __('admin.beta_keys.none_org') }}
                                 </flux:table.cell>
 
-                                <flux:table.cell>
+                                <flux:table.cell align="center">
                                     <flux:badge :color="$key->status()->badgeColor()" size="sm">
                                         {{ __("admin.beta_keys.status_{$key->status()->value}") }}
                                     </flux:badge>
@@ -90,23 +90,27 @@
                                     {{ $key->usedByUser?->name ?? '—' }}
                                 </flux:table.cell>
 
-                                <flux:table.cell class="text-sm text-zinc-500 dark:text-zinc-400">
+                                <flux:table.cell class="text-sm text-zinc-500 dark:text-zinc-400 whitespace-nowrap">
                                     {{ $key->expires_at?->format('d.m.Y') ?? '—' }}
                                 </flux:table.cell>
 
-                                <flux:table.cell class="text-sm font-semibold text-zinc-900 dark:text-white">
+                                <flux:table.cell variant="strong" align="end" class="whitespace-nowrap">
                                     {{ $key->start_balance !== null ? number_format($key->start_balance, 0) . ' 🌰' : '—' }}
                                 </flux:table.cell>
 
-                                <flux:table.cell class="text-sm text-zinc-500 dark:text-zinc-400 max-w-[160px] truncate" title="{{ $key->message }}">
-                                    {{ $key->message ?? '—' }}
+                                <flux:table.cell class="text-sm text-zinc-500 dark:text-zinc-400 max-w-[200px]" title="{{ $key->message }}">
+                                    @if ($key->message)
+                                        <span class="truncate block">{{ $key->message }}</span>
+                                    @else
+                                        —
+                                    @endif
                                 </flux:table.cell>
 
                                 <flux:table.cell class="text-sm text-zinc-500 dark:text-zinc-400 whitespace-nowrap">
                                     {{ $key->created_at?->format('d.m.Y H:i') }}
                                 </flux:table.cell>
 
-                                <flux:table.cell class="text-right">
+                                <flux:table.cell align="end">
                                     @if ($key->isValid())
                                         <div class="flex items-center justify-end gap-1">
                                             <flux:button
