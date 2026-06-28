@@ -16,6 +16,9 @@ use App\Livewire\Page\Register;
 use App\Models\Bet;
 use Illuminate\Support\Facades\Route;
 
+Route::view('/datenschutz', 'pages.legal.datenschutz')->name('legal.datenschutz');
+Route::view('/agb', 'pages.legal.agb')->name('legal.agb');
+
 Route::livewire('/', MainPage::class)->name('main');
 
 Route::middleware('guest')->group(function () {
