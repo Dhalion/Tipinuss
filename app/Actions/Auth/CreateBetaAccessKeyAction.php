@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Actions\Auth;
 
+use App\Constants\AppDefaults;
 use App\Models\BetaAccessKey;
 use App\Models\User;
 use App\Repositories\Contracts\BetaAccessKeyRepositoryInterface;
@@ -21,6 +22,7 @@ final class CreateBetaAccessKeyAction
         ?string $customKey = null,
         ?string $expiresAt = null,
         ?int $startBalance = null,
+        ?string $message = null,
     ): BetaAccessKey {
         $key = $customKey ?? $this->generateKey();
 
@@ -30,6 +32,7 @@ final class CreateBetaAccessKeyAction
             'created_by_user_id' => $admin->id,
             'expires_at' => $expiresAt,
             'start_balance' => $startBalance,
+            'message' => $message,
         ]);
 
         return $this->betaKeys->save($betaKey);
@@ -38,7 +41,7 @@ final class CreateBetaAccessKeyAction
     private function generateKey(): string
     {
         do {
-            $key = 'BETA-'.strtoupper(Str::random(8));
+            $key = 'BETA-'.strtoupper(Str::random(AppDefaults::BETA_KEY_RANDOM_LENGTH));
         } while ($this->betaKeys->existsByKey($key));
 
         return $key;

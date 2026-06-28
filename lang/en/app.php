@@ -17,6 +17,10 @@ return [
         'login' => 'Login',
         'register' => 'Register',
         'logout' => 'Logout',
+        'appearance' => 'Appearance',
+        'appearance_light' => 'Light',
+        'appearance_dark' => 'Dark',
+        'appearance_system' => 'System',
     ],
     'bet' => [
         'create' => [

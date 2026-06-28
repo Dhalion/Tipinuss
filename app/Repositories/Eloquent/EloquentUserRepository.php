@@ -4,12 +4,19 @@ declare(strict_types=1);
 
 namespace App\Repositories\Eloquent;
 
+use App\Constants\AppDefaults;
 use App\Models\User;
 use App\Repositories\Contracts\UserRepositoryInterface;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 
 final class EloquentUserRepository implements UserRepositoryInterface
 {
+    private const array SORTABLE_COLUMNS = [
+        'name', 'soapnuts', 'is_approved', 'is_admin',
+        'created_at', 'user_bets_count',
+    ];
+
     public function findById(string $id): ?User
     {
         return User::find($id);
@@ -33,17 +40,23 @@ final class EloquentUserRepository implements UserRepositoryInterface
             ->get();
     }
 
-    public function allWithBetCountByApprovalStatus(?bool $isApproved): Collection
-    {
+    public function paginateWithBetCountByApprovalStatus(
+        ?bool $isApproved,
+        string $sortBy = 'name',
+        string $sortDirection = 'asc',
+        int $perPage = AppDefaults::DEFAULT_PER_PAGE,
+    ): LengthAwarePaginator {
+        $sortBy = in_array($sortBy, self::SORTABLE_COLUMNS, true) ? $sortBy : 'name';
+        $sortDirection = $sortDirection === 'desc' ? 'desc' : 'asc';
+
         $query = User::withCount('userBets')
-            ->with('organisation')
-            ->orderBy('name');
+            ->with('organisation');
 
         if ($isApproved !== null) {
             $query->where('is_approved', $isApproved);
         }
 
-        return $query->get();
+        return $query->orderBy($sortBy, $sortDirection)->paginate($perPage);
     }
 
     public function pendingCount(): int
@@ -58,7 +71,7 @@ final class EloquentUserRepository implements UserRepositoryInterface
         return $user;
     }
 
-    public function topBySoapnuts(int $limit = 10): Collection
+    public function topBySoapnuts(int $limit = AppDefaults::TOP_USERS_LIMIT): Collection
     {
         return User::withCount('userBets')
             ->orderByDesc('soapnuts')

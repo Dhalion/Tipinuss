@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Repositories\Eloquent;
 
+use App\Constants\AppDefaults;
 use App\Models\BalanceTransaction;
 use App\Models\User;
 use App\Repositories\Contracts\BalanceTransactionRepositoryInterface;
@@ -24,7 +25,7 @@ final class EloquentBalanceTransactionRepository implements BalanceTransactionRe
         return $this->save(new BalanceTransaction($data));
     }
 
-    public function recentForUser(User $user, int $limit = 20): Collection
+    public function recentForUser(User $user, int $limit = AppDefaults::RECENT_TRANSACTIONS_LIMIT): Collection
     {
         return BalanceTransaction::where('user_id', $user->id)
             ->orderByDesc('created_at')
@@ -32,7 +33,7 @@ final class EloquentBalanceTransactionRepository implements BalanceTransactionRe
             ->get();
     }
 
-    public function chartDataForUser(User $user, int $limit = 100): Collection
+    public function chartDataForUser(User $user, int $limit = AppDefaults::CHART_DATA_LIMIT): Collection
     {
         return BalanceTransaction::where('user_id', $user->id)
             ->orderBy('created_at')

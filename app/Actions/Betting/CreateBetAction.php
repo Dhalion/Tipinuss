@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Actions\Betting;
 
+use App\Constants\AppDefaults;
 use App\DTOs\Betting\CreateBetData;
 use App\Enums\BetStatus;
 use App\Models\Bet;
@@ -42,7 +43,7 @@ final class CreateBetAction
         });
     }
 
-    private function generateSlug(string $title, int $maxAttempts = 100): string
+    private function generateSlug(string $title, int $maxAttempts = AppDefaults::MAX_SLUG_ATTEMPTS): string
     {
         $base = Str::slug($title);
 
@@ -54,6 +55,6 @@ final class CreateBetAction
             }
         }
 
-        return $base.'-'.Str::random(6);
+        return $base.'-'.Str::random(AppDefaults::SLUG_RANDOM_SUFFIX_LENGTH);
     }
 }

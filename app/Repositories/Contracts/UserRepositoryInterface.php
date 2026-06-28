@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Repositories\Contracts;
 
+use App\Constants\AppDefaults;
 use App\Models\User;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 
 interface UserRepositoryInterface
@@ -19,15 +21,19 @@ interface UserRepositoryInterface
     /** @return Collection<int, User> */
     public function allWithBetCount(): Collection;
 
-    /** @return Collection<int, User> */
-    public function allWithBetCountByApprovalStatus(?bool $isApproved): Collection;
+    public function paginateWithBetCountByApprovalStatus(
+        ?bool $isApproved,
+        string $sortBy = 'name',
+        string $sortDirection = 'asc',
+        int $perPage = AppDefaults::DEFAULT_PER_PAGE,
+    ): LengthAwarePaginator;
 
     public function pendingCount(): int;
 
     public function save(User $user): User;
 
     /** @return Collection<int, User> */
-    public function topBySoapnuts(int $limit = 10): Collection;
+    public function topBySoapnuts(int $limit = AppDefaults::TOP_USERS_LIMIT): Collection;
 
     public function delete(User $user): void;
 }

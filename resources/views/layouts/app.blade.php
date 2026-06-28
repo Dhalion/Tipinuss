@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" class="dark">
 
 <head>
     <meta charset="UTF-8">
@@ -31,7 +31,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 
-    @fluxAppearance
+    <style>:root.dark { color-scheme: dark; }</style>
 </head>
 
 <body class="min-h-screen flex flex-col bg-zinc-50 dark:bg-zinc-900 antialiased">

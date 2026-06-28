@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Enums\BetaAccessKeyStatus;
 use Carbon\Carbon;
 use Database\Factories\BetaAccessKeyFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -11,12 +12,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-/**
- * @property Carbon|null $expires_at
- */
-/**
- * @property Carbon|null $expires_at
- */
+/** @property Carbon|null $expires_at */
 final class BetaAccessKey extends Model
 {
     /** @use HasFactory<BetaAccessKeyFactory> */
@@ -28,6 +24,7 @@ final class BetaAccessKey extends Model
         'created_by_user_id',
         'expires_at',
         'start_balance',
+        'message',
         'is_active',
     ];
 
@@ -54,6 +51,23 @@ final class BetaAccessKey extends Model
     public function createdByUser(): BelongsTo
     {
         return $this->belongsTo(User::class, 'created_by_user_id');
+    }
+
+    public function status(): BetaAccessKeyStatus
+    {
+        if (! $this->is_active) {
+            return BetaAccessKeyStatus::Inactive;
+        }
+
+        if ($this->used_at !== null) {
+            return BetaAccessKeyStatus::Used;
+        }
+
+        if ($this->expires_at !== null && $this->expires_at->isPast()) {
+            return BetaAccessKeyStatus::Inactive;
+        }
+
+        return BetaAccessKeyStatus::Available;
     }
 
     public function isValid(): bool

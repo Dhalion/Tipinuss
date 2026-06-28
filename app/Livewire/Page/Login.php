@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Livewire\Page;
 
+use App\Constants\AppDefaults;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
@@ -25,7 +26,7 @@ final class Login extends Component
 
         $throttleKey = Str::lower($this->email).'|'.request()->ip();
 
-        if (RateLimiter::tooManyAttempts($throttleKey, maxAttempts: 5)) {
+        if (RateLimiter::tooManyAttempts($throttleKey, maxAttempts: AppDefaults::MAX_LOGIN_ATTEMPTS)) {
             $seconds = RateLimiter::availableIn($throttleKey);
             $this->addError('email', trans('auth.throttle', ['seconds' => $seconds, 'minutes' => ceil($seconds / 60)]));
 
@@ -44,7 +45,7 @@ final class Login extends Component
 
             $this->redirect(route('main'));
         } else {
-            RateLimiter::hit($throttleKey, decaySeconds: 60);
+            RateLimiter::hit($throttleKey, decaySeconds: AppDefaults::LOGIN_THROTTLE_DECAY);
             $this->addError('email', trans('auth.invalid_credentials'));
         }
     }

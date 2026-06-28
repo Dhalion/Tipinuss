@@ -23,10 +23,10 @@ final class SecurityHeadersMiddleware
 
         $response->headers->set('Content-Security-Policy', implode('; ', [
             "default-src 'self'",
-            "script-src 'nonce-{$nonce}' 'strict-dynamic'",
+            "script-src 'nonce-{$nonce}' 'strict-dynamic' 'unsafe-eval'",
             "style-src 'nonce-{$nonce}'",
             "img-src 'self' data:",
-            "font-src 'self'",
+            "font-src 'self' fonts.bunny.net",
             "connect-src 'self'",
             "form-action 'self'",
             "frame-ancestors 'none'",

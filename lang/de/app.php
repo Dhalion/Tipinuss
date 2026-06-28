@@ -17,6 +17,10 @@ return [
         'login' => 'Anmelden',
         'register' => 'Registrieren',
         'logout' => 'Abmelden',
+        'appearance' => 'Darstellung',
+        'appearance_light' => 'Hell',
+        'appearance_dark' => 'Dunkel',
+        'appearance_system' => 'System',
     ],
     'bet' => [
         'create' => [

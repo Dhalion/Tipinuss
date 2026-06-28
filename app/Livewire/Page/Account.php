@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Livewire\Page;
 
+use App\Constants\AppDefaults;
 use App\Repositories\Contracts\BalanceTransactionRepositoryInterface;
 use App\Repositories\Contracts\UserBetRepositoryInterface;
 use App\Services\User\TransactionHistoryService;
@@ -53,7 +54,7 @@ final class Account extends Component
             ]);
         }
 
-        $chartData = $transactions->chartDataForUser($user, limit: 100);
+        $chartData = $transactions->chartDataForUser($user, limit: AppDefaults::CHART_DATA_LIMIT);
 
         $chartDataJson = $chartData->map(fn ($transaction) => [
             'x' => $transaction->created_at->format('Y-m-d\TH:i:s'),
@@ -62,7 +63,7 @@ final class Account extends Component
 
         return view('pages.account', [
             'userBets' => $userBets->recentForUser($user),
-            'historyEntries' => $history->forUser($user, limit: 20),
+            'historyEntries' => $history->forUser($user, limit: AppDefaults::HISTORY_LIMIT),
             'chartDataJson' => $chartDataJson,
             'totalBetsCount' => $this->totalBetsCount(),
             'wonBetsCount' => $this->wonBetsCount(),

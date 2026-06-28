@@ -14,13 +14,28 @@ use App\Repositories\Contracts\OrganisationRepositoryInterface;
 use App\Repositories\Contracts\UserRepositoryInterface;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 final class UserManagement extends Component
 {
+    use WithPagination;
+
     public string $approvalFilter = '';
+
+    public string $sortBy = 'name';
+
+    public string $sortDirection = 'asc';
 
     /** @var array<string, int> */
     public array $balanceAdjustments = [];
+
+    protected function queryString(): array
+    {
+        return [
+            'sortBy' => ['except' => 'name'],
+            'sortDirection' => ['except' => 'asc'],
+        ];
+    }
 
     public function mount(): void
     {
@@ -30,6 +45,19 @@ final class UserManagement extends Component
     public function setFilter(string $filter): void
     {
         $this->approvalFilter = $filter;
+        $this->resetPage();
+    }
+
+    public function sort(string $column): void
+    {
+        if ($this->sortBy === $column) {
+            $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
+        } else {
+            $this->sortBy = $column;
+            $this->sortDirection = 'asc';
+        }
+
+        $this->resetPage();
     }
 
     public function adjustBalance(
@@ -138,7 +166,11 @@ final class UserManagement extends Component
         };
 
         return view('pages.admin.users', [
-            'users' => $users->allWithBetCountByApprovalStatus($isApproved),
+            'users' => $users->paginateWithBetCountByApprovalStatus(
+                isApproved: $isApproved,
+                sortBy: $this->sortBy,
+                sortDirection: $this->sortDirection,
+            ),
             'organisations' => $organisations->findAll(),
             'pendingCount' => $users->pendingCount(),
         ]);

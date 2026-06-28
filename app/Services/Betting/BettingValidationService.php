@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Betting;
 
+use App\Constants\AppDefaults;
 use App\Exceptions\BetException;
 use App\Models\Bet;
 use App\Models\BetOption;
@@ -51,7 +52,7 @@ final class BettingValidationService
             return true;
         }
 
-        return $distinctBettorCount >= 2;
+        return $distinctBettorCount >= AppDefaults::MIN_BETTORS_TO_CLOSE;
     }
 
     public function validateAmountWithinBounds(
