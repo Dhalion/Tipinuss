@@ -26,7 +26,7 @@ return [
     'select_winning_option' => 'Select the winning option',
     'close_disabled_hint' => 'At least 2 different users must have placed bets',
     'close_not_allowed' => 'The bet can only be closed once at least 2 different users have placed bets.',
-    'confirm_delete' => 'Really delete? All stakes will be refunded.',
+    'confirm_delete' => 'Really delete? This action cannot be undone.',
     'options' => 'Bet Options',
     'your_balance' => 'Your Balance',
     'recent_bets' => 'Recent Bets',
@@ -52,6 +52,7 @@ return [
     'potential_winnings_text' => 'Potential winnings: :amount 🌰',
     'closed_success' => 'Bet closed and winnings paid out.',
     'deleted_success' => 'Bet ":title" has been deleted.',
+    'refund_bettors' => 'Refund soapnuts to bettors',
 
     'bet_won' => 'Bet won!',
     'bet_lost' => 'Bet lost',

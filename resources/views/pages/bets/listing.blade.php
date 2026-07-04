@@ -1,12 +1,19 @@
 <div class="py-8">
     <div class="max-w-4xl mx-auto px-4">
-        <div class="mb-8">
-            <h1 class="text-3xl font-bold text-zinc-900 dark:text-white">
-                {{ __('app.navigation.bets.list') }}
-            </h1>
-            <p class="text-zinc-600 dark:text-zinc-400 mt-2">
-                {{ __('bets.listing_description') }}
-            </p>
+        <div class="mb-8 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+            <div>
+                <h1 class="text-3xl font-bold text-zinc-900 dark:text-white">
+                    {{ __('app.navigation.bets.list') }}
+                </h1>
+                <p class="text-zinc-600 dark:text-zinc-400 mt-2">
+                    {{ __('bets.listing_description') }}
+                </p>
+            </div>
+            <div class="w-full sm:w-auto">
+                <flux:button href="{{ route('bets.create') }}" wire:navigate variant="primary" icon="plus" class="w-full sm:w-auto">
+                    {{ __('app.navigation.bets.create') }}
+                </flux:button>
+            </div>
         </div>
 
         <div class="space-y-4">

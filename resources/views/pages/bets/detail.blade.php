@@ -6,7 +6,20 @@
         placeBetOdds: 0,
         placeBetOptionId: '',
         placeBetOptionTitle: '',
-        placeBetPotentialWinnings: ''
+        placeBetPotentialWinnings: '',
+        expiresAt: {{ $bet->expires_at?->timestamp ?? 'null' }},
+        betExpired: {{ $bet->isClosed() || $bet->isExpired() ? 'true' : 'false' }},
+        init() {
+            if (this.expiresAt !== null && !this.betExpired) {
+                const check = () => {
+                    if (Date.now() / 1000 > this.expiresAt) {
+                        this.betExpired = true;
+                    }
+                };
+                check();
+                setInterval(check, 1000);
+            }
+        }
     }"
     x-effect="placeBetPotentialWinnings = Math.floor((parseFloat(placeBetAmount) || 0) * (parseFloat(placeBetOdds) || 0)).toLocaleString('de-DE')"
     @bet-placed.window="placeBetShow = false; placeBetAmount = ''"
@@ -35,8 +48,9 @@
                             <button
                                 wire:key="option-odds-{{ $option->id }}"
                                 type="button"
+                                :disabled="betExpired"
                                 @click="placeBetOptionId = '{{ $option->id }}'; placeBetOptionTitle = {{ json_encode($option->title) }}; placeBetOdds = {{ $option->odds }}; placeBetAmount = ''; placeBetShow = true"
-                                class="group relative overflow-hidden rounded-xl border border-primary-200 dark:border-primary-700/50 bg-primary-50 dark:bg-primary-700/20 px-4 py-5 sm:px-6 sm:py-8 text-center transition-all duration-200 hover:border-gold-400 hover:shadow-lg hover:shadow-gold-500/25 focus:outline-none focus:ring-2 focus:ring-primary-700 focus:ring-offset-2 focus:ring-offset-zinc-50 dark:focus:ring-offset-zinc-900"
+                                class="group relative overflow-hidden rounded-xl border px-4 py-5 sm:px-6 sm:py-8 text-center transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-zinc-50 dark:focus:ring-offset-zinc-900 disabled:opacity-60 disabled:cursor-not-allowed disabled:border-zinc-300 disabled:bg-zinc-100 disabled:shadow-none disabled:hover:shadow-none disabled:dark:border-zinc-700 disabled:dark:bg-zinc-800/40 [&:not(:disabled)]:border-primary-200 [&:not(:disabled)]:dark:border-primary-700/50 [&:not(:disabled)]:bg-primary-50 [&:not(:disabled)]:dark:bg-primary-700/20 [&:not(:disabled)]:hover:border-gold-400 [&:not(:disabled)]:hover:shadow-lg [&:not(:disabled)]:hover:shadow-gold-500/25 [&:not(:disabled)]:focus:ring-primary-700"
                             >
                                 <div class="absolute inset-0 bg-primary-950/5 dark:bg-primary-700/5 opacity-0 transition-opacity group-hover:opacity-100"></div>
                                 <div class="relative">
@@ -207,7 +221,7 @@
 
     <div
         x-data="{ show: false }"
-        @open-close-bet-modal.window="show = true"
+        @open-close-bet-modal.window="show = true; $wire.$refresh()"
         x-show="show"
         x-transition:enter="transition ease-out duration-200"
         x-transition:enter-start="opacity-0"
@@ -345,6 +359,17 @@
                     </div>
                     <h2 class="text-lg font-bold text-white">{{ __('bets.delete') }}</h2>
                     <p class="mt-2 text-sm text-zinc-400">{{ __('bets.confirm_delete') }}</p>
+                </div>
+
+                <div class="px-6 pb-2">
+                    <label class="flex items-center gap-3 cursor-pointer group">
+                        <input
+                            type="checkbox"
+                            wire:model="refund"
+                            class="h-4 w-4 rounded border-zinc-600 bg-zinc-700 text-primary-600 focus:ring-primary-500"
+                        />
+                        <span class="text-sm text-zinc-300 group-hover:text-white transition-colors">{{ __('bets.refund_bettors') }}</span>
+                    </label>
                 </div>
 
                 <div class="flex gap-3 px-6 py-5">
