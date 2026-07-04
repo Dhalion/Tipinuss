@@ -63,6 +63,25 @@ final class EloquentUserBetRepository implements UserBetRepositoryInterface
             ->count('user_id');
     }
 
+    /**
+     * @param  array<int, string>  $optionIds
+     * @return Collection<int, UserBet>
+     */
+    public function findByOptionIds(array $optionIds): Collection
+    {
+        return UserBet::whereIn('bet_option_id', $optionIds)->get();
+    }
+
+    public function countForUser(User $user): int
+    {
+        return $user->userBets()->count();
+    }
+
+    public function countForUserByStatus(User $user, string $status): int
+    {
+        return $user->userBets()->where('status', $status)->count();
+    }
+
     public function save(UserBet $userBet): UserBet
     {
         $userBet->save();

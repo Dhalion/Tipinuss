@@ -91,4 +91,27 @@ final class EloquentUserRepository implements UserRepositoryInterface
     {
         $user->delete();
     }
+
+    /**
+     * @param  array<int, string>  $ids
+     * @return Collection<int, User>
+     */
+    public function findByIds(array $ids): Collection
+    {
+        return User::whereIn('id', $ids)->get()->keyBy('id');
+    }
+
+    public function findFirstAdmin(): ?User
+    {
+        return User::where('is_admin', true)->orderBy('created_at')->first();
+    }
+
+    public function adjustBalance(User $user, int $amount): void
+    {
+        if ($amount >= 0) {
+            $user->increment('soapnuts', $amount);
+        } else {
+            $user->decrement('soapnuts', abs($amount));
+        }
+    }
 }

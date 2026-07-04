@@ -16,27 +16,27 @@ use Livewire\Component;
 final class Account extends Component
 {
     #[Computed]
-    public function totalBetsCount(): int
+    public function totalBetsCount(UserBetRepositoryInterface $userBets): int
     {
         $user = Auth::user();
 
-        return $user !== null ? $user->userBets()->count() : 0;
+        return $user !== null ? $userBets->countForUser($user) : 0;
     }
 
     #[Computed]
-    public function wonBetsCount(): int
+    public function wonBetsCount(UserBetRepositoryInterface $userBets): int
     {
         $user = Auth::user();
 
-        return $user !== null ? $user->userBets()->where('status', 'won')->count() : 0;
+        return $user !== null ? $userBets->countForUserByStatus($user, 'won') : 0;
     }
 
     #[Computed]
-    public function lostBetsCount(): int
+    public function lostBetsCount(UserBetRepositoryInterface $userBets): int
     {
         $user = Auth::user();
 
-        return $user !== null ? $user->userBets()->where('status', 'lost')->count() : 0;
+        return $user !== null ? $userBets->countForUserByStatus($user, 'lost') : 0;
     }
 
     public function render(
@@ -65,9 +65,9 @@ final class Account extends Component
             'userBets' => $userBets->recentForUser($user),
             'historyEntries' => $history->forUser($user, limit: AppDefaults::HISTORY_LIMIT),
             'chartDataJson' => $chartDataJson,
-            'totalBetsCount' => $this->totalBetsCount(),
-            'wonBetsCount' => $this->wonBetsCount(),
-            'lostBetsCount' => $this->lostBetsCount(),
+            'totalBetsCount' => $this->totalBetsCount($userBets),
+            'wonBetsCount' => $this->wonBetsCount($userBets),
+            'lostBetsCount' => $this->lostBetsCount($userBets),
         ]);
     }
 }

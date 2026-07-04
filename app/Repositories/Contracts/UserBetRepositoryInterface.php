@@ -32,5 +32,15 @@ interface UserBetRepositoryInterface
      */
     public function findByIdsWithOptionAndBet(array $ids): Collection;
 
+    /**
+     * @param  array<int, string>  $optionIds
+     * @return Collection<int, UserBet>
+     */
+    public function findByOptionIds(array $optionIds): Collection;
+
+    public function countForUser(User $user): int;
+
+    public function countForUserByStatus(User $user, string $status): int;
+
     public function save(UserBet $userBet): UserBet;
 }

@@ -36,4 +36,14 @@ interface UserRepositoryInterface
     public function topBySoapnuts(int $limit = AppDefaults::TOP_USERS_LIMIT, ?string $organisationId = null): Collection;
 
     public function delete(User $user): void;
+
+    /**
+     * @param  array<int, string>  $ids
+     * @return Collection<int, User>
+     */
+    public function findByIds(array $ids): Collection;
+
+    public function findFirstAdmin(): ?User;
+
+    public function adjustBalance(User $user, int $amount): void;
 }

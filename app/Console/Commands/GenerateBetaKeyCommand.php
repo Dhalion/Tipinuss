@@ -6,6 +6,7 @@ namespace App\Console\Commands;
 
 use App\Actions\Auth\CreateBetaAccessKeyAction;
 use App\Models\User;
+use App\Repositories\Contracts\UserRepositoryInterface;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,6 +23,7 @@ final class GenerateBetaKeyCommand extends Command
 
     public function handle(
         CreateBetaAccessKeyAction $action,
+        UserRepositoryInterface $users,
     ): int {
         $organisationId = $this->option('organisation-id');
 
@@ -31,7 +33,7 @@ final class GenerateBetaKeyCommand extends Command
             return self::FAILURE;
         }
 
-        $admin = $this->resolveAdmin();
+        $admin = $this->resolveAdmin($users);
         if ($admin === null) {
             return self::FAILURE;
         }
@@ -68,12 +70,12 @@ final class GenerateBetaKeyCommand extends Command
         return self::SUCCESS;
     }
 
-    private function resolveAdmin(): ?User
+    private function resolveAdmin(UserRepositoryInterface $users): ?User
     {
         $email = $this->option('admin-email');
 
         if ($email !== null) {
-            $user = User::where('email', $email)->first();
+            $user = $users->findByEmail($email);
             if ($user === null) {
                 $this->error("Admin mit E-Mail „{$email}“ nicht gefunden.");
 
@@ -83,7 +85,7 @@ final class GenerateBetaKeyCommand extends Command
             return $user;
         }
 
-        $admin = User::where('is_admin', true)->orderBy('created_at')->first();
+        $admin = $users->findFirstAdmin();
         if ($admin === null) {
             $this->error('Es existiert kein Admin-Benutzer. Bitte --admin-email angeben.');
 
