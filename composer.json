@@ -23,6 +23,7 @@
         "fakerphp/faker": "1.24.1",
         "larastan/larastan": "3.9.6",
         "laravel/boost": "^2.4",
+        "laravel/dusk": "^8.6",
         "laravel/pail": "1.2.6",
         "laravel/pint": "1.29.1",
         "laravel/sail": "1.58.0",
@@ -96,6 +97,10 @@
         "test:parallel": [
             "Composer\\Config::disableProcessTimeout",
             "DB_CONNECTION=sqlite php artisan test --parallel --recreate-databases --compact --no-ansi"
+        ],
+        "test:dusk": [
+            "Composer\\Config::disableProcessTimeout",
+            "@php artisan dusk"
         ],
         "test": [
             "@php artisan config:clear --ansi",
