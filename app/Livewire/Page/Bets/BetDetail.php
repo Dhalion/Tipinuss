@@ -9,6 +9,7 @@ use App\Actions\Betting\CloseBetAction;
 use App\Actions\Betting\DeleteBetAction;
 use App\Actions\Betting\PlaceBetAction;
 use App\DTOs\Betting\CloseBetData;
+use App\DTOs\Betting\DeleteBetData;
 use App\DTOs\Betting\PlaceBetData;
 use App\Exceptions\BetException;
 use App\Models\Bet;
@@ -33,6 +34,8 @@ final class BetDetail extends Component
 {
     #[Locked]
     public string $betId;
+
+    public bool $refund = false;
 
     public function mount(Bet $bet, MetaTagService $metaTagService, BetRepositoryInterface $bets): void
     {
@@ -136,10 +139,9 @@ final class BetDetail extends Component
 
         $this->authorize('deleteBet', $bet);
 
-        $betTitle = $bet->title;
-        $action->execute($bet);
+        $action->execute(new DeleteBetData(bet: $bet, refund: $this->refund));
 
-        Flux::toast(variant: 'success', text: __('bets.deleted_success', ['title' => $betTitle]));
+        Flux::toast(variant: 'success', text: __('bets.deleted_success', ['title' => $bet->title]));
         $this->redirect(route('bets.list'), navigate: true);
     }
 

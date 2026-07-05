@@ -7,7 +7,6 @@ namespace Database\Seeders\Test;
 use App\Models\Organisation;
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
 final class UserSeeder extends Seeder
 {
@@ -16,7 +15,7 @@ final class UserSeeder extends Seeder
         User::create([
             'name' => 'Admin',
             'email' => 'admin@test.com',
-            'password' => Hash::make('password'),
+            'password' => 'password',
             'is_admin' => true,
             'is_approved' => true,
             'soapnuts' => 9999,
@@ -25,7 +24,7 @@ final class UserSeeder extends Seeder
         User::create([
             'name' => 'Alice',
             'email' => 'alice@test.com',
-            'password' => Hash::make('password'),
+            'password' => 'password',
             'is_admin' => false,
             'is_approved' => true,
             'soapnuts' => 500,
@@ -34,7 +33,7 @@ final class UserSeeder extends Seeder
         User::create([
             'name' => 'Bob',
             'email' => 'bob@test.com',
-            'password' => Hash::make('password'),
+            'password' => 'password',
             'is_admin' => false,
             'is_approved' => false,
             'soapnuts' => 0,

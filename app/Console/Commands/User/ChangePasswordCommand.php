@@ -6,7 +6,6 @@ namespace App\Console\Commands\User;
 
 use App\Repositories\Contracts\UserRepositoryInterface;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Hash;
 
 final class ChangePasswordCommand extends Command
 {
@@ -37,7 +36,7 @@ final class ChangePasswordCommand extends Command
             return self::FAILURE;
         }
 
-        $user->password = Hash::make($password);
+        $user->password = $password;
         $this->users->save($user);
 
         $this->info("Password updated for {$user->email}.");

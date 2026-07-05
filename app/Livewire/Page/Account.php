@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Livewire\Page;
 
+use App\Constants\AppDefaults;
 use App\Repositories\Contracts\BalanceTransactionRepositoryInterface;
 use App\Repositories\Contracts\UserBetRepositoryInterface;
 use App\Services\User\TransactionHistoryService;
@@ -15,27 +16,27 @@ use Livewire\Component;
 final class Account extends Component
 {
     #[Computed]
-    public function totalBetsCount(): int
+    public function totalBetsCount(UserBetRepositoryInterface $userBets): int
     {
         $user = Auth::user();
 
-        return $user !== null ? $user->userBets()->count() : 0;
+        return $user !== null ? $userBets->countForUser($user) : 0;
     }
 
     #[Computed]
-    public function wonBetsCount(): int
+    public function wonBetsCount(UserBetRepositoryInterface $userBets): int
     {
         $user = Auth::user();
 
-        return $user !== null ? $user->userBets()->where('status', 'won')->count() : 0;
+        return $user !== null ? $userBets->countForUserByStatus($user, 'won') : 0;
     }
 
     #[Computed]
-    public function lostBetsCount(): int
+    public function lostBetsCount(UserBetRepositoryInterface $userBets): int
     {
         $user = Auth::user();
 
-        return $user !== null ? $user->userBets()->where('status', 'lost')->count() : 0;
+        return $user !== null ? $userBets->countForUserByStatus($user, 'lost') : 0;
     }
 
     public function render(
@@ -53,7 +54,7 @@ final class Account extends Component
             ]);
         }
 
-        $chartData = $transactions->chartDataForUser($user, limit: 100);
+        $chartData = $transactions->chartDataForUser($user, limit: AppDefaults::CHART_DATA_LIMIT);
 
         $chartDataJson = $chartData->map(fn ($transaction) => [
             'x' => $transaction->created_at->format('Y-m-d\TH:i:s'),
@@ -62,11 +63,11 @@ final class Account extends Component
 
         return view('pages.account', [
             'userBets' => $userBets->recentForUser($user),
-            'historyEntries' => $history->forUser($user, limit: 20),
+            'historyEntries' => $history->forUser($user, limit: AppDefaults::HISTORY_LIMIT),
             'chartDataJson' => $chartDataJson,
-            'totalBetsCount' => $this->totalBetsCount(),
-            'wonBetsCount' => $this->wonBetsCount(),
-            'lostBetsCount' => $this->lostBetsCount(),
+            'totalBetsCount' => $this->totalBetsCount($userBets),
+            'wonBetsCount' => $this->wonBetsCount($userBets),
+            'lostBetsCount' => $this->lostBetsCount($userBets),
         ]);
     }
 }

@@ -4,26 +4,30 @@ declare(strict_types=1);
 
 namespace App\Actions\Auth;
 
+use App\Constants\AppDefaults;
 use App\DTOs\Auth\RegisterData;
+use App\DTOs\Auth\RegisterResult;
+use App\Enums\TransactionType;
 use App\Exceptions\InvalidBetaKeyException;
 use App\Models\BetaAccessKey;
 use App\Models\User;
 use App\Repositories\Contracts\BetaAccessKeyRepositoryInterface;
 use App\Repositories\Contracts\UserRepositoryInterface;
+use App\Services\User\BalanceTransactionService;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 
 final class RegisterUserAction
 {
     public function __construct(
         private UserRepositoryInterface $users,
         private BetaAccessKeyRepositoryInterface $betaKeys,
+        private BalanceTransactionService $balanceTransactions,
     ) {}
 
-    public function execute(RegisterData $data): User
+    public function execute(RegisterData $data): RegisterResult
     {
-        $betaMode = (bool) config('app.beta_mode', false);
+        $betaMode = (bool) config('app.restricted_mode', false);
         /** @var BetaAccessKey|null $betaKeyModel */
         $betaKeyModel = null;
 
@@ -61,14 +65,21 @@ final class RegisterUserAction
             $user->organisation_id = $betaKeyModel->organisation_id;
         }
 
-        $user->password = Hash::make($data->password);
+        $user->password = $data->password;
 
-        return DB::transaction(function () use ($user, $betaKeyModel): User {
-            if ($betaKeyModel !== null && $betaKeyModel->start_balance !== null) {
-                $user->soapnuts = $betaKeyModel->start_balance;
-            }
+        return DB::transaction(function () use ($user, $betaKeyModel): RegisterResult {
+            $startBalance = $betaKeyModel?->start_balance ?? AppDefaults::START_BALANCE;
+            $user->soapnuts = $startBalance;
 
             $user = $this->users->save($user);
+
+            $this->balanceTransactions->log(
+                user: $user,
+                type: TransactionType::Initial,
+                amount: $startBalance,
+                balanceAfter: $startBalance,
+                description: __('account.initial_balance_description'),
+            );
 
             if ($betaKeyModel !== null) {
                 $betaKeyModel->used_at = Carbon::now();
@@ -76,7 +87,11 @@ final class RegisterUserAction
                 $this->betaKeys->save($betaKeyModel);
             }
 
-            return $user;
+            return new RegisterResult(
+                user: $user,
+                startBalance: $betaKeyModel?->start_balance,
+                tokenMessage: $betaKeyModel?->message,
+            );
         });
     }
 }

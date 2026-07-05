@@ -6,27 +6,32 @@ namespace App\Services\User;
 
 use App\Exceptions\BetException;
 use App\Models\User;
+use App\Repositories\Contracts\UserRepositoryInterface;
 
 final class UserBalanceService
 {
+    public function __construct(
+        private UserRepositoryInterface $users,
+    ) {}
+
     public function decrementBalance(User $user, int $amount): void
     {
         if ($user->soapnuts < $amount) {
             throw BetException::insufficientBalance($amount - $user->soapnuts);
         }
 
-        $user->decrement('soapnuts', $amount);
+        $this->users->adjustBalance($user, -$amount);
     }
 
     public function incrementBalance(User $user, int $amount): void
     {
-        $user->increment('soapnuts', $amount);
+        $this->users->adjustBalance($user, $amount);
     }
 
     public function getAvailableBalance(User $user): int
     {
-        $freshUser = $user->fresh();
+        $freshUser = $this->users->findById($user->id);
 
-        return $freshUser instanceof User ? $freshUser->soapnuts : $user->soapnuts;
+        return $freshUser !== null ? $freshUser->soapnuts : $user->soapnuts;
     }
 }

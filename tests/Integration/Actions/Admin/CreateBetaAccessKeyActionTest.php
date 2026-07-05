@@ -52,4 +52,37 @@ final class CreateBetaAccessKeyActionTest extends TestCase
         $this->assertSame('CUSTOM-KEY-123', $betaKey->key);
         $this->assertSame(500, $betaKey->start_balance);
     }
+
+    public function test_creates_beta_access_key_with_message(): void
+    {
+        $admin = User::factory()->admin()->create();
+        $organisation = Organisation::factory()->create();
+        $action = app(CreateBetaAccessKeyAction::class);
+
+        $betaKey = $action->execute(
+            admin: $admin,
+            organisationId: $organisation->id,
+            customKey: 'MSG-KEY',
+            startBalance: 300,
+            message: 'Viel Spaß beim Tippen!',
+        );
+
+        $this->assertSame('MSG-KEY', $betaKey->key);
+        $this->assertSame(300, $betaKey->start_balance);
+        $this->assertSame('Viel Spaß beim Tippen!', $betaKey->message);
+    }
+
+    public function test_creates_beta_access_key_without_message(): void
+    {
+        $admin = User::factory()->admin()->create();
+        $organisation = Organisation::factory()->create();
+        $action = app(CreateBetaAccessKeyAction::class);
+
+        $betaKey = $action->execute(
+            admin: $admin,
+            organisationId: $organisation->id,
+        );
+
+        $this->assertNull($betaKey->message);
+    }
 }

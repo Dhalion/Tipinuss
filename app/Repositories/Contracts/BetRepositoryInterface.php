@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Repositories\Contracts;
 
+use App\Constants\AppDefaults;
 use App\Models\Bet;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
@@ -16,22 +17,22 @@ interface BetRepositoryInterface
     public function findByIdOrFail(string $id): Bet;
 
     /** @return LengthAwarePaginator<Bet> */
-    public function paginateOpen(int $perPage = 15): LengthAwarePaginator;
+    public function paginateOpen(int $perPage = AppDefaults::DEFAULT_PER_PAGE): LengthAwarePaginator;
 
     /** @return LengthAwarePaginator<int, Bet> */
-    public function paginateOpenForUser(User $user, int $perPage = 15): LengthAwarePaginator;
+    public function paginateOpenForUser(User $user, int $perPage = AppDefaults::DEFAULT_PER_PAGE): LengthAwarePaginator;
 
     /** @return LengthAwarePaginator<int, Bet> */
-    public function paginateForListing(int $perPage = 15): LengthAwarePaginator;
+    public function paginateForListing(int $perPage = AppDefaults::DEFAULT_PER_PAGE): LengthAwarePaginator;
 
     /** @return LengthAwarePaginator<int, Bet> */
-    public function paginateForListingForUser(User $user, int $perPage = 15): LengthAwarePaginator;
+    public function paginateForListingForUser(User $user, int $perPage = AppDefaults::DEFAULT_PER_PAGE): LengthAwarePaginator;
 
     /** @return Collection<int, Bet> */
-    public function recentOpen(int $limit = 5): Collection;
+    public function recentOpen(int $limit = AppDefaults::RECENT_OPEN_LIMIT): Collection;
 
     /** @return Collection<int, Bet> */
-    public function recentOpenForUser(?User $user, int $limit = 5): Collection;
+    public function recentOpenForUser(?User $user, int $limit = AppDefaults::RECENT_OPEN_LIMIT): Collection;
 
     public function existsBySlug(string $slug): bool;
 

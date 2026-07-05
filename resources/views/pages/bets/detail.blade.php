@@ -1,31 +1,28 @@
 <div 
     class="flex-1 flex flex-col bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-white"
     x-data="{
-        placeBet: {
-            show: false,
-            amount: '',
-            odds: 0,
-            optionId: '',
-            optionTitle: '',
-            get potentialWinnings() {
-                const a = parseFloat(this.amount) || 0;
-                const o = parseFloat(this.odds) || 0;
-                return Math.floor(a * o).toLocaleString('de-DE');
-            },
-            open(optionId, optionTitle, odds) {
-                this.optionId = optionId;
-                this.optionTitle = optionTitle;
-                this.odds = parseFloat(odds);
-                this.amount = '';
-                this.show = true;
-            },
-            close() {
-                this.show = false;
-                this.amount = '';
+        placeBetShow: false,
+        placeBetAmount: '',
+        placeBetOdds: 0,
+        placeBetOptionId: '',
+        placeBetOptionTitle: '',
+        placeBetPotentialWinnings: '',
+        expiresAt: {{ $bet->expires_at?->timestamp ?? 'null' }},
+        betExpired: {{ $bet->isClosed() || $bet->isExpired() ? 'true' : 'false' }},
+        init() {
+            if (this.expiresAt !== null && !this.betExpired) {
+                const check = () => {
+                    if (Date.now() / 1000 > this.expiresAt) {
+                        this.betExpired = true;
+                    }
+                };
+                check();
+                setInterval(check, 1000);
             }
         }
     }"
-    @bet-placed.window="placeBet.close()"
+    x-effect="placeBetPotentialWinnings = Math.floor((parseFloat(placeBetAmount) || 0) * (parseFloat(placeBetOdds) || 0)).toLocaleString('de-DE')"
+    @bet-placed.window="placeBetShow = false; placeBetAmount = ''"
 >
 
     @include('components.bets.detail-header-with-controls', ['bet' => $bet, 'canCloseBet' => $canCloseBet, 'organisations' => $organisations])
@@ -51,8 +48,9 @@
                             <button
                                 wire:key="option-odds-{{ $option->id }}"
                                 type="button"
-                                @click="placeBet.open('{{ $option->id }}', {{ json_encode($option->title) }}, {{ $option->odds }})"
-                                class="group relative overflow-hidden rounded-xl border border-primary-200 dark:border-primary-700/50 bg-primary-50 dark:bg-primary-700/20 px-4 py-5 sm:px-6 sm:py-8 text-center transition-all duration-200 hover:border-gold-400 hover:shadow-lg hover:shadow-gold-500/25 focus:outline-none focus:ring-2 focus:ring-primary-700 focus:ring-offset-2 focus:ring-offset-zinc-50 dark:focus:ring-offset-zinc-900"
+                                :disabled="betExpired"
+                                @click="placeBetOptionId = '{{ $option->id }}'; placeBetOptionTitle = {{ json_encode($option->title) }}; placeBetOdds = {{ $option->odds }}; placeBetAmount = ''; placeBetShow = true"
+                                class="group relative overflow-hidden rounded-xl border px-4 py-5 sm:px-6 sm:py-8 text-center transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-zinc-50 dark:focus:ring-offset-zinc-900 disabled:opacity-60 disabled:cursor-not-allowed disabled:border-zinc-300 disabled:bg-zinc-100 disabled:shadow-none disabled:hover:shadow-none disabled:dark:border-zinc-700 disabled:dark:bg-zinc-800/40 [&:not(:disabled)]:border-primary-200 [&:not(:disabled)]:dark:border-primary-700/50 [&:not(:disabled)]:bg-primary-50 [&:not(:disabled)]:dark:bg-primary-700/20 [&:not(:disabled)]:hover:border-gold-400 [&:not(:disabled)]:hover:shadow-lg [&:not(:disabled)]:hover:shadow-gold-500/25 [&:not(:disabled)]:focus:ring-primary-700"
                             >
                                 <div class="absolute inset-0 bg-primary-950/5 dark:bg-primary-700/5 opacity-0 transition-opacity group-hover:opacity-100"></div>
                                 <div class="relative">
@@ -90,7 +88,7 @@
     </div>
 
     <div
-        x-show="placeBet.show"
+        x-show="placeBetShow"
         x-transition:enter="transition ease-out duration-200"
         x-transition:enter-start="opacity-0"
         x-transition:enter-end="opacity-100"
@@ -99,19 +97,19 @@
         x-transition:leave-end="opacity-0"
         class="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4"
         style="display: none;"
-        @keydown.escape.window="placeBet.close()"
-        x-trap="placeBet.show"
+        @keydown.escape.window="placeBetShow = false; placeBetAmount = ''"
+        x-trap="placeBetShow"
         aria-modal="true"
         role="dialog"
     >
         <div 
             class="absolute inset-0 bg-black/70 backdrop-blur-sm"
-            @click="placeBet.close()"
+            @click="placeBetShow = false; placeBetAmount = ''"
             aria-hidden="true"
         ></div>
 
         <div
-            x-show="placeBet.show"
+            x-show="placeBetShow"
             x-transition:enter="transition ease-out duration-300"
             x-transition:enter-start="opacity-0 translate-y-4 sm:scale-95"
             x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
@@ -126,11 +124,11 @@
                     <div class="flex items-start justify-between gap-3">
                         <div class="min-w-0">
                             <h2 class="text-xl font-bold text-white">{{ __('bets.place_bet') }}</h2>
-                            <p class="mt-1 text-sm font-medium text-primary-300 truncate" x-text="placeBet.optionTitle"></p>
+                            <p class="mt-1 text-sm font-medium text-primary-300 truncate" x-text="placeBetOptionTitle"></p>
                         </div>
                         <button
                             type="button"
-                            @click="placeBet.close()"
+                            @click="placeBetShow = false; placeBetAmount = ''"
                             class="shrink-0 rounded-lg p-1.5 text-zinc-400 transition hover:bg-zinc-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-zinc-500"
                             aria-label="{{ __('bets.close') }}"
                         >
@@ -140,11 +138,11 @@
                 </div>
 
                 <div class="px-6 py-6 space-y-6">
-                    <form @submit.prevent="$wire.placeBet(placeBet.optionId, placeBet.amount)" class="space-y-4">
+                    <form @submit.prevent="$wire.placeBet(placeBetOptionId, placeBetAmount)" class="space-y-4">
 
                     <div class="flex items-center justify-between rounded-lg bg-zinc-800/60 px-4 py-3 text-sm">
                         <span class="text-zinc-400">{{ __('bets.odds') }}</span>
-                                                        <span class="font-bold text-gold-300" x-text="placeBet.odds.toFixed(2) + 'x'"></span>
+                                                        <span class="font-bold text-gold-300" x-text="placeBetOdds.toFixed(2) + 'x'"></span>
                     </div>
 
                     <div class="flex items-center justify-between rounded-lg bg-zinc-800/60 px-4 py-3 text-sm">
@@ -159,7 +157,7 @@
                         <div class="relative">
                             <input
                                 x-ref="amountInput"
-                                x-model="placeBet.amount"
+                                x-model="placeBetAmount"
                                 type="number"
                                 min="1"
                                 max="100000"
@@ -180,27 +178,27 @@
                             {{ __('bets.potential_winnings') }}
                         </div>
                         <div class="flex items-baseline gap-2">
-                            <span class="text-4xl font-bold text-gold-300" x-text="placeBet.potentialWinnings"></span>
+                            <span class="text-4xl font-bold text-gold-300" x-text="placeBetPotentialWinnings"></span>
                             <span class="text-2xl text-gold-400">🌰</span>
                         </div>
                         <div class="mt-2 text-xs text-gold-300/60">
-                            <span x-text="parseFloat(placeBet.amount || 0).toLocaleString('de-DE')"></span>
+                            <span x-text="parseFloat(placeBetAmount || 0).toLocaleString('de-DE')"></span>
                             ×
-                            <span x-text="placeBet.odds.toFixed(2)"></span>x
+                            <span x-text="placeBetOdds.toFixed(2)"></span>x
                         </div>
                     </div>
 
                     <div class="flex gap-3">
                         <button
                             type="button"
-                            @click="placeBet.close()"
+                            @click="placeBetShow = false; placeBetAmount = ''"
                             class="flex-1 rounded-xl border border-zinc-600 bg-zinc-800 px-4 py-3 font-medium text-zinc-300 transition hover:bg-zinc-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-zinc-500"
                         >
                             {{ __('bets.cancel') }}
                         </button>
                         <button
                             type="submit"
-                            :disabled="!placeBet.amount || parseFloat(placeBet.amount) < 1"
+                            :disabled="!placeBetAmount || parseFloat(placeBetAmount) < 1"
                             wire:loading.attr="disabled"
                             wire:target="placeBet"
                             class="flex-1 rounded-xl bg-primary-700 px-4 py-3 font-bold text-white shadow-lg shadow-primary-700/30 transition hover:bg-primary-600 disabled:cursor-not-allowed disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-primary-700"
@@ -223,7 +221,7 @@
 
     <div
         x-data="{ show: false }"
-        @open-close-bet-modal.window="show = true"
+        @open-close-bet-modal.window="show = true; $wire.$refresh()"
         x-show="show"
         x-transition:enter="transition ease-out duration-200"
         x-transition:enter-start="opacity-0"
@@ -361,6 +359,17 @@
                     </div>
                     <h2 class="text-lg font-bold text-white">{{ __('bets.delete') }}</h2>
                     <p class="mt-2 text-sm text-zinc-400">{{ __('bets.confirm_delete') }}</p>
+                </div>
+
+                <div class="px-6 pb-2">
+                    <label class="flex items-center gap-3 cursor-pointer group">
+                        <input
+                            type="checkbox"
+                            wire:model="refund"
+                            class="h-4 w-4 rounded border-zinc-600 bg-zinc-700 text-primary-600 focus:ring-primary-500"
+                        />
+                        <span class="text-sm text-zinc-300 group-hover:text-white transition-colors">{{ __('bets.refund_bettors') }}</span>
+                    </label>
                 </div>
 
                 <div class="flex gap-3 px-6 py-5">

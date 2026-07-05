@@ -24,7 +24,6 @@
     </flux:navbar>
 
     <flux:spacer/>
-
     @auth
         @if(auth()->user()->isApproved())
             <span class="text-sm text-gold-400 mr-2 whitespace-nowrap font-semibold">

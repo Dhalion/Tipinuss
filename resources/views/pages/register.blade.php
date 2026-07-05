@@ -14,8 +14,8 @@
 
         <form wire:submit="register" class="space-y-5">
 
-            @if ((bool) config('app.beta_mode', false))
-                <div x-data="{ hasBetaKey: $wire.entangle('hasBetaKey') }" class="space-y-3">
+            @if ((bool) config('app.restricted_mode', false))
+                <div x-data="{ hasBetaKey: $wire.entangle('hasBetaKey'), keyFromUrl: @js(request()->has('key')) }" class="space-y-3">
                     <p class="text-sm font-medium text-zinc-700 dark:text-zinc-300">{{ __('auth.register_path_label') }}</p>
 
                     <label
@@ -32,7 +32,13 @@
 
                     <div x-show="hasBetaKey" x-cloak x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" class="ml-1 p-3 border-l-2 border-primary-300 dark:border-primary-700">
                         <flux:input wire:model="betaKey" label="{{ __('auth.beta_key_label') }}"
-                            placeholder="{{ __('auth.beta_key_placeholder') }}" class="mb-2" />
+                            placeholder="{{ __('auth.beta_key_placeholder') }}"
+                            x-bind:disabled="keyFromUrl" class="mb-2" />
+
+                        <div x-show="keyFromUrl" x-cloak class="flex items-start gap-2 rounded-lg bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-700/60 px-3 py-2.5 mb-2">
+                            <flux:icon name="information-circle" class="mt-0.5 h-4 w-4 shrink-0 text-blue-600 dark:text-blue-300" />
+                            <p class="text-xs text-blue-700 dark:text-blue-200">{{ __('auth.invite_link_info') }}</p>
+                        </div>
 
                         <div class="flex items-start gap-2 rounded-lg bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-700/60 px-3 py-2.5">
                             <flux:icon name="check-circle" variant="solid" class="mt-0.5 h-4 w-4 shrink-0 text-green-600 dark:text-green-300" />
@@ -70,9 +76,9 @@
                 type="password" required />
 
             <flux:button type="submit" variant="primary" class="w-full">
-                @if ((bool) config('app.beta_mode', false) && $hasBetaKey)
+                @if ((bool) config('app.restricted_mode', false) && $hasBetaKey)
                     {{ __('auth.register_submit_key') }}
-                @elseif ((bool) config('app.beta_mode', false))
+                @elseif ((bool) config('app.restricted_mode', false))
                     {{ __('auth.register_submit_pending') }}
                 @else
                     {{ __('auth.register_submit') }}

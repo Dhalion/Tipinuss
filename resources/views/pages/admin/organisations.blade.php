@@ -1,109 +1,95 @@
-<div class="py-6">
+<div class="py-8">
     <div class="max-w-7xl mx-auto px-4">
-        <div class="mb-8">
-            <flux:heading size="xl">{{ __('admin.organisations.title') }}</flux:heading>
-            <flux:text class="mt-2">{{ __('admin.organisations.description') }}</flux:text>
+
+        <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <div>
+                <flux:heading size="xl">{{ __('admin.organisations.title') }}</flux:heading>
+                <flux:text class="mt-2">{{ __('admin.organisations.description') }}</flux:text>
+            </div>
+                @if ($organisations->isNotEmpty())
+                <flux:button wire:click="$toggle('showCreateForm')" variant="primary" size="sm" icon="plus">
+                    {{ __('admin.organisations.create_button') }}
+                </flux:button>
+            @endif
         </div>
 
-        @if (session('status'))
-            <flux:callout icon="check-circle" variant="success" class="mb-6">
-                <flux:text>{{ session('status') }}</flux:text>
-            </flux:callout>
-        @endif
+        <x:admin-nav />
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div class="lg:col-span-1">
-                <flux:card>
-                    <flux:heading size="lg" class="mb-4">{{ __('admin.organisations.create_title') }}</flux:heading>
-
-                    <form wire:submit="createOrganisation" class="space-y-4">
+        @if ($showCreateForm)
+            <flux:card class="mb-6 p-6">
+                <flux:heading size="lg" class="mb-4">{{ __('admin.organisations.create_title') }}</flux:heading>
+                <form wire:submit="createOrganisation" class="flex gap-3 items-end">
+                    <div class="flex-1">
                         <flux:input
                             wire:model="newOrganisationName"
                             label="{{ __('admin.organisations.name_label') }}"
                             placeholder="{{ __('admin.organisations.name_placeholder') }}"
                         />
-
-                        <flux:button type="submit" variant="primary" class="w-full">
-                            {{ __('admin.organisations.create_button') }}
-                        </flux:button>
-                    </form>
-                </flux:card>
-            </div>
-
-            <div class="lg:col-span-2 space-y-4">
-                @forelse ($organisations as $organisation)
-                    <flux:card wire:key="org-{{ $organisation->id }}">
-                        <div class="flex items-center justify-between mb-4">
-                            <flux:heading size="lg">{{ $organisation->name }}</flux:heading>
-                            <flux:button
-                                wire:click="deleteOrganisation('{{ $organisation->id }}')"
-                                wire:confirm="{{ __('admin.organisations.confirm_delete') }}"
-                                variant="danger"
-                                size="sm"
-                            >
-                                {{ __('admin.organisations.delete') }}
-                            </flux:button>
-                        </div>
-
-                        <flux:text class="mb-4">
-                            {{ trans_choice('admin.organisations.member_count', $organisation->users->count(), ['count' => $organisation->users->count()]) }}
-                        </flux:text>
-
-                        @if ($organisation->users->isNotEmpty())
-                            <div class="space-y-2 mb-4">
-                                @foreach ($organisation->users as $member)
-                                    <div wire:key="member-{{ $member->id }}" class="flex items-center justify-between py-1">
-                                        <span class="text-sm text-zinc-700 dark:text-zinc-300">{{ $member->name }}</span>
-                                        <flux:button
-                                            wire:click="assignUserToOrganisation('{{ $member->id }}', '')"
-                                            variant="ghost"
-                                            size="xs"
-                                            class="text-zinc-400 hover:text-red-500"
-                                        >
-                                            {{ __('admin.organisations.remove') }}
-                                        </flux:button>
-                                    </div>
-                                @endforeach
-                            </div>
-                        @endif
-                    </flux:card>
-                @empty
-                    <flux:card class="p-8 text-center">
-                        <flux:text>{{ __('admin.organisations.empty') }}</flux:text>
-                    </flux:card>
-                @endforelse
-            </div>
-        </div>
-
-        @if ($allUsers->isNotEmpty())
-            <flux:card class="mt-8">
-                <flux:heading size="lg" class="mb-4">{{ __('admin.organisations.assign_users') }}</flux:heading>
-                <div class="space-y-3">
-                    @foreach ($allUsers as $user)
-                        <div wire:key="all-user-{{ $user->id }}" class="flex items-center justify-between py-2 border-b border-zinc-100 dark:border-zinc-700 last:border-0">
-                            <div>
-                                <span class="font-medium text-zinc-900 dark:text-white text-sm">{{ $user->name }}</span>
-                                <span class="ml-2 text-xs text-zinc-400 dark:text-zinc-500">{{ $user->email }}</span>
-                            </div>
-                            <flux:select
-                                wire:change="assignUserToOrganisation('{{ $user->id }}', $event.target.value)"
-                                size="sm"
-                                class="min-w-0"
-                            >
-                                <option value="">{{ __('admin.organisations.no_group') }}</option>
-                                @foreach ($organisations as $organisation)
-                                    <option wire:key="org-{{ $organisation->id }}-assign"
-                                        value="{{ $organisation->id }}"
-                                        {{ $user->organisation_id === $organisation->id ? 'selected' : '' }}
-                                    >
-                                        {{ $organisation->name }}
-                                    </option>
-                                @endforeach
-                            </flux:select>
-                        </div>
-                    @endforeach
-                </div>
+                    </div>
+                    <flux:button type="submit" variant="primary">
+                        {{ __('admin.organisations.create_button') }}
+                    </flux:button>
+                </form>
             </flux:card>
         @endif
+
+        @if ($organisations->isEmpty())
+            <flux:card class="p-12 text-center">
+                <flux:heading class="mb-2">{{ __('admin.organisations.empty') }}</flux:heading>
+                <flux:text class="mb-4">{{ __('admin.organisations.description') }}</flux:text>
+                <flux:button wire:click="$set('showCreateForm', true)" variant="primary" icon="plus">
+                    {{ __('admin.organisations.create_button') }}
+                </flux:button>
+            </flux:card>
+        @else
+            <flux:card class="overflow-hidden">
+                <flux:table>
+                    <flux:table.columns>
+                        <flux:table.column>{{ __('admin.organisations.name_label') }}</flux:table.column>
+                        <flux:table.column align="center">{{ __('admin.organisations.members') }}</flux:table.column>
+                        <flux:table.column>{{ __('admin.users.table.registered') }}</flux:table.column>
+                        <flux:table.column align="end">{{ __('admin.users.table.actions') }}</flux:table.column>
+                    </flux:table.columns>
+                    <flux:table.rows>
+                        @foreach ($organisations as $organisation)
+                            <flux:table.row wire:key="org-{{ $organisation->id }}">
+                                <flux:table.cell>
+                                    <a href="{{ route('admin.organisations.detail', $organisation) }}" wire:navigate class="font-medium text-zinc-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                                        {{ $organisation->name }}
+                                    </a>
+                                </flux:table.cell>
+                                <flux:table.cell class="text-center font-mono text-sm text-zinc-600 dark:text-zinc-400">
+                                    {{ $organisation->users->count() }}
+                                </flux:table.cell>
+                                <flux:table.cell class="text-sm text-zinc-500 dark:text-zinc-400 whitespace-nowrap">
+                                    {{ $organisation->created_at?->format('d.m.Y') }}
+                                </flux:table.cell>
+                                <flux:table.cell class="text-right">
+                                    <div class="flex items-center justify-end gap-1">
+                                        <flux:button
+                                            href="{{ route('admin.organisations.detail', $organisation) }}"
+                                            wire:navigate
+                                            variant="ghost"
+                                            size="sm"
+                                            icon="chevron-right"
+                                        >
+                                            {{ __('admin.organisations.manage') }}
+                                        </flux:button>
+                                        <flux:button
+                                            wire:click="deleteOrganisation('{{ $organisation->id }}')"
+                                            wire:confirm="{{ __('admin.organisations.confirm_delete') }}"
+                                            variant="danger"
+                                            size="sm"
+                                            icon="trash"
+                                        />
+                                    </div>
+                                </flux:table.cell>
+                            </flux:table.row>
+                        @endforeach
+                    </flux:table.rows>
+                </flux:table>
+            </flux:card>
+        @endif
+
     </div>
 </div>

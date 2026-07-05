@@ -8,6 +8,7 @@ use App\DTOs\Betting\BetOptionData;
 use App\Models\Bet;
 use App\Models\BetOption;
 use App\Repositories\Contracts\BetOptionRepositoryInterface;
+use Illuminate\Support\Collection;
 
 final class EloquentBetOptionRepository implements BetOptionRepositoryInterface
 {
@@ -19,6 +20,14 @@ final class EloquentBetOptionRepository implements BetOptionRepositoryInterface
     public function findByIdOrFail(string $id): BetOption
     {
         return BetOption::findOrFail($id);
+    }
+
+    /** @return Collection<string, string> */
+    public function getOptionIdsByBetId(string $betId): Collection
+    {
+        $options = BetOption::where('bet_id', $betId)->get(['id']);
+
+        return $options->mapWithKeys(fn (BetOption $option): array => [$option->id => $option->id]);
     }
 
     public function createForBet(Bet $bet, BetOptionData $data): BetOption

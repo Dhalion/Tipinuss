@@ -31,10 +31,13 @@ return [
     'beta_key_label' => 'Beta-Zugangscode',
     'beta_key_placeholder' => 'z.B. BETA-A3FK8XLM',
     'beta_key_hint' => 'Nur ausfüllen, wenn du einen Einladungscode hast.',
+    'invite_link_info' => 'Einladungscode aus Link übernommen.',
     'beta_key_invalid' => 'Der Zugangscode ":key" ist nicht gültig.',
     'beta_key_already_used' => 'Dieser Zugangscode wurde bereits verwendet.',
     'beta_key_expired' => 'Dieser Zugangscode ist abgelaufen.',
     'beta_key_inactive' => 'Dieser Zugangscode wurde deaktiviert.',
+    'welcome_toast_heading' => 'Willkommen!',
+    'welcome_toast_balance' => 'Dir wurden :balance 🌰 Waschnüsse gutgeschrieben.',
 
     'pending_title' => 'Account wartet auf Freischaltung',
     'pending_description' => 'Dein Account wurde erfolgreich erstellt, muss aber noch von einem Administrator freigeschaltet werden, bevor du die Plattform nutzen kannst.',
