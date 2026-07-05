@@ -1,4 +1,5 @@
-<div 
+<div
+    id="bet-detail-page"
     class="flex-1 flex flex-col bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-white"
     x-data="{
         placeBetShow: false,
@@ -46,6 +47,7 @@
                     @foreach($optionsByOdds as $option)
                         @if($bet->isOpen())
                             <button
+                                id="bet-option-{{ $option->id }}"
                                 wire:key="option-odds-{{ $option->id }}"
                                 type="button"
                                 :disabled="betExpired"
@@ -88,6 +90,7 @@
     </div>
 
     <div
+        id="bet-place-modal"
         x-show="placeBetShow"
         x-transition:enter="transition ease-out duration-200"
         x-transition:enter-start="opacity-0"
@@ -156,6 +159,7 @@
                         </label>
                         <div class="relative">
                             <input
+                                id="bet-stake-input"
                                 x-ref="amountInput"
                                 x-model="placeBetAmount"
                                 type="number"
@@ -197,6 +201,7 @@
                             {{ __('bets.cancel') }}
                         </button>
                         <button
+                            id="bet-place-submit"
                             type="submit"
                             :disabled="!placeBetAmount || parseFloat(placeBetAmount) < 1"
                             wire:loading.attr="disabled"
@@ -220,6 +225,7 @@
     </div>
 
     <div
+        id="bet-close-modal"
         x-data="{ show: false }"
         @open-close-bet-modal.window="show = true; $wire.$refresh()"
         x-show="show"
@@ -282,6 +288,7 @@
 @php /** @var \App\Models\BetOption $option */ @endphp
 @foreach($optionsByBets as $option)
                             <button
+                                id="bet-close-option-{{ $option->id }}"
                                 wire:key="option-bets-{{ $option->id }}"
                                 type="button"
                                 wire:click="executeCloseBet('{{ $option->id }}')"
@@ -319,6 +326,7 @@
     </div>
 
     <div
+        id="bet-delete-modal"
         x-data="{ show: false }"
         @open-delete-bet-modal.window="show = true"
         x-show="show"
@@ -364,6 +372,7 @@
                 <div class="px-6 pb-2">
                     <label class="flex items-center gap-3 cursor-pointer group">
                         <input
+                            id="bet-refund-checkbox"
                             type="checkbox"
                             wire:model="refund"
                             class="h-4 w-4 rounded border-zinc-600 bg-zinc-700 text-primary-600 focus:ring-primary-500"
@@ -381,6 +390,7 @@
                         {{ __('bets.cancel') }}
                     </button>
                     <button
+                        id="bet-delete-confirm"
                         type="button"
                         wire:click="deleteBet"
                         wire:loading.attr="disabled"

@@ -1,4 +1,4 @@
-<div class="py-8">
+<div id="admin-beta-keys-page" class="py-8">
     <div class="max-w-7xl mx-auto px-4">
 
         <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
@@ -6,7 +6,7 @@
                 <flux:heading size="xl">{{ __('admin.beta_keys.title') }}</flux:heading>
                 <flux:text class="mt-1">{{ trans_choice('admin.beta_keys.count', $keys->count(), ['count' => $keys->count()]) }}</flux:text>
             </div>
-            <flux:button wire:click="$toggle('showCreateForm')" variant="primary" size="sm" icon="plus">
+            <flux:button id="beta-key-create-toggle" wire:click="$toggle('showCreateForm')" variant="primary" size="sm" icon="plus">
                 {{ __('admin.beta_keys.create_button') }}
             </flux:button>
         </div>
@@ -18,30 +18,30 @@
                 <flux:heading size="lg" class="mb-4">{{ __('admin.beta_keys.create_title') }}</flux:heading>
 
                 <form wire:submit="create" class="space-y-4">
-                    <flux:select wire:model="organisationId" label="{{ __('admin.beta_keys.organisation_label') }}" required>
+                    <flux:select id="beta-key-organisation" wire:model="organisationId" label="{{ __('admin.beta_keys.organisation_label') }}" required>
                         <option value="">{{ __('admin.beta_keys.organisation_placeholder') }}</option>
                         @foreach ($organisations as $org)
                             <option wire:key="org-{{ $org->id }}" value="{{ $org->id }}">{{ $org->name }}</option>
                         @endforeach
                     </flux:select>
 
-                    <flux:input wire:model="customKey" label="{{ __('admin.beta_keys.key_label') }}" placeholder="{{ __('admin.beta_keys.key_placeholder') }}"
+                    <flux:input id="beta-key-custom" wire:model="customKey" label="{{ __('admin.beta_keys.key_label') }}" placeholder="{{ __('admin.beta_keys.key_placeholder') }}"
                         hint="{{ __('admin.beta_keys.key_hint') }}" />
 
-                    <flux:input wire:model="expiresAt" label="{{ __('admin.beta_keys.expires_label') }}" type="date"
+                    <flux:input id="beta-key-expires" wire:model="expiresAt" label="{{ __('admin.beta_keys.expires_label') }}" type="date"
                         hint="{{ __('admin.beta_keys.expires_hint') }}" />
 
-                    <flux:input wire:model="startBalance" label="{{ __('admin.beta_keys.start_balance_label') }}" type="number" min="0"
+                    <flux:input id="beta-key-balance" wire:model="startBalance" label="{{ __('admin.beta_keys.start_balance_label') }}" type="number" min="0"
                         hint="{{ __('admin.beta_keys.start_balance_hint') }}" />
 
-                    <flux:textarea wire:model="message" label="{{ __('admin.beta_keys.message_label') }}" rows="2" maxlength="{{ \App\Constants\AppDefaults::BETA_KEY_MESSAGE_MAX_LENGTH }}"
+                    <flux:textarea id="beta-key-message" wire:model="message" label="{{ __('admin.beta_keys.message_label') }}" rows="2" maxlength="{{ \App\Constants\AppDefaults::BETA_KEY_MESSAGE_MAX_LENGTH }}"
                         hint="{{ __('admin.beta_keys.message_hint') }}" />
 
                     <div class="flex gap-2 justify-end pt-2">
                         <flux:button wire:click="$set('showCreateForm', false)" variant="ghost">
                             {{ __('bets.cancel') }}
                         </flux:button>
-                        <flux:button type="submit" variant="primary">
+                        <flux:button id="beta-key-create-submit" type="submit" variant="primary">
                             {{ __('admin.beta_keys.create_submit') }}
                         </flux:button>
                     </div>
@@ -116,6 +116,7 @@
                                     @if ($key->isValid())
                                         <div class="flex items-center justify-end gap-1">
                                             <flux:button
+                                                id="beta-key-copy-{{ $key->id }}"
                                                 x-data="{ copied: false }"
                                                 x-on:click="
                                                     navigator.clipboard.writeText('{{ route('register', ['key' => $key->key]) }}');
@@ -130,6 +131,7 @@
                                                 <span x-show="copied" x-cloak>{{ __('admin.beta_keys.link_copied') }}</span>
                                             </flux:button>
                                             <flux:button
+                                                id="beta-key-deactivate-{{ $key->id }}"
                                                 wire:click="deactivate('{{ $key->id }}')"
                                                 wire:confirm="{{ __('admin.beta_keys.confirm_deactivate') }}"
                                                 variant="danger"

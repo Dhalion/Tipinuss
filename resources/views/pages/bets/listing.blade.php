@@ -1,4 +1,4 @@
-<div class="py-8">
+<div id="bets-list-page" class="py-8">
     <div class="max-w-4xl mx-auto px-4">
         <div class="mb-8 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
             <div>
@@ -10,7 +10,7 @@
                 </p>
             </div>
             <div class="w-full sm:w-auto">
-                <flux:button href="{{ route('bets.create') }}" wire:navigate variant="primary" icon="plus" class="w-full sm:w-auto">
+                <flux:button id="bets-list-create-btn" href="{{ route('bets.create') }}" wire:navigate variant="primary" icon="plus" class="w-full sm:w-auto">
                     {{ __('app.navigation.bets.create') }}
                 </flux:button>
             </div>

@@ -1,6 +1,6 @@
  @php /** @var \App\Models\User|null $authUser */ $authUser = auth()->user(); @endphp
 
-<div class="py-8">
+<div id="account-page" class="py-8">
     <div class="max-w-4xl mx-auto px-4">
 
         <div class="mb-8">
@@ -37,7 +37,7 @@
                         <flux:icon name="wallet" class="h-4 w-4 inline -mt-0.5 mr-1" />
                         {{ __('account.balance') }}
                     </div>
-                    <div class="text-4xl font-black text-gold-600 dark:text-gold-400">
+                    <div id="account-balance" class="text-4xl font-black text-gold-600 dark:text-gold-400">
                         {{ number_format($authUser?->soapnuts ?? 0) }}
                     </div>
                     <div class="text-xl mt-1">🌰</div>

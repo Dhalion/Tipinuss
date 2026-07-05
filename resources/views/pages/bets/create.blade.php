@@ -1,19 +1,19 @@
-<div class="max-w-4xl mx-auto px-4 py-8">
+<div id="bet-create-page" class="max-w-4xl mx-auto px-4 py-8">
     <div class="mb-8">
         <h1 class="text-3xl font-bold text-zinc-900 dark:text-white">{{ __('app.bet.create.title') }}</h1>
         <p class="text-zinc-600 dark:text-zinc-400 mt-2">{{ __('app.bet.create.description') }}</p>
     </div>
 
     <flux:card>
-        <form wire:submit="createBet" class="space-y-6">
+        <form id="bet-create-form" wire:submit="createBet" class="space-y-6">
             <div class="space-y-4">
-                <flux:input wire:model.live.debounce.250ms="title" label="{{ __('app.bet.title') }}"
+                <flux:input id="bet-create-title" wire:model.live.debounce.250ms="title" label="{{ __('app.bet.title') }}"
                     placeholder="{{ __('app.bet.title_placeholder') }}" required />
 
-                <flux:textarea wire:model="description" label="{{ __('app.bet.description') }}"
+                <flux:textarea id="bet-create-description" wire:model="description" label="{{ __('app.bet.description') }}"
                     placeholder="{{ __('app.bet.description_placeholder') }}" rows="4" />
 
-                <flux:input type="datetime-local" wire:model="expires_at" label="{{ __('app.bet.expiration_date') }}" />
+                <flux:input id="bet-create-expires-at" type="datetime-local" wire:model="expires_at" label="{{ __('app.bet.expiration_date') }}" />
 
                 <flux:separator />
 
@@ -39,7 +39,7 @@
             <flux:separator />
 
             <div class="pt-4">
-                <flux:button type="submit" variant="primary" class="w-full">
+                <flux:button id="bet-create-submit" type="submit" variant="primary" class="w-full">
                     {{ __('app.bet.create.submit') }}
                 </flux:button>
             </div>

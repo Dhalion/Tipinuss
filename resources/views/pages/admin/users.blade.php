@@ -1,4 +1,4 @@
-<div class="py-8">
+<div id="admin-users-page" class="py-8">
     <div class="max-w-7xl mx-auto px-4">
 
         <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
@@ -62,6 +62,7 @@
                                 <div class="flex items-center justify-end gap-2">
                                     <span>{{ number_format((float) $user->soapnuts, 0, ',', '.') }}</span>
                                     <flux:button
+                                        id="user-balance-adjust-{{ $user->id }}"
                                         wire:click="openBalanceModal('{{ $user->id }}')"
                                         variant="ghost"
                                         size="xs"
@@ -86,6 +87,7 @@
                                         {{ $user->is_admin ? __('admin.users.admin_role') : __('admin.users.user_role') }}
                                     </flux:badge>
                                     <flux:button
+                                        id="user-toggle-admin-{{ $user->id }}"
                                         wire:click="toggleAdmin('{{ $user->id }}')"
                                         variant="ghost"
                                         size="xs"
@@ -110,6 +112,7 @@
                                     </flux:select>
                                     @if (! $user->isApproved())
                                         <flux:button
+                                            id="user-approve-{{ $user->id }}"
                                             wire:click="approveUser('{{ $user->id }}', '{{ $user->organisation_id }}')"
                                             size="sm"
                                             variant="primary"
@@ -131,6 +134,7 @@
 
                             <flux:table.cell align="end" class="whitespace-nowrap">
                                 <flux:button
+                                    id="user-delete-{{ $user->id }}"
                                     wire:click="deleteUser('{{ $user->id }}')"
                                     wire:confirm="{{ __('admin.users.confirm_delete') }}"
                                     variant="danger"
@@ -149,6 +153,7 @@
 
             <form wire:submit="adjustBalance" class="space-y-4">
                 <flux:input
+                    id="balance-adjust-input"
                     wire:model="modalAdjustment"
                     type="number"
                     label="{{ __('admin.balance_modal.label') }}"
@@ -160,7 +165,7 @@
                     <flux:button wire:click="closeBalanceModal" variant="ghost">
                         {{ __('bets.cancel') }}
                     </flux:button>
-                    <flux:button type="submit" variant="primary">
+                    <flux:button id="balance-adjust-submit" type="submit" variant="primary">
                         {{ __('admin.balance_modal.apply') }}
                     </flux:button>
                 </div>

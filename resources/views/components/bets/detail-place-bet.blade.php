@@ -34,7 +34,7 @@
                 <span class="font-semibold text-zinc-900 dark:text-white">— 🌰</span>
             </div>
 
-            <flux:button type="submit" variant="primary" class="w-full">{{ __('bets.place_bet') }}</flux:button>
+            <flux:button id="bet-place-submit-sidebar" type="submit" variant="primary" class="w-full">{{ __('bets.place_bet') }}</flux:button>
         </form>
 
     @else

@@ -1,4 +1,4 @@
-<div class="py-8">
+<div id="admin-organisations-page" class="py-8">
     <div class="max-w-7xl mx-auto px-4">
 
         <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
@@ -7,7 +7,7 @@
                 <flux:text class="mt-2">{{ __('admin.organisations.description') }}</flux:text>
             </div>
                 @if ($organisations->isNotEmpty())
-                <flux:button wire:click="$toggle('showCreateForm')" variant="primary" size="sm" icon="plus">
+                <flux:button id="organisation-create-toggle" wire:click="$toggle('showCreateForm')" variant="primary" size="sm" icon="plus">
                     {{ __('admin.organisations.create_button') }}
                 </flux:button>
             @endif
@@ -21,12 +21,13 @@
                 <form wire:submit="createOrganisation" class="flex gap-3 items-end">
                     <div class="flex-1">
                         <flux:input
+                            id="organisation-create-name"
                             wire:model="newOrganisationName"
                             label="{{ __('admin.organisations.name_label') }}"
                             placeholder="{{ __('admin.organisations.name_placeholder') }}"
                         />
                     </div>
-                    <flux:button type="submit" variant="primary">
+                    <flux:button id="organisation-create-submit" type="submit" variant="primary">
                         {{ __('admin.organisations.create_button') }}
                     </flux:button>
                 </form>
@@ -37,7 +38,7 @@
             <flux:card class="p-12 text-center">
                 <flux:heading class="mb-2">{{ __('admin.organisations.empty') }}</flux:heading>
                 <flux:text class="mb-4">{{ __('admin.organisations.description') }}</flux:text>
-                <flux:button wire:click="$set('showCreateForm', true)" variant="primary" icon="plus">
+                <flux:button id="organisation-create-toggle" wire:click="$set('showCreateForm', true)" variant="primary" icon="plus">
                     {{ __('admin.organisations.create_button') }}
                 </flux:button>
             </flux:card>
@@ -67,6 +68,7 @@
                                 <flux:table.cell class="text-right">
                                     <div class="flex items-center justify-end gap-1">
                                         <flux:button
+                                            id="organisation-manage-{{ $organisation->id }}"
                                             href="{{ route('admin.organisations.detail', $organisation) }}"
                                             wire:navigate
                                             variant="ghost"
@@ -76,6 +78,7 @@
                                             {{ __('admin.organisations.manage') }}
                                         </flux:button>
                                         <flux:button
+                                            id="organisation-delete-{{ $organisation->id }}"
                                             wire:click="deleteOrganisation('{{ $organisation->id }}')"
                                             wire:confirm="{{ __('admin.organisations.confirm_delete') }}"
                                             variant="danger"
