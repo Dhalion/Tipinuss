@@ -15,10 +15,10 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('status', 20)->default('open');
             $table->boolean('dynamic_odds_enabled')->default(false);
-            $table->timestamp('odds_last_updated_at')->nullable();
+            $table->dateTime('odds_last_updated_at')->nullable();
 
-            $table->timestamp('expires_at')->nullable();
-            $table->timestamp('closed_at')->nullable();
+            $table->dateTime('expires_at')->nullable();
+            $table->dateTime('closed_at')->nullable();
             $table->timestamps();
 
             $table->index('status');

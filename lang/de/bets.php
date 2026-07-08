@@ -26,7 +26,7 @@ return [
     'select_winning_option' => 'Wähle die gewinnerlose Option aus',
     'close_disabled_hint' => 'Mindestens 2 verschiedene User müssen gewettet haben',
     'close_not_allowed' => 'Die Wette kann erst geschlossen werden, wenn mindestens 2 verschiedene User gewettet haben.',
-    'confirm_delete' => 'Wirklich löschen? Alle Einsätze werden erstattet.',
+    'confirm_delete' => 'Wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.',
     'options' => 'Wettoptionen',
     'your_balance' => 'Dein Guthaben',
     'recent_bets' => 'Letzte Wetten',
@@ -52,6 +52,7 @@ return [
     'potential_winnings_text' => 'Möglicher Gewinn: :amount 🌰',
     'closed_success' => 'Wette geschlossen und Gewinne ausgezahlt.',
     'deleted_success' => 'Wette ":title" wurde gelöscht.',
+    'refund_bettors' => 'Waschnüsse an Wetter zurückerstatten',
 
     'bet_won' => 'Wette gewonnen!',
     'bet_lost' => 'Wette verloren',

@@ -14,10 +14,10 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('key', 32)->unique();
             $table->foreignUuid('organisation_id')->constrained('organisations')->cascadeOnDelete();
-            $table->timestamp('used_at')->nullable();
+            $table->dateTime('used_at')->nullable();
             $table->foreignUuid('used_by_user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignUuid('created_by_user_id')->constrained('users')->cascadeOnDelete();
-            $table->timestamp('expires_at')->nullable();
+            $table->dateTime('expires_at')->nullable();
             $table->integer('start_balance')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();

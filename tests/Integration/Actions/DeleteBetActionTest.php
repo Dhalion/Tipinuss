@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Integration\Actions;
 
 use App\Actions\Betting\DeleteBetAction;
+use App\DTOs\Betting\DeleteBetData;
 use App\Models\Bet;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -20,7 +21,7 @@ final class DeleteBetActionTest extends TestCase
         $bet = Bet::factory()->create(['user_id' => $user->id]);
         $action = app(DeleteBetAction::class);
 
-        $action->execute($bet);
+        $action->execute(new DeleteBetData(bet: $bet));
 
         $this->assertModelMissing($bet);
     }

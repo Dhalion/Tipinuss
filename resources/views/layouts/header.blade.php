@@ -24,32 +24,35 @@
     </flux:navbar>
 
     <flux:spacer/>
-
     @auth
         @if(auth()->user()->isApproved())
-            <span class="text-sm text-gold-400 mr-2 whitespace-nowrap font-semibold">
-                @livewire('soapnuts-balance')
-            </span>
-            @livewire('notification-bell', key('notification-bell'))
-            <flux:dropdown>
-                <flux:profile name="{{ Auth::user()->name }}" class="max-lg:hidden"/>
-                <flux:menu>
-                    <flux:menu.item href="{{ route('account') }}" wire:navigate>{{ __('app.navigation.account') }}</flux:menu.item>
-                    <form method="POST" action="{{ route('logout') }}" class="contents">
-                        @csrf
-                        <flux:menu.item as="button" type="submit">
-                            {{ __('app.navigation.logout') }}
-                        </flux:menu.item>
-                    </form>
-                </flux:menu>
-            </flux:dropdown>
+            <div id="user-menu" class="flex items-center gap-2">
+                <span class="text-sm text-gold-400 mr-2 whitespace-nowrap font-semibold">
+                    @livewire('soapnuts-balance')
+                </span>
+                @livewire('notification-bell', key('notification-bell'))
+                <flux:dropdown>
+                    <flux:profile name="{{ Auth::user()->name }}" class="max-lg:hidden"/>
+                    <flux:menu>
+                        <flux:menu.item href="{{ route('account') }}" wire:navigate>{{ __('app.navigation.account') }}</flux:menu.item>
+                        <form method="POST" action="{{ route('logout') }}" class="contents">
+                            @csrf
+                            <flux:menu.item as="button" type="submit">
+                                {{ __('app.navigation.logout') }}
+                            </flux:menu.item>
+                        </form>
+                    </flux:menu>
+                </flux:dropdown>
+            </div>
         @else
-            <form method="POST" action="{{ route('logout') }}" class="contents">
-                @csrf
-                <flux:button type="submit" variant="ghost" size="sm" icon="arrow-right-start-on-rectangle">
-                    {{ __('app.navigation.logout') }}
-                </flux:button>
-            </form>
+            <div id="user-menu">
+                <form method="POST" action="{{ route('logout') }}" class="contents">
+                    @csrf
+                    <flux:button type="submit" variant="ghost" size="sm" icon="arrow-right-start-on-rectangle">
+                        {{ __('app.navigation.logout') }}
+                    </flux:button>
+                </form>
+            </div>
         @endif
     @endauth
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Repositories\Eloquent;
 
+use App\Constants\AppDefaults;
 use App\Models\Bet;
 use App\Models\BetOption;
 use App\Models\User;
@@ -18,7 +19,7 @@ final class EloquentUserBetRepository implements UserBetRepositoryInterface
         return $option->userBets()->with(['user', 'betOption.bet'])->get();
     }
 
-    public function recentForBet(Bet $bet, int $limit = 20): Collection
+    public function recentForBet(Bet $bet, int $limit = AppDefaults::RECENT_BETS_LIMIT): Collection
     {
         return $bet->userBets()
             ->with(['user', 'betOption'])
@@ -27,7 +28,7 @@ final class EloquentUserBetRepository implements UserBetRepositoryInterface
             ->get();
     }
 
-    public function recentForUser(User $user, int $limit = 10): Collection
+    public function recentForUser(User $user, int $limit = AppDefaults::RECENT_USER_BETS_LIMIT): Collection
     {
         return $user->userBets()
             ->with(['betOption.bet.creator'])
@@ -60,6 +61,25 @@ final class EloquentUserBetRepository implements UserBetRepositoryInterface
         return $bet->userBets()
             ->distinct('user_id')
             ->count('user_id');
+    }
+
+    /**
+     * @param  array<int, string>  $optionIds
+     * @return Collection<int, UserBet>
+     */
+    public function findByOptionIds(array $optionIds): Collection
+    {
+        return UserBet::whereIn('bet_option_id', $optionIds)->get();
+    }
+
+    public function countForUser(User $user): int
+    {
+        return $user->userBets()->count();
+    }
+
+    public function countForUserByStatus(User $user, string $status): int
+    {
+        return $user->userBets()->where('status', $status)->count();
     }
 
     public function save(UserBet $userBet): UserBet

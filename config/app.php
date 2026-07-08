@@ -119,7 +119,7 @@ return [
     |
     */
 
-    'beta_mode' => (bool) env('BETA_MODE', false),
+    'restricted_mode' => (bool) env('RESTRICTED_MODE', false),
 
     'maintenance' => [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),

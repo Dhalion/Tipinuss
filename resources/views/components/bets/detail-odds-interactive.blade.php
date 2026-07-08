@@ -10,6 +10,7 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
         @foreach($sorted as $option)
             <button
+                id="bet-option-{{ $option->id }}"
                 wire:key="option-{{ $option->id }}"
                 type="button"
                 wire:click="selectOption('{{ $option->id }}', {{ json_encode($option->title) }}, {{ $option->odds }})"

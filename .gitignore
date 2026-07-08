@@ -11,6 +11,7 @@
 .env.production
 .env.local
 .env.testing
+.env.dusk.*
 .phpactor.json
 .phpunit.result.cache
 Homestead.json
@@ -28,9 +29,6 @@ devenv.lock
 /.devenv
 /bootstrap/cache/phpstan
 
-/tests/Browser/screenshots/
-/tests/Browser/console/
-.env.dusk.local
 
 /graphify-out/
 /.agents/
@@ -40,3 +38,4 @@ devenv.lock
 
 /package-lock.json
 /DevOps
+/inventory.local.php

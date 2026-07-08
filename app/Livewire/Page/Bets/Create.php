@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Livewire\Page\Bets;
 
 use App\Actions\Betting\CreateBetAction;
+use App\Constants\AppDefaults;
 use App\DTOs\Betting\BetOptionData;
 use App\DTOs\Betting\CreateBetData;
 use App\Models\User;
@@ -21,7 +22,7 @@ final class Create extends Component
     #[Validate('required|min:5|max:255')]
     public string $title = '';
 
-    #[Validate('nullable|max:1000')]
+    #[Validate(['nullable', 'max:'.AppDefaults::BET_DESCRIPTION_MAX_LENGTH])]
     public string $description = '';
 
     #[Validate('nullable|date')]
@@ -132,7 +133,7 @@ final class Create extends Component
 
     private function calculateBaseOdds(int $optionCount): float
     {
-        return round(1 + (0.5 * ($optionCount - 1)), 2);
+        return round(1 + (AppDefaults::ODDS_MULTIPLIER * ($optionCount - 1)), 2);
     }
 
     private function recalculateOdds(): void

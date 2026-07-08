@@ -10,4 +10,5 @@ enum TransactionType: string
     case BetPlaced = 'bet_placed';
     case BetWon = 'bet_won';
     case AdminAdjustment = 'admin_adjustment';
+    case BetRefund = 'bet_refund';
 }

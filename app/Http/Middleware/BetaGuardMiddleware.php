@@ -18,14 +18,11 @@ final class BetaGuardMiddleware
         'register',
         'logout',
         'pending.approval',
-        'dusk.login',
-        'dusk.logout',
-        'dusk.user',
     ];
 
     public function handle(Request $request, Closure $next): Response
     {
-        if (! (bool) config('app.beta_mode', false)) {
+        if (! (bool) config('app.restricted_mode', false)) {
             return $next($request);
         }
 

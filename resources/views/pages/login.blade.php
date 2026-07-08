@@ -6,13 +6,13 @@
                 <p class="text-zinc-600 dark:text-zinc-400 text-sm mt-1">{{ __('auth.have_account') }}</p>
             </div>
 
-            <form wire:submit="authenticate" class="space-y-4">
-                <flux:input wire:model="email" label="{{ __('auth.email') }}" type="email"
+            <form id="login-form" wire:submit="authenticate" class="space-y-4">
+                <flux:input wire:model="email" name="email" label="{{ __('auth.email') }}" type="email"
                     placeholder="name@example.com" required />
 
-                <flux:input wire:model="password" label="{{ __('auth.password') }}" type="password" required />
+                <flux:input wire:model="password" name="password" label="{{ __('auth.password') }}" type="password" required />
 
-                <flux:button type="submit" variant="outline" class="w-full">
+                <flux:button id="login-submit" type="submit" variant="outline" class="w-full">
                     {{ __('auth.login_submit') }}
                 </flux:button>
             </form>

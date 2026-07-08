@@ -31,4 +31,5 @@ return [
     'potential' => 'Möglicher Gewinn',
     'no_bets' => 'Du hast noch keine Wetten platziert. Gehe zu Wetten um eine zu platzieren!',
     'balance_decrement_failed' => 'Fehler beim Abbuchen des Guthabens.',
+    'initial_balance_description' => 'Startguthaben bei Registrierung',
 ];

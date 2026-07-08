@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Repositories\Eloquent;
 
+use App\Constants\AppDefaults;
 use App\Enums\BetStatus;
 use App\Models\Bet;
 use App\Models\User;
@@ -23,7 +24,7 @@ final class EloquentBetRepository implements BetRepositoryInterface
         return Bet::with(['betOptions.userBets', 'creator'])->findOrFail($id);
     }
 
-    public function paginateOpen(int $perPage = 15): LengthAwarePaginator
+    public function paginateOpen(int $perPage = AppDefaults::DEFAULT_PER_PAGE): LengthAwarePaginator
     {
         return Bet::with(['creator', 'betOptions'])
             ->withCount('userBets')
@@ -33,7 +34,7 @@ final class EloquentBetRepository implements BetRepositoryInterface
     }
 
     /** @return LengthAwarePaginator<int, Bet> */
-    public function paginateOpenForUser(User $user, int $perPage = 15): LengthAwarePaginator
+    public function paginateOpenForUser(User $user, int $perPage = AppDefaults::DEFAULT_PER_PAGE): LengthAwarePaginator
     {
         $query = Bet::with(['creator', 'betOptions'])
             ->withCount('userBets')
@@ -47,7 +48,7 @@ final class EloquentBetRepository implements BetRepositoryInterface
     }
 
     /** @return LengthAwarePaginator<int, Bet> */
-    public function paginateForListing(int $perPage = 15): LengthAwarePaginator
+    public function paginateForListing(int $perPage = AppDefaults::DEFAULT_PER_PAGE): LengthAwarePaginator
     {
         return Bet::with(['creator', 'betOptions'])
             ->withCount('userBets')
@@ -56,7 +57,7 @@ final class EloquentBetRepository implements BetRepositoryInterface
     }
 
     /** @return LengthAwarePaginator<int, Bet> */
-    public function paginateForListingForUser(User $user, int $perPage = 15): LengthAwarePaginator
+    public function paginateForListingForUser(User $user, int $perPage = AppDefaults::DEFAULT_PER_PAGE): LengthAwarePaginator
     {
         $query = Bet::with(['creator', 'betOptions'])
             ->withCount('userBets');
@@ -68,7 +69,7 @@ final class EloquentBetRepository implements BetRepositoryInterface
         return $query->latest()->paginate($perPage);
     }
 
-    public function recentOpen(int $limit = 5): Collection
+    public function recentOpen(int $limit = AppDefaults::RECENT_OPEN_LIMIT): Collection
     {
         return Bet::with(['creator', 'betOptions'])
             ->where('status', BetStatus::Open)
@@ -78,7 +79,7 @@ final class EloquentBetRepository implements BetRepositoryInterface
     }
 
     /** @return Collection<int, Bet> */
-    public function recentOpenForUser(?User $user, int $limit = 5): Collection
+    public function recentOpenForUser(?User $user, int $limit = AppDefaults::RECENT_OPEN_LIMIT): Collection
     {
         $query = Bet::with(['creator', 'betOptions'])
             ->where('status', BetStatus::Open);

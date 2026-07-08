@@ -54,9 +54,13 @@ final class UserManagementTest extends TestCase
 
         Livewire::actingAs($admin)
             ->test(UserManagement::class)
-            ->set('balanceAdjustments', [$target->id => 200])
-            ->call('adjustBalance', $target->id)
-            ->assertHasNoErrors();
+            ->call('openBalanceModal', $target->id)
+            ->assertSet('modalUserId', $target->id)
+            ->assertSet('showBalanceModal', true)
+            ->set('modalAdjustment', 200)
+            ->call('adjustBalance')
+            ->assertHasNoErrors()
+            ->assertSet('showBalanceModal', false);
 
         $this->assertSame(700, $target->fresh()->soapnuts);
         $this->assertDatabaseHas('balance_transactions', [

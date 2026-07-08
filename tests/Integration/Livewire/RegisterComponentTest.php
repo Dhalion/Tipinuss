@@ -20,7 +20,7 @@ final class RegisterComponentTest extends TestCase
     {
         parent::setUp();
 
-        config(['app.beta_mode' => false]);
+        config(['app.restricted_mode' => false]);
     }
 
     public function test_registers_user_successfully(): void
@@ -97,9 +97,9 @@ final class RegisterComponentTest extends TestCase
             ->assertHasErrors(['password']);
     }
 
-    public function test_redirects_to_pending_approval_in_beta_mode(): void
+    public function test_redirects_to_pending_approval_in_restriced_mode(): void
     {
-        config(['app.beta_mode' => true]);
+        config(['app.restricted_mode' => true]);
 
         Livewire::test(Register::class)
             ->set('name', 'Pending User')

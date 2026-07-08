@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\User;
 
+use App\Constants\AppDefaults;
 use App\DTOs\Account\TransactionHistoryEntry;
 use App\Enums\TransactionType;
 use App\Models\BalanceTransaction;
@@ -23,7 +24,7 @@ final class TransactionHistoryService
     ) {}
 
     /** @return array<int, TransactionHistoryEntry> */
-    public function forUser(User $user, int $limit = 20): array
+    public function forUser(User $user, int $limit = AppDefaults::HISTORY_LIMIT): array
     {
         $transactions = $this->transactions->recentForUser($user, $limit * 2);
 

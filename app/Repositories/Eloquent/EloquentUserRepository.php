@@ -4,12 +4,19 @@ declare(strict_types=1);
 
 namespace App\Repositories\Eloquent;
 
+use App\Constants\AppDefaults;
 use App\Models\User;
 use App\Repositories\Contracts\UserRepositoryInterface;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 
 final class EloquentUserRepository implements UserRepositoryInterface
 {
+    private const array SORTABLE_COLUMNS = [
+        'name', 'soapnuts', 'is_approved', 'is_admin',
+        'created_at', 'user_bets_count',
+    ];
+
     public function findById(string $id): ?User
     {
         return User::find($id);
@@ -33,17 +40,23 @@ final class EloquentUserRepository implements UserRepositoryInterface
             ->get();
     }
 
-    public function allWithBetCountByApprovalStatus(?bool $isApproved): Collection
-    {
+    public function paginateWithBetCountByApprovalStatus(
+        ?bool $isApproved,
+        string $sortBy = 'name',
+        string $sortDirection = 'asc',
+        int $perPage = AppDefaults::DEFAULT_PER_PAGE,
+    ): LengthAwarePaginator {
+        $sortBy = in_array($sortBy, self::SORTABLE_COLUMNS, true) ? $sortBy : 'name';
+        $sortDirection = $sortDirection === 'desc' ? 'desc' : 'asc';
+
         $query = User::withCount('userBets')
-            ->with('organisation')
-            ->orderBy('name');
+            ->with('organisation');
 
         if ($isApproved !== null) {
             $query->where('is_approved', $isApproved);
         }
 
-        return $query->get();
+        return $query->orderBy($sortBy, $sortDirection)->paginate($perPage);
     }
 
     public function pendingCount(): int
@@ -58,10 +71,18 @@ final class EloquentUserRepository implements UserRepositoryInterface
         return $user;
     }
 
-    public function topBySoapnuts(int $limit = 10): Collection
+    public function topBySoapnuts(int $limit = AppDefaults::TOP_USERS_LIMIT, ?string $organisationId = null): Collection
     {
-        return User::withCount('userBets')
-            ->orderByDesc('soapnuts')
+        $query = User::withCount('userBets');
+
+        if ($organisationId !== null) {
+            $query->where(function ($q) use ($organisationId): void {
+                $q->where('organisation_id', $organisationId)
+                    ->orWhereNull('organisation_id');
+            });
+        }
+
+        return $query->orderByDesc('soapnuts')
             ->take($limit)
             ->get();
     }
@@ -69,5 +90,28 @@ final class EloquentUserRepository implements UserRepositoryInterface
     public function delete(User $user): void
     {
         $user->delete();
+    }
+
+    /**
+     * @param  array<int, string>  $ids
+     * @return Collection<int, User>
+     */
+    public function findByIds(array $ids): Collection
+    {
+        return User::whereIn('id', $ids)->get()->keyBy('id');
+    }
+
+    public function findFirstAdmin(): ?User
+    {
+        return User::where('is_admin', true)->orderBy('created_at')->first();
+    }
+
+    public function adjustBalance(User $user, int $amount): void
+    {
+        if ($amount >= 0) {
+            $user->increment('soapnuts', $amount);
+        } else {
+            $user->decrement('soapnuts', abs($amount));
+        }
     }
 }

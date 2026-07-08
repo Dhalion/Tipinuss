@@ -7,6 +7,12 @@ parameters:
 			path: app/Actions/Auth/RegisterUserAction.php
 
 		-
+			message: '#^Using nullsafe property access "\?\-\>start_balance" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Actions/Auth/RegisterUserAction.php
+
+		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
 			identifier: property.notFound
 			count: 1
@@ -79,7 +85,7 @@ parameters:
 			path: app/Actions/Betting/CloseBetAction.php
 
 		-
-			message: '#^Parameter \#2 \$participants of method App\\Actions\\Betting\\CloseBetAction\:\:notifyParticipants\(\) expects list\<array\{user\: App\\Models\\User, status\: string, wagered\: int, winnings\: int\}\>, list\<array\{user\: Illuminate\\Database\\Eloquent\\Model\|null, status\: literal\-string&non\-falsy\-string, wagered\: int, winnings\: int\}\> given\.$#'
+			message: '#^Parameter \$participants of class App\\Events\\Betting\\BetClosed constructor expects list\<array\{user\: App\\Models\\User, status\: string, wagered\: int, winnings\: int\}\>, list\<array\{user\: Illuminate\\Database\\Eloquent\\Model\|null, status\: literal\-string&non\-falsy\-string, wagered\: int, winnings\: int\}\> given\.$#'
 			identifier: argument.type
 			count: 1
 			path: app/Actions/Betting/CloseBetAction.php
@@ -221,6 +227,24 @@ parameters:
 			identifier: return.type
 			count: 4
 			path: app/Http/Middleware/BetaGuardMiddleware.php
+
+		-
+			message: '#^Cannot access property \$headers on mixed\.$#'
+			identifier: property.nonObject
+			count: 2
+			path: app/Http/Middleware/SecurityHeadersMiddleware.php
+
+		-
+			message: '#^Cannot call method set\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: app/Http/Middleware/SecurityHeadersMiddleware.php
+
+		-
+			message: '#^Method App\\Http\\Middleware\\SecurityHeadersMiddleware\:\:handle\(\) should return Symfony\\Component\\HttpFoundation\\Response but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Middleware/SecurityHeadersMiddleware.php
 
 		-
 			message: '#^Cannot access offset ''key'' on mixed\.$#'
@@ -385,9 +409,27 @@ parameters:
 			path: app/Livewire/Page/Account.php
 
 		-
+			message: '#^Binary operation "\." between mixed and ''/437fa112dc117cd5bd…'' results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
 			message: '#^Binary operation "\." between mixed and ''/b95e17b693fb03d8fe…'' results in an error\.$#'
 			identifier: binaryOp.invalid
 			count: 1
+			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
+			message: '#^Binary operation "\." between mixed and ''/ca29657caefef1bb99…'' results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
+			message: '#^Cannot access an offset on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
 			path: app/Livewire/Page/Admin/BetaKeyManagement.php
 
 		-
@@ -399,24 +441,42 @@ parameters:
 		-
 			message: '#^Cannot access property \$compiledPath on mixed\.$#'
 			identifier: property.nonObject
-			count: 1
+			count: 3
 			path: app/Livewire/Page/Admin/BetaKeyManagement.php
 
 		-
 			message: '#^Cannot call method ensureRequired\(\) on mixed\.$#'
 			identifier: method.nonObject
-			count: 1
+			count: 3
 			path: app/Livewire/Page/Admin/BetaKeyManagement.php
 
 		-
 			message: '#^Cannot call method popData\(\) on mixed\.$#'
 			identifier: method.nonObject
-			count: 1
+			count: 3
 			path: app/Livewire/Page/Admin/BetaKeyManagement.php
 
 		-
 			message: '#^Cannot call method pushData\(\) on mixed\.$#'
 			identifier: method.nonObject
+			count: 3
+			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
+			message: '#^Cannot call method pushSlots\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
+			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
+			identifier: empty.notAllowed
+			count: 2
+			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
+			message: '#^Function _437fa112dc117cd5bda0be2fc8266dcc not found\.$#'
+			identifier: function.notFound
 			count: 1
 			path: app/Livewire/Page/Admin/BetaKeyManagement.php
 
@@ -424,6 +484,30 @@ parameters:
 			message: '#^Function _b95e17b693fb03d8fe9d5f88b0c28f93 not found\.$#'
 			identifier: function.notFound
 			count: 1
+			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
+			message: '#^Function _ca29657caefef1bb99c280bb3a7ea9fb not found\.$#'
+			identifier: function.notFound
+			count: 1
+			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
+			message: '#^Implicit array creation is not allowed \- variable \$__attrsStackca29657caefef1bb99c280bb3a7ea9fb might not exist\.$#'
+			identifier: variable.implicitArray
+			count: 1
+			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
+			message: '#^Implicit array creation is not allowed \- variable \$__slotsStackca29657caefef1bb99c280bb3a7ea9fb might not exist\.$#'
+			identifier: variable.implicitArray
+			count: 1
+			path: app/Livewire/Page/Admin/BetaKeyManagement.php
+
+		-
+			message: '#^Parameter \#1 \$array of function array_pop expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 2
 			path: app/Livewire/Page/Admin/BetaKeyManagement.php
 
 		-
@@ -435,7 +519,7 @@ parameters:
 		-
 			message: '#^Parameter \#1 \$string of function trim expects string, string\|false given\.$#'
 			identifier: argument.type
-			count: 2
+			count: 3
 			path: app/Livewire/Page/Admin/BetaKeyManagement.php
 
 		-
@@ -447,13 +531,13 @@ parameters:
 		-
 			message: '#^Variable \$__blaze might not be defined\.$#'
 			identifier: variable.undefined
-			count: 5
+			count: 16
 			path: app/Livewire/Page/Admin/BetaKeyManagement.php
 
 		-
 			message: '#^Variable \$this in isset\(\) always exists and is not nullable\.$#'
 			identifier: isset.variable
-			count: 1
+			count: 3
 			path: app/Livewire/Page/Admin/BetaKeyManagement.php
 
 		-
@@ -873,6 +957,12 @@ parameters:
 		-
 			message: '#^Dynamic call to static method Illuminate\\Session\\Store\:\:regenerate\(\)\.$#'
 			identifier: staticMethod.dynamicCall
+			count: 1
+			path: app/Livewire/Page/Register.php
+
+		-
+			message: '#^Parameter \#1 \$string of function ltrim expects string, string\|false given\.$#'
+			identifier: argument.type
 			count: 1
 			path: app/Livewire/Page/Register.php
 

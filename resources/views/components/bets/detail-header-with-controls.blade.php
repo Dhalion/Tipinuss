@@ -37,7 +37,8 @@
                     @if($bet->isOpen())
                         <div class="flex gap-2 flex-wrap">
                             <div x-data x-tooltip.raw="{{ $canCloseBet ? '' : __('bets.close_disabled_hint') }}">
-                                <button 
+                                <button
+                                    id="bet-close-{{ $bet->id }}"
                                     type="button"
                                     @if($canCloseBet)
                                         @click="$dispatch('open-close-bet-modal')"
@@ -52,7 +53,8 @@
                                     {{ __('bets.close') }}
                                 </button>
                             </div>
-                            <button 
+                            <button
+                                id="bet-delete-{{ $bet->id }}"
                                 type="button"
                                 @click="$dispatch('open-delete-bet-modal')"
                                 class="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg border-2 border-red-400 bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 font-medium hover:bg-red-100 dark:hover:bg-red-900/40 transition text-sm"

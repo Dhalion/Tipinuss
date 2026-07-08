@@ -31,10 +31,13 @@ return [
     'beta_key_label' => 'Beta Access Code',
     'beta_key_placeholder' => 'e.g. BETA-A3FK8XLM',
     'beta_key_hint' => 'Only fill in if you have an invitation code.',
+    'invite_link_info' => 'Invite code from link applied.',
     'beta_key_invalid' => 'The access code ":key" is not valid.',
     'beta_key_already_used' => 'This access code has already been used.',
     'beta_key_expired' => 'This access code has expired.',
     'beta_key_inactive' => 'This access code has been deactivated.',
+    'welcome_toast_heading' => 'Welcome!',
+    'welcome_toast_balance' => 'You received :balance 🌰 soapnuts.',
 
     'pending_title' => 'Account Pending Approval',
     'pending_description' => 'Your account has been created successfully, but needs to be approved by an administrator before you can use the platform.',

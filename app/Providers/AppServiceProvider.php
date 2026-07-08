@@ -31,16 +31,11 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
-use Laravel\Dusk\DuskServiceProvider;
 
 final class AppServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        if (! $this->app->environment('production') && class_exists(DuskServiceProvider::class)) {
-            $this->app->register(DuskServiceProvider::class);
-        }
-
         $this->app->bind(BalanceTransactionRepositoryInterface::class, EloquentBalanceTransactionRepository::class);
         $this->app->bind(BetaAccessKeyRepositoryInterface::class, EloquentBetaAccessKeyRepository::class);
         $this->app->bind(BetRepositoryInterface::class, EloquentBetRepository::class);
@@ -59,7 +54,7 @@ final class AppServiceProvider extends ServiceProvider
 
         DB::prohibitDestructiveCommands(app()->isProduction());
 
-        View::share('showBetaBadge', (bool) config('app.beta_mode', false));
+        View::share('showBetaBadge', (bool) config('app.restricted_mode', false));
 
         Blade::directive('appVersion', fn (): string => "<?php echo \App\Services\VersionService::label(); ?>");
 

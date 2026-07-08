@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace App\Console\Commands\Bet;
 
 use App\Actions\Betting\DeleteBetAction;
-use App\Models\Bet;
+use App\DTOs\Betting\DeleteBetData;
+use App\Repositories\Contracts\BetRepositoryInterface;
 use Illuminate\Console\Command;
 
 final class DeleteBetCommand extends Command
@@ -14,14 +15,16 @@ final class DeleteBetCommand extends Command
 
     protected $description = 'Permanently delete a bet and all associated data';
 
-    public function __construct(private DeleteBetAction $deleteBet)
-    {
+    public function __construct(
+        private DeleteBetAction $deleteBet,
+        private BetRepositoryInterface $bets,
+    ) {
         parent::__construct();
     }
 
     public function handle(): int
     {
-        $bet = Bet::find($this->argument('bet'));
+        $bet = $this->bets->findById($this->argument('bet'));
 
         if ($bet === null) {
             $this->error('Bet not found.');
@@ -39,7 +42,7 @@ final class DeleteBetCommand extends Command
             return self::SUCCESS;
         }
 
-        $this->deleteBet->execute($bet);
+        $this->deleteBet->execute(new DeleteBetData(bet: $bet));
 
         $this->info("✓ Bet '{$bet->title}' deleted.");
 
