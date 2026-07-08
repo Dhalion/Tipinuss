@@ -10,7 +10,7 @@
     "license": "proprietary",
     "require": {
         "php": "^8.4",
-        "laravel/framework": "12.58.0",
+        "laravel/framework": "v12.63.0",
         "laravel/tinker": "2.11.1",
         "league/commonmark": "2.8.2",
         "livewire/blaze": "1.0.12",
@@ -100,7 +100,12 @@
         ],
         "test:dusk": [
             "Composer\\Config::disableProcessTimeout",
-            "@php artisan dusk"
+            "@php -r \"is_executable('bin/run-dusk.sh') || chmod(0755, 'bin/run-dusk.sh');\"",
+            "bash bin/run-dusk.sh"
+        ],
+        "serve:dusk": [
+            "Composer\\Config::disableProcessTimeout",
+            "env -u SESSION_DRIVER -u SESSION_LIFETIME -u SESSION_ENCRYPT -u SESSION_SECURE_COOKIE -u SESSION_PATH -u SESSION_DOMAIN -u DB_CONNECTION -u DB_HOST -u DB_PORT -u DB_DATABASE -u DB_USERNAME -u DB_PASSWORD -u APP_ENV -u APP_DEBUG -u APP_URL -u APP_KEY -u CACHE_STORE -u CACHE_PREFIX -u QUEUE_CONNECTION -u BROADCAST_DRIVER -u BROADCAST_CONNECTION -u MAIL_MAILER -u LOG_CHANNEL -u LOG_LEVEL APP_ENV=dusk APP_DEBUG=false php artisan serve --host=127.0.0.1 --port=8000 --env=dusk"
         ],
         "test": [
             "@php artisan config:clear --ansi",
